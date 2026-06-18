@@ -63,19 +63,82 @@ body {
 
 .sidebar {
   width: 260px;
+  min-width: 260px;
   background-color: var(--primary-color);
   color: white;
   display: flex;
   flex-direction: column;
   padding: 24px 0;
+  transition: width 0.25s ease, min-width 0.25s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.sidebar.sidebar-collapsed {
+  width: 64px;
+  min-width: 64px;
 }
 
 .sidebar-logo {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  padding: 0 24px 32px;
+  padding: 0 0 28px;
+  margin: 0 16px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.sidebar-logo-text {
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-logo-icon {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: var(--accent-color);
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Collapse toggle button */
+.sidebar-collapse-btn {
+  position: absolute;
+  top: 20px;
+  right: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 1.5px solid var(--border-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.2s;
+  z-index: 50;
+  padding: 0;
+}
+
+.sidebar-collapse-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: scale(1.1);
 }
 
 .nav-menu {
@@ -85,7 +148,7 @@ body {
 }
 
 .nav-item {
-  padding: 12px 24px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -93,12 +156,39 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-collapsed .nav-item {
+  padding: 12px;
+  justify-content: center;
+  gap: 0;
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-item:hover, .nav-item.active {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
+}
+
+.nav-item.active {
   border-left: 4px solid var(--accent-color);
+}
+
+.sidebar-collapsed .nav-item.active {
+  border-left: none;
+  border-right: 4px solid var(--accent-color);
 }
 
 .main-content {
@@ -119,8 +209,8 @@ body {
 }
 
 .page-container {
-  padding: 32px;
-  max-width: 1200px;
+  padding: 16px 32px 32px;
+  max-width: 1450px;
   margin: 0 auto;
   width: 100%;
 }
@@ -325,19 +415,15 @@ tr:hover {
 
 .ProseMirror img {
   max-width: 100%;
-  max-height: 450px;
   height: auto;
-  object-fit: contain;
   display: block;
-  margin: 16px auto;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
   transition: outline 0.15s ease-in-out;
 }
 
-.ProseMirror img:hover {
-  outline: 3px solid var(--accent-color);
+/* Images inside resizable NodeView wrapper handle their own hover via React */
+.ProseMirror .resizable-image-node-view img:hover {
+  outline: none;
 }
 
 /* Floating Bubble Menu Styles */
@@ -450,4 +536,375 @@ tr:hover {
   border-radius: 2px;
 }
 
+/* Color picker dot button styling */
+.color-dot-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, border-color 0.1s ease;
+  box-shadow: var(--shadow-sm);
+}
 
+.color-dot-btn:hover {
+  transform: scale(1.15);
+  border-color: rgba(0, 0, 0, 0.45);
+}
+
+.color-dot-btn.is-active {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 1px;
+}
+
+.color-dot-btn.reset {
+  background-color: white;
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px dashed var(--border-color);
+}
+
+.color-dot-btn.reset:hover {
+  background-color: #f3f4f6;
+  color: var(--text-primary);
+}
+
+/* Toolbar select menu styling */
+.toolbar-select {
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: white;
+  font-size: 13px;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+  height: 28px;
+  font-family: inherit;
+}
+
+.toolbar-select:focus {
+  border-color: var(--primary-color);
+}
+
+/* Prevent image link navigation in editor */
+.ProseMirror a.editor-image-link {
+  pointer-events: none;
+  cursor: default;
+  display: inline-block;
+}
+
+/* Custom Image Alignment Margins inside the editor */
+.ProseMirror [style*="text-align: left"] img,
+.ProseMirror [style*="text-align:left"] img,
+.ProseMirror [style*="text-align: left"] a.editor-image-link,
+.ProseMirror [style*="text-align:left"] a.editor-image-link {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.ProseMirror [style*="text-align: right"] img,
+.ProseMirror [style*="text-align:right"] img,
+.ProseMirror [style*="text-align: right"] a.editor-image-link,
+.ProseMirror [style*="text-align:right"] a.editor-image-link {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+.ProseMirror [style*="text-align: center"] img,
+.ProseMirror [style*="text-align:center"] img,
+.ProseMirror [style*="text-align: center"] a.editor-image-link,
+.ProseMirror [style*="text-align:center"] a.editor-image-link {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ProseMirror [style*="text-align: justify"] img,
+.ProseMirror [style*="text-align:justify"] img,
+.ProseMirror [style*="text-align: justify"] a.editor-image-link,
+.ProseMirror [style*="text-align:justify"] a.editor-image-link {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Fallbacks for direct style adjustments on image/anchor nodes */
+.ProseMirror img[style*="text-align: left"],
+.ProseMirror img[style*="text-align:left"],
+.ProseMirror a.editor-image-link[style*="text-align: left"],
+.ProseMirror a.editor-image-link[style*="text-align:left"] {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.ProseMirror img[style*="text-align: right"],
+.ProseMirror img[style*="text-align:right"],
+.ProseMirror a.editor-image-link[style*="text-align: right"],
+.ProseMirror a.editor-image-link[style*="text-align:right"] {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+/* Prevent button redirect inside the editor */
+.ProseMirror a.blog-button {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Sticky Portal for Editor Toolbar */
+#editor-toolbar-portal {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--bg-main);
+  padding: 8px 0;
+  margin-bottom: 24px;
+}
+
+#editor-toolbar-portal .editor-toolbar {
+  border-bottom: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-sm);
+  background-color: #ffffff !important;
+}
+
+/* Detached editor content styling */
+.editor-content-only .ProseMirror {
+  border-radius: var(--radius-md) !important;
+}
+
+/* Custom cursor pointers for Horizontal Rules in editor */
+.ProseMirror hr {
+  cursor: pointer !important;
+}
+
+.horizontal-rule-node-view-wrapper {
+  cursor: pointer !important;
+}
+
+.horizontal-rule-node-view-wrapper hr {
+  cursor: pointer !important;
+  transition: outline 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.horizontal-rule-node-view-wrapper hr:hover {
+  background-color: #94a3b8 !important; /* Make it darker on hover */
+  outline: 2px solid var(--accent-hover) !important;
+  outline-offset: 2px;
+}
+
+/* Resizable Image Node View */
+.resizable-image-node-view {
+  position: relative;
+  line-height: 1.5;
+}
+
+.resizable-image-node-view img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── IMAGE SETTINGS PANEL ── */
+.image-settings-panel {
+  background: #ffffff;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  z-index: 10;
+  clear: both;
+}
+
+/* When panel is in the toolbar area: extend the toolbar card downward */
+.toolbar-image-panel {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-top: 1.5px solid var(--border-color);
+  box-shadow: none;
+  border-radius: 0 0 10px 10px;
+  background: #fafbfc;
+  margin-top: 0;
+}
+
+/* Hide the arrow caret for toolbar panel */
+.toolbar-image-panel::before {
+  display: none;
+}
+
+.image-settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.image-settings-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.image-settings-row2 {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Position/wrap option grid */
+.image-position-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.image-position-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+  flex: 1;
+  min-width: 80px;
+  color: var(--text-secondary);
+}
+
+.image-position-btn:hover {
+  background: #f0f4ff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.image-position-btn.active {
+  background: rgba(13,46,78,0.07);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(13,46,78,0.08);
+}
+
+.image-position-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.image-position-label {
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.image-position-desc {
+  font-size: 9.5px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Width preset buttons */
+.image-width-btn {
+  padding: 4px 10px;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.image-width-btn:hover {
+  background: #f0f4ff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.image-width-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Alt text + link inputs in panel */
+.image-settings-input {
+  flex: 1;
+  min-width: 160px;
+  padding: 7px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+  background: white;
+  outline: none;
+}
+
+.image-settings-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(13,46,78,0.1);
+}
+
+.image-settings-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Right-side drag handle */
+.img-resize-handle {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 40px;
+  background: var(--accent-color);
+  border-radius: 5px;
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(200,66,10,0.35);
+  z-index: 20;
+  user-select: none;
+}
+
+.img-resize-handle span {
+  color: white;
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: -1px;
+  user-select: none;
+}
+
+/* Prevent text selection during image resize drag */
+.resizable-image-node-view .image-settings-panel * {
+  user-select: text;
+}
+
+/* Allow text interactions inside settings panel but not elsewhere */
+.resizable-image-node-view img,
+.resizable-image-node-view .img-resize-handle {
+  user-select: none;
+  -webkit-user-drag: none;
+}

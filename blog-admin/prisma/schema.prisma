@@ -68,3 +68,14 @@ model Post {
   @@index([slug])
   @@index([status])
 }
+
+model Banner {
+  id        String   @id @default(uuid())
+  title     String?  // Optional title/heading
+  imageUrl  String   // URL of the uploaded image
+  linkUrl   String?  // Optional target URL when clicked
+  order     Int      @default(0) // Ordering for multiple banners
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

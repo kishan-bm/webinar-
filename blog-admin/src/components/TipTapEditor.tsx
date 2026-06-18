@@ -1,14 +1,18 @@
 'use client';
 
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
-import { Mark, mergeAttributes, Extension } from '@tiptap/core';
+import TextAlign from '@tiptap/extension-text-align';
+import { TextStyle } from '@tiptap/extension-text-style';
+import Color from '@tiptap/extension-color';
+import { Mark, mergeAttributes, Extension, Node } from '@tiptap/core';
 import { Plugin, PluginKey, NodeSelection } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
-import { Bold, Italic, Heading2, List, ListOrdered, ImageIcon, LinkIcon, Code, Edit2, Trash2, Check, X } from 'lucide-react';
+import { Bold, Italic, Heading2, List, ListOrdered, ImageIcon, LinkIcon, Code, Edit2, Trash2, Check, X, AlignLeft, AlignCenter, AlignRight, AlignJustify, FileCode, Minus } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useCallback, useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 // Custom extension to highlight text selection when the editor is blurred but user is using the link menus
 const BlurredSelectionHighlight = Extension.create({
@@ -45,6 +49,533 @@ const BlurredSelectionHighlight = Extension.create({
   },
 });
 
+// Position options: Left, Center, Right, In-Text (floats within paragraph text)
+const IMAGE_POSITIONS = [
+  {
+    key: 'left',
+    label: 'Left',
+    desc: 'Block left',
+    icon: (
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
+        <rect x="1" y="1" width="11" height="9" rx="2" fill="currentColor" opacity="0.9"/>
+        <rect x="1" y="13" width="24" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="1" y="17" width="18" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+      </svg>
+    ),
+  },
+  {
+    key: 'center',
+    label: 'Center',
+    desc: 'Centered block',
+    icon: (
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
+        <rect x="7" y="1" width="12" height="9" rx="2" fill="currentColor" opacity="0.9"/>
+        <rect x="1" y="13" width="24" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="4" y="17" width="18" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+      </svg>
+    ),
+  },
+  {
+    key: 'right',
+    label: 'Right',
+    desc: 'Block right',
+    icon: (
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
+        <rect x="14" y="1" width="11" height="9" rx="2" fill="currentColor" opacity="0.9"/>
+        <rect x="1" y="13" width="24" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="7" y="17" width="18" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+      </svg>
+    ),
+  },
+  {
+    key: 'in-text',
+    label: 'In Text',
+    desc: 'Drag to float in paragraph',
+    icon: (
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
+        <rect x="1" y="2" width="9" height="12" rx="2" fill="currentColor" opacity="0.9"/>
+        <rect x="13" y="2" width="12" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="13" y="6" width="12" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="13" y="10" width="9" height="2" rx="1" fill="currentColor" opacity="0.35"/>
+        <rect x="1" y="16" width="24" height="2" rx="1" fill="currentColor" opacity="0.25"/>
+      </svg>
+    ),
+  },
+];
+
+const WIDTH_PRESETS = ['25%', '33%', '50%', '66%', '75%', '100%', 'auto'];
+
+// React NodeView component for resizable images with drag handle
+function ResizableImageNodeView({ node, updateAttributes, selected, editor, getPos }: any) {
+  const { src, alt, title, href, width, align } = node.attrs;
+  const [isResizing, setIsResizing] = useState(false);
+  const startXRef = useRef(0);
+  const startWidthRef = useRef(0);
+  const imgRef = useRef<HTMLImageElement>(null);
+  // For in-text mode: track drag direction to auto-set float side
+  const floatDragStartX = useRef(0);
+
+  const imgAlign = align || 'center';
+  const isInText = imgAlign === 'in-text' || imgAlign === 'float-left' || imgAlign === 'float-right';
+  // Resolve actual float side for in-text mode
+  const floatSide: 'left' | 'right' | null = 
+    imgAlign === 'in-text' || imgAlign === 'float-left' ? 'left' :
+    imgAlign === 'float-right' ? 'right' : null;
+
+  // Compute wrapper style
+  const getWrapperStyle = (): React.CSSProperties => {
+    if (floatSide === 'left') return { float: 'left', marginRight: '20px', marginBottom: '12px', marginTop: '4px', display: 'inline-block' };
+    if (floatSide === 'right') return { float: 'right', marginLeft: '20px', marginBottom: '12px', marginTop: '4px', display: 'inline-block' };
+    if (imgAlign === 'left') return { display: 'block', marginLeft: '0', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
+    if (imgAlign === 'right') return { display: 'block', marginLeft: 'auto', marginRight: '0', marginTop: '12px', marginBottom: '4px' };
+    return { display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
+  };
+
+  // Select node programmatically on click/mousedown
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (typeof getPos === 'function' && editor) {
+      try {
+        const pos = getPos();
+        const tr = editor.state.tr;
+        const selection = NodeSelection.create(editor.state.doc, pos);
+        editor.view.dispatch(tr.setSelection(selection));
+        setTimeout(() => {
+          editor.view.focus();
+        }, 10);
+      } catch (err) {
+        console.error("Failed to select node", err);
+      }
+    }
+  };
+
+  // Resize drag (right handle)
+  const onMouseDownResize = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!imgRef.current) return;
+    setIsResizing(true);
+    startXRef.current = e.clientX;
+    startWidthRef.current = imgRef.current.offsetWidth;
+
+    const onMouseMove = (mv: MouseEvent) => {
+      const newW = Math.max(80, startWidthRef.current + mv.clientX - startXRef.current);
+      if (imgRef.current) imgRef.current.style.width = `${newW}px`;
+    };
+    const onMouseUp = (up: MouseEvent) => {
+      const newW = Math.max(80, startWidthRef.current + up.clientX - startXRef.current);
+      updateAttributes({ width: `${newW}px` });
+      setIsResizing(false);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
+
+  // In-text drag: drag image left/right to flip float side
+  const onMouseDownFloat = (e: React.MouseEvent) => {
+    if (imgAlign !== 'in-text' && imgAlign !== 'float-left' && imgAlign !== 'float-right') return;
+    floatDragStartX.current = e.clientX;
+    const onMouseMove = (mv: MouseEvent) => {
+      const delta = mv.clientX - floatDragStartX.current;
+      if (Math.abs(delta) > 20) {
+        const nextAlign = delta > 0 ? 'float-right' : 'float-left';
+        if (nextAlign !== node.attrs.align) {
+          updateAttributes({ align: nextAlign });
+        }
+      }
+    };
+    const onMouseUp = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
+
+  const imgEl = (
+    <img
+      ref={imgRef}
+      src={src}
+      alt={alt || ''}
+      title={title || ''}
+      style={{
+        width: width || 'auto',
+        maxWidth: '100%',
+        height: 'auto',
+        display: 'block',
+        borderRadius: '6px',
+        border: selected ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
+        boxShadow: selected ? '0 0 0 3px rgba(200,66,10,0.18)' : 'var(--shadow-sm)',
+        cursor: isResizing ? 'ew-resize' : isInText ? 'grab' : 'pointer',
+        userSelect: 'none',
+        transition: 'border 0.15s, box-shadow 0.15s',
+      }}
+      onMouseDown={(e) => {
+        handleClick(e);
+        if (isInText) onMouseDownFloat(e);
+      }}
+    />
+  );
+
+  const imageContent = (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="editor-image-link"
+          style={{ pointerEvents: 'none', cursor: 'default', display: 'block' }}
+        >{imgEl}</a>
+      ) : imgEl}
+      {/* Drag handle for moving the node in text */}
+      {selected && (
+        <div
+          data-drag-handle
+          className="img-drag-handle"
+          title="Drag to move image"
+          style={{
+            position: 'absolute',
+            top: '6px',
+            right: '6px',
+            background: 'var(--accent-color, #c8420a)',
+            color: 'white',
+            width: '28px',
+            height: '28px',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'grab',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            zIndex: 10,
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="5 9 2 12 5 15"></polyline>
+            <polyline points="9 5 12 2 15 5"></polyline>
+            <polyline points="15 19 12 22 9 19"></polyline>
+            <polyline points="19 9 22 12 19 15"></polyline>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+          </svg>
+        </div>
+      )}
+      {/* Right-side drag handle for resizing */}
+      {selected && (
+        <div onMouseDown={onMouseDownResize} className="img-resize-handle" title="Drag to resize">
+          <span>⋮⋮</span>
+        </div>
+      )}
+      {/* In-text float badge */}
+      {selected && isInText && (
+        <div style={{
+          position: 'absolute', bottom: '6px', left: '6px',
+          background: 'rgba(13,46,78,0.85)', color: 'white',
+          fontSize: '10px', fontWeight: 700, padding: '2px 7px',
+          borderRadius: '4px', pointerEvents: 'none',
+          letterSpacing: '0.04em'
+        }}>
+          {floatSide === 'right' ? '← Drag left to flip' : 'Drag right to flip →'}
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <NodeViewWrapper
+      as="div"
+      className="resizable-image-node-view"
+      contentEditable={false}
+      draggable={true}
+      style={{ 
+        display: 'block', 
+        width: '100%', 
+        margin: '4px 0',
+        clear: isInText ? 'none' : 'both'
+      }}
+    >
+      {isInText ? (
+        <div style={{ display: 'block', ...getWrapperStyle() }}>{imageContent}</div>
+      ) : (
+        <div style={{
+          display: 'flex',
+          justifyContent: imgAlign === 'left' ? 'flex-start' : imgAlign === 'right' ? 'flex-end' : 'center',
+          width: '100%',
+          ...getWrapperStyle()
+        }}>
+          {imageContent}
+        </div>
+      )}
+    </NodeViewWrapper>
+  );
+}
+
+// Custom Image Extension: supports href, width, align (including float variants) + ReactNodeView
+const CustomImage = Image.extend({
+  inline: false,
+  group: 'block',
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      href: {
+        default: null,
+        parseHTML: element => element.getAttribute('data-href') || null,
+        renderHTML: attributes => attributes.href ? { 'data-href': attributes.href } : {},
+      },
+      target: { default: '_blank' },
+      width: {
+        default: null,
+        parseHTML: element => element.getAttribute('width') || element.style.width || null,
+        renderHTML: attributes => {
+          if (!attributes.width) return {};
+          return {
+            width: attributes.width,
+            style: `width: ${attributes.width};`
+          };
+        },
+      },
+      align: {
+        default: 'center',
+        parseHTML: element => {
+          const selfAlign = element.getAttribute('data-align');
+          if (selfAlign) return selfAlign;
+          let current: HTMLElement | null = element.parentElement;
+          for (let i = 0; i < 3 && current; i++) {
+            const parentAlign = current.getAttribute('data-align');
+            if (parentAlign) return parentAlign;
+            current = current.parentElement;
+          }
+          return 'center';
+        },
+        renderHTML: attributes => {
+          return { 'data-align': attributes.align };
+        },
+      },
+    };
+  },
+  renderHTML({ HTMLAttributes }) {
+    const { href, 'data-href': dataHref, 'data-align': dataAlign, width, ...rest } = HTMLAttributes;
+    const actualHref = href || dataHref;
+    const a = dataAlign || 'center';
+    const w = width ? `width:${width};` : '';
+
+    let wrapStyle = '';
+    switch (a) {
+      case 'float-left':
+      case 'in-text':
+        wrapStyle = `float:left;margin-right:20px;margin-bottom:12px;margin-top:4px;display:block;`;
+        break;
+      case 'float-right':
+        wrapStyle = `float:right;margin-left:20px;margin-bottom:12px;margin-top:4px;display:block;`;
+        break;
+      case 'left':
+        wrapStyle = `display:block;margin-left:0;margin-right:auto;margin-top:12px;margin-bottom:4px;`;
+        break;
+      case 'right':
+        wrapStyle = `display:block;margin-left:auto;margin-right:0;margin-top:12px;margin-bottom:4px;`;
+        break;
+      default:
+        wrapStyle = `display:block;margin-left:auto;margin-right:auto;margin-top:12px;margin-bottom:4px;`;
+    }
+
+    const imgStyle = `${w}max-width:100%;height:auto;display:block;border-radius:6px;`;
+    const imgNode = ['img', mergeAttributes(this.options.HTMLAttributes, rest, { style: imgStyle })];
+    const innerNode = actualHref
+      ? ['a', { href: actualHref, target: '_blank', rel: 'noopener noreferrer', style: 'display:block;' }, imgNode]
+      : imgNode;
+
+    return ['div', { style: wrapStyle, class: 'article-image-wrapper' }, innerNode] as any;
+  },
+  addNodeView() {
+    return ReactNodeViewRenderer(ResizableImageNodeView);
+  },
+});
+
+// Custom Font Size Extension to support text-style size attribute
+const FontSize = Extension.create({
+  name: 'fontSize',
+  addGlobalAttributes() {
+    return [
+      {
+        types: ['textStyle'],
+        attributes: {
+          fontSize: {
+            default: null,
+            parseHTML: (element: HTMLElement) => element.style.fontSize?.replace(/['"]+/g, '') || null,
+            renderHTML: (attributes: Record<string, any>) => {
+              if (!attributes.fontSize) {
+                return {};
+              }
+              return {
+                style: `font-size: ${attributes.fontSize}`,
+              };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      setFontSize: (fontSize: string) => ({ chain }) => {
+        return chain()
+          .setMark('textStyle', { fontSize })
+          .run();
+      },
+      unsetFontSize: () => ({ chain }) => {
+        return chain()
+          .setMark('textStyle', { fontSize: null })
+          .run();
+      },
+    };
+  },
+});
+
+// Custom Font Family Extension to support text-style font-family attribute
+const FontFamily = Extension.create({
+  name: 'fontFamily',
+  addGlobalAttributes() {
+    return [
+      {
+        types: ['textStyle'],
+        attributes: {
+          fontFamily: {
+            default: null,
+            parseHTML: (element: HTMLElement) => element.style.fontFamily?.replace(/['"]+/g, '') || null,
+            renderHTML: (attributes: Record<string, any>) => {
+              if (!attributes.fontFamily) {
+                return {};
+              }
+              return {
+                style: `font-family: ${attributes.fontFamily}`,
+              };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      setFontFamily: (fontFamily: string) => ({ chain }) => {
+        return chain()
+          .setMark('textStyle', { fontFamily })
+          .run();
+      },
+      unsetFontFamily: () => ({ chain }) => {
+        return chain()
+          .setMark('textStyle', { fontFamily: null })
+          .run();
+      },
+    };
+  },
+});
+
+// React Component for Horizontal Rule Node View to support interactive width, thickness and alignment updates
+function HorizontalRuleNodeView({ node, selected }: any) {
+  const { width, thickness, align } = node.attrs;
+  const alignVal = align || 'center';
+  const marginLeft = alignVal === 'left' ? '0' : alignVal === 'right' ? 'auto' : 'auto';
+  const marginRight = alignVal === 'right' ? '0' : alignVal === 'left' ? 'auto' : 'auto';
+
+  const combinedStyle = {
+    width: width || '100%',
+    height: thickness || '2px',
+    border: 'none',
+    backgroundColor: '#cbd5e1',
+    marginLeft,
+    marginRight,
+    marginTop: '24px',
+    marginBottom: '24px',
+    display: 'block',
+    cursor: 'pointer',
+    outline: selected ? '2px solid var(--accent-color)' : 'none',
+    outlineOffset: '2px',
+    transition: 'outline 0.15s ease-in-out'
+  };
+
+  return (
+    <NodeViewWrapper className="horizontal-rule-node-view-wrapper" style={{ width: '100%' }}>
+      <hr style={combinedStyle} />
+    </NodeViewWrapper>
+  );
+}
+
+// Custom Horizontal Rule Extension supporting width, thickness, and alignment styles
+const CustomHorizontalRule = Node.create({
+  name: 'horizontalRule',
+  group: 'block',
+  
+  addAttributes() {
+    return {
+      width: {
+        default: '100%',
+        parseHTML: element => element.style.width || '100%',
+        renderHTML: attributes => {
+          return {
+            style: `width: ${attributes.width};`,
+          };
+        },
+      },
+      thickness: {
+        default: '2px',
+        parseHTML: element => element.style.height || '2px',
+        renderHTML: attributes => {
+          return {
+            style: `height: ${attributes.thickness};`,
+          };
+        },
+      },
+      align: {
+        default: 'center',
+        parseHTML: element => {
+          const ml = element.style.marginLeft;
+          const mr = element.style.marginRight;
+          if (ml === '0px' || ml === '0') return 'left';
+          if (mr === '0px' || mr === '0') return 'right';
+          return 'center';
+        },
+        renderHTML: attributes => {
+          const align = attributes.align;
+          const marginLeft = align === 'left' ? '0' : align === 'right' ? 'auto' : 'auto';
+          const marginRight = align === 'right' ? '0' : align === 'left' ? 'auto' : 'auto';
+          return {
+            style: `margin-left: ${marginLeft}; margin-right: ${marginRight};`,
+          };
+        },
+      },
+    };
+  },
+
+  parseHTML() {
+    return [{ tag: 'hr' }];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    const { style, ...rest } = HTMLAttributes;
+    const align = HTMLAttributes.align || 'center';
+    const marginLeft = align === 'left' ? '0' : align === 'right' ? 'auto' : 'auto';
+    const marginRight = align === 'right' ? '0' : align === 'left' ? 'auto' : 'auto';
+    const combinedStyle = `width: ${HTMLAttributes.width || '100%'}; height: ${HTMLAttributes.thickness || '2px'}; border: none; background-color: #cbd5e1; margin-left: ${marginLeft}; margin-right: ${marginRight}; margin-top: 24px; margin-bottom: 24px; display: block;`;
+    
+    return ['hr', mergeAttributes(rest, { style: combinedStyle })];
+  },
+
+  addNodeView() {
+    return ReactNodeViewRenderer(HorizontalRuleNodeView);
+  },
+
+  addCommands() {
+    return {
+      setHorizontalRule: () => ({ chain }) => {
+        return chain()
+          .insertContent({ type: this.name })
+          .run();
+      },
+    };
+  },
+});
+
+
 // Custom Minimal Link Mark to bypass the official extension's crashing bugs
 const CustomLink = Mark.create({
   name: 'link',
@@ -76,20 +607,191 @@ const CustomLink = Mark.create({
   },
 });
 
+// Custom HTML Block Node View component
+function HTMLBlockNodeView({ node, updateAttributes, deleteNode }: any) {
+  const [isEditing, setIsEditing] = useState(true);
+  const html = node.attrs.html || '';
+
+  const handleTextareaKeyDown = (e: React.KeyboardEvent) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <NodeViewWrapper 
+      className="html-block-node-wrapper" 
+      style={{ 
+        margin: '24px 0', 
+        border: '1px solid var(--border-color)', 
+        borderRadius: '8px', 
+        overflow: 'hidden',
+        background: '#f9fafb'
+      }}
+    >
+      <div 
+        style={{ 
+          background: '#f3f4f6', 
+          padding: '8px 16px', 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          borderBottom: '1px solid var(--border-color)',
+          userSelect: 'none'
+        }}
+      >
+        <span 
+          data-drag-handle=""
+          style={{ 
+            fontSize: '13px', 
+            fontWeight: 600, 
+            color: 'var(--primary-color)', 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px',
+            cursor: 'grab',
+            flex: 1,
+            paddingRight: '12px'
+          }}
+          title="Drag to reposition this block"
+        >
+          ⠿ Custom HTML Block
+        </span>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button
+            type="button"
+            onClick={() => setIsEditing(!isEditing)}
+            style={{
+              background: 'white',
+              border: '1px solid var(--border-color)',
+              padding: '4px 10px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              cursor: 'pointer',
+              fontWeight: 600,
+              color: 'var(--primary-color)',
+              transition: 'background 0.2s'
+            }}
+          >
+            {isEditing ? '👁️ Preview' : '✏️ Edit'}
+          </button>
+          <button
+            type="button"
+            onClick={deleteNode}
+            style={{
+              background: 'white',
+              border: '1px solid #fecaca',
+              padding: '4px 10px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              cursor: 'pointer',
+              fontWeight: 600,
+              color: '#ef4444',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.background = '#fef2f2')}
+            onMouseOut={(e) => (e.currentTarget.style.background = 'white')}
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      </div>
+      
+      {isEditing ? (
+        <textarea
+          value={html}
+          onChange={(e) => updateAttributes({ html: e.target.value })}
+          onKeyDown={handleTextareaKeyDown}
+          placeholder="Paste or write your custom HTML, forms, embed codes, or scripts here..."
+          style={{
+            width: '100%',
+            minHeight: '140px',
+            padding: '16px',
+            fontFamily: 'SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace',
+            fontSize: '13px',
+            border: 'none',
+            outline: 'none',
+            resize: 'vertical',
+            display: 'block',
+            background: '#ffffff',
+            color: '#1f2937',
+            lineHeight: '1.5'
+          }}
+        />
+      ) : (
+        <div 
+          style={{ padding: '20px', background: 'white', overflowX: 'auto' }}
+          dangerouslySetInnerHTML={{ __html: html || '<div style="color: #9ca3af; font-style: italic; text-align: center; padding: 12px;">Empty HTML Block. Click "Edit Code" to paste HTML.</div>' }}
+        />
+      )}
+    </NodeViewWrapper>
+  );
+}
+
+// Custom TipTap HTML Block extension
+const HTMLBlock = Node.create({
+  name: 'htmlBlock',
+  group: 'block',
+  atom: true,
+  draggable: true, // Enable drag & drop!
+  
+  addAttributes() {
+    return {
+      html: {
+        default: '',
+      },
+    };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: 'div[data-html-block="true"]',
+        getAttrs: element => ({
+          html: (element as HTMLElement).getAttribute('data-content') || '',
+        }),
+      },
+    ];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return ['div', { 
+      'data-html-block': 'true', 
+      'data-content': HTMLAttributes.html 
+    }];
+  },
+
+  addNodeView() {
+    return ReactNodeViewRenderer(HTMLBlockNodeView);
+  },
+});
+
 const extensions = [
-  StarterKit,
-  Image,
+  StarterKit.configure({
+    horizontalRule: false,
+  }),
+  CustomImage,
   CustomLink,
   BlurredSelectionHighlight,
+  TextAlign.configure({
+    types: ['heading', 'paragraph'],
+    alignments: ['left', 'center', 'right', 'justify'],
+  }),
+  TextStyle,
+  Color,
+  FontSize,
+  FontFamily,
+  CustomHorizontalRule,
+  HTMLBlock,
 ];
 
 interface TipTapEditorProps {
   content: string;
   onChange: (content: string) => void;
+  toolbarPortalId?: string;
 }
 
-export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
+export default function TipTapEditor({ content, onChange, toolbarPortalId }: TipTapEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInteractingRef = useRef(false);
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkText, setLinkText] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
@@ -100,6 +802,26 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
   const [isEditingBubbleLink, setIsEditingBubbleLink] = useState(false);
   const [bubbleMenuPos, setBubbleMenuPos] = useState<{ top: number; left: number } | null>(null);
 
+  // Image SEO Attributes State
+  const [isEditingImageSettings, setIsEditingImageSettings] = useState(false);
+  const [tempAltText, setTempAltText] = useState('');
+  const [tempTitleText, setTempTitleText] = useState('');
+
+  // Horizontal Rule settings state
+  const [isEditingHorizontalRuleSettings, setIsEditingHorizontalRuleSettings] = useState(false);
+
+  // Portal target element state
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (toolbarPortalId) {
+      const el = document.getElementById(toolbarPortalId);
+      if (el) {
+        setPortalElement(el);
+      }
+    }
+  }, [toolbarPortalId]);
+
   const editor = useEditor({
     extensions,
     content,
@@ -107,27 +829,47 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
+    editorProps: {
+      handleClickOn(view, pos, node, nodePos, event, direct) {
+        if (node.type.name === 'image') {
+          const tr = view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos));
+          view.dispatch(tr);
+          return true;
+        }
+        return false;
+      }
+    }
   });
 
-  // Keep bubbleLinkUrl synced with selected link href
+  // Keep bubbleLinkUrl synced with selected link href or image href
   useEffect(() => {
     if (!editor) return;
-    if (editor.isActive('link')) {
+    const { selection } = editor.state;
+    if (selection instanceof NodeSelection && selection.node.type.name === 'image') {
+      setBubbleLinkUrl(selection.node.attrs.href || '');
+    } else if (editor.isActive('link')) {
       setBubbleLinkUrl(editor.getAttributes('link').href || '');
     }
   }, [editor?.state.selection]);
 
-  // Positioning the custom floating bubble menu above selected text
+  // Positioning the custom floating bubble menu above selected text, image, or horizontal rule
   useEffect(() => {
     if (!editor) return;
 
     const updateBubbleMenu = () => {
       const { selection } = editor.state;
-      
-      // If nothing is selected and cursor is not on a link, hide menu
-      if (selection.empty && !editor.isActive('link')) {
+      const isImageSelected = selection instanceof NodeSelection && selection.node.type.name === 'image';
+      const isHorizontalRuleSelected = selection instanceof NodeSelection && selection.node.type.name === 'horizontalRule';
+      const hasTextSelection = !selection.empty && !(selection instanceof NodeSelection);
+      const isCursorOnLink = editor.isActive('link');
+
+      // Images have their own inline NodeView settings panel — no floating bubble menu needed for them
+      // If nothing is selected, cursor is not on a link, and no horizontal line is selected, hide menu
+      if (!hasTextSelection && !isCursorOnLink && !isHorizontalRuleSelected) {
         setBubbleMenuPos(null);
         setIsEditingBubbleLink(false);
+        setIsEditingImageSettings(false);
+        setIsEditingHorizontalRuleSettings(false);
         return;
       }
 
@@ -143,21 +885,66 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
           const range = domSelection.getRangeAt(0);
           let rect = range.getBoundingClientRect();
 
-          // Hide if the selection area is empty/invisible AND we are not on a link
-          if (rect.width === 0 && rect.height === 0 && !editor.isActive('link')) {
+          // Hide if the selection area is empty/invisible AND we are not on a link/HR
+          if (rect.width === 0 && rect.height === 0 && !editor.isActive('link') && !isHorizontalRuleSelected) {
             setBubbleMenuPos(null);
             return;
           }
 
           // If we are on a link and selection is collapsed (cursor), target the link DOM element itself
           if (editor.isActive('link') && (rect.width === 0 || selection.empty)) {
-            let node: Node | null = domSelection.anchorNode;
+            let node = domSelection.anchorNode;
             while (node && node !== containerRef.current) {
               if (node.nodeName === 'A') {
                 rect = (node as Element).getBoundingClientRect();
                 break;
               }
               node = node.parentNode;
+            }
+          } else if (isImageSelected) {
+            // Use ProseMirror's nodeDOM to find the actual image wrapper, since
+            // ReactNodeViews do NOT update window.getSelection() to point at themselves.
+            try {
+              const nodeDOM = editor.view.nodeDOM((selection as any).from);
+              if (nodeDOM) {
+                const domEl = nodeDOM as Element;
+                const imgEl = domEl.nodeName === 'IMG' ? domEl : domEl.querySelector?.('img') || domEl;
+                rect = imgEl.getBoundingClientRect();
+              }
+            } catch (_) {
+              // Fallback: try walking DOM selection
+              let node = domSelection.anchorNode;
+              while (node && node !== containerRef.current) {
+                if (node.nodeName === 'IMG' || (node as Element).querySelector?.('img')) {
+                  const imgEl = node.nodeName === 'IMG' ? (node as Element) : (node as Element).querySelector('img');
+                  if (imgEl) rect = imgEl.getBoundingClientRect();
+                  break;
+                }
+                node = node.parentNode;
+              }
+            }
+          } else if (isHorizontalRuleSelected) {
+            // Use ProseMirror's nodeDOM to find the actual HR wrapper, since
+            // ReactNodeViews do NOT update window.getSelection() to point at themselves.
+            try {
+              const nodeDOM = editor.view.nodeDOM((selection as any).from);
+              if (nodeDOM) {
+                const domEl = nodeDOM as Element;
+                // The NodeViewWrapper is the outer element; the <hr> is inside it
+                const hrEl = domEl.nodeName === 'HR' ? domEl : domEl.querySelector?.('hr') || domEl;
+                rect = hrEl.getBoundingClientRect();
+              }
+            } catch (_) {
+              // Fallback: try walking DOM selection
+              let node = domSelection.anchorNode;
+              while (node && node !== containerRef.current) {
+                if (node.nodeName === 'HR' || (node as Element).querySelector?.('hr')) {
+                  const hrEl = node.nodeName === 'HR' ? (node as Element) : (node as Element).querySelector('hr');
+                  if (hrEl) rect = hrEl.getBoundingClientRect();
+                  break;
+                }
+                node = node.parentNode;
+              }
             }
           }
 
@@ -181,9 +968,12 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
     // Hide bubble menu on blur, unless focus shifts to the bubble menu inputs or modal
     const handleBlur = () => {
       setTimeout(() => {
+        if (isInteractingRef.current) return;
         const activeEl = document.activeElement;
         if (!activeEl?.closest('.bubble-menu') && !activeEl?.closest('.toolbar-link-modal')) {
           setBubbleMenuPos(null);
+          setIsEditingImageSettings(false);
+          setIsEditingHorizontalRuleSettings(false);
         }
       }, 200);
     };
@@ -274,7 +1064,7 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
     setShowLinkModal(false);
   };
 
-  // Set link inside the bubble menu (inline formatting)
+  // Set link inside the bubble menu (inline formatting or image link)
   const applyInlineBubbleLink = () => {
     if (!editor || !bubbleLinkUrl) return;
     
@@ -283,124 +1073,87 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
       targetUrl = 'https://' + targetUrl;
     }
 
-    editor
-      .chain()
-      .focus()
-      .extendMarkRange('link')
-      .setLink({ href: targetUrl })
-      .run();
+    const { selection } = editor.state;
+    const isImageSelected = selection instanceof NodeSelection && selection.node.type.name === 'image';
+
+    if (isImageSelected) {
+      editor.chain().focus().updateAttributes('image', { href: targetUrl }).run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: targetUrl })
+        .run();
+    }
     setIsEditingBubbleLink(false);
   };
 
   // Remove link inside the bubble menu (unlink)
   const removeInlineBubbleLink = () => {
     if (!editor) return;
-    editor
-      .chain()
-      .focus()
-      .extendMarkRange('link')
-      .unsetLink()
-      .run();
+
+    const { selection } = editor.state;
+    const isImageSelected = selection instanceof NodeSelection && selection.node.type.name === 'image';
+
+    if (isImageSelected) {
+      editor.chain().focus().updateAttributes('image', { href: null }).run();
+    } else {
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .unsetLink()
+        .run();
+    }
     setIsEditingBubbleLink(false);
     setBubbleLinkUrl('');
   };
 
+  // Context-aware text alignment: aligns all text if selection is empty, or only selected text
+  const handleAlign = (alignment: string) => {
+    if (!editor) return;
+
+    const { selection } = editor.state;
+    const { from } = selection;
+    const isActive = editor.isActive({ textAlign: alignment });
+
+    if (selection.empty) {
+      if (isActive) {
+        editor
+          .chain()
+          .focus()
+          .selectAll()
+          .unsetTextAlign()
+          .setTextSelection(from)
+          .run();
+      } else {
+        editor
+          .chain()
+          .focus()
+          .selectAll()
+          .setTextAlign(alignment)
+          .setTextSelection(from)
+          .run();
+      }
+    } else {
+      if (isActive) {
+        editor.chain().focus().unsetTextAlign().run();
+      } else {
+        editor.chain().focus().setTextAlign(alignment).run();
+      }
+    }
+  };
+
   if (!editor) return null;
 
-  return (
-    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
-      
-      {/* ── CUSTOM FLOATING BUBBLE MENU ── */}
-      {bubbleMenuPos && (
-        <div 
-          className="bubble-menu"
-          style={{
-            position: 'absolute',
-            top: `${bubbleMenuPos.top}px`,
-            left: `${bubbleMenuPos.left}px`,
-            transform: 'translateX(-50%)',
-            zIndex: 90,
-          }}
-        >
-          {isEditingBubbleLink ? (
-            /* Inline Link input inside the bubble menu */
-            <div className="bubble-menu-input-container">
-              <input
-                type="text"
-                placeholder="Paste or type link..."
-                value={bubbleLinkUrl}
-                onChange={(e) => setBubbleLinkUrl(e.target.value)}
-                className="bubble-menu-input"
-                autoFocus
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') applyInlineBubbleLink();
-                  if (e.key === 'Escape') setIsEditingBubbleLink(false);
-                }}
-              />
-              <button type="button" onClick={applyInlineBubbleLink} className="toolbar-btn" style={{ color: '#10b981' }}>
-                <Check size={16} />
-              </button>
-              <button type="button" onClick={() => setIsEditingBubbleLink(false)} className="toolbar-btn" style={{ color: '#ef4444' }}>
-                <X size={16} />
-              </button>
-            </div>
-          ) : editor.isActive('link') ? (
-            /* Current Link Viewer */
-            <div className="bubble-menu-link-view">
-              <a href={editor.getAttributes('link').href} target="_blank" rel="noopener noreferrer">
-                {editor.getAttributes('link').href}
-              </a>
-              <div className="bubble-divider"></div>
-              <button
-                type="button"
-                onClick={() => {
-                  setBubbleLinkUrl(editor.getAttributes('link').href || '');
-                  setIsEditingBubbleLink(true);
-                }}
-                className="toolbar-btn"
-                title="Edit Link"
-              >
-                <Edit2 size={14} />
-              </button>
-              <button
-                type="button"
-                onClick={removeInlineBubbleLink}
-                className="toolbar-btn"
-                title="Unlink"
-                style={{ color: '#ef4444' }}
-              >
-                <Trash2 size={14} />
-              </button>
-            </div>
-          ) : (
-            /* Basic Formatting Bubble Menu */
-            <>
-              <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={`toolbar-btn ${editor.isActive('bold') ? 'is-active' : ''}`}>
-                <Bold size={16} />
-              </button>
-              <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={`toolbar-btn ${editor.isActive('italic') ? 'is-active' : ''}`}>
-                <Italic size={16} />
-              </button>
-              <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={`toolbar-btn ${editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}`}>
-                <Heading2 size={16} />
-              </button>
-              <div className="bubble-divider"></div>
-              <button
-                type="button"
-                onClick={() => {
-                  setBubbleLinkUrl('');
-                  setIsEditingBubbleLink(true);
-                }}
-                className="toolbar-btn"
-                title="Add Link"
-              >
-                <LinkIcon size={16} />
-              </button>
-            </>
-          )}
-        </div>
-      )}
+  const { selection: activeSelection } = editor.state;
+  const isImageSelected = activeSelection instanceof NodeSelection && activeSelection.node.type.name === 'image';
+  const isHorizontalRuleSelected = activeSelection instanceof NodeSelection && activeSelection.node.type.name === 'horizontalRule';
+  const selectedImageHref = isImageSelected ? (activeSelection.node.attrs.href || null) : null;
 
+  const toolbarAndModal = (
+    <div className="editor-toolbar-sticky-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'sticky', top: 0, zIndex: 40 }}>
       {/* ── TOP EDITOR TOOLBAR ── */}
       <div className="editor-toolbar">
         <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={`toolbar-btn ${editor.isActive('bold') ? 'is-active' : ''}`}>
@@ -409,19 +1162,208 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
         <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={`toolbar-btn ${editor.isActive('italic') ? 'is-active' : ''}`}>
           <Italic size={18} />
         </button>
-        <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={`toolbar-btn ${editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}`}>
-          <Heading2 size={18} />
-        </button>
+        {/* Headings Selector Dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <select
+            className="toolbar-select"
+            value={
+              editor.isActive('heading', { level: 1 }) ? 'h1' :
+              editor.isActive('heading', { level: 2 }) ? 'h2' :
+              editor.isActive('heading', { level: 3 }) ? 'h3' :
+              editor.isActive('heading', { level: 4 }) ? 'h4' :
+              'paragraph'
+            }
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === 'paragraph') {
+                editor.chain().focus().setParagraph().run();
+              } else {
+                const level = parseInt(val.replace('h', ''), 10) as any;
+                editor.chain().focus().toggleHeading({ level }).run();
+              }
+            }}
+            title="Text Style / Headings"
+            style={{ width: '110px' }}
+          >
+            <option value="paragraph">Normal Text</option>
+            <option value="h1">Heading 1</option>
+            <option value="h2">Heading 2</option>
+            <option value="h3">Heading 3</option>
+            <option value="h4">Heading 4</option>
+          </select>
+        </div>
         <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`toolbar-btn ${editor.isActive('bulletList') ? 'is-active' : ''}`}>
           <List size={18} />
         </button>
         <button type="button" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`toolbar-btn ${editor.isActive('orderedList') ? 'is-active' : ''}`}>
           <ListOrdered size={18} />
         </button>
-        <button type="button" onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={`toolbar-btn ${editor.isActive('codeBlock') ? 'is-active' : ''}`}>
+        <button type="button" onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={`toolbar-btn ${editor.isActive('codeBlock') ? 'is-active' : ''}`} title="Code Snippet">
           <Code size={18} />
         </button>
+        <button 
+          type="button" 
+          onClick={() => editor.chain().focus().insertContent({ type: 'htmlBlock', attrs: { html: '' } }).run()} 
+          className={`toolbar-btn ${editor.isActive('htmlBlock') ? 'is-active' : ''}`}
+          title="Insert Custom HTML / Form Block"
+        >
+          <FileCode size={18} />
+        </button>
+        <button 
+          type="button" 
+          onClick={() => (editor.chain().focus() as any).setHorizontalRule().run()} 
+          className="toolbar-btn"
+          title="Insert Divider Line"
+        >
+          <Minus size={18} />
+        </button>
         
+        <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
+        
+        {/* Alignment Buttons */}
+        <button 
+          type="button" 
+          onClick={() => handleAlign('left')} 
+          className={`toolbar-btn ${editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}`}
+          title="Align Left"
+        >
+          <AlignLeft size={18} />
+        </button>
+        <button 
+          type="button" 
+          onClick={() => handleAlign('center')} 
+          className={`toolbar-btn ${editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}`}
+          title="Align Center"
+        >
+          <AlignCenter size={18} />
+        </button>
+        <button 
+          type="button" 
+          onClick={() => handleAlign('right')} 
+          className={`toolbar-btn ${editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}`}
+          title="Align Right"
+        >
+          <AlignRight size={18} />
+        </button>
+        <button 
+          type="button" 
+          onClick={() => handleAlign('justify')} 
+          className={`toolbar-btn ${editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}`}
+          title="Justify"
+        >
+          <AlignJustify size={18} />
+        </button>
+
+        <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
+
+        {/* Font Family Select */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <select
+            className="toolbar-select"
+            value={editor.getAttributes('textStyle').fontFamily || 'default'}
+            onChange={(e) => {
+              const font = e.target.value;
+              if (font === 'default') {
+                (editor.chain().focus() as any).unsetFontFamily().run();
+              } else {
+                (editor.chain().focus() as any).setFontFamily(font).run();
+              }
+            }}
+            title="Font Style"
+            style={{ width: '130px' }}
+          >
+            <option value="default">Default Font</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Impact, Charcoal, sans-serif">Impact</option>
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+            <option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet MS</option>
+            <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+          </select>
+        </div>
+
+        <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
+
+        {/* Font Size Select */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <select
+            className="toolbar-select"
+            value={editor.getAttributes('textStyle').fontSize || '16px'}
+            onChange={(e) => {
+              const size = e.target.value;
+              if (size === 'default') {
+                (editor.chain().focus() as any).unsetFontSize().run();
+              } else {
+                (editor.chain().focus() as any).setFontSize(size).run();
+              }
+            }}
+            title="Font Size"
+          >
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px (Default)</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+            <option value="24px">24px</option>
+            <option value="30px">30px</option>
+            <option value="36px">36px</option>
+          </select>
+        </div>
+
+        <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
+
+        {/* Text Color Picker */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Color:</span>
+          <input
+            type="color"
+            value={editor.getAttributes('textStyle').color || '#111827'}
+            onChange={(e) => {
+              (editor.chain().focus() as any).setColor(e.target.value).run();
+            }}
+            style={{
+              width: '24px',
+              height: '24px',
+              border: '1px solid var(--border-color)',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              padding: 0,
+              backgroundColor: 'transparent',
+            }}
+            title="Custom Color"
+          />
+          <button
+            type="button"
+            onClick={() => (editor.chain().focus() as any).unsetColor().run()}
+            className="color-dot-btn reset"
+            title="Reset to default color"
+          >
+            ✕
+          </button>
+          <button
+            type="button"
+            onClick={() => (editor.chain().focus() as any).setColor('#c8420a').run()}
+            className={`color-dot-btn ${editor.getAttributes('textStyle').color === '#c8420a' ? 'is-active' : ''}`}
+            style={{ backgroundColor: '#c8420a' }}
+            title="Orange"
+          />
+          <button
+            type="button"
+            onClick={() => (editor.chain().focus() as any).setColor('#0d2e4e').run()}
+            className={`color-dot-btn ${editor.getAttributes('textStyle').color === '#0d2e4e' ? 'is-active' : ''}`}
+            style={{ backgroundColor: '#0d2e4e' }}
+            title="Navy"
+          />
+          <button
+            type="button"
+            onClick={() => (editor.chain().focus() as any).setColor('#10b981').run()}
+            className={`color-dot-btn ${editor.getAttributes('textStyle').color === '#10b981' ? 'is-active' : ''}`}
+            style={{ backgroundColor: '#10b981' }}
+            title="Green"
+          />
+        </div>
+
         <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
         
         <button type="button" onClick={uploadImage} className="toolbar-btn" title="Insert Image">
@@ -447,13 +1389,14 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
           className="toolbar-link-modal"
           style={{
             padding: '20px',
-            borderBottom: '1px solid var(--border-color)',
+            border: '1px solid var(--border-color)',
             background: 'white',
-            borderLeft: '1px solid var(--border-color)',
-            borderRight: '1px solid var(--border-color)',
+            borderRadius: 'var(--radius-md)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '14px'
+            gap: '14px',
+            boxShadow: 'var(--shadow-md)',
+            marginTop: '4px'
           }}
         >
           <h4 style={{ margin: 0, fontSize: '15px', fontWeight: 600, color: 'var(--primary-color)' }}>
@@ -525,8 +1468,301 @@ export default function TipTapEditor({ content, onChange }: TipTapEditorProps) {
           </div>
         </div>
       )}
+      {/* ── IMAGE SETTINGS PANEL IN TOOLBAR ── shown when image is selected */}
+      {isImageSelected && (() => {
+        const imgAttrs = (activeSelection as any).node.attrs;
+        const imgAlignVal = imgAttrs.align || 'center';
+        return (
+          <div
+            className="image-settings-panel toolbar-image-panel"
+            onMouseDown={e => e.stopPropagation()}
+          >
+            {/* Row 1: Position & Width side-by-side Dropdowns */}
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="image-settings-label" style={{ marginBottom: 0, whiteSpace: 'nowrap' }}>Position &amp; Wrap:</span>
+                <select
+                  value={imgAlignVal}
+                  onChange={e => {
+                    editor.commands.updateAttributes('image', { align: e.target.value });
+                  }}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    border: '1.5px solid var(--border-color)',
+                    background: '#ffffff',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    color: 'var(--text-main)',
+                    cursor: 'pointer',
+                    minWidth: '160px',
+                    outline: 'none',
+                  }}
+                >
+                  {IMAGE_POSITIONS.map(pos => (
+                    <option key={pos.key} value={pos.key}>
+                      {pos.label} — {pos.desc}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="image-settings-label" style={{ marginBottom: 0, whiteSpace: 'nowrap' }}>Width:</span>
+                <select
+                  value={imgAttrs.width || 'auto'}
+                  onChange={e => {
+                    editor.commands.updateAttributes('image', { width: e.target.value === 'auto' ? null : e.target.value });
+                  }}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '6px',
+                    border: '1.5px solid var(--border-color)',
+                    background: '#ffffff',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    color: 'var(--text-main)',
+                    cursor: 'pointer',
+                    minWidth: '120px',
+                    outline: 'none',
+                  }}
+                >
+                  {WIDTH_PRESETS.map(w => (
+                    <option key={w} value={w}>
+                      {w}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Row 2: Alt Text & Link URL side by side */}
+            <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginTop: '12px', background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-dim)', letterSpacing: '0.5px' }}>Alt Text (SEO)</span>
+                <input
+                  type="text"
+                  className="image-settings-input"
+                  placeholder="Describe this image..."
+                  defaultValue={imgAttrs.alt || ''}
+                  key={`alt-${(activeSelection as any).from}`}
+                  onBlur={e => editor.commands.updateAttributes('image', { alt: e.target.value })}
+                  onKeyDown={e => { e.stopPropagation(); if (e.key === 'Enter') editor.commands.updateAttributes('image', { alt: (e.target as HTMLInputElement).value }); }}
+                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1.5px solid var(--border-color)', fontSize: '13px' }}
+                />
+              </div>
+              <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-dim)', letterSpacing: '0.5px' }}>Link URL (Optional)</span>
+                <input
+                  type="text"
+                  className="image-settings-input"
+                  placeholder="https://example.com..."
+                  defaultValue={imgAttrs.href || ''}
+                  key={`href-${(activeSelection as any).from}`}
+                  onBlur={e => editor.commands.updateAttributes('image', { href: e.target.value || null })}
+                  onKeyDown={e => { e.stopPropagation(); if (e.key === 'Enter') editor.commands.updateAttributes('image', { href: (e.target as HTMLInputElement).value || null }); }}
+                  style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1.5px solid var(--border-color)', fontSize: '13px' }}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+    </div>
+  );
+
+  return (
+    <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
       
-      <EditorContent editor={editor} />
+      {/* ── CUSTOM FLOATING BUBBLE MENU ── */}
+      {bubbleMenuPos && (
+        <div 
+          className="bubble-menu"
+          onMouseEnter={() => { isInteractingRef.current = true; }}
+          onMouseLeave={() => { isInteractingRef.current = false; }}
+          style={{
+            position: 'absolute',
+            top: `${bubbleMenuPos.top}px`,
+            left: `${bubbleMenuPos.left}px`,
+            transform: 'translateX(-50%)',
+            zIndex: 90,
+          }}
+        >
+          {isEditingHorizontalRuleSettings ? (
+            /* Horizontal Rule settings form */
+            <div className="bubble-menu-input-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px' }}>
+              <span style={{ color: 'white', fontSize: '12px', fontWeight: 600 }}>Width:</span>
+              <select
+                value={editor.getAttributes('horizontalRule').width || '100%'}
+                onChange={(e) => {
+                  editor.commands.updateAttributes('horizontalRule', { width: e.target.value });
+                }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', color: 'white', fontSize: '12px', padding: '2px' }}
+              >
+                <option value="25%" style={{ color: 'black' }}>25%</option>
+                <option value="50%" style={{ color: 'black' }}>50%</option>
+                <option value="75%" style={{ color: 'black' }}>75%</option>
+                <option value="100%" style={{ color: 'black' }}>100%</option>
+              </select>
+
+              <span style={{ color: 'white', fontSize: '12px', fontWeight: 600, marginLeft: '8px' }}>Thickness:</span>
+              <select
+                value={editor.getAttributes('horizontalRule').thickness || '2px'}
+                onChange={(e) => {
+                  editor.commands.updateAttributes('horizontalRule', { thickness: e.target.value });
+                }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', color: 'white', fontSize: '12px', padding: '2px' }}
+              >
+                <option value="1px" style={{ color: 'black' }}>1px</option>
+                <option value="2px" style={{ color: 'black' }}>2px</option>
+                <option value="4px" style={{ color: 'black' }}>4px</option>
+                <option value="8px" style={{ color: 'black' }}>8px</option>
+              </select>
+
+              <span style={{ color: 'white', fontSize: '12px', fontWeight: 600, marginLeft: '8px' }}>Align:</span>
+              <select
+                value={editor.getAttributes('horizontalRule').align || 'center'}
+                onChange={(e) => {
+                  editor.commands.updateAttributes('horizontalRule', { align: e.target.value });
+                }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '4px', color: 'white', fontSize: '12px', padding: '2px' }}
+              >
+                <option value="left" style={{ color: 'black' }}>Left</option>
+                <option value="center" style={{ color: 'black' }}>Center</option>
+                <option value="right" style={{ color: 'black' }}>Right</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => {
+                  editor.chain().focus().deleteSelection().run();
+                  setIsEditingHorizontalRuleSettings(false);
+                }}
+                className="toolbar-btn"
+                style={{ color: '#ef4444', fontSize: '12px', padding: '2px 8px', background: 'rgba(255,255,255,0.1)', marginLeft: '8px' }}
+                title="Delete Line"
+              >
+                <Trash2 size={14} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsEditingHorizontalRuleSettings(false)}
+                className="toolbar-btn"
+                style={{ color: '#10b981', fontSize: '12px', padding: '2px 8px', background: 'rgba(255,255,255,0.1)' }}
+              >
+                Done
+              </button>
+            </div>
+          ) : isHorizontalRuleSelected ? (
+            /* Horizontal Rule selection but not in settings mode */
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '4px 8px' }}>
+              <button
+                type="button"
+                onClick={() => setIsEditingHorizontalRuleSettings(true)}
+                className="toolbar-btn"
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px' }}
+                title="Line Settings"
+              >
+                <Edit2 size={16} />
+                <span style={{ fontSize: '13px', color: 'white', fontWeight: 500 }}>Line Settings</span>
+              </button>
+              <div className="bubble-divider"></div>
+              <button
+                type="button"
+                onClick={() => editor.chain().focus().deleteSelection().run()}
+                className="toolbar-btn"
+                style={{ color: '#ef4444', padding: '6px 12px' }}
+                title="Delete Line"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+          ) : isEditingBubbleLink ? (
+            /* Inline Link input inside the bubble menu */
+            <div className="bubble-menu-input-container">
+              <input
+                type="text"
+                placeholder="Paste or type link..."
+                value={bubbleLinkUrl}
+                onChange={(e) => setBubbleLinkUrl(e.target.value)}
+                className="bubble-menu-input"
+                autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') applyInlineBubbleLink();
+                  if (e.key === 'Escape') setIsEditingBubbleLink(false);
+                }}
+              />
+              <button type="button" onClick={applyInlineBubbleLink} className="toolbar-btn" style={{ color: '#10b981' }}>
+                <Check size={16} />
+              </button>
+              <button type="button" onClick={() => setIsEditingBubbleLink(false)} className="toolbar-btn" style={{ color: '#ef4444' }}>
+                <X size={16} />
+              </button>
+            </div>
+          ) : editor.isActive('link') ? (
+            /* Current Link Viewer (text links only - image links are handled in the NodeView panel) */
+            <div className="bubble-menu-link-view">
+              <a href={editor.getAttributes('link').href || '#'} target="_blank" rel="noopener noreferrer">
+                {editor.getAttributes('link').href}
+              </a>
+              <div className="bubble-divider"></div>
+              <button
+                type="button"
+                onClick={() => {
+                  setBubbleLinkUrl(editor.getAttributes('link').href || '');
+                  setIsEditingBubbleLink(true);
+                }}
+                className="toolbar-btn"
+                title="Edit Link"
+              >
+                <Edit2 size={14} />
+              </button>
+              <button
+                type="button"
+                onClick={removeInlineBubbleLink}
+                className="toolbar-btn"
+                title="Unlink"
+                style={{ color: '#ef4444' }}
+              >
+                <Trash2 size={14} />
+              </button>
+            </div>
+          ) : (
+            /* Basic Formatting Bubble Menu */
+            <>
+              <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={`toolbar-btn ${editor.isActive('bold') ? 'is-active' : ''}`}>
+                <Bold size={16} />
+              </button>
+              <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={`toolbar-btn ${editor.isActive('italic') ? 'is-active' : ''}`}>
+                <Italic size={16} />
+              </button>
+              <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={`toolbar-btn ${editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}`}>
+                <Heading2 size={16} />
+              </button>
+              <div className="bubble-divider"></div>
+              <button
+                type="button"
+                onClick={() => {
+                  setBubbleLinkUrl('');
+                  setIsEditingBubbleLink(true);
+                }}
+                className="toolbar-btn"
+                title="Add Link"
+              >
+                <LinkIcon size={16} />
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── TOP EDITOR TOOLBAR PORTALED OR INLINE ── */}
+      {portalElement ? createPortal(toolbarAndModal, portalElement) : toolbarAndModal}
+      
+      <div className={portalElement ? 'editor-content-only' : ''}>
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }

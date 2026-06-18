@@ -27,6 +27,35 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const body = await request.json();
 
+    let categoryUpdate: any = undefined;
+    let categoryIdUpdate: any = undefined;
+
+    if (body.categoryName !== undefined) {
+      if (body.categoryName && body.categoryName.trim() !== '') {
+        const catName = body.categoryName.trim();
+        categoryUpdate = {
+          connectOrCreate: {
+            where: { name: catName },
+            create: { name: catName, slug: catName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') }
+          }
+        };
+      } else {
+        categoryIdUpdate = null; // Clear category link if empty
+      }
+    }
+
+    let tagsUpdate: any = undefined;
+    if (body.tagNames !== undefined) {
+      const tagsArray = body.tagNames.split(',').map((t: string) => t.trim()).filter((t: string) => t !== '');
+      tagsUpdate = {
+        set: [],
+        connectOrCreate: tagsArray.map((tagName: string) => ({
+          where: { name: tagName },
+          create: { name: tagName, slug: tagName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') }
+        }))
+      };
+    }
+
     const post = await prisma.post.update({
       where: { id },
       data: {
@@ -38,7 +67,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         seoTitle: body.seoTitle,
         seoDescription: body.seoDescription,
         status: body.status,
-        categoryId: body.categoryId,
+        category: categoryUpdate,
+        categoryId: categoryIdUpdate,
+        tags: tagsUpdate,
         publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
       },
     });

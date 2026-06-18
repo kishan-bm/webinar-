@@ -145,6 +145,17 @@ footer {
   background: #0D2E4E;
   color: white;
   padding: 80px 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/footer-bg.jpeg') center/cover no-repeat;
+  opacity: 0.05;
+  pointer-events: none;
 }
 
 .footer-top {
@@ -153,6 +164,8 @@ footer {
   gap: 40px;
   margin-bottom: 60px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-brand img {
@@ -160,6 +173,8 @@ footer {
   margin-bottom: 16px;
   transform: scale(2.5);
   transform-origin: left center;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-tagline {
@@ -341,5 +356,70 @@ footer {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(200, 66, 10, 0.35);
 }
+
+/* Image links inside public articles */
+.blog-body a.editor-image-link {
+  display: inline-block;
+  max-width: 100%;
+  width: auto;
+}
+
+/* Clickable tag links styling */
+.blog-tag-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.blog-tag-link:hover {
+  border-color: var(--orange) !important;
+  color: var(--orange) !important;
+  background: rgba(200, 66, 10, 0.05) !important;
+}
+
+/* Clickable category link styling */
+.blog-category-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.blog-category-link:hover {
+  color: var(--emerald-500) !important;
+  opacity: 0.85;
+}
+
+/* Sidebar banner link hover effect */
+.sidebar-banner-link {
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  display: block;
+}
+
+.sidebar-banner-link:hover {
+  transform: translateY(-2px);
+}
+
+/* Table of Contents links hover animations and states */
+.toc-link:hover {
+  color: var(--teal-900) !important;
+  border-left-color: var(--teal-900) !important;
+  padding-left: 14px !important;
+}
+
+.toc-link.is-active {
+  color: var(--orange) !important;
+  border-left-color: var(--orange) !important;
+}
+
+.toc-link.is-active:hover {
+  color: var(--orange) !important;
+  border-left-color: var(--orange) !important;
+  padding-left: 14px !important;
+}
+
+/* Hide Table of Contents completely on screens smaller than 1024px width */
+@media (max-width: 1024px) {
+  .toc-sidebar {
+    display: none !important;
+  }
+}
+
 
 

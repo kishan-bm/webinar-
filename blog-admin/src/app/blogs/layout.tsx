@@ -12,8 +12,7 @@ export default function PublicLayout({
     <>
       <nav className="navbar" id="navbar">
         <a href="https://webclass.navigationtrading.com/home" className="nav-logo">
-          {/* I am using text here or an image if available on the static site */}
-          <span style={{color: 'white', fontWeight: 800, fontSize: '24px'}}>NavigationTrading</span>
+          <img src="/logo.png" alt="NavigationTrading" />
         </a>
         <ul className="nav-links">
           <li className="nav-item-dropdown">
@@ -44,7 +43,9 @@ export default function PublicLayout({
       <footer>
         <div className="footer-top">
           <div>
-            <div className="footer-brand"><span style={{color: 'white', fontWeight: 800, fontSize: '24px'}}>NavigationTrading</span></div>
+            <div className="footer-brand">
+              <img src="/logo.png" alt="NavigationTrading" />
+            </div>
             <div className="footer-tagline">Institutional Grade Trading Education</div>
           </div>
           <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', alignItems: 'flex-start' }}>

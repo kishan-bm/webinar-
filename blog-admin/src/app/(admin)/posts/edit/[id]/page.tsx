@@ -150,6 +150,8 @@ export default function EditPost({ params }: EditPostProps) {
           
           {/* Main Content Area */}
           <div>
+            <div id="editor-toolbar-portal"></div>
+
             <div className="form-group">
               <label className="form-label">Post Title</label>
               <input 
@@ -167,6 +169,7 @@ export default function EditPost({ params }: EditPostProps) {
               <TipTapEditor 
                 content={formData.content}
                 onChange={(html) => setFormData({...formData, content: html})}
+                toolbarPortalId="editor-toolbar-portal"
               />
             </div>
 
