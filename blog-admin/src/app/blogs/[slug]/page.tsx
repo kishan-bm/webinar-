@@ -137,92 +137,123 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Center column: Article */}
         <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
-          <article className="blog-content" style={{ margin: 0, maxWidth: 'none' }}>
-            {post.coverImage && (
-              <div style={{ 
-                width: '100%', 
-                height: '360px', 
-                position: 'relative', 
-                borderRadius: '16px', 
-                overflow: 'hidden', 
-                marginBottom: '32px',
-                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.08)'
-              }}>
-                <img 
-                  src={post.coverImage} 
-                  alt={post.title} 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover',
-                    display: 'block'
-                  }} 
-                />
-              </div>
-            )}
-            <header style={{ marginBottom: '40px', borderBottom: '1px solid var(--border-light)', paddingBottom: '32px' }}>
-              {post.category && (
-                <div style={{ marginBottom: '16px' }}>
-                  <Link 
-                    href={`/blogs?category=${encodeURIComponent(post.category.name)}`}
-                    style={{ 
-                      fontSize: '13px', 
-                      fontWeight: 700, 
-                      color: 'var(--emerald-600)', 
-                      letterSpacing: '1px', 
-                      textTransform: 'uppercase',
-                      textDecoration: 'none',
-                      transition: 'color 0.2s',
-                      cursor: 'pointer'
-                    }}
-                    className="blog-category-link"
-                  >
-                    {post.category.name}
-                  </Link>
-                </div>
+          <article className="blog-content" style={{ margin: 0, maxWidth: 'none', padding: 0, overflow: 'hidden' }}>
+            {/* Premium Header Section */}
+            <div style={{
+              position: 'relative',
+              padding: '48px',
+              color: post.coverImage ? '#ffffff' : '#334155',
+              background: post.coverImage 
+                ? `linear-gradient(to bottom, rgba(13, 46, 78, 0.75), rgba(13, 46, 78, 0.95))` 
+                : '#ffffff',
+              borderBottom: '1px solid var(--border-light)',
+              minHeight: post.coverImage ? '340px' : 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end'
+            }}>
+              {post.coverImage && (
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: `url(${post.coverImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  zIndex: 0,
+                  opacity: 0.28
+                }} />
               )}
-              <h1 className="blog-title" style={{ fontSize: '48px' }}>{post.title}</h1>
-              <div className="blog-meta" style={{ marginTop: '24px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--teal-900)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-                    {post.author.name.charAt(0).toUpperCase()}
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 700, color: 'var(--text-main)' }}>{post.author.name}</div>
-                    <div>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-                  </div>
-                </div>
-              </div>
-              {post.tags && post.tags.length > 0 && (
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '24px' }}>
-                  {post.tags.map(tag => (
+              
+              <div style={{ position: 'relative', zIndex: 1 }}>
+                {post.category && (
+                  <div style={{ marginBottom: '16px' }}>
                     <Link 
-                      key={tag.id} 
-                      href={`/blogs?tag=${encodeURIComponent(tag.name)}`}
-                      className="blog-tag-link"
+                      href={`/blogs?category=${encodeURIComponent(post.category.name)}`}
                       style={{ 
-                        background: 'var(--bg-main)', 
-                        border: '1px solid var(--border-light)', 
-                        padding: '4px 12px', 
-                        borderRadius: '100px', 
-                        fontSize: '12px', 
-                        color: 'var(--text-dim)',
+                        fontSize: '13px', 
+                        fontWeight: 700, 
+                        color: post.coverImage ? '#4ade80' : 'var(--emerald-600)', 
+                        letterSpacing: '1px', 
+                        textTransform: 'uppercase',
                         textDecoration: 'none',
-                        fontWeight: 500,
-                        transition: 'all 0.2s',
+                        transition: 'color 0.2s',
                         cursor: 'pointer'
                       }}
+                      className="blog-category-link"
                     >
-                      #{tag.name}
+                      {post.category.name}
                     </Link>
-                  ))}
+                  </div>
+                )}
+                
+                <h1 className="blog-title" style={{ 
+                  fontSize: '42px', 
+                  color: post.coverImage ? '#ffffff' : '#0d2e4e',
+                  lineHeight: '1.25',
+                  marginBottom: '20px',
+                  fontWeight: 800
+                }}>
+                  {post.title}
+                </h1>
+                
+                <div className="blog-meta" style={{ 
+                  marginTop: '24px', 
+                  marginBottom: 0,
+                  color: post.coverImage ? 'rgba(255, 255, 255, 0.75)' : '#94a3b8' 
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ 
+                      width: '40px', 
+                      height: '40px', 
+                      borderRadius: '50%', 
+                      background: post.coverImage ? '#c8420a' : 'var(--teal-900)', 
+                      color: 'white', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      fontWeight: 'bold' 
+                    }}>
+                      {post.author.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 700, color: post.coverImage ? '#ffffff' : 'var(--text-main)' }}>{post.author.name}</div>
+                      <div style={{ fontSize: '13px' }}>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                    </div>
+                  </div>
                 </div>
-              )}
-            </header>
+
+                {post.tags && post.tags.length > 0 && (
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '24px' }}>
+                    {post.tags.map(tag => (
+                      <Link 
+                        key={tag.id} 
+                        href={`/blogs?tag=${encodeURIComponent(tag.name)}`}
+                        className="blog-tag-link"
+                        style={{ 
+                          background: post.coverImage ? 'rgba(255,255,255,0.12)' : 'var(--bg-main)', 
+                          border: post.coverImage ? '1px solid rgba(255,255,255,0.2)' : '1px solid var(--border-light)', 
+                          padding: '4px 12px', 
+                          borderRadius: '100px', 
+                          fontSize: '12px', 
+                          color: post.coverImage ? '#ffffff' : 'var(--text-dim)',
+                          textDecoration: 'none',
+                          fontWeight: 500,
+                          transition: 'all 0.2s',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        #{tag.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
 
             {/* Render TipTap Raw HTML securely */}
             <div 
               className="blog-body"
+              style={{ padding: '48px' }}
               dangerouslySetInnerHTML={{ __html: contentWithHeadingIds }} 
             />
           </article>

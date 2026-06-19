@@ -146,8 +146,9 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '8px',
-            overflowY: 'auto'
+            gap: '14px',
+            overflowY: 'auto',
+            paddingTop: '8px'
           }}
         >
           {headings.map((heading) => {
@@ -164,14 +165,16 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
                 style={{
                   display: 'block',
                   paddingLeft: `${indent + 8}px`,
-                  fontSize: heading.level === 2 ? '13.5px' : '12.5px',
+                  paddingTop: '6px',
+                  paddingBottom: '6px',
+                  fontSize: heading.level === 2 ? '14px' : '13px',
                   fontWeight: heading.level === 2 ? 600 : 500,
                   color: isActive ? 'var(--orange)' : 'var(--text-dim)',
                   textDecoration: 'none',
-                  borderLeft: '2px solid transparent',
+                  borderLeft: '3px solid transparent',
                   borderLeftColor: isActive ? 'var(--orange)' : 'transparent',
                   transition: 'all 0.2s ease',
-                  lineHeight: '1.4',
+                  lineHeight: '1.6',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
