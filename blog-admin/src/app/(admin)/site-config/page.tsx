@@ -224,6 +224,23 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'whopProLink', label: 'Pro Membership Text Link (In comparison & FAQ)', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL for the textual links pointing to Pro Membership (located in the Comparison box and FAQ answers)', group: 'URLs & Links' }
     ]
+  },
+  {
+    key: 'contact',
+    title: 'Contact Us',
+    path: '/contact',
+    deployedUrl: 'https://webclass.navigationtrading.com/contact',
+    description: 'Contact us form page with support channels and FAQ.',
+    fields: [
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'freeJoinLink', label: 'Get Started Now Bottom CTA URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntfree/', description: 'URL for the bottom Get Started Now button', group: 'URLs & Links' },
+      { key: 'discordLink', label: 'Discord Community Link', type: 'url', placeholder: '/pricing', description: 'URL pointing to the Whop/Discord community pricing or room link', group: 'Other Support Links' },
+      { key: 'calendlyLink', label: 'Schedule Calendly Call URL', type: 'url', placeholder: 'https://calendly.com/navigationtrading', description: 'URL for the Coaching Call Calendly booking page', group: 'Other Support Links' },
+      { key: 'blogLink', label: 'Read Blog URL', type: 'url', placeholder: 'https://navigationtrading.com/blog/', description: 'URL for the Blog link', group: 'Other Support Links' },
+      { key: 'contactLocation', label: 'Location Text', type: 'text', placeholder: 'Online — Trading Worldwide', description: 'Location text displayed in details', group: 'Details & Support Info' },
+      { key: 'contactResponseTime', label: 'Response Time Text', type: 'text', placeholder: 'Mon – Fri · < 24 hours', description: 'Expected response time text', group: 'Details & Support Info' },
+      { key: 'contactEmail', label: 'Support Email', type: 'text', placeholder: 'support@navigationtrading.com', description: 'Support contact email address (both mailto: links and visible texts will update)', group: 'Details & Support Info' }
+    ]
   }
 ];
 

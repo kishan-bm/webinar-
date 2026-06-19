@@ -49,7 +49,12 @@
         for (var j = 0; j < elements.length; j++) {
           var el = elements[j];
           if (el.tagName === 'A') {
-            el.href = normalizeUrl(value);
+            if (key === 'contactEmail' || (value.indexOf('@') !== -1 && value.indexOf('/') === -1 && !/^mailto:/i.test(value))) {
+              el.href = 'mailto:' + value;
+              el.textContent = value;
+            } else {
+              el.href = normalizeUrl(value);
+            }
           } else if (el.tagName === 'IFRAME') {
             el.src = value;
           } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
