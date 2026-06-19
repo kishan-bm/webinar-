@@ -222,7 +222,7 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'whopLink', label: 'Day Trading Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for main Join Day Trading buttons', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
-      { key: 'whopProLink', label: 'Pro Membership Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL redirecting to Pro Membership plan', group: 'URLs & Links' }
+      { key: 'whopProLink', label: 'Pro Membership Text Link (In comparison & FAQ)', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL for the textual links pointing to Pro Membership (located in the Comparison box and FAQ answers)', group: 'URLs & Links' }
     ]
   }
 ];
