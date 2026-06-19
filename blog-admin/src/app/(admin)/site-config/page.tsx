@@ -155,7 +155,8 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://webclass.navigationtrading.com/paid-membership',
     description: 'Welcome and details page for Paid/Pro members.',
     fields: [
-      { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for main Get Pro Access and Join Pro buttons', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
