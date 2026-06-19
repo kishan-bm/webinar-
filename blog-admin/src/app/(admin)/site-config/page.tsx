@@ -212,6 +212,18 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
       { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. DAY', group: 'Promo Settings' },
     ]
+  },
+  {
+    key: 'day-trading-membership',
+    title: 'Day Trading Membership Welcome',
+    path: '/day-trading-membership',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-membership',
+    description: 'Overview and detail page for Day Trading members.',
+    fields: [
+      { key: 'whopLink', label: 'Day Trading Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for main Join Day Trading buttons', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'whopProLink', label: 'Pro Membership Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL redirecting to Pro Membership plan', group: 'URLs & Links' }
+    ]
   }
 ];
 
