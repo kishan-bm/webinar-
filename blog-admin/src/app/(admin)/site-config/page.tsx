@@ -92,9 +92,10 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'whopLink', label: 'Hero Join Room Whop URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Whop checkout link when clicking hero Get Free Access button', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL for Navbar Join Now button', group: 'URLs & Links' },
-      { key: 'viewResultsLink', label: 'View Results Link', type: 'url', placeholder: 'e.g. /performance', description: 'Redirect path/URL for View Track Record / View Results buttons', group: 'URLs & Links' },
-      { key: 'explorePlansLink', label: 'Explore Plans Link', type: 'url', placeholder: 'e.g. pricing.html', description: 'Redirect path/URL for Explore Plans/Explore All Plans buttons', group: 'URLs & Links' },
-      { key: 'bookCallLink', label: 'Book Calendly Call Link', type: 'url', placeholder: 'https://calendly.com/...', description: 'Redirect URL for Book Call buttons', group: 'URLs & Links' },
+      { key: 'viewResultsLink', label: 'See Our Performance / View Results URL', type: 'url', placeholder: 'e.g. /performance', description: 'Redirect path/URL for See Our Performance / View Track Record / View Results buttons', group: 'URLs & Links' },
+      { key: 'explorePlansLink', label: 'Explore Plans URL', type: 'url', placeholder: 'e.g. pricing.html', description: 'Redirect path/URL for Explore Plans/Explore All Plans buttons', group: 'URLs & Links' },
+      { key: 'bookCallLink', label: 'Book Calendly Call URL', type: 'url', placeholder: 'https://calendly.com/...', description: 'Redirect URL for Book Call buttons', group: 'URLs & Links' },
+      { key: 'joinFreeLink', label: 'Join for Free URL', type: 'url', placeholder: 'e.g. /free-membership', description: 'Redirect path/URL for Join for Free button', group: 'URLs & Links' },
       
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
@@ -482,7 +483,7 @@ export default function SiteConfigPage() {
                   {Object.entries(groupedFields).map(([groupName, fields]) => {
                     const isExpanded = !!expandedGroups[groupName];
                     return (
-                      <div key={groupName} style={{ border: '1px solid var(--border-color)', borderRadius: '10px', overflow: 'hidden', backgroundColor: 'var(--bg-main)' }}>
+                      <div key={groupName} style={{ border: '1px solid var(--border-color)', borderRadius: '12px', overflow: 'hidden', backgroundColor: 'var(--bg-main)', marginBottom: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                         <button
                           type="button"
                           onClick={() => setExpandedGroups(prev => ({ ...prev, [groupName]: !prev[groupName] }))}
@@ -491,14 +492,14 @@ export default function SiteConfigPage() {
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             width: '100%',
-                            padding: '12px 18px',
+                            padding: '18px 24px',
                             backgroundColor: 'rgba(0,0,0,0.015)',
                             border: 'none',
                             borderBottom: isExpanded ? '1px solid var(--border-color)' : 'none',
                             fontWeight: 700,
-                            fontSize: '12.5px',
+                            fontSize: '14px',
                             textTransform: 'uppercase',
-                            letterSpacing: '0.7px',
+                            letterSpacing: '0.8px',
                             textAlign: 'left',
                             cursor: 'pointer',
                             color: 'var(--text-primary)',
@@ -508,11 +509,11 @@ export default function SiteConfigPage() {
                           onMouseOut={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.015)'}
                         >
                           <span>{groupName}</span>
-                          {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                          {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
                         </button>
                         
                         {isExpanded && (
-                          <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '18px', backgroundColor: 'white' }}>
+                          <div style={{ padding: '30px 32px', display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'white' }}>
                             {fields.map(field => {
                               const value = formState[field.key];
                               return (
