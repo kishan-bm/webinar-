@@ -74,8 +74,10 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
       { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. May 6', group: 'Countdown & Date Settings' },
+      { key: 'timeLabel', label: 'Time Badge Text', type: 'text', placeholder: 'e.g. 3:30 PM CST', group: 'Countdown & Date Settings' },
       { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · May 6th', group: 'Countdown & Date Settings' },
       { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. May 6, 2026', group: 'Countdown & Date Settings' },
+      { key: 'fullDateSubtext', label: 'Register Button Subtext', type: 'text', placeholder: 'e.g. Wednesday, March 19 · 7:00 PM ET · Free & Live', description: 'Extended subtext under the register button', group: 'Countdown & Date Settings' },
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 132', description: 'Inline registration form ID', group: 'Form Settings' },
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors leave', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', placeholder: 'Turn Any Options Trade Into a Risk-Free Position', group: 'Exit Intent Popup' },
