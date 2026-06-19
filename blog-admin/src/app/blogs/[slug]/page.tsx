@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Center column: Article */}
         <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
           <article className="blog-content" style={{ margin: 0, maxWidth: 'none' }}>
-            {post.featureImage && (
+            {post.coverImage && (
               <div style={{ 
                 width: '100%', 
                 height: '360px', 
@@ -149,7 +149,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 boxShadow: '0 4px 30px rgba(0, 0, 0, 0.08)'
               }}>
                 <img 
-                  src={post.featureImage} 
+                  src={post.coverImage} 
                   alt={post.title} 
                   style={{ 
                     width: '100%', 
@@ -331,7 +331,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Widget 3: Banners */}
-          {banners.map(banner => {
+          {banners.map((banner: any) => {
             const bannerContent = (
               <div key={banner.id} style={{ display: 'flex', flexDirection: 'column' }}>
                 {banner.title && (
