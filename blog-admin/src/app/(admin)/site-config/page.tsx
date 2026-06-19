@@ -241,6 +241,20 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'contactResponseTime', label: 'Response Time Text', type: 'text', placeholder: 'Mon – Fri · < 24 hours', description: 'Expected response time text', group: 'Details & Support Info' },
       { key: 'contactEmail', label: 'Support Email', type: 'text', placeholder: 'support@navigationtrading.com', description: 'Support contact email address (both mailto: links and visible texts will update)', group: 'Details & Support Info' }
     ]
+  },
+  {
+    key: 'brokers',
+    title: 'Preferred Brokers',
+    path: '/brokers',
+    deployedUrl: 'https://webclass.navigationtrading.com/brokers',
+    description: 'Broker recommendations with referral links and comparison sheet.',
+    fields: [
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'ibReferralUrl', label: 'Interactive Brokers Referral URL', type: 'url', placeholder: 'https://www.interactivebrokers.com/referral/navigationtrading', description: 'Referral link for Interactive Brokers account opening', group: 'Broker Links' },
+      { key: 'tradierReferralUrl', label: 'Tradier Referral URL', type: 'url', placeholder: 'https://tradier.com/individuals/options-trading', description: 'Referral link for Tradier account opening', group: 'Broker Links' },
+      { key: 'schwabReferralUrl', label: 'Charles Schwab Referral URL', type: 'url', placeholder: 'https://www.schwab.com/', description: 'Referral link for Charles Schwab account opening', group: 'Broker Links' },
+      { key: 'commissionSheetUrl', label: 'Spreadsheet Download URL', type: 'url', placeholder: '#', description: 'Download link for the Broker Commission Comparison spreadsheet', group: 'Broker Links' }
+    ]
   }
 ];
 

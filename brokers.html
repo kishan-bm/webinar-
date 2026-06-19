@@ -421,7 +421,7 @@
     </ul>
     <div style="display:flex; gap:16px; align-items:center;">
         <a href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
-        <a href="https://whop.com/navigationtrading/" class="nav-cta">Join Now</a>
+        <a href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
     </div>
   </nav>
 
@@ -468,7 +468,7 @@
           <li>Invest globally in <strong>stocks, options, futures, currencies, bonds, and funds</strong> from a single unified platform.</li>
           <li>Powerful <strong>Trader Workstation (TWS)</strong> built for professional execution.</li>
         </ul>
-        <a href="https://www.interactivebrokers.com/referral/navigationtrading" target="_blank" class="broker-cta">Open an Account →</a>
+        <a href="https://www.interactivebrokers.com/referral/navigationtrading" target="_blank" class="broker-cta" data-config="ibReferralUrl">Open an Account →</a>
       </div>
 
       <!-- Tradier (Featured) -->
@@ -484,7 +484,7 @@
           <li><strong>$0 commission</strong> on online exchange-traded funds (ETFs) — domestic and Canadian.</li>
           <li><strong>Reduced fees</strong> on Index Options (click below for details).</li>
         </ul>
-        <a href="https://tradier.com/individuals/options-trading" target="_blank" class="broker-cta">Open an Account →</a>
+        <a href="https://tradier.com/individuals/options-trading" target="_blank" class="broker-cta" data-config="tradierReferralUrl">Open an Account →</a>
       </div>
 
       <!-- Charles Schwab -->
@@ -499,7 +499,7 @@
           <li><strong>$0 commission</strong> on online ETF trades — domestic and Canadian.</li>
           <li><strong>Option trades</strong> — contract fees are $0.65/contract; no assignment or exercise fees.</li>
         </ul>
-        <a href="https://www.schwab.com/" target="_blank" class="broker-cta">Open an Account →</a>
+        <a href="https://www.schwab.com/" target="_blank" class="broker-cta" data-config="schwabReferralUrl">Open an Account →</a>
       </div>
 
     </div>
@@ -512,7 +512,7 @@
         <span class="comparison-eyebrow">Free Resource</span>
         <h2>Broker Commission Comparison</h2>
         <p>Trading commissions can quietly erode your overall profits. Download our broker commission comparison spreadsheet and see — line by line — exactly what each broker charges so you can pick the one that keeps the most of your gains in your pocket.</p>
-        <a href="#" class="download-cta">
+        <a href="#" class="download-cta" data-config="commissionSheetUrl">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Spreadsheet
         </a>
@@ -582,5 +582,6 @@
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
     });
   </script>
+  <script src="site-config.js" data-page="brokers"></script>
 </body>
 </html>
