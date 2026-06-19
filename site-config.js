@@ -27,6 +27,14 @@
       if (!data.success || !data.config) return;
       var config = data.config;
 
+      function normalizeUrl(val) {
+        if (!val) return val;
+        if (val.indexOf('.') !== -1 && !/^(https?:\/\/|\/|#|mailto:|tel:)/i.test(val)) {
+          return 'https://' + val;
+        }
+        return val;
+      }
+
       // 1. Dynamic Countdown Target
       if (config.countdownTarget && typeof window.setCountdownTarget === 'function') {
         window.setCountdownTarget(config.countdownTarget);
@@ -41,7 +49,7 @@
         for (var j = 0; j < elements.length; j++) {
           var el = elements[j];
           if (el.tagName === 'A') {
-            el.href = value;
+            el.href = normalizeUrl(value);
           } else if (el.tagName === 'IFRAME') {
             el.src = value;
           } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
@@ -108,7 +116,7 @@
       // 7. Update exit popup redirect buttons (for redirect/link-based exit popups)
       if (config.exitPopupRedirectUrl) {
         var ctaBtn = document.querySelector('.eip-cta-btn');
-        if (ctaBtn) ctaBtn.href = config.exitPopupRedirectUrl;
+        if (ctaBtn) ctaBtn.href = normalizeUrl(config.exitPopupRedirectUrl);
       }
     })
     .catch(function(err) {
