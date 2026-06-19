@@ -135,12 +135,17 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://webclass.navigationtrading.com/free-membership',
     description: 'Welcome and overview page for Free members.',
     fields: [
+      { key: 'freeJoinLink', label: 'Start Learning Free Button Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the main Start Learning Free button', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: '../pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
       { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number', group: 'Exit Intent Popup' },
+
+      { key: 'youtubeVideoUrl', label: 'Welcome Video Embed URL (YouTube)', type: 'url', placeholder: 'https://www.youtube.com/embed/...', description: 'YouTube embed src URL for welcome video', group: 'Video Settings' },
     ]
   },
   {
