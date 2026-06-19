@@ -143,9 +143,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               position: 'relative',
               padding: '48px',
               color: post.coverImage ? '#ffffff' : '#334155',
-              background: post.coverImage 
-                ? `linear-gradient(to bottom, rgba(13, 46, 78, 0.75), rgba(13, 46, 78, 0.95))` 
-                : '#ffffff',
+              background: post.coverImage ? '#07182c' : '#ffffff',
               borderBottom: '1px solid var(--border-light)',
               minHeight: post.coverImage ? '340px' : 'auto',
               display: 'flex',
@@ -153,15 +151,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               justifyContent: 'flex-end'
             }}>
               {post.coverImage && (
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: `url(${post.coverImage})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  zIndex: 0,
-                  opacity: 0.28
-                }} />
+                <>
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url(${post.coverImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    zIndex: 0
+                  }} />
+                  {/* Dark linear gradient overlay to guarantee text legibility */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(7, 24, 44, 0.95) 10%, rgba(7, 24, 44, 0.6) 60%, rgba(7, 24, 44, 0.3) 100%)',
+                    zIndex: 0
+                  }} />
+                </>
               )}
               
               <div style={{ position: 'relative', zIndex: 1 }}>
