@@ -1189,7 +1189,7 @@
   <div id="progress-bar"></div>
 
   <!-- TOP URGENCY TICKER -->
-  <div class="ticker">⚡ Limited Time · Your 30% Discount Code Expires Soon · Don't Miss It ⚡</div>
+  <div class="ticker">⚡ Limited Time · Your <span data-config="promoPercent">30%</span> Discount Code Expires Soon · Don't Miss It ⚡</div>
 
   <!-- ── NAVBAR (same as day-trading.html) ── -->
   <nav class="navbar" id="navbar">
@@ -1199,7 +1199,7 @@
       <li><a href="#offer">Offer</a></li>
       <li><a href="#why">Why Now</a></li>
     </ul>
-    <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer_nav&promo=DAY" class="nav-cta" data-config="whopOfferUrl">Claim 30% Off</a>
+    <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer_nav&promo=DAY" class="nav-cta" data-config="whopOfferUrl">Claim <span data-config="promoPercent">30%</span> Off</a>
   </nav>
 
   <!-- ── MAIN (LIGHT) ── -->
@@ -1215,7 +1215,7 @@
             <span class="greet-dot"></span>
             <span id="greet-text">Your Offer Is Active</span>
           </div>
-          <h2 class="tcta-headline">30% off, locked in for <em>the next 48 hours.</em></h2>
+          <h2 class="tcta-headline"><span data-config="promoPercent">30%</span> off, locked in for <em>the next 48 hours.</em></h2>
           <div class="countdown-wrap">
             <div class="countdown-head">
               <span class="dot"></span>
@@ -1244,13 +1244,13 @@
         <div class="tcta-right">
           <div class="promo-card">
             <div class="promo-lbl">Promo Code</div>
-            <div class="promo-code">DAY</div>
-            <div class="promo-tag"><strong>30% off</strong> any membership</div>
+             <div class="promo-code" data-config="promoCode">DAY</div>
+             <div class="promo-tag"><strong data-config="promoPercent">30%</strong> off any membership</div>
           </div>
 
           <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer&promo=DAY" class="main-cta" id="claim-btn" data-config="whopOfferUrl">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            Claim My 30% Off Now
+             Claim My <span data-config="promoPercent">30%</span> Off Now
           </a>
 
           <div class="trust">
@@ -1435,10 +1435,10 @@
         <div class="faq-list">
         <div class="faq-item">
           <div class="faq-q">
-            How long is the DAY discount code valid?
+            How long is the <span data-config="promoCode">DAY</span> discount code valid?
             <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </div>
-          <div class="faq-a"><div class="faq-a-inner"><div class="faq-a-inner-text">The 30% off code is valid for new members for a limited time after the webclass replay. We recommend claiming it now while it's active.</div></div></div>
+          <div class="faq-a"><div class="faq-a-inner"><div class="faq-a-inner-text">The <span data-config="promoPercent">30%</span> off code is valid for new members for a limited time after the webclass replay. We recommend claiming it now while it's active.</div></div></div>
         </div>
 
         <div class="faq-item">
@@ -1498,7 +1498,7 @@
             <span class="dt-live-dot"></span> Last Step
           </div>
           <h2>Trade alongside us, <em>starting tomorrow.</em></h2>
-          <p>Use code DAY at checkout for 30% off any membership. No card required for the free plan.</p>
+           <p>Use code <span data-config="promoCode">DAY</span> at checkout for <span data-config="promoPercent">30%</span> off any membership. No card required for the free plan.</p>
 
           <div class="dt-volume-profile">
             <div class="dt-vol-bar"></div>
@@ -1513,15 +1513,15 @@
         <div class="dt-term-right">
           <div class="dt-term-price-lbl">Promo Code</div>
           <div class="dt-term-price">
-            <span class="val">DAY</span>
-            <span class="per">30% OFF</span>
+             <span class="val" data-config="promoCode">DAY</span>
+             <span class="per"><span data-config="promoPercent">30%</span> OFF</span>
           </div>
 
           <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer&utm_medium=web&utm_campaign=offer_final_cta&promo=DAY" class="dt-term-action" data-config="whopOfferUrl">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
-            Claim My 30% Off
+            Claim My <span data-config="promoPercent">30%</span> Off
           </a>
 
           <div class="dt-term-features">
@@ -1618,7 +1618,7 @@
       var card    = document.getElementById('terminal-cta');
       var claimBtn = document.getElementById('claim-btn');
 
-      var expiry = new Date('2026-06-18T22:00:00Z').getTime();
+       var expiry = new Date('2026-12-31T23:59:59Z').getTime();
       window.setCountdownTarget = function(newTarget) {
         expiry = new Date(newTarget).getTime();
         tick();

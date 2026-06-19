@@ -46,7 +46,9 @@ const PAGES_CONFIG: PageConfig[] = [
     description: '48-hour offer deadline page giving 30% discount.',
     fields: [
       { key: 'countdownTarget', label: 'Offer Expiry Date & Time', type: 'datetime-local', description: 'When the 48-hour discount window expires', group: 'Countdown & Date Settings' },
-      { key: 'whopOfferUrl', label: 'Whop Checkout Promo Link', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL applied to checkout buttons', group: 'URLs & Redirects' },
+      { key: 'whopOfferUrl', label: 'Whop Checkout Promo Link', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL applied to checkout buttons', group: 'URLs & Links' },
+      { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', description: 'Discount percentage shown on the page', group: 'Promo Settings' },
+      { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. DAY', description: 'Promo code displayed to copy/use', group: 'Promo Settings' },
     ]
   },
   {
