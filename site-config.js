@@ -69,16 +69,8 @@
       if (config.formId) {
         var form = document.querySelector('[data-config="activecampaign-form"]') || document.querySelector('form[id^="_form_"]');
         if (form) {
-          // Extract old id
-          var oldId = form.id.replace(/_form_|_/g, '');
-          form.id = '_form_' + config.formId + '_';
-          
-          // Update classes
-          if (form.className) {
-            form.className = form.className.replace('_form_' + oldId, '_form_' + config.formId);
-          }
-          
-          // Update hidden fields
+          // Only update the hidden fields (f and u) that determine the ActiveCampaign form identity.
+          // Changing the form element's DOM ID or classes dynamically breaks scoped CSS and event listeners.
           var hiddenF = form.querySelector('input[name="f"]');
           if (hiddenF) hiddenF.value = config.formId;
           
