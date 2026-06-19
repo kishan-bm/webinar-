@@ -176,6 +176,7 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-noshow',
     description: 'Replay page for registered users who missed the live webinar.',
     fields: [
+      { key: 'whopLink', label: 'Main CTA Offer Link', type: 'url', placeholder: 'e.g. day-trading-offer.html', description: 'Redirect URL for Claim Offer and Claim Discount buttons', group: 'URLs & Links' },
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
