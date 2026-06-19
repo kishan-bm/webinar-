@@ -192,9 +192,12 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-v2',
     description: 'Variant replay page showing different CTAs.',
     fields: [
-      { key: 'whopReplayUrl', label: 'Main Replay Join Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
-      { key: 'whopOfferUrl', label: 'Middle Offer Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
-      { key: 'whopFinalUrl', label: 'Final Bottom Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopReplayUrl', label: 'Main Replay Join Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'whopOfferUrl', label: 'Middle Offer Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'whopFinalUrl', label: 'Final Bottom Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
+      { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. DAY', group: 'Promo Settings' },
     ]
   },
   {
@@ -204,7 +207,10 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay',
     description: 'Standard day trading replay page.',
     fields: [
-      { key: 'whopLink', label: 'Join Room Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopLink', label: 'Join Room Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
+      { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. DAY', group: 'Promo Settings' },
     ]
   }
 ];
