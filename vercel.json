@@ -143,6 +143,18 @@
     {
       "source": "/api/banners/:path*",
       "destination": "https://webinar-neon-one.vercel.app/api/banners/:path*"
+    },
+    {
+      "source": "/site-config",
+      "destination": "https://webinar-neon-one.vercel.app/site-config"
+    },
+    {
+      "source": "/api/config",
+      "destination": "https://webinar-neon-one.vercel.app/api/config"
+    },
+    {
+      "source": "/api/config/:path*",
+      "destination": "https://webinar-neon-one.vercel.app/api/config/:path*"
     }
   ]
 }
