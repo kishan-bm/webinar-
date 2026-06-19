@@ -1618,7 +1618,7 @@
       var card    = document.getElementById('terminal-cta');
       var claimBtn = document.getElementById('claim-btn');
 
-       var expiry = new Date('2026-06-18T22:00:00Z').getTime();
+       var expiry = new Date('2026-06-19T03:30:00-06:00').getTime();
       window.setCountdownTarget = function(newTarget) {
         expiry = new Date(newTarget).getTime();
         tick();
@@ -1636,6 +1636,9 @@
       function tick() {
         var diff = Math.max(0, expiry - Date.now());
         if (diff <= 0) {
+          setDigit(hoursEl, '00');
+          setDigit(minsEl,  '00');
+          setDigit(secsEl,  '00');
           card.classList.add('expired');
           if (claimBtn) {
             claimBtn.style.opacity = '0.55';
