@@ -76,8 +76,8 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
       className={`toc-sidebar ${isOpen ? 'is-open' : 'is-closed'}`}
       style={{
         position: 'sticky',
-        top: '160px',
-        maxHeight: 'calc(100vh - 200px)',
+        top: '140px',
+        maxHeight: 'calc(100vh - 160px)',
         overflowY: 'auto',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         display: 'flex',
@@ -87,8 +87,8 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
         borderRadius: '16px',
         border: '1px solid #e2e8f0',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
-        width: isOpen ? '240px' : '48px',
-        padding: isOpen ? '20px' : '8px',
+        width: isOpen ? '280px' : '48px',
+        padding: isOpen ? '24px 20px' : '8px',
         marginRight: isOpen ? '0px' : '12px',
         flexShrink: 0
       }}

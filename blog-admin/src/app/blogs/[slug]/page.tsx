@@ -138,6 +138,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Center column: Article */}
         <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
           <article className="blog-content" style={{ margin: 0, maxWidth: 'none' }}>
+            {post.featureImage && (
+              <div style={{ 
+                width: '100%', 
+                height: '360px', 
+                position: 'relative', 
+                borderRadius: '16px', 
+                overflow: 'hidden', 
+                marginBottom: '32px',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.08)'
+              }}>
+                <img 
+                  src={post.featureImage} 
+                  alt={post.title} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    display: 'block'
+                  }} 
+                />
+              </div>
+            )}
             <header style={{ marginBottom: '40px', borderBottom: '1px solid var(--border-light)', paddingBottom: '32px' }}>
               {post.category && (
                 <div style={{ marginBottom: '16px' }}>
