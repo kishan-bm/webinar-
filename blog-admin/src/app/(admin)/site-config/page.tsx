@@ -60,6 +60,7 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
       { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. June 16', group: 'Countdown & Date Settings' },
+      { key: 'timeLabel', label: 'Time Badge Text', type: 'text', placeholder: 'e.g. 3:30 PM CT', group: 'Countdown & Date Settings' },
       { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · June 16', group: 'Countdown & Date Settings' },
       { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. June 16, 2026', group: 'Countdown & Date Settings' },
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 134', group: 'Form Settings' },
