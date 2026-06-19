@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { Search, Save, Globe, Loader2, CheckCircle2, AlertCircle, Calendar, Link as LinkIcon, Hash, Sliders } from 'lucide-react';
+import { Search, Save, Globe, Loader2, CheckCircle2, AlertCircle, Calendar, Link as LinkIcon, Hash, Sliders, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
 
 interface FieldConfig {
   key: string;
@@ -9,12 +9,14 @@ interface FieldConfig {
   type: 'text' | 'datetime-local' | 'number' | 'boolean' | 'url' | 'textarea';
   placeholder?: string;
   description?: string;
+  group?: string;
 }
 
 interface PageConfig {
   key: string;
   title: string;
   path: string;
+  deployedUrl: string;
   description: string;
   fields: FieldConfig[];
 }
@@ -24,151 +26,172 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading',
     title: 'Day Trading Live Webinar',
     path: '/day-trading',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading',
     description: 'Main landing/registration page for the live day trading webinar.',
     fields: [
-      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', description: 'When the webinar countdown timer expires' },
-      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. March 19', description: 'Brief date shown in tags' },
-      { key: 'timeLabel', label: 'Time Badge Text', type: 'text', placeholder: 'e.g. 3:30 PM CT', description: 'Brief time shown in tags' },
-      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · March 19', description: 'Subtitle of session details card' },
-      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. March 19, 2026', description: 'Overview section tag text' },
-      { key: 'fullDateSubtext', label: 'Register Button Subtext', type: 'text', placeholder: 'e.g. Wednesday, March 19 · 7:00 PM ET · Free & Live', description: 'Extended subtext under the register button' },
-      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier' },
+      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', description: 'When the webinar countdown timer expires', group: 'Countdown & Date Settings' },
+      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. March 19', description: 'Brief date shown in tags', group: 'Countdown & Date Settings' },
+      { key: 'timeLabel', label: 'Time Badge Text', type: 'text', placeholder: 'e.g. 3:30 PM CT', description: 'Brief time shown in tags', group: 'Countdown & Date Settings' },
+      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · March 19', description: 'Subtitle of session details card', group: 'Countdown & Date Settings' },
+      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. March 19, 2026', description: 'Overview section tag text', group: 'Countdown & Date Settings' },
+      { key: 'fullDateSubtext', label: 'Register Button Subtext', type: 'text', placeholder: 'e.g. Wednesday, March 19 · 7:00 PM ET · Free & Live', description: 'Extended subtext under the register button', group: 'Countdown & Date Settings' },
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier', group: 'Form Settings' },
     ]
   },
   {
     key: 'day-trading-offer',
     title: 'Day Trading Offer Page',
     path: '/day-trading-offer',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-offer',
     description: '48-hour offer deadline page giving 30% discount.',
     fields: [
-      { key: 'countdownTarget', label: 'Offer Expiry Date & Time', type: 'datetime-local', description: 'When the 48-hour discount window expires' },
-      { key: 'whopOfferUrl', label: 'Whop Checkout Promo Link', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL applied to checkout buttons' },
+      { key: 'countdownTarget', label: 'Offer Expiry Date & Time', type: 'datetime-local', description: 'When the 48-hour discount window expires', group: 'Countdown & Date Settings' },
+      { key: 'whopOfferUrl', label: 'Whop Checkout Promo Link', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL applied to checkout buttons', group: 'URLs & Redirects' },
     ]
   },
   {
     key: 'dtt-6',
     title: 'Variant Webinar (dtt-6)',
     path: '/dtt-6/16',
+    deployedUrl: 'https://webclass.navigationtrading.com/dtt-6/16',
     description: 'Variant registration page for the June 16 webinar edition.',
     fields: [
-      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local' },
-      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. June 16' },
-      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · June 16' },
-      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. June 16, 2026' },
-      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 134' },
+      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
+      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. June 16', group: 'Countdown & Date Settings' },
+      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · June 16', group: 'Countdown & Date Settings' },
+      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. June 16, 2026', group: 'Countdown & Date Settings' },
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 134', group: 'Form Settings' },
     ]
   },
   {
     key: 'transformer-option-spreads',
     title: 'Option Spreads Webinar',
     path: '/transformer-option-spreads',
+    deployedUrl: 'https://webclass.navigationtrading.com/transformer-option-spreads',
     description: 'Option Spreads registration page and exit intent settings.',
     fields: [
-      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local' },
-      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. May 6' },
-      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · May 6th' },
-      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. May 6, 2026' },
-      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 132', description: 'Inline registration form ID' },
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors leave' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', placeholder: 'Turn Any Options Trade Into a Risk-Free Position' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', placeholder: 'Using the DC TimeMachine strategy — live, with real trades.' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', placeholder: 'See FLUX signal a real entry live; Learn the Double Calendar setup; Get the $200/mo FLUX tool free', description: 'Semicolon (;) separated bullet points' },
-      { key: 'exitPopupDate', label: 'Exit Popup Webinar Date Text', type: 'text', placeholder: 'Tuesday, May 6 | 8 PM IST' },
-      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 132' },
+      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
+      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. May 6', group: 'Countdown & Date Settings' },
+      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · May 6th', group: 'Countdown & Date Settings' },
+      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. May 6, 2026', group: 'Countdown & Date Settings' },
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 132', description: 'Inline registration form ID', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', placeholder: 'Turn Any Options Trade Into a Risk-Free Position', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', placeholder: 'Using the DC TimeMachine strategy — live, with real trades.', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', placeholder: 'See FLUX signal a real entry live; Learn the Double Calendar setup; Get the $200/mo FLUX tool free', description: 'Semicolon (;) separated bullet points', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Webinar Date Text', type: 'text', placeholder: 'Tuesday, May 6 | 8 PM IST', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 132', group: 'Exit Intent Popup' },
     ]
   },
   {
     key: 'home',
     title: 'Homepage',
     path: '/home',
+    deployedUrl: 'https://webclass.navigationtrading.com/home',
     description: 'Navigation Trading Homepage, containing free signups and join links.',
     fields: [
-      { key: 'whopLink', label: 'Join Room Whop URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Whop checkout link when clicking Join Room' },
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea' },
-      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text' },
-      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number' },
+      { key: 'whopLink', label: 'Hero Join Room Whop URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Whop checkout link when clicking hero Get Free Access button', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL for Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'viewResultsLink', label: 'View Results Link', type: 'url', placeholder: 'e.g. /performance', description: 'Redirect path/URL for View Track Record / View Results buttons', group: 'URLs & Links' },
+      { key: 'explorePlansLink', label: 'Explore Plans Link', type: 'url', placeholder: 'e.g. pricing.html', description: 'Redirect path/URL for Explore Plans/Explore All Plans buttons', group: 'URLs & Links' },
+      { key: 'bookCallLink', label: 'Book Calendly Call Link', type: 'url', placeholder: 'https://calendly.com/...', description: 'Redirect URL for Book Call buttons', group: 'URLs & Links' },
+      
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number', group: 'Exit Intent Popup' },
+
+      { key: 'youtubeVideoUrl', label: 'Welcome Video Embed URL (YouTube)', type: 'url', placeholder: 'https://www.youtube.com/embed/...', description: 'YouTube embed src URL for welcome video', group: 'Video & Podcast Embeds' },
+      { key: 'spotifyPodcastEmbedUrl', label: 'Podcast Embed URL (Spotify Player)', type: 'url', placeholder: 'https://open.spotify.com/embed/...', description: 'Spotify embed src URL for podcast player', group: 'Video & Podcast Embeds' },
+      { key: 'spotifyLink', label: 'Spotify Podcast Page Link', type: 'url', placeholder: 'https://open.spotify.com/...', description: 'Listen on Spotify external button link', group: 'Video & Podcast Embeds' },
+      { key: 'applePodcastsLink', label: 'Apple Podcasts Page Link', type: 'url', placeholder: 'https://podcasts.apple.com/...', description: 'Listen on Apple Podcasts external button link', group: 'Video & Podcast Embeds' },
     ]
   },
   {
     key: 'pricing',
     title: 'Pricing & Plans',
     path: '/pricing',
+    deployedUrl: 'https://webclass.navigationtrading.com/pricing',
     description: 'Pricing grid displaying Free, Day Trading, and Pro memberships.',
     fields: [
-      { key: 'whopFree', label: 'Free Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'whopDay', label: 'Day Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'whopPro', label: 'Pro Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea' },
-      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text' },
-      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number' },
+      { key: 'whopFree', label: 'Free Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopDay', label: 'Day Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopPro', label: 'Pro Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number', group: 'Exit Intent Popup' },
     ]
   },
   {
     key: 'free-membership',
     title: 'Free Membership Welcome',
     path: '/free-membership',
+    deployedUrl: 'https://webclass.navigationtrading.com/free-membership',
     description: 'Welcome and overview page for Free members.',
     fields: [
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea' },
-      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text' },
-      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number', group: 'Exit Intent Popup' },
     ]
   },
   {
     key: 'paid-membership',
     title: 'Paid Membership Welcome',
     path: '/paid-membership',
+    deployedUrl: 'https://webclass.navigationtrading.com/paid-membership',
     description: 'Welcome and details page for Paid/Pro members.',
     fields: [
-      { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea' },
-      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text' },
-      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number' },
+      { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Date Text', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup Form ID', type: 'number', group: 'Exit Intent Popup' },
     ]
   },
   {
     key: 'day-trading-replay-noshow',
     title: 'Replay NoShow Page',
     path: '/day-trading-replay-noshow',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-noshow',
     description: 'Replay page for registered users who missed the live webinar.',
     fields: [
-      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean' },
-      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text' },
-      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text' },
-      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea' },
-      { key: 'exitPopupRedirectUrl', label: 'Exit Popup Button Link', type: 'url', placeholder: 'e.g. day-trading-offer.html', description: 'Redirect URL when clicking Join Now inside exit popup' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupRedirectUrl', label: 'Exit Popup Button Link', type: 'url', placeholder: 'e.g. day-trading-offer.html', description: 'Redirect URL when clicking Join Now inside exit popup', group: 'Exit Intent Popup' },
     ]
   },
   {
     key: 'day-trading-replay-v2',
     title: 'Day Trading Replay V2',
     path: '/day-trading-replay-v2',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-v2',
     description: 'Variant replay page showing different CTAs.',
     fields: [
-      { key: 'whopReplayUrl', label: 'Main Replay Join Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'whopOfferUrl', label: 'Middle Offer Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
-      { key: 'whopFinalUrl', label: 'Final Bottom Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
+      { key: 'whopReplayUrl', label: 'Main Replay Join Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopOfferUrl', label: 'Middle Offer Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
+      { key: 'whopFinalUrl', label: 'Final Bottom Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
     ]
   },
   {
     key: 'day-trading-replay',
     title: 'Day Trading Replay',
     path: '/day-trading-replay',
+    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay',
     description: 'Standard day trading replay page.',
     fields: [
-      { key: 'whopLink', label: 'Join Room Whop Link', type: 'url', placeholder: 'https://whop.com/...' },
+      { key: 'whopLink', label: 'Join Room Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
     ]
   }
 ];
@@ -178,6 +201,7 @@ export default function SiteConfigPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [configs, setConfigs] = useState<Record<string, Record<string, string>>>({});
   const [formState, setFormState] = useState<Record<string, string>>({});
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
@@ -188,15 +212,20 @@ export default function SiteConfigPage() {
     fetchConfigs();
   }, []);
 
-  // Update current form fields when selected page or configs change
+  // Update current form fields and open accordions when selected page or configs change
   useEffect(() => {
     if (selectedPage) {
       const pageValues = configs[selectedPage.key] || {};
       const newFormState: Record<string, string> = {};
+      const initialExpanded: Record<string, boolean> = {};
+
       selectedPage.fields.forEach(field => {
         newFormState[field.key] = pageValues[field.key] || '';
+        initialExpanded[field.group || 'General Settings'] = true;
       });
+
       setFormState(newFormState);
+      setExpandedGroups(initialExpanded);
       setStatus({ type: null, message: '' });
     }
   }, [selectedPage, configs]);
@@ -242,7 +271,6 @@ export default function SiteConfigPage() {
       const data = await res.json();
       if (data.success) {
         setStatus({ type: 'success', message: 'Configuration saved successfully! All updates are live.' });
-        // Update local configs map
         setConfigs(prev => ({
           ...prev,
           [selectedPage.key]: {
@@ -260,7 +288,6 @@ export default function SiteConfigPage() {
     }
   };
 
-  // Filter pages based on search
   const filteredPages = PAGES_CONFIG.filter(page =>
     page.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     page.path.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -279,6 +306,16 @@ export default function SiteConfigPage() {
         return <Sliders size={15} style={{ color: 'var(--accent-color)' }} />;
     }
   };
+
+  // Group fields for the selected page
+  const groupedFields: Record<string, FieldConfig[]> = {};
+  selectedPage.fields.forEach(field => {
+    const groupName = field.group || 'General Settings';
+    if (!groupedFields[groupName]) {
+      groupedFields[groupName] = [];
+    }
+    groupedFields[groupName].push(field);
+  });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -373,14 +410,40 @@ export default function SiteConfigPage() {
             <div style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '28px', boxShadow: 'var(--shadow-sm)' }}>
               {/* Header */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingBottom: '20px', borderBottom: '1px solid var(--border-color)', marginBottom: '24px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: 'rgba(200,66,10,0.1)', color: 'var(--accent-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: 'rgba(200,66,10,0.1)', color: 'var(--accent-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Globe size={18} />
                 </div>
-                <div>
-                  <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0 }}>{selectedPage.title}</h2>
-                  <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                    Serving at: <code style={{ background: 'var(--bg-main)', padding: '2px 4px', borderRadius: '4px', color: 'var(--accent-color)' }}>{selectedPage.path}</code>
-                  </span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <h2 style={{ fontSize: '18px', fontWeight: 700, margin: 0 }}>{selectedPage.title}</h2>
+                    <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      Serving path: <code style={{ background: 'var(--bg-main)', padding: '2px 4px', borderRadius: '4px', color: 'var(--accent-color)' }}>{selectedPage.path}</code>
+                    </span>
+                  </div>
+                  <a
+                    href={selectedPage.deployedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '12.5px',
+                      fontWeight: 600,
+                      padding: '8px 14px',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      backgroundColor: 'rgba(200,66,10,0.06)',
+                      color: 'var(--accent-color)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseOver={e => e.currentTarget.style.backgroundColor = 'rgba(200,66,10,0.1)'}
+                    onMouseOut={e => e.currentTarget.style.backgroundColor = 'rgba(200,66,10,0.06)'}
+                  >
+                    <ExternalLink size={14} />
+                    View Live Page
+                  </a>
                 </div>
               </div>
 
@@ -414,62 +477,101 @@ export default function SiteConfigPage() {
               )}
 
               {/* Form */}
-              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  {selectedPage.fields.map(field => {
-                    const value = formState[field.key];
+              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {Object.entries(groupedFields).map(([groupName, fields]) => {
+                    const isExpanded = !!expandedGroups[groupName];
                     return (
-                      <div key={field.key} className="form-group" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          {getFieldIcon(field.type)}
-                          <label className="form-label" style={{ marginBottom: 0, fontWeight: 600, fontSize: '13.5px' }}>
-                            {field.label}
-                          </label>
-                        </div>
+                      <div key={groupName} style={{ border: '1px solid var(--border-color)', borderRadius: '10px', overflow: 'hidden', backgroundColor: 'var(--bg-main)' }}>
+                        <button
+                          type="button"
+                          onClick={() => setExpandedGroups(prev => ({ ...prev, [groupName]: !prev[groupName] }))}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '100%',
+                            padding: '12px 18px',
+                            backgroundColor: 'rgba(0,0,0,0.015)',
+                            border: 'none',
+                            borderBottom: isExpanded ? '1px solid var(--border-color)' : 'none',
+                            fontWeight: 700,
+                            fontSize: '12.5px',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.7px',
+                            textAlign: 'left',
+                            cursor: 'pointer',
+                            color: 'var(--text-primary)',
+                            transition: 'background 0.2s',
+                          }}
+                          onMouseOver={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.03)'}
+                          onMouseOut={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.015)'}
+                        >
+                          <span>{groupName}</span>
+                          {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                        </button>
+                        
+                        {isExpanded && (
+                          <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '18px', backgroundColor: 'white' }}>
+                            {fields.map(field => {
+                              const value = formState[field.key];
+                              return (
+                                <div key={field.key} className="form-group" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    {getFieldIcon(field.type)}
+                                    <label className="form-label" style={{ marginBottom: 0, fontWeight: 600, fontSize: '13.5px' }}>
+                                      {field.label}
+                                    </label>
+                                  </div>
 
-                        {field.type === 'boolean' ? (
-                          <div style={{ display: 'flex', alignItems: 'center', marginTop: '4px' }}>
-                            <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', gap: '10px' }}>
-                              <input
-                                type="checkbox"
-                                checked={value === 'true'}
-                                onChange={e => handleFieldChange(field.key, e.target.checked ? 'true' : 'false')}
-                                style={{
-                                  width: '18px',
-                                  height: '18px',
-                                  accentColor: 'var(--accent-color)',
-                                  cursor: 'pointer'
-                                }}
-                              />
-                              <span style={{ fontSize: '13.5px', color: value === 'true' ? 'var(--accent-color)' : 'var(--text-secondary)', fontWeight: 600 }}>
-                                {value === 'true' ? 'Active' : 'Disabled'}
-                              </span>
-                            </label>
+                                  {field.type === 'boolean' ? (
+                                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '4px' }}>
+                                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', gap: '10px' }}>
+                                        <input
+                                          type="checkbox"
+                                          checked={value === 'true'}
+                                          onChange={e => handleFieldChange(field.key, e.target.checked ? 'true' : 'false')}
+                                          style={{
+                                            width: '18px',
+                                            height: '18px',
+                                            accentColor: 'var(--accent-color)',
+                                            cursor: 'pointer'
+                                          }}
+                                        />
+                                        <span style={{ fontSize: '13.5px', color: value === 'true' ? 'var(--accent-color)' : 'var(--text-secondary)', fontWeight: 600 }}>
+                                          {value === 'true' ? 'Active' : 'Disabled'}
+                                        </span>
+                                      </label>
+                                    </div>
+                                  ) : field.type === 'textarea' ? (
+                                    <textarea
+                                      className="form-control"
+                                      rows={3}
+                                      placeholder={field.placeholder}
+                                      value={value || ''}
+                                      onChange={e => handleFieldChange(field.key, e.target.value)}
+                                      style={{ width: '100%', fontFamily: 'inherit', fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
+                                    />
+                                  ) : (
+                                    <input
+                                      type={field.type === 'datetime-local' ? 'datetime-local' : 'text'}
+                                      className="form-control"
+                                      placeholder={field.placeholder}
+                                      value={value || ''}
+                                      onChange={e => handleFieldChange(field.key, e.target.value)}
+                                      style={{ width: '100%', fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
+                                    />
+                                  )}
+
+                                  {field.description && (
+                                    <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginLeft: '2px' }}>
+                                      {field.description}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </div>
-                        ) : field.type === 'textarea' ? (
-                          <textarea
-                            className="form-control"
-                            rows={3}
-                            placeholder={field.placeholder}
-                            value={value || ''}
-                            onChange={e => handleFieldChange(field.key, e.target.value)}
-                            style={{ width: '100%', fontFamily: 'inherit', fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
-                          />
-                        ) : (
-                          <input
-                            type={field.type === 'datetime-local' ? 'datetime-local' : 'text'}
-                            className="form-control"
-                            placeholder={field.placeholder}
-                            value={value || ''}
-                            onChange={e => handleFieldChange(field.key, e.target.value)}
-                            style={{ width: '100%', fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
-                          />
-                        )}
-
-                        {field.description && (
-                          <span style={{ fontSize: '12px', color: 'var(--text-secondary)', marginLeft: '2px' }}>
-                            {field.description}
-                          </span>
                         )}
                       </div>
                     );

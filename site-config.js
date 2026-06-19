@@ -42,6 +42,8 @@
           var el = elements[j];
           if (el.tagName === 'A') {
             el.href = value;
+          } else if (el.tagName === 'IFRAME') {
+            el.src = value;
           } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.value = value;
           } else {
