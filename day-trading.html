@@ -3000,6 +3000,7 @@
       text-transform: uppercase;
     }
   </style>
+  <script src="/site-config.js" data-page="day-trading" defer></script>
 </head>
 
 <body>
@@ -3090,6 +3091,7 @@
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
             March 19
+            <span style="display:none" data-config="dateLabel">March 19</span>
           </div>
           <div class="meta-chip">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -3097,6 +3099,7 @@
               <polyline points="12 6 12 12 16 14" />
             </svg>
             3:30 PM CT
+            <span style="display:none" data-config="timeLabel">3:30 PM CT</span>
           </div>
           <div class="meta-chip">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -3198,7 +3201,7 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
           }
         </style>
-        <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="_form_126_" class="_form _form_126 _inline-form _dark" novalidate data-styles-version="5">
+        <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="_form_126_" class="_form _form_126 _inline-form _dark" novalidate data-styles-version="5" data-config="activecampaign-form">
           <input type="hidden" name="u" value="126" />
           <input type="hidden" name="f" value="126" />
           <input type="hidden" name="s" />
@@ -3564,7 +3567,7 @@
           <div class="get-accord-row">
             <div class="get-accord-left">
               <div class="get-accord-title">Live 90-Minute Training</div>
-              <div class="get-accord-sub">Live session · March 19</div>
+              <div class="get-accord-sub" data-config="liveSessionLabel">Live session · March 19</div>
             </div>
             <div class="get-accord-plus">+</div>
           </div>
@@ -3638,7 +3641,7 @@
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              March 19, 2026
+              <span data-config="overviewDateLabel">March 19, 2026</span>
             </div>
             <div class="get-card-stat">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4054,7 +4057,7 @@
     <p class="mid-cta-sub reveal">Don't trade another day without a clear directional framework. Reserve your free seat now before spots fill up.</p>
     <div class="reveal">
       <button class="btn-main" onclick="scrollToForm()">CLAIM MY FREE SEAT &rarr;</button>
-      <span class="btn-main-sub">Wednesday, March 19 &nbsp;·&nbsp; 7:00 PM ET &nbsp;·&nbsp; Free &amp; Live</span>
+      <span class="btn-main-sub" data-config="fullDateSubtext">Wednesday, March 19 &nbsp;·&nbsp; 7:00 PM ET &nbsp;·&nbsp; Free &amp; Live</span>
     </div>
     <p class="mid-cta-note reveal">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -4195,7 +4198,11 @@
     // Set target to 20 days + 4 hours + 5 minutes from now so it's always counting live
     // const end = Date.now() + (20 * 24 * 3600 + 4 * 3600 + 5 * 60) * 1000;
     // Set target to March 19, 2026 3:30 PM CT
-    const end = new Date('2026-03-19T15:30:00-05:00').getTime();
+    let end = new Date('2026-03-19T15:30:00-05:00').getTime();
+    window.setCountdownTarget = function(newTarget) {
+      end = new Date(newTarget).getTime();
+      tick();
+    };
 
     function tick() {
       const now = Date.now();

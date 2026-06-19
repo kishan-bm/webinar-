@@ -7,7 +7,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import { Mark, mergeAttributes, Extension, Node } from '@tiptap/core';
-import { Plugin, PluginKey, NodeSelection } from '@tiptap/pm/state';
+import { Plugin, PluginKey, NodeSelection, Selection } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
 import { Bold, Italic, Heading2, List, ListOrdered, ImageIcon, LinkIcon, Code, Edit2, Trash2, Check, X, AlignLeft, AlignCenter, AlignRight, AlignJustify, FileCode, Minus } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
@@ -134,12 +134,22 @@ function ResizableImageNodeView({ node, updateAttributes, selected, editor, getP
   // Select node programmatically on click/mousedown
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     if (typeof getPos === 'function' && editor) {
       try {
         const pos = getPos();
-        const tr = editor.state.tr;
-        const selection = NodeSelection.create(editor.state.doc, pos);
-        editor.view.dispatch(tr.setSelection(selection));
+        const { selection } = editor.state;
+        const isCurrentlySelected = selection instanceof NodeSelection && selection.from === pos;
+
+        if (isCurrentlySelected) {
+          // Deselect node by setting a text selection at the same position
+          const tr = editor.state.tr.setSelection(editor.state.selection.constructor.near(editor.state.doc.resolve(pos)));
+          editor.view.dispatch(tr);
+        } else {
+          // Select the image node
+          const tr = editor.state.tr.setSelection(NodeSelection.create(editor.state.doc, pos));
+          editor.view.dispatch(tr);
+        }
         setTimeout(() => {
           editor.view.focus();
         }, 10);
@@ -212,9 +222,14 @@ function ResizableImageNodeView({ node, updateAttributes, selected, editor, getP
         userSelect: 'none',
         transition: 'border 0.15s, box-shadow 0.15s',
       }}
-      onMouseDown={(e) => {
+      onClick={(e) => {
         handleClick(e);
-        if (isInText) onMouseDownFloat(e);
+      }}
+      onMouseDown={(e) => {
+        if (isInText) {
+          e.stopPropagation();
+          onMouseDownFloat(e);
+        }
       }}
     />
   );
@@ -832,8 +847,17 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
     editorProps: {
       handleClickOn(view, pos, node, nodePos, event, direct) {
         if (node.type.name === 'image') {
-          const tr = view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos));
-          view.dispatch(tr);
+          const { selection } = view.state;
+          const isCurrentlySelected = selection instanceof NodeSelection && selection.from === nodePos;
+          if (isCurrentlySelected) {
+            // Deselect: place text cursor at nodePos
+            const tr = view.state.tr.setSelection(Selection.near(view.state.doc.resolve(nodePos)));
+            view.dispatch(tr);
+          } else {
+            // Select: select image node
+            const tr = view.state.tr.setSelection(NodeSelection.create(view.state.doc, nodePos));
+            view.dispatch(tr);
+          }
           return true;
         }
         return false;

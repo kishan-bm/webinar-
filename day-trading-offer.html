@@ -1180,6 +1180,7 @@
       .timer { gap: 4px; }
     }
   </style>
+  <script src="/site-config.js" data-page="day-trading-offer" defer></script>
 </head>
 
 <body>
@@ -1198,7 +1199,7 @@
       <li><a href="#offer">Offer</a></li>
       <li><a href="#why">Why Now</a></li>
     </ul>
-    <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer_nav&promo=DAY" class="nav-cta">Claim 30% Off</a>
+    <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer_nav&promo=DAY" class="nav-cta" data-config="whopOfferUrl">Claim 30% Off</a>
   </nav>
 
   <!-- ── MAIN (LIGHT) ── -->
@@ -1247,7 +1248,7 @@
             <div class="promo-tag"><strong>30% off</strong> any membership</div>
           </div>
 
-          <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer&promo=DAY" class="main-cta" id="claim-btn">
+          <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer_countdown&utm_medium=web&utm_campaign=noshow_offer&promo=DAY" class="main-cta" id="claim-btn" data-config="whopOfferUrl">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             Claim My 30% Off Now
           </a>
@@ -1516,7 +1517,7 @@
             <span class="per">30% OFF</span>
           </div>
 
-          <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer&utm_medium=web&utm_campaign=offer_final_cta&promo=DAY" class="dt-term-action">
+          <a href="https://whop.com/joined/navigationtrading/products/ntday/?utm_source=offer&utm_medium=web&utm_campaign=offer_final_cta&promo=DAY" class="dt-term-action" data-config="whopOfferUrl">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
@@ -1618,6 +1619,10 @@
       var claimBtn = document.getElementById('claim-btn');
 
       var expiry = new Date('2026-06-18T22:00:00Z').getTime();
+      window.setCountdownTarget = function(newTarget) {
+        expiry = new Date(newTarget).getTime();
+        tick();
+      };
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
       function setDigit(el, val) {

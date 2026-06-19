@@ -1809,6 +1809,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       .pm-final-cta { padding: 50px 0; }
     }
 </style>
+  <script src="/site-config.js" data-page="free-membership" defer></script>
 </head>
 
 <body>
@@ -2712,14 +2713,14 @@ revealEls.forEach(el => observer.observe(el));
       <div class="eip-left">
         <div class="eip-logo-row"><img src="logo.png" alt="NavigationTrading" class="eip-logo"></div>
         <div class="eip-badge">Free Live Webinar</div>
-        <h2 class="eip-headline">Turn Any Options Trade Into a Risk-Free Position</h2>
-        <p class="eip-tagline">Using the DC TimeMachine strategy — live, with real trades.</p>
+        <h2 class="eip-headline" data-config="exitPopupHeadline">Turn Any Options Trade Into a Risk-Free Position</h2>
+        <p class="eip-tagline" data-config="exitPopupTagline">Using the DC TimeMachine strategy — live, with real trades.</p>
         <ul class="eip-bullets">
           <li>&#10003; See FLUX signal a real entry live</li>
           <li>&#10003; Learn the Double Calendar setup</li>
           <li>&#10003; Get the $200/mo FLUX tool free</li>
         </ul>
-        <div class="eip-date">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
+        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
       </div>
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>

@@ -3156,6 +3156,7 @@
       }
     }
   </style>
+  <script src="/site-config.js" data-page="transformer-option-spreads" defer></script>
 </head>
 
 <body>
@@ -3245,6 +3246,7 @@
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
             May 6
+            <span style="display:none" data-config="dateLabel">May 6</span>
           </div>
           <div class="meta-chip">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -3290,7 +3292,7 @@
         ._x78742557 input {
           margin-bottom:10px;
         }</style>
-        <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="_form_132_" class="_form _form_132 _inline-form  _dark" novalidate data-styles-version="5">
+        <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="_form_132_" class="_form _form_132 _inline-form  _dark" novalidate data-styles-version="5" data-config="activecampaign-form">
           <input type="hidden" name="u" value="132" />
           <input type="hidden" name="f" value="132" />
           <input type="hidden" name="s" />
@@ -4234,7 +4236,7 @@
           <div class="get-accord-row">
             <div class="get-accord-left">
               <div class="get-accord-title">Live 75-Minute Training</div>
-              <div class="get-accord-sub">Live session · May 6th</div>
+              <div class="get-accord-sub" data-config="liveSessionLabel">Live session · May 6th</div>
             </div>
             <div class="get-accord-plus">+</div>
           </div>
@@ -4315,7 +4317,7 @@
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              May 6, 2026
+              <span data-config="overviewDateLabel">May 6, 2026</span>
             </div>
             <div class="get-card-stat">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4979,7 +4981,11 @@
     // Set target to 20 days + 4 hours + 5 minutes from now so it's always counting live
     // const end = Date.now() + (20 * 24 * 3600 + 4 * 3600 + 5 * 60) * 1000;
     // Set target to May 6th, 2026
-    const end = new Date('2026-05-06T15:30:00-05:00').getTime();
+    let end = new Date('2026-05-06T15:30:00-05:00').getTime();
+    window.setCountdownTarget = function(newTarget) {
+      end = new Date(newTarget).getTime();
+      tick();
+    };
 
     function tick() {
       const now = Date.now();
@@ -5351,14 +5357,14 @@
           <img src="logo.png" alt="NavigationTrading" class="eip-logo">
         </div>
         <div class="eip-badge">Free Live Webinar</div>
-        <h2 class="eip-headline">Turn Any Options Trade Into a Risk-Free Position</h2>
-        <p class="eip-tagline">Using the DC TimeMachine strategy — live, with real trades.</p>
+        <h2 class="eip-headline" data-config="exitPopupHeadline">Turn Any Options Trade Into a Risk-Free Position</h2>
+        <p class="eip-tagline" data-config="exitPopupTagline">Using the DC TimeMachine strategy — live, with real trades.</p>
         <ul class="eip-bullets">
           <li>&#10003;&nbsp; See FLUX signal a real entry live</li>
           <li>&#10003;&nbsp; Learn the Double Calendar setup</li>
           <li>&#10003;&nbsp; Get the $200/mo FLUX tool free</li>
         </ul>
-        <div class="eip-date">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
+        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
       </div>
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>

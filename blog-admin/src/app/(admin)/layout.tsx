@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
 import '../globals.css';
 import { useState, useEffect } from 'react';
 
@@ -44,6 +44,7 @@ export default function RootLayout({
   ];
 
   const settingsItems = [
+    { href: '/site-config', icon: <SlidersHorizontal size={20} />, label: 'Site Config' },
     { href: '/settings', icon: <Settings size={20} />, label: 'Settings' },
   ];
 

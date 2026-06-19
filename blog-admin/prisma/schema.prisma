@@ -79,3 +79,16 @@ model Banner {
   updatedAt DateTime @updatedAt
 }
 
+model SiteConfig {
+  id        String   @id @default(uuid())
+  pageKey   String   // e.g. "day-trading", "pricing"
+  key       String   // e.g. "countdownTarget", "formId"
+  value     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([pageKey, key])
+  @@index([pageKey])
+}
+
+

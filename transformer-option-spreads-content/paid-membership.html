@@ -1571,7 +1571,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .final-cta h2 { font-size: 28px; }
   .btn-final { padding: 15px 22px !important; font-size: 15px !important; width: 100%; }
 }
-</style>
+  </style>
+  <script src="/site-config.js" data-page="paid-membership" defer></script>
 </head>
 <body>
 
@@ -1613,7 +1614,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   </ul>
   <div style="display:flex; gap:16px; align-items:center;">
       <a href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;" class="nav-login">Login</a>
-      <a href="https://whop.com/navigationtrading/ntpro/" class="nav-cta">Join Now</a>
+      <a href="https://whop.com/navigationtrading/ntpro/" class="nav-cta" data-config="whopLink">Join Now</a>
   </div>
   <div class="nav-toggle" id="navToggle">
     <span></span>
@@ -2884,14 +2885,14 @@ document.querySelectorAll('.faq-item').forEach(item => {
       <div class="eip-left">
         <div class="eip-logo-row"><img src="logo.png" alt="NavigationTrading" class="eip-logo"></div>
         <div class="eip-badge">Free Live Webinar</div>
-        <h2 class="eip-headline">See the Pro Strategy in Action Before You Join</h2>
-        <p class="eip-tagline">Watch live trades using the FLUX DC TimeMachine. Included free with Pro.</p>
+        <h2 class="eip-headline" data-config="exitPopupHeadline">See the Pro Strategy in Action Before You Join</h2>
+        <p class="eip-tagline" data-config="exitPopupTagline">Watch live trades using the FLUX DC TimeMachine. Included free with Pro.</p>
         <ul class="eip-bullets">
           <li>&#10003; Live Double Calendar trade walkthrough</li>
           <li>&#10003; FLUX DC TimeMachine access included</li>
           <li>&#10003; Get the $200/mo tool at no cost</li>
         </ul>
-        <div class="eip-date">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
+        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
       </div>
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>
