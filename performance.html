@@ -1644,7 +1644,7 @@
       <li><a href="https://navigationtrading.com/blog/">Blog</a></li>
       <li><a href="/contact">Contact Us</a></li>
     </ul>
-    <a href="pricing.html" class="nav-cta">Get Trade Alerts</a>
+    <a href="pricing.html" class="nav-cta" data-config="navCtaLink">Get Trade Alerts</a>
   </nav>
 
   <!-- ── PERFORMANCE HERO ── -->
@@ -1705,7 +1705,7 @@
 
         <!-- LEFT: tall 2025 featured card -->
         <a href="https://navigationtrading.com/wp-content/uploads/2026/02/2025-Monthly-Performance-Links.pdf"
-          target="_blank" class="year-featured reveal">
+          target="_blank" class="year-featured reveal" data-config="featuredYearPdfUrl">
           <div class="yf-watermark">2025</div>
           <div class="yf-top">
             <span class="yf-badge">LIVE · 2025</span>
@@ -1889,7 +1889,7 @@
             </div>
           </div>
 
-          <a href="pricing.html" class="dt-term-action">
+          <a href="pricing.html" class="dt-term-action" data-config="pricingLink">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
@@ -1990,6 +1990,7 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+  <script src="site-config.js" data-page="performance"></script>
 </body>
 
 </html>

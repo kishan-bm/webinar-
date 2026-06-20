@@ -2053,7 +2053,7 @@
       <li><a href="#about">Author</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <button class="nav-cta" onclick="window.location.href='/day-trading'">Back to Home</button>
+    <a href="/day-trading" class="nav-cta" data-config="navCtaLink" style="text-decoration: none;">Back to Home</a>
   </nav>
 
   <!-- REGISTRATION — top strip -->
@@ -2099,7 +2099,7 @@
               </svg></div>
             <div>
               <div class="reg-detail-label">Date</div>
-              <div class="reg-detail-val">March 19th, 2026</div>
+              <div class="reg-detail-val" data-config="dateLabel">March 19th, 2026</div>
             </div>
           </div>
           <div class="reg-detail-row">
@@ -2109,7 +2109,7 @@
               </svg></div>
             <div>
               <div class="reg-detail-label">Time</div>
-              <div class="reg-detail-val">3:30 PM Central Time</div>
+              <div class="reg-detail-val" data-config="timeLabel">3:30 PM Central Time</div>
             </div>
           </div>
           <div class="reg-detail-row">
@@ -2149,7 +2149,7 @@
             Webinar Access Link
           </div>
           <a class="reg-zoom-btn" href="https://us06web.zoom.us/j/84515347195?pwd=PSipBDbQzfnNbG71jRea3KSkar4sAE.1"
-            target="_blank">
+            target="_blank" data-config="zoomLink">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path
                 d="M15 10l4.553-2.069A1 1 0 0121 8.869v6.262a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" />
@@ -2159,11 +2159,11 @@
           <div class="reg-meeting-info">
             <div class="reg-meeting-chip">
               <div class="reg-meeting-chip-label">Meeting ID</div>
-              <div class="reg-meeting-chip-val">845 1534 7195</div>
+              <div class="reg-meeting-chip-val" data-config="meetingId">845 1534 7195</div>
             </div>
             <div class="reg-meeting-chip">
               <div class="reg-meeting-chip-label">Passcode</div>
-              <div class="reg-meeting-chip-val">615280</div>
+              <div class="reg-meeting-chip-val" data-config="meetingPasscode">615280</div>
             </div>
           </div>
           <p class="reg-email-note">
@@ -2190,7 +2190,7 @@
           <div class="reg-cal-btns">
             <a class="reg-cal-google"
               href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Directional+Day+Trading+Class&dates=20260319T203000Z/20260319T220000Z&details=Join:+https://us06web.zoom.us/j/84515347195?pwd=PSipBDbQzfnNbG71jRea3KSkar4sAE.1&location=Online+Webinar"
-              target="_blank">
+              target="_blank" data-config="googleCalLink">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
@@ -2201,7 +2201,7 @@
             </a>
             <a class="reg-cal-outlook"
               href="https://outlook.live.com/calendar/0/deeplink/compose?subject=Directional+Day+Trading+Class&startdt=2026-03-19T20:30:00Z&enddt=2026-03-19T22:00:00Z&body=Join:+https://us06web.zoom.us/j/84515347195"
-              target="_blank">
+              target="_blank" data-config="outlookCalLink">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
@@ -2436,6 +2436,7 @@
       });
     });
   </script>
+  <script src="site-config.js" data-page="thank-you-dtt"></script>
 </body>
 
 </html>

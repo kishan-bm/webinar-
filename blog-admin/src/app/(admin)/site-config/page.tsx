@@ -255,6 +255,54 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'schwabReferralUrl', label: 'Charles Schwab Referral URL', type: 'url', placeholder: 'https://www.schwab.com/', description: 'Referral link for Charles Schwab account opening', group: 'Broker Links' },
       { key: 'commissionSheetUrl', label: 'Spreadsheet Download URL', type: 'url', placeholder: '#', description: 'Download link for the Broker Commission Comparison spreadsheet', group: 'Broker Links' }
     ]
+  },
+  {
+    key: 'podcast',
+    title: 'Podcast',
+    path: '/podcast',
+    deployedUrl: 'https://webclass.navigationtrading.com/podcast',
+    description: 'Listen to the Tradehacker Mindset podcast and subscribe to various platforms.',
+    fields: [
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'spotifyPodcastEmbedUrl', label: 'Spotify Podcast Embed URL', type: 'url', placeholder: 'https://open.spotify.com/embed/...', description: 'Spotify embedded player URL', group: 'Embed Settings' },
+      { key: 'spotifyLink', label: 'Spotify Subscribe Link', type: 'url', placeholder: 'https://open.spotify.com/...', description: 'Listen on Spotify link', group: 'Platform Links' },
+      { key: 'applePodcastsLink', label: 'Apple Podcasts Subscribe Link', type: 'url', placeholder: 'https://podcasts.apple.com/...', description: 'Listen on Apple Podcasts link', group: 'Platform Links' },
+      { key: 'youtubeLink', label: 'YouTube Subscribe Link', type: 'url', placeholder: 'https://www.youtube.com/...', description: 'Subscribe on YouTube link', group: 'Platform Links' },
+      { key: 'freeJoinLink', label: 'Free Membership Access Link', type: 'url', placeholder: 'https://whop.com/...', description: 'Get started link for free courses', group: 'Call to Actions' },
+      { key: 'paidJoinLink', label: 'Premium Membership Learn More Link', type: 'url', placeholder: 'pricing.html', description: 'Learn More link for Premium memberships', group: 'Call to Actions' },
+      { key: 'proJoinLink', label: 'Pro Membership Learn More Link', type: 'url', placeholder: 'pricing.html', description: 'Learn More link for Pro memberships', group: 'Call to Actions' },
+      { key: 'calendlyLink', label: 'Schedule Coaching Call Link', type: 'url', placeholder: 'https://calendly.com/...', description: 'Calendly booking link', group: 'Call to Actions' },
+      { key: 'pricingLink', label: 'View Membership Plans Link', type: 'url', placeholder: 'pricing.html', description: 'Redirect URL for bottom CTA', group: 'Call to Actions' }
+    ]
+  },
+  {
+    key: 'performance',
+    title: 'Performance & Track Record',
+    path: '/performance',
+    deployedUrl: 'https://webclass.navigationtrading.com/performance',
+    description: 'Documented performance history and annual trade reports.',
+    fields: [
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'pricingLink', label: 'Explore Memberships URL', type: 'url', placeholder: 'pricing.html', description: 'Explore Memberships bottom CTA button', group: 'URLs & Links' },
+      { key: 'featuredYearPdfUrl', label: '2025 Featured Year Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for the current year performance report', group: 'URLs & Links' }
+    ]
+  },
+  {
+    key: 'thank-you-dtt',
+    title: 'Webinar Thank You Page',
+    path: '/thank-you-dtt',
+    deployedUrl: 'https://webclass.navigationtrading.com/thank-you-dtt',
+    description: 'Registration confirmation page showing webinar meeting access details.',
+    fields: [
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/day-trading', description: 'URL for the Navbar CTA button', group: 'URLs & Links' },
+      { key: 'zoomLink', label: 'Zoom Join URL', type: 'url', placeholder: 'https://us06web.zoom.us/...', description: 'URL to join the Zoom webinar session', group: 'Zoom Access Details' },
+      { key: 'meetingId', label: 'Zoom Meeting ID', type: 'text', placeholder: 'e.g. 845 1534 7195', description: 'Webinar Zoom Meeting ID text', group: 'Zoom Access Details' },
+      { key: 'meetingPasscode', label: 'Zoom Meeting Passcode', type: 'text', placeholder: 'e.g. 615280', description: 'Webinar Zoom Meeting Passcode text', group: 'Zoom Access Details' },
+      { key: 'googleCalLink', label: 'Google Calendar Link', type: 'url', placeholder: 'https://calendar.google.com/...', description: 'Add event to Google Calendar URL', group: 'Calendar Add Buttons' },
+      { key: 'outlookCalLink', label: 'Outlook Calendar Link', type: 'url', placeholder: 'https://outlook.live.com/...', description: 'Add event to Outlook Calendar URL', group: 'Calendar Add Buttons' },
+      { key: 'dateLabel', label: 'Webinar Date Label', type: 'text', placeholder: 'e.g. March 19th, 2026', description: 'Webinar date text in Details card', group: 'Webinar Date & Time' },
+      { key: 'timeLabel', label: 'Webinar Time Label', type: 'text', placeholder: 'e.g. 3:30 PM Central Time', description: 'Webinar time text in Details card', group: 'Webinar Date & Time' }
+    ]
   }
 ];
 
