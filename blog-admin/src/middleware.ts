@@ -47,7 +47,7 @@ export async function middleware(request: NextRequest) {
     if (sessionCookie) {
       const decrypted = await decryptSession(sessionCookie);
       if (decrypted && decrypted.expiresAt > Date.now()) {
-        return NextResponse.redirect(getRedirectUrl(request, '/site-config'));
+        return NextResponse.redirect(getRedirectUrl(request, '/admin-blog'));
       }
     }
   }
