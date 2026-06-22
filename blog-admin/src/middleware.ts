@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { decryptSession } from './lib/session';
 
+function getRedirectUrl(request: NextRequest, path: string): string {
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  const proto = request.headers.get('x-forwarded-proto') || 'https';
+  return host ? `${proto}://${host}${path}` : new URL(path, request.url).toString();
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -19,13 +25,13 @@ export async function middleware(request: NextRequest) {
     const sessionCookie = request.cookies.get('admin_session')?.value;
 
     if (!sessionCookie) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(getRedirectUrl(request, '/login'));
     }
 
     const decrypted = await decryptSession(sessionCookie);
 
     if (!decrypted || decrypted.expiresAt < Date.now()) {
-      const response = NextResponse.redirect(new URL('/login', request.url));
+      const response = NextResponse.redirect(getRedirectUrl(request, '/login'));
       response.cookies.set('admin_session', '', {
         httpOnly: true,
         path: '/',
@@ -41,7 +47,7 @@ export async function middleware(request: NextRequest) {
     if (sessionCookie) {
       const decrypted = await decryptSession(sessionCookie);
       if (decrypted && decrypted.expiresAt > Date.now()) {
-        return NextResponse.redirect(new URL('/site-config', request.url));
+        return NextResponse.redirect(getRedirectUrl(request, '/site-config'));
       }
     }
   }
