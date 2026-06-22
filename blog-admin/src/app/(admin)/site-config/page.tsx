@@ -306,6 +306,54 @@ const PAGES_CONFIG: PageConfig[] = [
   }
 ];
 
+function getOffsetString(timezone: string, localDateTimeStr: string): string {
+  try {
+    const naiveDate = new Date(localDateTimeStr + ':00Z');
+    if (isNaN(naiveDate.getTime())) return '-05:00';
+    
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    const parts = formatter.formatToParts(naiveDate);
+    const p: Record<string, string> = {};
+    parts.forEach(part => {
+      p[part.type] = part.value;
+    });
+    
+    let hour = parseInt(p.hour || '0', 10);
+    if (hour === 24) hour = 0;
+    
+    const tzLocal = new Date(Date.UTC(
+      parseInt(p.year || '0', 10),
+      parseInt(p.month || '1', 10) - 1,
+      parseInt(p.day || '1', 10),
+      hour,
+      parseInt(p.minute || '0', 10),
+      parseInt(p.second || '0', 10)
+    ));
+    
+    const offsetMs = tzLocal.getTime() - naiveDate.getTime();
+    const offsetMin = Math.round(offsetMs / 60000);
+    
+    const sign = offsetMin >= 0 ? '+' : '-';
+    const absOffsetMin = Math.abs(offsetMin);
+    const hours = String(Math.floor(absOffsetMin / 60)).padStart(2, '0');
+    const mins = String(absOffsetMin % 60).padStart(2, '0');
+    return `${sign}${hours}:${mins}`;
+  } catch (e) {
+    console.error('Error calculating timezone offset:', e);
+    return '-05:00';
+  }
+}
+
 export default function SiteConfigPage() {
   const [selectedPage, setSelectedPage] = useState<PageConfig>(PAGES_CONFIG[0]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -330,7 +378,15 @@ export default function SiteConfigPage() {
       const initialExpanded: Record<string, boolean> = {};
 
       selectedPage.fields.forEach(field => {
-        newFormState[field.key] = pageValues[field.key] || '';
+        if (field.type === 'datetime-local') {
+          const rawValue = pageValues[field.key] || '';
+          const tzValue = pageValues[field.key + '_tz'] || 'America/Chicago';
+          const localValue = rawValue ? rawValue.substring(0, 16) : '';
+          newFormState[field.key + '_local'] = localValue;
+          newFormState[field.key + '_tz'] = tzValue;
+        } else {
+          newFormState[field.key] = pageValues[field.key] || '';
+        }
         initialExpanded[field.group || 'General Settings'] = true;
       });
 
@@ -369,12 +425,29 @@ export default function SiteConfigPage() {
     setStatus({ type: null, message: '' });
 
     try {
+      const payload: Record<string, string> = {};
+      selectedPage.fields.forEach(field => {
+        if (field.type === 'datetime-local') {
+          const localVal = formState[field.key + '_local'] || '';
+          const tzVal = formState[field.key + '_tz'] || 'America/Chicago';
+          if (localVal) {
+            const offset = getOffsetString(tzVal, localVal);
+            payload[field.key] = `${localVal}:00${offset}`;
+          } else {
+            payload[field.key] = '';
+          }
+          payload[field.key + '_tz'] = tzVal;
+        } else {
+          payload[field.key] = formState[field.key] || '';
+        }
+      });
+
       const res = await fetch('/api/config', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pageKey: selectedPage.key,
-          config: formState
+          config: payload
         })
       });
 
@@ -385,7 +458,7 @@ export default function SiteConfigPage() {
           ...prev,
           [selectedPage.key]: {
             ...(prev[selectedPage.key] || {}),
-            ...formState
+            ...payload
           }
         }));
       } else {
@@ -662,9 +735,32 @@ export default function SiteConfigPage() {
                                       onChange={e => handleFieldChange(field.key, e.target.value)}
                                       style={{ width: '100%', fontFamily: 'inherit', fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
                                     />
+                                  ) : field.type === 'datetime-local' ? (
+                                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', width: '100%' }}>
+                                      <input
+                                        type="datetime-local"
+                                        className="form-control"
+                                        value={formState[field.key + '_local'] || ''}
+                                        onChange={e => handleFieldChange(field.key + '_local', e.target.value)}
+                                        style={{ flex: 1, fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
+                                      />
+                                      <select
+                                        className="form-control"
+                                        value={formState[field.key + '_tz'] || 'America/Chicago'}
+                                        onChange={e => handleFieldChange(field.key + '_tz', e.target.value)}
+                                        style={{ width: '220px', fontSize: '14px', borderRadius: '8px', padding: '10px 12px', cursor: 'pointer', backgroundColor: '#fff', border: '1px solid var(--border-color)' }}
+                                      >
+                                        <option value="America/Chicago">Central Time (CST/CDT)</option>
+                                        <option value="America/New_York">Eastern Time (EST/EDT)</option>
+                                        <option value="America/Los_Angeles">Pacific Time (PST/PDT)</option>
+                                        <option value="America/Denver">Mountain Time (MST/MDT)</option>
+                                        <option value="Asia/Kolkata">India Time (IST)</option>
+                                        <option value="UTC">UTC / GMT</option>
+                                      </select>
+                                    </div>
                                   ) : (
                                     <input
-                                      type={field.type === 'datetime-local' ? 'datetime-local' : 'text'}
+                                      type="text"
                                       className="form-control"
                                       placeholder={field.placeholder}
                                       value={value || ''}
