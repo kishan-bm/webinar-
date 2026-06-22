@@ -158,7 +158,7 @@ export default function RootLayout({
               <ul className="nav-menu">
                 <li>
                   <a
-                    href="#"
+                    href="/api/auth/logout"
                     className="nav-item"
                     style={{ color: '#ef4444' }}
                     title={collapsed ? 'Logout' : undefined}
