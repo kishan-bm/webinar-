@@ -18,7 +18,6 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/settings') ||
     pathname.startsWith('/replay') ||
     pathname.startsWith('/posts') ||
-    pathname.startsWith('/blogs') ||
     pathname === '/';
 
   if (isAdminRoute) {
