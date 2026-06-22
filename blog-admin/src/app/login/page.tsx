@@ -37,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
+    <div className="login-page" style={{
       display: 'flex',
       flex: 1,
       minHeight: '100vh',
