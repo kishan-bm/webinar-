@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
-import '../globals.css';
 import { useState, useEffect } from 'react';
 
 export default function RootLayout({

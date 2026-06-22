@@ -1,3 +1,5 @@
+import './globals.css';
+
 export const metadata = {
   title: 'Navigation Trading',
   description: 'Simple Strategies. Expert Guidance.',
