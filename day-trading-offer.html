@@ -1619,9 +1619,18 @@
       var claimBtn = document.getElementById('claim-btn');
 
        var expiry = new Date('2026-06-19T23:59:59-05:00').getTime();
+      var interval = null;
+      function startInterval() {
+        if (interval) clearInterval(interval);
+        interval = setInterval(function () {
+          if (!tick()) clearInterval(interval);
+        }, 1000);
+      }
+
       window.setCountdownTarget = function(newTarget) {
         expiry = new Date(newTarget).getTime();
         tick();
+        startInterval();
       };
 
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
@@ -1646,6 +1655,14 @@
           }
           return false;
         }
+
+        // Restore active state when countdown is in the future
+        card.classList.remove('expired');
+        if (claimBtn) {
+          claimBtn.style.opacity = '';
+          claimBtn.style.pointerEvents = '';
+        }
+
         var totalSec = Math.floor(diff / 1000);
         var h = Math.floor(totalSec / 3600);
         var m = Math.floor((totalSec % 3600) / 60);
@@ -1656,9 +1673,7 @@
         return true;
       }
       tick();
-      var interval = setInterval(function () {
-        if (!tick()) clearInterval(interval);
-      }, 1000);
+      startInterval();
     })();
 
     /* FAQ accordion — one open at a time */
