@@ -5862,64 +5862,69 @@
         <p>Options education, market strategies, and the math behind consistent trading.</p>
       </div>
 
-      <div class="blog-grid">
-        <!-- Blog Card 1 -->
-        <a href="https://navigationtrading.com/covered-calls/" target="_blank" class="blog-card">
-          <div class="blog-image-wrap">
-            <img src="images/blog_covered_calls.png" alt="How to Trade Covered Calls for Monthly Income">
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span class="blog-tag">Options Strategy</span>
-              <span class="blog-date">June 10, 2026 &middot; 6 min</span>
-            </div>
-            <h3>How to Trade Covered Calls for Monthly Income</h3>
-            <p>Learn the step-by-step setup, optimal implied volatility conditions, delta targets, and profit management rules for trading covered calls.</p>
-            <div class="blog-link">
-              Read Article
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </div>
-          </div>
-        </a>
-
-        <!-- Blog Card 2 -->
-        <a href="https://navigationtrading.com/iron-condors/" target="_blank" class="blog-card">
-          <div class="blog-image-wrap">
-            <img src="images/blog_iron_condor.png" alt="Managing the Iron Condor for 40% Max Profit">
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span class="blog-tag">Advanced Strategy</span>
-              <span class="blog-date">May 28, 2026 &middot; 8 min</span>
-            </div>
-            <h3>Managing the Iron Condor for 40% Max Profit</h3>
-            <p>Discover why the 40% profit target is the statistical sweet spot for Iron Condors, and how to adjust your wings when the market challenges your levels.</p>
-            <div class="blog-link">
-              Read Article
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </div>
-          </div>
-        </a>
-
-        <!-- Blog Card 3 -->
-        <a href="https://navigationtrading.com/podcast/" target="_blank" class="blog-card">
-          <div class="blog-image-wrap">
-            <img src="images/blog_mindset.png" alt="The TradeHacker Mindset: The Psychology of Consistency">
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span class="blog-tag">Trading Mindset</span>
-              <span class="blog-date">May 14, 2026 &middot; 5 min</span>
-            </div>
-            <h3>The TradeHacker Mindset: Psychology of Consistency</h3>
-            <p>Why do most options traders fail? Explore the psychology of drawdowns, revenge trading, and why smaller, high-probability trades win in the long run.</p>
-            <div class="blog-link">
-              Read Article
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </div>
-          </div>
+      <div class="blog-grid" id="dynamic-blog-grid">
+        <!-- Dynamically populated from API -->
+      </div>
+      
+      <div style="text-align: center; margin-top: 48px;">
+        <a href="/blogs" class="btn-main" style="display: inline-flex; height: 50px; padding: 0 28px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 25px rgba(200,66,10,0.25);">
+          View All Blogs
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
+
+      <script>
+        (function() {
+          const grid = document.getElementById('dynamic-blog-grid');
+          if (!grid) return;
+          
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: rgba(255,255,255,0.4); padding: 40px 0;">Loading latest articles...</div>';
+          
+          fetch('/api/posts?status=PUBLISHED')
+            .then(res => res.json())
+            .then(data => {
+              if (data.success && data.data && data.data.length > 0) {
+                const posts = data.data.slice(0, 3);
+                grid.innerHTML = posts.map(post => {
+                  const dateStr = post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  }) : '';
+                  const categoryName = post.category ? post.category.name : 'Trading';
+                  const coverImg = post.coverImage || '/images/posts/best-options-trading-platform-for-beginners/image1.png';
+                  const shortExcerpt = post.excerpt || (post.content ? post.content.replace(/<[^>]*>/g, '').substring(0, 140) + '...' : '');
+                  
+                  return `
+                    <a href="/blogs/\${post.slug}" class="blog-card">
+                      <div class="blog-image-wrap">
+                        <img src="\${coverImg}" alt="\${post.title}">
+                      </div>
+                      <div class="blog-content">
+                        <div class="blog-meta">
+                          <span class="blog-tag">\${categoryName}</span>
+                          <span class="blog-date">\${dateStr}</span>
+                        </div>
+                        <h3>\${post.title}</h3>
+                        <p>\${shortExcerpt}</p>
+                        <div class="blog-link">
+                          Read Article
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </div>
+                      </div>
+                    </a>
+                  `;
+                }).join('');
+              } else {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: rgba(255,255,255,0.4); padding: 40px 0;">No articles found.</div>';
+              }
+            })
+            .catch(err => {
+              console.error('Failed to load posts:', err);
+              grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: rgba(255,255,255,0.4); padding: 40px 0;">Failed to load latest articles.</div>';
+            });
+        })();
+      </script>
     </div>
   </section>
 
