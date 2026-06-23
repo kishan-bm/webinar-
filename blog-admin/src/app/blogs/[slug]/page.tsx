@@ -114,196 +114,131 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const contentWithHeadingIds = injectHeadingIds(decodedContent);
 
   return (
-    <div className="blog-page-container" style={{ background: '#ffffff', minHeight: '100vh', paddingBottom: '80px' }}>
-      
-      {/* Cover Image at the very top (below navbar) */}
-      {post.coverImage && (
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          maxHeight: '460px',
-          overflow: 'hidden',
-          borderBottom: '1px solid #e2e8f0',
-          background: '#07182c'
-        }}>
-          <img 
-            src={post.coverImage} 
-            alt={post.title} 
-            style={{ width: '100%', height: 'auto', maxHeight: '460px', objectFit: 'cover', display: 'block' }} 
-          />
-          
-          {/* Back button layered on top of the image */}
-          <div style={{
-            position: 'absolute',
-            top: '24px',
-            left: '24px',
-            zIndex: 10,
-            background: 'rgba(255, 255, 255, 0.9)',
-            padding: '8px 16px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-          }}>
-            <Link href="/blogs" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600, fontSize: '13px' }}>
-              &larr; Back to all posts
-            </Link>
-          </div>
-        </div>
-      )}
+    <div className="blog-page-container">
 
-      {/* Back button fall back if no cover image exists */}
-      {!post.coverImage && (
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '24px 24px 0', marginBottom: '24px' }}>
-          <Link href="/blogs" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600, fontSize: '14px' }}>
-            &larr; Back to all posts
+      {/* ── FULL-WIDTH COVER IMAGE (navbar floats on top, zero gap) ── */}
+      {post.coverImage ? (
+        <div className="article-cover-hero">
+          {/* Real img tag: fills full width, shows full image, no clipping */}
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="article-cover-img"
+          />
+          {/* Back button lives ON the image, below the navbar */}
+          <Link href="/blogs" className="cover-back-link">
+            ← Back to all posts
+          </Link>
+        </div>
+      ) : (
+        /* Back button below navbar when no cover image */
+        <div className="article-back-bar">
+          <Link href="/blogs" className="article-back-link">
+            ← Back to all posts
           </Link>
         </div>
       )}
 
-      {/* Modern Top Hero Header (Text only, no cover image background) */}
-      <div style={{
-        position: 'relative',
-        color: '#0d2e4e',
-        background: '#f8fafc',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '64px 24px',
-        marginBottom: '48px',
-        borderBottom: '1px solid #e2e8f0'
-      }}>
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
-          {post.category && (
-            <div style={{ marginBottom: '16px' }}>
-              <Link 
-                href={`/blogs?category=${encodeURIComponent(post.category.name)}`}
-                style={{ 
-                  fontSize: '13px', 
-                  fontWeight: 700, 
-                  color: 'var(--emerald-600)', 
-                  letterSpacing: '1px', 
-                  textTransform: 'uppercase',
-                  textDecoration: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                {post.category.name}
-              </Link>
-            </div>
-          )}
-          
-          <h1 style={{ 
-            fontSize: '44px', 
-            color: '#0d2e4e',
-            lineHeight: '1.25',
-            marginBottom: '24px',
-            fontWeight: 800,
-            maxWidth: '900px'
-          }}>
-            {post.title}
-          </h1>
-          
-          <div style={{ 
-            marginTop: '24px', 
-            color: '#64748b' 
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ 
-                width: '44px', 
-                height: '44px', 
-                borderRadius: '50%', 
-                background: 'var(--teal-900)', 
-                color: 'white', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                fontWeight: 'bold',
-                fontSize: '16px'
-              }}>
-                {post.author.name.charAt(0).toUpperCase()}
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, color: '#0d2e4e' }}>{post.author.name}</div>
-                <div style={{ fontSize: '13px' }}>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-              </div>
-            </div>
-          </div>
+      {/* ── THREE-COLUMN LAYOUT ── */}
+      <div className="article-outer">
 
-          {post.tags && post.tags.length > 0 && (
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '24px' }}>
-              {post.tags.map(tag => (
-                <Link 
-                  key={tag.id} 
-                  href={`/blogs?tag=${encodeURIComponent(tag.name)}`}
-                  style={{ 
-                    background: '#e2e8f0', 
-                    border: '1px solid #cbd5e1', 
-                    padding: '4px 12px', 
-                    borderRadius: '100px', 
-                    fontSize: '12px', 
-                    color: '#475569',
-                    textDecoration: 'none',
-                    fontWeight: 500,
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  #{tag.name}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Three column layout */}
-      <div style={{
-        display: 'flex',
-        gap: '48px',
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: '0 24px',
-        alignItems: 'flex-start',
-        flexWrap: 'wrap'
-      }}>
         {/* Left column: Sticky Table of Contents */}
         <TableOfContents headings={headings} />
-        
-        {/* Center column: Article content */}
-        <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
-          <article className="blog-content" style={{ margin: 0, maxWidth: 'none', padding: 0, background: 'transparent', boxShadow: 'none' }}>
-            <div 
+
+        {/* Center column: Article */}
+        <div className="article-main">
+          <article className="blog-content" style={{ margin: 0, maxWidth: 'none', padding: 0, overflow: 'hidden' }}>
+
+            {/* Article Header */}
+            <div className="article-header">
+              {post.category && (
+                <div style={{ marginBottom: '12px' }}>
+                  <Link
+                    href={`/blogs?category=${encodeURIComponent(post.category.name)}`}
+                    className="article-category-label"
+                  >
+                    {post.category.name}
+                  </Link>
+                </div>
+              )}
+
+              <h1 className="blog-title" style={{
+                fontSize: '38px',
+                color: '#0d2e4e',
+                lineHeight: '1.25',
+                marginBottom: '20px',
+                fontWeight: 800
+              }}>
+                {post.title}
+              </h1>
+
+              <div className="blog-meta" style={{ marginTop: '16px', marginBottom: 0, color: '#94a3b8' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    background: 'var(--teal-900)',
+                    color: 'white',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 'bold'
+                  }}>
+                    {post.author.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, color: 'var(--text-main)' }}>{post.author.name}</div>
+                    <div style={{ fontSize: '13px' }}>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                  </div>
+                </div>
+              </div>
+
+              {post.tags && post.tags.length > 0 && (
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '20px' }}>
+                  {post.tags.map(tag => (
+                    <Link
+                      key={tag.id}
+                      href={`/blogs?tag=${encodeURIComponent(tag.name)}`}
+                      className="blog-tag-link"
+                      style={{
+                        background: 'var(--bg-main)',
+                        border: '1px solid var(--border-light)',
+                        padding: '4px 12px',
+                        borderRadius: '100px',
+                        fontSize: '12px',
+                        color: 'var(--text-dim)',
+                        textDecoration: 'none',
+                        fontWeight: 500,
+                        transition: 'all 0.2s',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      #{tag.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Article Body */}
+            <div
               className="blog-body"
-              style={{ padding: '0 0 48px 0' }}
-              dangerouslySetInnerHTML={{ __html: contentWithHeadingIds }} 
+              style={{ padding: '40px 48px 48px' }}
+              dangerouslySetInnerHTML={{ __html: contentWithHeadingIds }}
             />
           </article>
         </div>
 
-        {/* Right column: Sticky Sidebar */}
-        <aside style={{
-          width: '300px',
-          flexShrink: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '32px',
-          position: 'sticky',
-          top: '120px',
-          maxHeight: 'calc(100vh - 140px)',
-          overflowY: 'auto',
-          paddingRight: '4px' // padding to avoid scrollbar overlapping content
-        }}>
+        {/* Right column: Sidebar */}
+        <aside className="article-sidebar">
           {/* Widget 1: Search */}
-          <div style={{
-            background: 'white',
-            padding: '24px',
-            borderRadius: '16px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-            border: '1px solid #e2e8f0'
-          }}>
+          <div className="sidebar-widget">
             <form action="/blogs" method="GET" style={{ position: 'relative' }}>
               <input
                 type="text"
                 name="search"
-                placeholder="Search..."
+                placeholder="Search articles..."
                 style={{
                   width: '100%',
                   padding: '12px 16px',
@@ -334,15 +269,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Widget 2: Categories (Topics) */}
-          <div style={{
-            background: 'white',
-            padding: '24px',
-            borderRadius: '16px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-            border: '1px solid #e2e8f0'
-          }}>
+          <div className="sidebar-widget">
             <h3 style={{
-              fontSize: '18px',
+              fontSize: '16px',
               fontWeight: 700,
               color: '#0d2e4e',
               marginBottom: '16px',

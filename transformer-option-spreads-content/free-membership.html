@@ -699,6 +699,10 @@ body {
   margin-bottom: 10px; letter-spacing: -.01em;
 }
 .ts-right p { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px; }
+.ts-modules { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-direction: column; gap: 6px; }
+.ts-modules li { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #444; line-height: 1.4; }
+.ts-mod-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+.ts-dur { margin-left: auto; font-size: 12px; color: #888; font-weight: 600; white-space: nowrap; }
 .ts-tags { display: flex; gap: 8px; flex-wrap: wrap; }
 .ts-tag {
   background: rgba(13,46,78,.07); border: 1px solid rgba(13,46,78,.12);
@@ -2099,7 +2103,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <div class="track-inner">
       <div class="track-sticky-head">
         <span class="eyebrow">YOUR LEARNING PATH</span>
-        <h2>5 Courses. One Clear Path. <span style="color: var(--orange);">Zero Cost.</span></h2>
+        <h2>8 Courses. One Clear Path. <span style="color: var(--orange);">Zero Cost.</span></h2>
         <p>Each course builds on the last. By the end, you won't just know what options are — you'll know how to trade them.</p>
         <a href="#hero-cta" class="track-cta-inline">
           Start Your Learning Path — Join Free
@@ -2108,65 +2112,71 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       </div>
 
       <div class="track-steps-list">
+
         <div class="track-step reveal">
-          <div class="ts-left">
-            <div class="ts-num-circle">1</div>
-            <div class="ts-connector"></div>
-          </div>
+          <div class="ts-left"><div class="ts-num-circle">1</div><div class="ts-connector"></div></div>
           <div class="ts-right">
-            <div class="ts-phase">Step 1</div>
-            <h3>Options Fundamentals</h3>
-            <p>Start here. Learn what options contracts actually are, how they're priced, and why traders use them. This is the foundation everything else is built on.</p>
+            <div class="ts-phase">Course 1</div>
+            <h3>Directional Strategies</h3>
           </div>
         </div>
 
         <div class="track-step reveal">
-          <div class="ts-left">
-            <div class="ts-num-circle">2</div>
-            <div class="ts-connector"></div>
-          </div>
+          <div class="ts-left"><div class="ts-num-circle">2</div><div class="ts-connector"></div></div>
           <div class="ts-right">
-            <div class="ts-phase">Step 2</div>
-            <h3>Options Trading vs. Stock Trading</h3>
-            <p>Understand the key differences between trading options and trading stocks. Learn why options give you more flexibility, defined risk, and the ability to profit in any market direction.</p>
+            <div class="ts-phase">Course 2</div>
+            <h3>0-DTE Spread Trading</h3>
           </div>
         </div>
 
         <div class="track-step reveal">
-          <div class="ts-left">
-            <div class="ts-num-circle">3</div>
-            <div class="ts-connector"></div>
-          </div>
+          <div class="ts-left"><div class="ts-num-circle">3</div><div class="ts-connector"></div></div>
           <div class="ts-right">
-            <div class="ts-phase">Step 3</div>
-            <h3>Options Basics: Calls, Puts &amp; How They Work</h3>
-            <p>Get hands-on with calls and puts. Learn how to read an options chain, understand strike prices and expiration dates, and see how options move in relation to the underlying stock.</p>
+            <div class="ts-phase">Course 3</div>
+            <h3>Trading Calendar Spreads for Income</h3>
           </div>
         </div>
 
         <div class="track-step reveal">
-          <div class="ts-left">
-            <div class="ts-num-circle">4</div>
-            <div class="ts-connector"></div>
-          </div>
+          <div class="ts-left"><div class="ts-num-circle">4</div><div class="ts-connector"></div></div>
           <div class="ts-right">
-            <div class="ts-phase">Step 4</div>
-            <h3>Reading Profit &amp; Loss Diagrams</h3>
-            <p>This is where it clicks. Learn to visually map out your risk and reward before entering any trade. Once you can read a P&L diagram, you'll never enter a trade blind again.</p>
+            <div class="ts-phase">Course 4</div>
+            <h3>Trading Butterfly Spreads for Income</h3>
           </div>
         </div>
 
         <div class="track-step reveal">
-          <div class="ts-left">
-            <div class="ts-num-circle">5</div>
-            <div class="ts-connector"></div>
-          </div>
+          <div class="ts-left"><div class="ts-num-circle">5</div><div class="ts-connector"></div></div>
           <div class="ts-right">
-            <div class="ts-phase">Step 5</div>
-            <h3>Core Options Strategies for Beginners</h3>
-            <p>Put it all together. Learn your first set of real, actionable strategies — the same ones our paid members use as their starting point. You'll finish this course ready to trade with a plan, not a prayer.</p>
+            <div class="ts-phase">Course 5</div>
+            <h3>The Iron Duck Options Spread</h3>
           </div>
         </div>
+
+        <div class="track-step reveal">
+          <div class="ts-left"><div class="ts-num-circle">6</div><div class="ts-connector"></div></div>
+          <div class="ts-right">
+            <div class="ts-phase">Course 6</div>
+            <h3>High Probability Option Selling</h3>
+          </div>
+        </div>
+
+        <div class="track-step reveal">
+          <div class="ts-left"><div class="ts-num-circle">7</div><div class="ts-connector"></div></div>
+          <div class="ts-right">
+            <div class="ts-phase">Course 7</div>
+            <h3>NTT — The Ultimate Trend Trading Strategy</h3>
+          </div>
+        </div>
+
+        <div class="track-step reveal">
+          <div class="ts-left"><div class="ts-num-circle">8</div></div>
+          <div class="ts-right">
+            <div class="ts-phase">Course 8</div>
+            <h3>Day Trading Options for Income</h3>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
