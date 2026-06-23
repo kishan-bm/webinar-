@@ -115,12 +115,49 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="blog-page-container" style={{ background: '#ffffff', minHeight: '100vh', paddingBottom: '80px' }}>
-      {/* Back button container */}
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '24px 24px 0', marginBottom: '24px' }}>
-        <Link href="/blogs" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600, fontSize: '14px' }}>
-          &larr; Back to all posts
-        </Link>
-      </div>
+      
+      {/* Cover Image at the very top (below navbar) */}
+      {post.coverImage && (
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          maxHeight: '460px',
+          overflow: 'hidden',
+          borderBottom: '1px solid #e2e8f0',
+          background: '#07182c'
+        }}>
+          <img 
+            src={post.coverImage} 
+            alt={post.title} 
+            style={{ width: '100%', height: 'auto', maxHeight: '460px', objectFit: 'cover', display: 'block' }} 
+          />
+          
+          {/* Back button layered on top of the image */}
+          <div style={{
+            position: 'absolute',
+            top: '24px',
+            left: '24px',
+            zIndex: 10,
+            background: 'rgba(255, 255, 255, 0.9)',
+            padding: '8px 16px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+          }}>
+            <Link href="/blogs" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600, fontSize: '13px' }}>
+              &larr; Back to all posts
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Back button fall back if no cover image exists */}
+      {!post.coverImage && (
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '24px 24px 0', marginBottom: '24px' }}>
+          <Link href="/blogs" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600, fontSize: '14px' }}>
+            &larr; Back to all posts
+          </Link>
+        </div>
+      )}
 
       {/* Modern Top Hero Header (Text only, no cover image background) */}
       <div style={{
@@ -232,15 +269,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         
         {/* Center column: Article content */}
         <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
-          {post.coverImage && (
-            <div style={{ marginBottom: '32px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)' }}>
-              <img 
-                src={post.coverImage} 
-                alt={post.title} 
-                style={{ width: '100%', height: 'auto', display: 'block' }} 
-              />
-            </div>
-          )}
           <article className="blog-content" style={{ margin: 0, maxWidth: 'none', padding: 0, background: 'transparent', boxShadow: 'none' }}>
             <div 
               className="blog-body"
