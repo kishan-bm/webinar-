@@ -67,7 +67,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         seoTitle: body.seoTitle,
         seoDescription: body.seoDescription,
         status: body.status,
-        authorId: body.authorId,
+        author: body.authorId ? {
+          connect: { id: body.authorId }
+        } : undefined,
         category: categoryUpdate,
         categoryId: categoryIdUpdate,
         tags: tagsUpdate,

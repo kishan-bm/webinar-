@@ -1571,6 +1571,33 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .final-cta h2 { font-size: 28px; }
   .btn-final { padding: 15px 22px !important; font-size: 15px !important; width: 100%; }
 }
+
+/* Flux Row Responsiveness & Styles */
+.flux-row {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.flux-row.reverse {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+@media (max-width: 960px) {
+  .flux-row, .flux-row.reverse {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center;
+  }
+  .flux-row ul {
+    text-align: left;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .flux-row img {
+    max-width: 100%;
+  }
+}
   </style>
   <script src="/site-config.js" data-page="paid-membership" defer></script>
 </head>
@@ -1966,89 +1993,79 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 </section>
 
 <!-- SECTION 6 — CUSTOM TOOLS & ALERTS -->
-<section class="tools-section" id="tools">
+<section class="tools-section" id="tools" style="background: #ffffff; color: #111; padding: 50px 0; border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06);">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Pro-Exclusive Tools</span>
-      <h2>The Same Tools Our Team Uses, On Your Screen</h2>
-      <p>Pro members don't just learn strategies. They get professional-grade tools to execute them with precision, built by traders, for traders.</p>
+    <div class="section-head reveal" style="margin-bottom: 40px;">
+      <span class="eyebrow" style="color: var(--gold);">Pro-Exclusive Software</span>
+      <h2 style="color: var(--navy);">Introducing FLUX — The DC Time Machine</h2>
+      <p style="color: rgba(0,0,0,.6); max-width: 720px; margin-left: auto; margin-right: auto;">Stop entering on a hunch. Trade with the proprietary volatility tool developed by the NavigationTrading team to find optimal entry windows and manage positions with mathematical precision.</p>
     </div>
 
-    <div class="tools-split reveal">
-
-      <!-- Left: feature rows -->
+    <!-- FLUX Tool 1: Ratio Tool -->
+    <div class="flux-row reveal">
       <div>
-        <div class="tool-feature-row">
-          <div class="tool-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="eyebrow" style="color: var(--gold); font-size: 11px; margin-bottom: 8px;">01 // THE RATIO TOOL</span>
+        <h3 style="color: var(--navy); font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; margin: 10px 0 20px; letter-spacing: -.02em;">FLUX Volatility & Calendar Ratio Tracker</h3>
+        <p style="color: rgba(0,0,0,.65); font-size: 15px; line-height: 1.75; margin-bottom: 20px;">
+          Track the precise relationship between front-month and back-month implied volatility (IV) across SPX, QQQ, and SPY. Calendar spreads benefit when front-month IV contracts faster than back-month IV. 
+        </p>
+        <p style="color: rgba(0,0,0,.65); font-size: 15px; line-height: 1.75; margin-bottom: 24px;">
+          The Ratio Tool monitors these volatility relationships in real-time, highlighting when the spread is extended and primed for mean reversion. This gives you the exact signal to enter your Double Calendar trades.
+        </p>
+        <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; color: rgba(0,0,0,.8); font-size: 14.5px;">
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Real-Time IV Updates</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> 5-Day & 20-Day Comparisons</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Optimal Expiration Strips</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Precise Entry Signals</li>
+        </ul>
+      </div>
+      <div style="position: relative;">
+        <div style="background: #ffffff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; padding: 12px; box-shadow: 0 20px 48px rgba(0,0,0,.08);">
+          <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56;"></span>
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e;"></span>
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f;"></span>
           </div>
-          <div>
-            <div class="tool-feat-title">Custom Chart Indicators</div>
-            <p class="tool-feat-desc">Built by the NavigationTrading team over years of live trading. NTT signals, entry triggers, trend filters, 0 DTE timing. Install them and see exactly what we see.</p>
-            <div class="tool-feat-pills">
-              <span class="tool-feat-pill">NTT Signals</span>
-              <span class="tool-feat-pill">Entry Triggers</span>
-              <span class="tool-feat-pill">Trend Filters</span>
-              <span class="tool-feat-pill">0 DTE Timing</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tool-feature-row">
-          <div class="tool-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
-          <div>
-            <div class="tool-feat-title">Custom Watch Lists</div>
-            <p class="tool-feat-desc">Pre-built watch lists curated daily by our team. Start every morning with the setups we're already watching. No scanning hundreds of tickers to find what matters.</p>
-            <div class="tool-feat-pills">
-              <span class="tool-feat-pill">Team Curated</span>
-              <span class="tool-feat-pill">Updated Daily</span>
-              <span class="tool-feat-pill">Multi-Strategy</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tool-feature-row">
-          <div class="tool-feat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          </div>
-          <div>
-            <div class="tool-feat-title">Real-Time Alerts for Every Strategy</div>
-            <p class="tool-feat-desc">Pro members get alerts for everything: all 17+ strategies, all day, every market day. Every alert includes entry, exit rules, and risk plan.</p>
-            <div class="tool-feat-pills">
-              <span class="tool-feat-pill">All 17+ Strategies</span>
-              <span class="tool-feat-pill">Entry + Exit Rules</span>
-              <span class="tool-feat-pill">Risk Management</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stat cards moved above button -->
-        <div class="tools-stats-panel reveal">
-          <div class="tools-stat-card">
-            <span class="tools-stat-num">17+</span>
-            <span class="tools-stat-label">Strategies Covered</span>
-            <span class="tools-stat-sub">Day trades, 0 DTE, spreads, trend and portfolio, all in one membership</span>
-          </div>
-          <div class="tools-stat-card">
-            <span class="tools-stat-num">3</span>
-            <span class="tools-stat-label">Indicator Suites</span>
-            <span class="tools-stat-sub">NTT signals, entry triggers and trend filters, built for our exact strategies</span>
-          </div>
-          <div class="tools-stat-card">
-            <span class="tools-stat-num">∞</span>
-            <span class="tools-stat-label">Alerts Per Day</span>
-            <span class="tools-stat-sub">Every alert we fire across every strategy is delivered to your device</span>
-          </div>
-        </div>
-
-        <div style="margin-top:40px; text-align:center;" class="reveal">
-          <a href="#" class="btn-hero" data-config="whopLink" style="background:var(--gold); padding:18px 44px; font-size:16px;">Get Pro Tools and Alerts for $179/month</a>
+          <img src="results.png" alt="FLUX Volatility Ratio Tool" style="width: 100%; border-radius: 6px; display: block;">
         </div>
       </div>
-
     </div>
+
+    <!-- FLUX Tool 2: Earnings / Transformer Tool -->
+    <div class="flux-row reverse reveal">
+      <div style="position: relative;">
+        <div style="background: #ffffff; border: 1px solid rgba(0,0,0,.08); border-radius: 12px; padding: 12px; box-shadow: 0 20px 48px rgba(0,0,0,.08);">
+          <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56;"></span>
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e;"></span>
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f;"></span>
+          </div>
+          <img src="results2.png" alt="FLUX Earnings Spread Tool" style="width: 100%; border-radius: 6px; display: block;">
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow" style="color: var(--gold); font-size: 11px; margin-bottom: 8px;">02 // EARNINGS & TRANSFORMATION</span>
+        <h3 style="color: var(--navy); font-size: clamp(24px, 2.5vw, 32px); font-weight: 700; margin: 10px 0 20px; letter-spacing: -.02em;">FLUX Earnings & Live Trading Dashboard</h3>
+        <p style="color: rgba(0,0,0,.65); font-size: 15px; line-height: 1.75; margin-bottom: 20px;">
+          Trade earnings announcements and high-volatility events with confidence. FLUX models volatility crush and identifies where the market is mispricing option premium, giving you the edge during major corporate releases.
+        </p>
+        <p style="color: rgba(0,0,0,.65); font-size: 15px; line-height: 1.75; margin-bottom: 24px;">
+          Use our proprietary <strong>Transformer Order</strong> approach: start with a high-probability Double Calendar spread, and once in profit, roll it into a completely risk-free Iron Condor. Lock in gains and capture upside without any downside risk.
+        </p>
+        <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; color: rgba(0,0,0,.8); font-size: 14.5px;">
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Volatility Crush Modeler</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Transformer Order Planner</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Risk-Free Adjustments</li>
+          <li><span style="color: var(--gold); font-weight: bold; margin-right: 8px;">✓</span> Value: $200/mo — Free with Pro</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div style="margin-top: 50px; text-align: center;" class="reveal">
+      <a href="#" class="btn-hero" data-config="whopLink" style="background: var(--gold); padding: 18px 44px; font-size: 16px;">Get Pro Tools and Alerts for $179/month</a>
+    </div>
+
   </div>
 </section>
 

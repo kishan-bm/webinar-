@@ -682,7 +682,7 @@
       position: absolute;
       inset: 0;
       background: url('trading_chart_bg.png') center/cover no-repeat;
-      filter: grayscale(1) opacity(0.06) contrast(1.5);
+      filter: grayscale(1) opacity(0.02) contrast(1.5);
       pointer-events: none;
       z-index: -1;
     }
@@ -739,19 +739,19 @@
     .bento-pillars {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 32px;
     }
 
     .bento-pillar {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 18px;
     }
 
     .bento-pillar-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       background: linear-gradient(135deg, #e8f0fb 0%, #dbe8f8 100%);
       display: flex;
       align-items: center;
@@ -763,18 +763,18 @@
     .bento-pillar-text {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 6px;
     }
 
     .bento-pillar-text strong {
-      font-size: 15px;
+      font-size: 19px;
       font-weight: 700;
       color: #0d2e4e;
       line-height: 1.3;
     }
 
     .bento-pillar-text span {
-      font-size: 13px;
+      font-size: 15.5px;
       color: #64748b;
       line-height: 1.4;
     }
@@ -4114,16 +4114,16 @@
       background: rgba(200,66,10,0.45);
     }
     .pw-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: var(--ff-sans);
       font-size: clamp(32px, 3.8vw, 54px);
-      font-weight: 700;
+      font-weight: 800;
       color: #0D2E4E;
       line-height: 1.1;
-      letter-spacing: -1.5px;
+      letter-spacing: -2px;
       margin-bottom: 18px;
     }
     .pw-title em {
-      font-style: italic;
+      font-style: normal;
       color: var(--orange);
     }
     .pw-sub {
@@ -4159,14 +4159,14 @@
       background: #ffffff;
       border: 1px solid rgba(13, 46, 78, 0.08);
       border-radius: 20px;
-      padding: 24px 20px;
+      padding: 28px 24px;
       text-decoration: none;
       color: inherit;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 10px 30px rgba(13, 46, 78, 0.02);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
 
     .pw-card:hover {
@@ -4179,11 +4179,11 @@
 
     .pw-card-node {
       position: absolute;
-      top: -52px;
+      top: -57px;
       left: 50%;
       transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: #0D2E4E;
       color: #ffffff;
@@ -4191,17 +4191,17 @@
       align-items: center;
       justify-content: center;
       font-family: var(--ff-mono);
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 700;
       z-index: 10;
       transition: all 0.3s ease;
-      box-shadow: 0 0 0 4px #fbfaf6;
+      box-shadow: 0 0 0 5px #fbfaf6;
     }
 
     .pw-card:hover .pw-card-node {
       background: var(--orange);
       transform: translateX(-50%) scale(1.1);
-      box-shadow: 0 0 0 6px #fbfaf6, 0 4px 12px rgba(200, 66, 10, 0.2);
+      box-shadow: 0 0 0 8px #fbfaf6, 0 4px 12px rgba(200, 66, 10, 0.2);
     }
 
     .pw-card-header {
@@ -4233,9 +4233,9 @@
     }
 
     .pw-card-header h3 {
-      font-family: var(--ff-serif);
-      font-size: clamp(21px, 2vw, 25px);
-      font-weight: 700;
+      font-family: var(--ff-sans);
+      font-size: clamp(23px, 2.2vw, 27px);
+      font-weight: 800;
       color: #0D2E4E;
       line-height: 1.25;
       margin: 0;
@@ -4264,15 +4264,15 @@
     }
 
     .pw-card-text p {
-      font-size: 13.5px;
+      font-size: 15px;
       color: #5b6776;
-      line-height: 1.5;
+      line-height: 1.55;
       margin: 0;
     }
 
     .pw-card-link {
       font-family: var(--ff-mono);
-      font-size: 11px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--orange);
       display: inline-flex;
@@ -4290,8 +4290,8 @@
     }
 
     .pw-card-image {
-      flex: 0 0 84px;
-      height: 84px;
+      flex: 0 0 92px;
+      height: 92px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -5851,11 +5851,6 @@
 
   <!-- ── PREMIUM BLOGS SECTION ── -->
   <section class="blogs-section-premium" id="blog-section">
-    <div class="blogs-top-divider">
-      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M1200 120L0 16.48V0h1200v120z" class="shape-fill"></path>
-      </svg>
-    </div>
     <div class="blogs-glow-1"></div>
     <div class="blogs-glow-2"></div>
     <div class="blogs-grid-overlay"></div>
