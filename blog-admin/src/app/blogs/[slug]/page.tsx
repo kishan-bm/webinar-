@@ -122,38 +122,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </Link>
       </div>
 
-      {/* Modern Top Hero Header (Cover Image out of article container) */}
+      {/* Modern Top Hero Header (Text only, no cover image background) */}
       <div style={{
         position: 'relative',
-        color: post.coverImage ? '#ffffff' : '#0d2e4e',
-        background: post.coverImage ? '#07182c' : '#f8fafc',
-        minHeight: post.coverImage ? '420px' : 'auto',
+        color: '#0d2e4e',
+        background: '#f8fafc',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '64px 24px',
-        marginBottom: '64px',
+        marginBottom: '48px',
         borderBottom: '1px solid #e2e8f0'
       }}>
-        {post.coverImage && (
-          <>
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url(${post.coverImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              zIndex: 0
-            }} />
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to top, rgba(7, 24, 44, 0.95) 10%, rgba(7, 24, 44, 0.6) 60%, rgba(7, 24, 44, 0.3) 100%)',
-              zIndex: 0
-            }} />
-          </>
-        )}
-
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
           {post.category && (
             <div style={{ marginBottom: '16px' }}>
@@ -162,7 +142,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 style={{ 
                   fontSize: '13px', 
                   fontWeight: 700, 
-                  color: post.coverImage ? '#4ade80' : 'var(--emerald-600)', 
+                  color: 'var(--emerald-600)', 
                   letterSpacing: '1px', 
                   textTransform: 'uppercase',
                   textDecoration: 'none',
@@ -175,9 +155,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           )}
           
           <h1 style={{ 
-            fontSize: '48px', 
-            color: post.coverImage ? '#ffffff' : '#0d2e4e',
-            lineHeight: '1.2',
+            fontSize: '44px', 
+            color: '#0d2e4e',
+            lineHeight: '1.25',
             marginBottom: '24px',
             fontWeight: 800,
             maxWidth: '900px'
@@ -187,14 +167,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           
           <div style={{ 
             marginTop: '24px', 
-            color: post.coverImage ? 'rgba(255, 255, 255, 0.85)' : '#64748b' 
+            color: '#64748b' 
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ 
                 width: '44px', 
                 height: '44px', 
                 borderRadius: '50%', 
-                background: post.coverImage ? '#c8420a' : 'var(--teal-900)', 
+                background: 'var(--teal-900)', 
                 color: 'white', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -205,7 +185,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 {post.author.name.charAt(0).toUpperCase()}
               </div>
               <div>
-                <div style={{ fontWeight: 700, color: post.coverImage ? '#ffffff' : '#0d2e4e' }}>{post.author.name}</div>
+                <div style={{ fontWeight: 700, color: '#0d2e4e' }}>{post.author.name}</div>
                 <div style={{ fontSize: '13px' }}>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
               </div>
             </div>
@@ -218,12 +198,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   key={tag.id} 
                   href={`/blogs?tag=${encodeURIComponent(tag.name)}`}
                   style={{ 
-                    background: post.coverImage ? 'rgba(255,255,255,0.12)' : '#e2e8f0', 
-                    border: post.coverImage ? '1px solid rgba(255,255,255,0.2)' : '1px solid #cbd5e1', 
+                    background: '#e2e8f0', 
+                    border: '1px solid #cbd5e1', 
                     padding: '4px 12px', 
                     borderRadius: '100px', 
                     fontSize: '12px', 
-                    color: post.coverImage ? '#ffffff' : '#475569',
+                    color: '#475569',
                     textDecoration: 'none',
                     fontWeight: 500,
                     transition: 'all 0.2s'
@@ -252,6 +232,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         
         {/* Center column: Article content */}
         <div style={{ flex: 1, minWidth: '320px', maxWidth: '850px' }}>
+          {post.coverImage && (
+            <div style={{ marginBottom: '32px', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)' }}>
+              <img 
+                src={post.coverImage} 
+                alt={post.title} 
+                style={{ width: '100%', height: 'auto', display: 'block' }} 
+              />
+            </div>
+          )}
           <article className="blog-content" style={{ margin: 0, maxWidth: 'none', padding: 0, background: 'transparent', boxShadow: 'none' }}>
             <div 
               className="blog-body"
