@@ -76,20 +76,17 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
       className={`toc-sidebar ${isOpen ? 'is-open' : 'is-closed'}`}
       style={{
         position: 'sticky',
-        top: '140px',
-        maxHeight: 'calc(100vh - 160px)',
+        top: '120px',
+        maxHeight: 'calc(100vh - 140px)',
         overflowY: 'auto',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 50,
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        border: '1px solid #e2e8f0',
-        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
+        backgroundColor: 'transparent',
         width: isOpen ? '280px' : '48px',
-        padding: isOpen ? '24px 20px' : '8px',
-        marginRight: isOpen ? '0px' : '12px',
+        padding: isOpen ? '0 20px 0 0' : '8px',
+        borderRight: isOpen ? '1px dashed #cbd5e1' : 'none',
         flexShrink: 0
       }}
     >
@@ -99,23 +96,20 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: isOpen ? 'space-between' : 'center',
-          marginBottom: isOpen ? '16px' : '0px',
-          borderBottom: isOpen ? '1px solid #e2e8f0' : 'none',
-          paddingBottom: isOpen ? '8px' : '0px',
+          marginBottom: isOpen ? '20px' : '0px',
           minHeight: '32px'
         }}
       >
         {isOpen && (
           <span
             style={{
-              fontSize: '11px',
-              fontWeight: 800,
-              color: 'var(--teal-900)',
-              letterSpacing: '1px',
-              textTransform: 'uppercase'
+              fontSize: '15px',
+              fontWeight: 700,
+              color: '#0d2e4e',
+              fontFamily: "'DM Sans', sans-serif"
             }}
           >
-            Table of Contents
+            Table of contents
           </span>
         )}
         <button
@@ -146,15 +140,14 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '14px',
+            gap: '16px',
             overflowY: 'auto',
-            paddingTop: '8px'
+            paddingTop: '4px'
           }}
         >
           {headings.map((heading) => {
             const isActive = heading.id === activeId;
-            // Indent based on heading level (H1/H2=0, H3=12px, H4=24px)
-            const indent = Math.max(0, (heading.level - 2) * 12);
+            const indent = Math.max(0, (heading.level - 2) * 16);
 
             return (
               <a
@@ -164,20 +157,15 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
                 className={`toc-link ${isActive ? 'is-active' : ''}`}
                 style={{
                   display: 'block',
-                  paddingLeft: `${indent + 8}px`,
-                  paddingTop: '6px',
-                  paddingBottom: '6px',
+                  paddingLeft: `${indent}px`,
                   fontSize: heading.level === 2 ? '14px' : '13px',
                   fontWeight: heading.level === 2 ? 600 : 500,
-                  color: isActive ? 'var(--orange)' : 'var(--text-dim)',
+                  color: isActive ? '#0d2e4e' : '#64748b',
                   textDecoration: 'none',
-                  borderLeft: '3px solid transparent',
-                  borderLeftColor: isActive ? 'var(--orange)' : 'transparent',
                   transition: 'all 0.2s ease',
-                  lineHeight: '1.6',
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
+                  lineHeight: '1.4',
+                  whiteSpace: 'normal', // Allow wrap as in nogood
+                  borderLeft: 'none' // Remove default border highlighting
                 }}
               >
                 {heading.text}
