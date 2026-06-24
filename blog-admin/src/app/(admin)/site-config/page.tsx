@@ -284,7 +284,17 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'pricingLink', label: 'Explore Memberships URL', type: 'url', placeholder: 'pricing.html', description: 'Explore Memberships bottom CTA button', group: 'URLs & Links' },
-      { key: 'featuredYearPdfUrl', label: '2025 Featured Year Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for the current year performance report', group: 'URLs & Links' }
+      { key: 'featuredYearPdfUrl', label: '2025 Featured Year Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for the current year performance report', group: 'URLs & Links' },
+      { key: 'yearPdfUrl2024', label: '2024 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2024 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2023', label: '2023 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2023 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2022', label: '2022 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2022 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2021', label: '2021 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2021 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2020', label: '2020 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2020 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2019', label: '2019 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2019 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2018', label: '2018 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2018 annual performance report', group: 'Year Report Links' },
+      { key: 'yearPdfUrl2017', label: '2017 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2017 inception year performance report', group: 'Year Report Links' },
+      { key: 'video1Url', label: 'Video 1 — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the first live execution video (left card)', group: 'Live Execution Videos' },
+      { key: 'video2Url', label: 'Video 2 — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the second live execution video (right card)', group: 'Live Execution Videos' }
     ]
   },
   {

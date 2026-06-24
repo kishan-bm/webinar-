@@ -127,14 +127,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           />
           {/* Back button lives ON the image, below the navbar */}
           <Link href="/blogs" className="cover-back-link">
-            ← Back to all posts
+            ← Back
           </Link>
         </div>
       ) : (
         /* Back button below navbar when no cover image */
         <div className="article-back-bar">
           <Link href="/blogs" className="article-back-link">
-            ← Back to all posts
+            ← Back
           </Link>
         </div>
       )}
