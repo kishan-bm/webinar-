@@ -214,7 +214,7 @@ footer::before {
 .blog-page-container {
   background: #f8fafc;
   min-height: 100vh;
-  padding-top: 0;
+  padding-top: 108px;
   padding-bottom: 80px;
 }
 
