@@ -101,7 +101,7 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'explorePlansLink', label: 'Explore Plans URL', type: 'url', placeholder: 'e.g. pricing.html', description: 'Redirect path/URL for Explore Plans/Explore All Plans buttons', group: 'URLs & Links' },
       { key: 'bookCallLink', label: 'Book Calendly Call URL', type: 'url', placeholder: 'https://calendly.com/...', description: 'Redirect URL for Book Call buttons', group: 'URLs & Links' },
       { key: 'joinFreeLink', label: 'Join for Free URL', type: 'url', placeholder: 'e.g. /free-membership', description: 'Redirect path/URL for Join for Free button', group: 'URLs & Links' },
-      
+
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
@@ -142,7 +142,7 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'freeJoinLink', label: 'Start Learning Free Button Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the main Start Learning Free button', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: '../pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
-      
+
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
@@ -162,6 +162,7 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for main Get Pro Access and Join Pro buttons', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'heroVideoUrl', label: 'Hero Section Video — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/...', description: 'YouTube embed URL for the video shown on the right side of the hero section', group: 'Hero Section' },
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
       { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
@@ -222,7 +223,8 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'whopLink', label: 'Day Trading Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for main Join Day Trading buttons', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
-      { key: 'whopProLink', label: 'Pro Membership Text Link (In comparison & FAQ)', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL for the textual links pointing to Pro Membership (located in the Comparison box and FAQ answers)', group: 'URLs & Links' }
+      { key: 'whopProLink', label: 'Pro Membership Text Link (In comparison & FAQ)', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL for the textual links pointing to Pro Membership (located in the Comparison box and FAQ answers)', group: 'URLs & Links' },
+      { key: 'heroVideoUrl', label: 'Hero Section Video — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/...', description: 'YouTube embed URL for the video shown on the right side of the hero section', group: 'Hero Section' }
     ]
   },
   {
@@ -320,7 +322,7 @@ function getOffsetString(timezone: string, localDateTimeStr: string): string {
   try {
     const naiveDate = new Date(localDateTimeStr + ':00Z');
     if (isNaN(naiveDate.getTime())) return '-05:00';
-    
+
     const formatter = new Intl.DateTimeFormat('en-US', {
       timeZone: timezone,
       year: 'numeric',
@@ -331,16 +333,16 @@ function getOffsetString(timezone: string, localDateTimeStr: string): string {
       second: '2-digit',
       hour12: false
     });
-    
+
     const parts = formatter.formatToParts(naiveDate);
     const p: Record<string, string> = {};
     parts.forEach(part => {
       p[part.type] = part.value;
     });
-    
+
     let hour = parseInt(p.hour || '0', 10);
     if (hour === 24) hour = 0;
-    
+
     const tzLocal = new Date(Date.UTC(
       parseInt(p.year || '0', 10),
       parseInt(p.month || '1', 10) - 1,
@@ -349,10 +351,10 @@ function getOffsetString(timezone: string, localDateTimeStr: string): string {
       parseInt(p.minute || '0', 10),
       parseInt(p.second || '0', 10)
     ));
-    
+
     const offsetMs = tzLocal.getTime() - naiveDate.getTime();
     const offsetMin = Math.round(offsetMs / 60000);
-    
+
     const sign = offsetMin >= 0 ? '+' : '-';
     const absOffsetMin = Math.abs(offsetMin);
     const hours = String(Math.floor(absOffsetMin / 60)).padStart(2, '0');
@@ -703,7 +705,7 @@ export default function SiteConfigPage() {
                           <span>{groupName}</span>
                           {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
                         </button>
-                        
+
                         {isExpanded && (
                           <div style={{ padding: '30px 32px', display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'white' }}>
                             {fields.map(field => {

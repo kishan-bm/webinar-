@@ -35,6 +35,24 @@
         return val;
       }
 
+      function normalizeYouTubeEmbed(val) {
+        if (!val) return val;
+        // Already an embed URL — pass through
+        if (/youtube\.com\/embed\//i.test(val)) return val;
+        var videoId = null;
+        // youtu.be/ID or youtu.be/ID?...
+        var m = val.match(/youtu\.be\/([^?&]+)/);
+        if (m) { videoId = m[1]; }
+        // youtube.com/watch?v=ID
+        if (!videoId) { m = val.match(/[?&]v=([^&]+)/); if (m) videoId = m[1]; }
+        // youtube.com/live/ID
+        if (!videoId) { m = val.match(/youtube\.com\/live\/([^?&]+)/i); if (m) videoId = m[1]; }
+        // youtube.com/shorts/ID
+        if (!videoId) { m = val.match(/youtube\.com\/shorts\/([^?&]+)/i); if (m) videoId = m[1]; }
+        if (videoId) return 'https://www.youtube.com/embed/' + videoId;
+        return val;
+      }
+
       // 1. Dynamic Countdown Target
       if (config.countdownTarget && typeof window.setCountdownTarget === 'function') {
         window.setCountdownTarget(config.countdownTarget);
@@ -56,7 +74,9 @@
               el.href = normalizeUrl(value);
             }
           } else if (el.tagName === 'IFRAME') {
-            el.src = value;
+            var embedSrc = normalizeYouTubeEmbed(value);
+            el.src = embedSrc;
+            if (embedSrc && el.parentElement) el.parentElement.classList.add('has-video');
           } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.value = value;
           } else {
