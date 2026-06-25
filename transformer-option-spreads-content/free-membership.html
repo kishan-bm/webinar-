@@ -93,13 +93,16 @@ body {
 .nav-chevron { font-size: 9px; transition: transform 0.25s; line-height: 1; opacity: 0.7; }
 .nav-item-dropdown:hover .nav-chevron { transform: rotate(180deg); }
 .dropdown-menu {
-  position: absolute; top: calc(100% + 8px); left: 50%;
+  position: absolute; top: 100%; left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: rgba(7,24,44,0.97); backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--orange);
-  border-radius: 12px; min-width: 215px; padding: 6px;
+  border-radius: 12px; min-width: 215px; padding: 14px 6px 6px;
   opacity: 0; visibility: hidden; transition: all 0.22s ease;
   z-index: 200; box-shadow: 0 20px 50px rgba(0,0,0,0.45); pointer-events: none;
+}
+.dropdown-menu::before {
+  content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px;
 }
 .nav-item-dropdown:hover .dropdown-menu {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all;
@@ -1849,7 +1852,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       </div>
     </li>
     <li><a href="/podcast">Podcast</a></li>
-    <li><a href="https://navigationtrading.com/blog/">Blog</a></li>
+    <li><a href="/blogs">Blog</a></li>
     <li><a href="/contact">Contact Us</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:16px;">

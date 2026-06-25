@@ -4115,7 +4115,7 @@
     }
     .pw-title {
       font-family: var(--ff-sans);
-      font-size: clamp(32px, 3.8vw, 54px);
+      font-size: clamp(40px, 4.8vw, 68px);
       font-weight: 800;
       color: #0D2E4E;
       line-height: 1.1;
@@ -4236,7 +4236,7 @@
 
     .pw-card-header h3 {
       font-family: var(--ff-sans);
-      font-size: clamp(23px, 2.2vw, 27px);
+      font-size: clamp(26px, 2.6vw, 32px);
       font-weight: 800;
       color: #0D2E4E;
       line-height: 1.25;
@@ -4244,7 +4244,7 @@
       text-align: center;
     }
     .pw-card-header h3 em {
-      font-style: italic;
+      font-style: normal;
       color: var(--orange);
     }
 
@@ -4822,14 +4822,7 @@
       <img src="logo.png" alt="NavigationTrading">
     </a>
     <ul class="nav-links">
-      <li class="nav-item-dropdown">
-        <a href="#" class="active">Home <span class="nav-chevron">▾</span></a>
-        <div class="dropdown-menu">
-          <a href="/home?v=1">V1 — Original</a>
-          <a href="/home?v=2">V2 — Current Live</a>
-          <a href="/indexV3">V3 — Atmospheric</a>
-        </div>
-      </li>
+      <li><a href="/home" class="active">Home</a></li>
       <li><a href="/performance">Performance</a></li>
       <li><a href="/pricing">Pricing</a></li>
       <li class="nav-item-dropdown">
@@ -4851,6 +4844,7 @@
   </nav>
 
   <!-- HERO V1 (green bg + dashboard image) — hidden, swap display to show -->
+  <!-- [DEAD CODE] V1 hero and V1 ecosystem removed
   <div id="hero-v1" style="display:none">
   <section class="hero">
     <div class="hero-bg-texture"></div>
@@ -5344,6 +5338,7 @@
   </section>
   </div>
 
+  [END DEAD CODE] -->
   <!-- OLD ECOSYSTEM (orbit + proof cards) — hidden -->
   <div id="ecosystem-orig" style="display:none">
   <section class="pricing-section-home" id="membership-plans-orig">
@@ -6279,37 +6274,8 @@
     })();
   </script>
 
-  <!-- Auto-open Home dropdown on page load (close on outside click) -->
-  <script>
-    (function(){
-      var homeDD = document.querySelector('.navbar .nav-item-dropdown');
-      if (!homeDD) return;
-      setTimeout(function(){ homeDD.classList.add('is-open'); }, 500);
-      document.addEventListener('click', function(e){
-        if (!homeDD.contains(e.target)) homeDD.classList.remove('is-open');
-      });
-      document.addEventListener('keydown', function(e){
-        if (e.key === 'Escape') homeDD.classList.remove('is-open');
-      });
-    })();
-  </script>
 
-  <!-- Version switcher: ?v=1 shows V1 (hero + ecosystem), default/v=2 shows V2 -->
-  <script>
-    (function(){
-      var v = new URLSearchParams(window.location.search).get('v');
-      var v1Hero = document.getElementById('hero-v1');
-      var v2Hero = document.querySelector('.hero-v2');
-      var v1Eco  = document.getElementById('ecosystem-v1');
-      var v2Eco  = document.querySelector('.eco-v2');
-      if (v === '1') {
-        if (v1Hero) v1Hero.style.display = 'block';
-        if (v2Hero) v2Hero.style.display = 'none';
-        if (v1Eco)  v1Eco.style.display  = 'block';
-        if (v2Eco)  v2Eco.style.display  = 'none';
-      }
-    })();
-  </script>
+  <!-- [DEAD CODE] Version switcher removed — V1 sections commented out -->
 
   <script>
     document.querySelectorAll('.faq-q').forEach(btn => {
