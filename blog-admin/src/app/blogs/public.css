@@ -228,13 +228,13 @@ footer::before {
   overflow: hidden;
 }
 
-/* Cover image: full width, max half screen height, never cropped */
+/* Cover image: full edge-to-edge width, half screen height */
 .article-cover-img {
   width: 100%;
-  max-height: 50vh;
-  height: auto;
+  height: 50vh;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* Overlay removed – show image cleanly with no fade */
