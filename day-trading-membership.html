@@ -2115,7 +2115,7 @@
         radial-gradient(ellipse at 82% 88%, rgba(26,74,122,0.2) 0%, transparent 55%);
       pointer-events: none;
     }
-    .dt-curr .pm-container { position: relative; z-index: 2; max-width: 1100px; }
+    .dt-curr .pm-container { position: relative; z-index: 2; max-width: 1260px; }
 
     /* Two-column layout: label left, courses right */
     .dt-curr-cluster {
@@ -2137,9 +2137,9 @@
     .dt-curr-cluster-head {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end;
       gap: 14px;
-      padding: 36px 28px;
+      padding: 28px 28px 32px;
       cursor: default;
       background: rgba(200,66,10,0.07);
       border-right: 1px solid rgba(255,255,255,0.08);
@@ -2147,6 +2147,8 @@
       border-radius: 0;
       margin-bottom: 0;
       border-left: 4px solid var(--orange);
+      position: relative;
+      overflow: hidden;
     }
     .dt-curr-cluster-head:hover { background: rgba(200,66,10,0.07); transform: none; }
     .dt-curr-cluster.open .dt-curr-cluster-head {
@@ -2155,24 +2157,33 @@
       border-bottom: none; border-radius: 0; box-shadow: none;
     }
 
+    /* Watermark number — large, top-left, faded */
     .dt-curr-num-big {
-      position: static; transform: none;
-      width: 32px; height: 32px;
-      border-radius: 6px;
-      background: var(--orange);
+      position: absolute;
+      top: -10px;
+      left: -4px;
+      transform: none;
+      width: auto; height: auto;
+      border-radius: 0;
+      background: transparent;
       border: none;
-      display: flex; align-items: center; justify-content: center;
       font-family: 'DM Mono', monospace;
-      font-size: 11px; font-weight: 800; color: #fff;
-      flex-shrink: 0; letter-spacing: 0; box-shadow: 0 2px 8px rgba(200,66,10,0.4);
+      font-size: 88px; font-weight: 800;
+      color: rgba(200,66,10,0.18);
+      line-height: 1;
+      letter-spacing: -4px;
+      box-shadow: none;
+      display: block;
+      pointer-events: none;
+      user-select: none;
     }
-    .dt-curr-cluster.open .dt-curr-num-big { background: var(--orange); box-shadow: 0 2px 8px rgba(200,66,10,0.4); }
+    .dt-curr-cluster.open .dt-curr-num-big { background: transparent; box-shadow: none; color: rgba(200,66,10,0.18); }
 
-    .dt-curr-head-text { min-width: 0; }
+    .dt-curr-head-text { min-width: 0; position: relative; z-index: 1; }
     .dt-curr-tag { display: none; }
 
     .dt-curr-cluster-head h3 {
-      font-size: clamp(16px, 1.7vw, 20px);
+      font-size: clamp(17px, 1.8vw, 22px);
       font-weight: 800; color: #fff;
       letter-spacing: -0.3px; margin: 0; line-height: 1.2;
     }
