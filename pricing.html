@@ -1080,24 +1080,24 @@
       text-transform: uppercase;
     }
 
-    /* ── PRICING DETAILS SECTION (STACKING PATHWAY STYLE) ── */
+    /* ── PRICING DETAILS SECTION ── */
     .pricing-details-section {
       background: #f8fafc;
-      padding: 100px 0;
+      padding: 80px 0;
       border-top: 1px solid rgba(0,0,0,0.06);
     }
     .pricing-details-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 32px; /* spacing between sticky stack cards */
-      max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1160px;
       margin: 0 auto;
       padding: 0 20px;
-      position: relative;
+      align-items: start;
     }
     .details-header-centered {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 56px;
     }
     .details-eyebrow {
       display: inline-block;
@@ -1116,9 +1116,7 @@
       letter-spacing: -.02em;
       margin-bottom: 16px;
     }
-    .details-header-centered h2 span {
-      color: var(--orange);
-    }
+    .details-header-centered h2 span { color: var(--orange); }
     .details-header-centered p {
       font-size: 15px;
       color: var(--text-mid);
@@ -1128,146 +1126,80 @@
     }
     .pricing-details-card {
       background: #ffffff;
-      border: 1px solid rgba(13, 46, 78, 0.08);
-      border-radius: 16px;
-      padding: 40px 48px;
-      position: sticky;
-      height: 380px;
+      border: 1px solid rgba(13,46,78,0.09);
+      border-radius: 20px;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.1fr 1.3fr;
-      gap: 56px;
-      align-items: center;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 20px 50px rgba(13, 46, 78, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(13,46,78,0.06);
+      transition: box-shadow .3s, transform .3s;
     }
     .pricing-details-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(200, 66, 10, 0.25);
-      box-shadow: 0 30px 60px rgba(13, 46, 78, 0.08), 0 0 40px rgba(200, 66, 10, 0.04);
+      box-shadow: 0 12px 40px rgba(13,46,78,0.12);
     }
-    /* Sticky stacked offsets */
-    .pricing-details-card:nth-child(1) { top: 100px; z-index: 1; }
-    .pricing-details-card:nth-child(2) { top: 130px; z-index: 2; }
-    .pricing-details-card:nth-child(3) { top: 160px; z-index: 3; }
-    
-    .pdc-content {
-      position: relative;
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .pricing-details-card.pdc-featured {
+      border: 2px solid var(--orange);
+      box-shadow: 0 8px 32px rgba(200,66,10,0.14);
     }
-    .pdc-num {
-      position: absolute;
-      top: -24px;
-      left: 10px;
-      font-size: 150px;
-      font-weight: 800;
-      color: rgba(13, 46, 78, 0.035);
-      line-height: 0.8;
-      pointer-events: none;
-      z-index: 1;
-      font-family: 'DM Sans', sans-serif;
-      user-select: none;
-      letter-spacing: -3px;
+    .pdc-header {
+      padding: 32px 28px 24px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
     }
     .pdc-header-row {
       display: flex;
       align-items: center;
-      gap: 16px;
-      position: relative;
-      z-index: 5;
+      gap: 14px;
+      margin-bottom: 10px;
     }
     .pdc-icon-box {
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgba(200, 66, 10, 0.2);
-      background: rgba(200, 66, 10, 0.05);
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(200,66,10,0.2);
+      background: rgba(200,66,10,0.06);
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: 10px;
       color: var(--orange);
-      transition: all 0.3s ease;
       flex-shrink: 0;
     }
-    .pricing-details-card:hover .pdc-icon-box {
-      border-color: var(--orange);
-      background: rgba(200, 66, 10, 0.1);
-      box-shadow: 0 0 15px rgba(200, 66, 10, 0.15);
-      transform: scale(1.05);
-    }
-    .pdc-icon-box svg {
-      width: 20px;
-      height: 20px;
-    }
+    .pdc-icon-box svg { width: 18px; height: 18px; }
     .pdc-title-area h3 {
-      font-size: 28px;
+      font-size: 20px;
       color: #0d2e4e;
-      font-weight: 700;
+      font-weight: 800;
       margin: 0;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
+      letter-spacing: -0.3px;
     }
     .pdc-title-area .price {
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--orange);
-      margin-top: 4px;
+      margin-top: 2px;
+      display: block;
     }
     .pdc-desc {
-      font-size: 16px;
-      color: var(--text-mid);
+      font-size: 14px;
+      color: #6b7280;
       line-height: 1.6;
-      margin: 0;
-      max-width: 460px;
-    }
-    .pdc-features-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 20px;
-      z-index: 5;
-    }
-    .pdc-features-list.single-col {
-      grid-template-columns: 1fr;
-    }
-    .pdc-features-list li {
-      font-size: 15px;
-      color: #4b5563;
-      line-height: 1.4;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .pdc-features-list li svg {
-      width: 18px;
-      height: 18px;
-      color: #10b981;
-      flex-shrink: 0;
-      margin-top: 2px;
+      margin: 0 0 20px;
     }
     .pdc-btn {
-      align-self: flex-start;
-      margin-top: 8px;
-      padding: 10px 24px;
+      display: inline-block;
+      padding: 10px 22px;
       background: var(--orange);
-      border: 1px solid var(--orange);
       border-radius: 50px;
-      color: #ffffff;
+      color: #fff;
       text-decoration: none;
       font-weight: 700;
-      font-size: 14.5px;
-      transition: all 0.3s;
+      font-size: 13.5px;
+      transition: all .25s;
     }
     .pdc-btn:hover {
       background: var(--orange-bright);
-      border-color: var(--orange-bright);
-      transform: translateX(4px);
-      box-shadow: 0 4px 15px rgba(200, 66, 10, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(200,66,10,0.25);
     }
 
     /* ── TOP PRICING CARDS IMPROVEMENTS ── */
@@ -1310,9 +1242,33 @@
         margin-bottom: 20px;
         gap: 24px;
       }
-      .pdc-features-list {
-        grid-template-columns: 1fr;
-      }
+    }
+    .pdc-features-list {
+      list-style: none;
+      padding: 20px 28px 28px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      flex: 1;
+    }
+    .pdc-features-list li {
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .pdc-features-list li svg {
+      width: 16px;
+      height: 16px;
+      color: #10b981;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    @media (max-width: 900px) {
+      .pricing-details-grid { grid-template-columns: 1fr; }
     }
   </style>
   <script src="/site-config.js" data-page="pricing" defer></script>
@@ -1429,14 +1385,13 @@
       </div>
 
       <div class="pricing-details-grid">
-        
+
         <!-- Card 1: Free Plan -->
         <div class="pricing-details-card">
-          <div class="pdc-num">01</div>
-          <div class="pdc-content">
+          <div class="pdc-header">
             <div class="pdc-header-row">
               <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
               </div>
               <div class="pdc-title-area">
                 <h3>Free Plan</h3>
@@ -1457,12 +1412,11 @@
         </div>
 
         <!-- Card 2: Day Trading -->
-        <div class="pricing-details-card">
-          <div class="pdc-num">02</div>
-          <div class="pdc-content">
+        <div class="pricing-details-card pdc-featured">
+          <div class="pdc-header">
             <div class="pdc-header-row">
               <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
               </div>
               <div class="pdc-title-area">
                 <h3>Day Trading</h3>
@@ -1486,11 +1440,10 @@
 
         <!-- Card 3: Pro Plan -->
         <div class="pricing-details-card">
-          <div class="pdc-num">03</div>
-          <div class="pdc-content">
+          <div class="pdc-header">
             <div class="pdc-header-row">
               <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <div class="pdc-title-area">
                 <h3>Pro Plan</h3>
