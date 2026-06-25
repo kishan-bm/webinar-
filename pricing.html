@@ -1082,22 +1082,13 @@
 
     /* ── PRICING DETAILS SECTION ── */
     .pricing-details-section {
-      background: #f8fafc;
+      background: #f4f6f9;
       padding: 80px 0;
       border-top: 1px solid rgba(0,0,0,0.06);
     }
-    .pricing-details-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 20px;
-      align-items: start;
-    }
     .details-header-centered {
       text-align: center;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
     }
     .details-eyebrow {
       display: inline-block;
@@ -1106,170 +1097,145 @@
       font-weight: 800;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .details-header-centered h2 {
-      font-size: clamp(28px, 4vw, 40px);
+      font-size: clamp(26px, 3.5vw, 38px);
       font-weight: 800;
       color: #0d2e4e;
       line-height: 1.15;
       letter-spacing: -.02em;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .details-header-centered h2 span { color: var(--orange); }
     .details-header-centered p {
       font-size: 15px;
-      color: var(--text-mid);
-      max-width: 600px;
+      color: #6b7280;
+      max-width: 520px;
       margin: 0 auto;
       line-height: 1.6;
     }
-    .pricing-details-card {
-      background: #ffffff;
-      border: 1px solid rgba(13,46,78,0.09);
-      border-radius: 20px;
-      overflow: hidden;
+    /* Tab switcher */
+    .plan-tabs {
       display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 20px rgba(13,46,78,0.06);
-      transition: box-shadow .3s, transform .3s;
-    }
-    .pricing-details-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(13,46,78,0.12);
-    }
-    .pricing-details-card.pdc-featured {
-      border: 2px solid var(--orange);
-      box-shadow: 0 8px 32px rgba(200,66,10,0.14);
-    }
-    .pdc-header {
-      padding: 32px 28px 24px;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-    .pdc-header-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 10px;
-    }
-    .pdc-icon-box {
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(200,66,10,0.2);
-      background: rgba(200,66,10,0.06);
-      display: flex;
-      align-items: center;
       justify-content: center;
+      gap: 0;
+      margin-bottom: 40px;
+      background: #e8edf2;
+      border-radius: 14px;
+      padding: 5px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 40px;
+    }
+    .plan-tab {
+      flex: 1;
+      padding: 11px 20px;
+      border: none;
       border-radius: 10px;
-      color: var(--orange);
+      background: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
+    }
+    .plan-tab.active {
+      background: #fff;
+      color: #0d2e4e;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    .plan-tab[data-plan="day"].active { color: var(--orange); }
+    /* Plan panels */
+    .plan-panels { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    .plan-panel { display: none; }
+    .plan-panel.active { display: block; }
+    .plan-panel-inner {
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.07);
+      box-shadow: 0 4px 24px rgba(13,46,78,0.07);
+      overflow: hidden;
+    }
+    .plan-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: #0d2e4e;
+    }
+    .plan-panel-title { display: flex; align-items: center; gap: 16px; }
+    .plan-panel-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
       flex-shrink: 0;
     }
-    .pdc-icon-box svg { width: 18px; height: 18px; }
-    .pdc-title-area h3 {
-      font-size: 20px;
-      color: #0d2e4e;
-      font-weight: 800;
-      margin: 0;
-      letter-spacing: -0.3px;
-    }
-    .pdc-title-area .price {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--orange);
-      margin-top: 2px;
-      display: block;
-    }
-    .pdc-desc {
-      font-size: 14px;
-      color: #6b7280;
-      line-height: 1.6;
-      margin: 0 0 20px;
-    }
-    .pdc-btn {
+    .plan-panel-icon svg { width: 22px; height: 22px; }
+    .plan-panel-name { font-size: 22px; font-weight: 800; color: #fff; margin: 0; }
+    .plan-panel-price { font-size: 13px; font-weight: 600; color: var(--orange); margin-top: 3px; }
+    .plan-panel-desc { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 380px; line-height: 1.5; }
+    .plan-panel-cta {
       display: inline-block;
-      padding: 10px 22px;
-      background: var(--orange);
+      padding: 12px 28px;
       border-radius: 50px;
-      color: #fff;
-      text-decoration: none;
+      font-size: 14px;
       font-weight: 700;
-      font-size: 13.5px;
+      text-decoration: none;
+      background: var(--orange);
+      color: #fff;
+      white-space: nowrap;
       transition: all .25s;
+      flex-shrink: 0;
     }
-    .pdc-btn:hover {
-      background: var(--orange-bright);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(200,66,10,0.25);
+    .plan-panel-cta:hover { background: var(--orange-bright); transform: translateY(-1px); }
+    /* Feature grid inside panel */
+    .plan-feat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+    .plan-feat-cat {
+      grid-column: 1 / -1;
+      padding: 20px 40px 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9ca3af;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .plan-feat-cat:first-child { border-top: none; }
+    .plan-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 40px;
+      font-size: 14.5px;
+      color: #374151;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .plan-feat-item:nth-child(odd) { background: transparent; }
+    .plan-feat-item svg { width: 18px; height: 18px; color: #10b981; flex-shrink: 0; }
+    @media (max-width: 700px) {
+      .plan-feat-grid { grid-template-columns: 1fr; }
+      .plan-panel-head { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+      .plan-feat-item, .plan-feat-cat { padding-left: 24px; padding-right: 24px; }
     }
 
     /* ── TOP PRICING CARDS IMPROVEMENTS ── */
-    .pricing-card.free-tier h3 {
-      color: #10b981;
-      font-weight: 800;
-      font-size: 22px;
-    }
-    .pricing-card.day-tier h3 {
-      color: var(--orange);
-      font-weight: 800;
-      font-size: 22px;
-    }
-    .pricing-card.pro-tier h3 {
-      color: #d4a040;
-      font-weight: 800;
-      font-size: 22px;
-    }
-    .pricing-card .card-price {
-      color: #0d2e4e !important;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-    .pricing-card.free-tier .card-price {
-      font-size: 38px;
-    }
-    .pricing-card.day-tier .card-price {
-      font-size: 32px;
-    }
-    .pricing-card.pro-tier .card-price {
-      font-size: 32px;
-    }
-
-    @media (max-width: 1024px) {
-      .pricing-details-card {
-        grid-template-columns: 1fr;
-        height: auto;
-        padding: 30px;
-        position: static;
-        margin-bottom: 20px;
-        gap: 24px;
-      }
-    }
-    .pdc-features-list {
-      list-style: none;
-      padding: 20px 28px 28px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-      flex: 1;
-    }
-    .pdc-features-list li {
-      font-size: 14px;
-      color: #374151;
-      line-height: 1.45;
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-    }
-    .pdc-features-list li svg {
-      width: 16px;
-      height: 16px;
-      color: #10b981;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    @media (max-width: 900px) {
-      .pricing-details-grid { grid-template-columns: 1fr; }
-    }
+    .pricing-card.free-tier h3 { color: #10b981; font-weight: 800; font-size: 22px; }
+    .pricing-card.day-tier h3 { color: var(--orange); font-weight: 800; font-size: 22px; }
+    .pricing-card.pro-tier h3 { color: #d4a040; font-weight: 800; font-size: 22px; }
+    .pricing-card .card-price { color: #0d2e4e !important; font-weight: 800; letter-spacing: -0.03em; }
+    .pricing-card.free-tier .card-price { font-size: 38px; }
+    .pricing-card.day-tier .card-price { font-size: 32px; }
+    .pricing-card.pro-tier .card-price { font-size: 32px; }
   </style>
   <script src="/site-config.js" data-page="pricing" defer></script>
 </head>
@@ -1316,7 +1282,7 @@
     <div class="dot-grid" style="bottom:80px;left:40px;width:100px;height:80px;opacity:0.5;z-index:3"></div>
     <div class="pricing-hero-content">
       <span class="hero-label">Membership Plans</span>
-      <h1>Simple Plans for<br><em>Expert Trading</em></h1>
+      <h1>Simple Plans for<br><span style="color:var(--orange);font-style:normal;">Expert Trading</span></h1>
       <p>Take your trading to the next level with our structured frameworks and real-time guidance.</p>
     </div>
   </section>
@@ -1375,101 +1341,132 @@
     </div>
   </section>
 
-  <!-- ── PRICING DETAILS SECTION (STACKING PATHWAY STYLE) ── -->
+  <!-- ── PRICING DETAILS SECTION ── -->
   <section class="pricing-details-section" id="compare-features">
     <div class="container">
       <div class="details-header-centered">
         <span class="details-eyebrow">Details</span>
         <h2>Everything Included In Your <span>Plan</span></h2>
-        <p>Explore the full list of features, courses, indicators, and support that come with each membership plan.</p>
+        <p>Pick a plan to see everything that's included — every feature, every tool, every course.</p>
       </div>
 
-      <div class="pricing-details-grid">
+      <!-- Tab buttons -->
+      <div class="plan-tabs">
+        <button class="plan-tab active" data-plan="free" onclick="switchPlan('free')">Free</button>
+        <button class="plan-tab" data-plan="day" onclick="switchPlan('day')">Day Trading</button>
+        <button class="plan-tab" data-plan="pro" onclick="switchPlan('pro')">Pro</button>
+      </div>
 
-        <!-- Card 1: Free Plan -->
-        <div class="pricing-details-card">
-          <div class="pdc-header">
-            <div class="pdc-header-row">
-              <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <div class="plan-panels">
+
+        <!-- FREE -->
+        <div class="plan-panel active" id="panel-free">
+          <div class="plan-panel-inner">
+            <div class="plan-panel-head">
+              <div class="plan-panel-title">
+                <div class="plan-panel-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <div>
+                  <p class="plan-panel-name">Free Plan</p>
+                  <p class="plan-panel-price">$0 / forever</p>
+                </div>
               </div>
-              <div class="pdc-title-area">
-                <h3>Free Plan</h3>
-                <span class="price">$0 / forever</span>
-              </div>
+              <p class="plan-panel-desc">Perfect for beginners — core education and community access, completely free.</p>
+              <a href="https://whop.com/navigationtrading/ntfree/" class="plan-panel-cta" data-config="whopFree">Join Free →</a>
             </div>
-            <p class="pdc-desc">Perfect for beginners looking to start their trading journey with core educational materials and community access.</p>
-            <a href="https://whop.com/navigationtrading/ntfree/" class="pdc-btn" data-config="whopFree">Join Free &rarr;</a>
+            <div class="plan-feat-grid">
+              <div class="plan-feat-cat">Education</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>5 core strategy courses</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Options trading courses</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>TradeHacker's Playbook ebook</div>
+              <div class="plan-feat-cat">Community & Support</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>TradeHacker Discord Community</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Access to 3,600+ member community</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited NT Team support</div>
+            </div>
           </div>
-          <ul class="pdc-features-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>5 core strategy courses</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>TradeHacker Discord Community</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Access to 3,600+ member community</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Options trading courses</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>TradeHacker's Playbook ebook</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited NT Team support</li>
-          </ul>
         </div>
 
-        <!-- Card 2: Day Trading -->
-        <div class="pricing-details-card pdc-featured">
-          <div class="pdc-header">
-            <div class="pdc-header-row">
-              <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <!-- DAY TRADING -->
+        <div class="plan-panel" id="panel-day">
+          <div class="plan-panel-inner">
+            <div class="plan-panel-head">
+              <div class="plan-panel-title">
+                <div class="plan-panel-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div>
+                  <p class="plan-panel-name">Day Trading</p>
+                  <p class="plan-panel-price">Join Now / mo</p>
+                </div>
               </div>
-              <div class="pdc-title-area">
-                <h3>Day Trading</h3>
-                <span class="price">Join Now / mo</span>
-              </div>
+              <p class="plan-panel-desc">Daily live streams, real-time trade calls, and professional indicators for active traders.</p>
+              <a href="https://whop.com/navigationtrading/ntday/" class="plan-panel-cta" data-config="whopDay">Start Now →</a>
             </div>
-            <p class="pdc-desc">Comprehensive daily live stream, indicator access, and real-time execution support.</p>
-            <a href="https://whop.com/navigationtrading/ntday/" class="pdc-btn" data-config="whopDay">Start Now &rarr;</a>
+            <div class="plan-feat-grid">
+              <div class="plan-feat-cat">Live Trading</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Twice-daily live streams</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Real-time live trades called out</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>0 DTE Iron Condors</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade alerts & live chat access</div>
+              <div class="plan-feat-cat">Courses & Tools</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>10 day trading strategy courses</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Day trading indicators & watch list</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Mighty Ninety & Runner Strategies</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Power Hour & ELMO Mini Course</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>MOC Course & NTT Indicator</div>
+              <div class="plan-feat-cat">Community & Support</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in the Free plan</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Live chat during streams</div>
+            </div>
           </div>
-          <ul class="pdc-features-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Twice-daily live streams</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Real-time live trades called out</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Day trading indicators & watch list</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>0 DTE Iron Condors</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Mighty Ninety & Runner Strategies</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Power Hour & ELMO Mini Course</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>MOC Course & NTT Indicator</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade alerts & live chat access</li>
-          </ul>
         </div>
 
-        <!-- Card 3: Pro Plan -->
-        <div class="pricing-details-card">
-          <div class="pdc-header">
-            <div class="pdc-header-row">
-              <div class="pdc-icon-box">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <!-- PRO -->
+        <div class="plan-panel" id="panel-pro">
+          <div class="plan-panel-inner">
+            <div class="plan-panel-head">
+              <div class="plan-panel-title">
+                <div class="plan-panel-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                  <p class="plan-panel-name">Pro Plan</p>
+                  <p class="plan-panel-price">Ultimate / mo</p>
+                </div>
               </div>
-              <div class="pdc-title-area">
-                <h3>Pro Plan</h3>
-                <span class="price">Ultimate / mo</span>
-              </div>
+              <p class="plan-panel-desc">The complete system — every strategy, every tool, every alert. Nothing held back.</p>
+              <a href="https://whop.com/navigationtrading/ntpro/" class="plan-panel-cta" data-config="whopPro">Get Pro Access →</a>
             </div>
-            <p class="pdc-desc">The complete all-access package for serious traders seeking absolute strategy mastery.</p>
-            <a href="https://whop.com/navigationtrading/ntpro/" class="pdc-btn" data-config="whopPro">Get Pro Access &rarr;</a>
+            <div class="plan-feat-grid">
+              <div class="plan-feat-cat">Everything in Day Trading, plus</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>17+ advanced strategy courses</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade alerts for all strategies</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Custom indicators & watch lists</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>FLUX software access</div>
+              <div class="plan-feat-cat">Advanced Strategies</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Transformer Option Spreads</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Calendar & Butterfly Spreads</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Iron Ducks & Hedge Hog Spreads</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>NTT Trend & Portfolio Margin</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>High Probability Option Selling</div>
+              <div class="plan-feat-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Day Trading Options for Income</div>
+            </div>
           </div>
-          <ul class="pdc-features-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Day Trading</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>17 advanced strategy courses</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade alerts for all strategies</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Transformer Option Spreads</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Calendar & Butterfly Spreads</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Iron Ducks & Hedge Hog Spreads</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>NTT Trend & Portfolio Margin</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Custom indicators & watch lists</li>
-          </ul>
         </div>
 
       </div>
     </div>
   </section>
+  <script>
+    function switchPlan(plan) {
+      document.querySelectorAll('.plan-tab').forEach(t => t.classList.toggle('active', t.dataset.plan === plan));
+      document.querySelectorAll('.plan-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + plan));
+    }
+  </script>
 
-  <!-- ── FAQ SECTION ── -->
+      <!-- ── FAQ SECTION ── -->
   <section class="faq" id="faq">
     <div class="container">
       <div class="faq-layout">
