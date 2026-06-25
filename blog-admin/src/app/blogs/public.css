@@ -228,12 +228,13 @@ footer::before {
   overflow: hidden;
 }
 
-/* Actual <img> tag: fills full width at natural proportions, never cropped */
+/* Cover image capped at 50vh */
 .article-cover-img {
   width: 100%;
-  height: auto;
+  height: 50vh;
   display: block;
-  /* No max-height, no object-fit – show the full image like the blog card */
+  object-fit: cover;
+  object-position: center top;
 }
 
 /* Overlay removed – show image cleanly with no fade */
