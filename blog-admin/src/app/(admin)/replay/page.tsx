@@ -11,13 +11,15 @@ export default function ReplayAdminPage() {
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNCq_1GGFDQDM1ZHFY5ZOiT0byuu3DqTGcxHP3_NJlAZU9XoLMYrEsmgdaWQxUEyPZTmDgU79nLJN-/pub?gid=0&single=true&output=csv';
 
   const [password, setPassword] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [loginError, setLoginError] = useState('');
 
   const [currentVideo, setCurrentVideo] = useState('Checking...');
   const [hasVideoClass, setHasVideoClass] = useState(false);
 
   const [activeTab, setActiveTab] = useState<'github' | 'sheet'>('github');
+
+  useEffect(() => { loadCurrentConfig(); }, []);
 
   // GitHub Method State
   const [githubToken, setGithubToken] = useState('');

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, SlidersHorizontal } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, SlidersHorizontal, MousePointerClick } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function RootLayout({
@@ -40,6 +40,10 @@ export default function RootLayout({
 
   const videoItems = [
     { href: '/replay', icon: <FileText size={20} />, label: 'Replay Video' },
+  ];
+
+  const popupItems = [
+    { href: '/exit-intent', icon: <MousePointerClick size={20} />, label: 'Exit Intent Popups' },
   ];
 
   const settingsItems = [
@@ -111,6 +115,31 @@ export default function RootLayout({
                 {collapsed && <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 16px 16px' }}></div>}
                 <ul className="nav-menu">
                   {videoItems.map(item => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
+                        title={collapsed ? item.label : undefined}
+                        style={{ paddingLeft: collapsed ? '12px' : '32px' }}
+                      >
+                        <span className="nav-icon">{item.icon}</span>
+                        {!collapsed && <span className="nav-label">{item.label}</span>}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Popups Group */}
+              <div>
+                {!collapsed && (
+                  <div style={{ padding: '0 20px 8px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.4)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px', margin: '0 16px 8px' }}>
+                    Popups
+                  </div>
+                )}
+                {collapsed && <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 16px 16px' }}></div>}
+                <ul className="nav-menu">
+                  {popupItems.map(item => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
