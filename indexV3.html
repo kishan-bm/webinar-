@@ -5747,7 +5747,7 @@
       if(getCookie(COOKIE))return;
       var popup=document.getElementById('exit-popup'),shown=false,pageReady=false;
       setTimeout(function(){pageReady=true;},MIN_TIME);
-      function show(){if(shown||!pageReady)return;shown=true;popup.classList.add('eip-open');document.body.style.overflow='hidden';setCookie(COOKIE,DAYS);}
+      function show(){if(shown||!pageReady||window.EXIT_POPUP_DISABLED)return;shown=true;popup.classList.add('eip-open');document.body.style.overflow='hidden';setCookie(COOKIE,DAYS);}
       function hide(){popup.classList.remove('eip-open');document.body.style.overflow='';}
       document.addEventListener('mouseleave',function(e){if(e.relatedTarget===null&&e.clientY<=0)show();});
       setTimeout(function(){if(!shown&&window.innerWidth<768)show();},30000);
