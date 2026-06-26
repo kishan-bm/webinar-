@@ -7,7 +7,6 @@ interface PostWithRelations {
   id: string;
   title: string;
   slug: string;
-  content: string;
   excerpt: string | null;
   coverImage: string | null;
   createdAt: Date | string;
@@ -53,10 +52,9 @@ export default function BlogListWithFilter({ posts }: BlogListWithFilterProps) {
 
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
-    filteredPosts = filteredPosts.filter(post => 
+    filteredPosts = filteredPosts.filter(post =>
       post.title.toLowerCase().includes(q) ||
-      (post.excerpt && post.excerpt.toLowerCase().includes(q)) ||
-      post.content.toLowerCase().includes(q)
+      (post.excerpt && post.excerpt.toLowerCase().includes(q))
     );
   }
 
@@ -248,18 +246,10 @@ export default function BlogListWithFilter({ posts }: BlogListWithFilterProps) {
           )
         ) : (
           filteredPosts.map(post => {
-            let displayImage = post.coverImage;
-            if (!displayImage && post.content) {
-              const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
-              if (imgMatch) {
-                displayImage = imgMatch[1];
-              }
-            }
-
             return (
               <a href={`/blogs/${post.slug}`} key={post.id} className="blog-card">
-                {displayImage && (
-                  <img src={displayImage} alt={post.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                {post.coverImage && (
+                  <img src={post.coverImage} alt={post.title} loading="lazy" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
                 )}
                 <div className="blog-card-content">
                   <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--emerald-600)', marginBottom: '8px', letterSpacing: '1px', textTransform: 'uppercase' }}>

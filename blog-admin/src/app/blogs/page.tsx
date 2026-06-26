@@ -7,17 +7,23 @@ export const metadata = {
   description: 'Read the latest strategies, updates, and market insights from Navigation Trading.',
 };
 
-export const revalidate = 0; // Disable caching to fetch fresh post updates immediately
+export const revalidate = 60;
 
 export default async function BlogsPage() {
   const posts = await prisma.post.findMany({
     where: { status: 'PUBLISHED' },
     orderBy: { createdAt: 'desc' },
-    include: {
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      excerpt: true,
+      coverImage: true,
+      createdAt: true,
       author: { select: { name: true, avatarUrl: true } },
-      category: true,
-      tags: true, // Fetch tags!
-    }
+      category: { select: { id: true, name: true } },
+      tags: { select: { id: true, name: true } },
+    },
   });
 
   return (

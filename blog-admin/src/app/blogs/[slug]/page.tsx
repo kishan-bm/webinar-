@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import TableOfContents from '@/components/TableOfContents';
 
-export const revalidate = 0; // Disable caching to fetch fresh post updates immediately
+export const revalidate = 60;
 
 // Dynamically generate SEO tags for this specific post
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -78,36 +78,28 @@ function parseHeadings(html: string) {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await prisma.post.findUnique({
-    where: { slug },
-    include: { author: true, category: true, tags: true }
-  });
+
+  const [post, categories, banners] = await Promise.all([
+    prisma.post.findUnique({
+      where: { slug },
+      include: { author: true, category: true, tags: true },
+    }),
+    prisma.category.findMany({
+      include: {
+        _count: { select: { posts: { where: { status: 'PUBLISHED' } } } },
+      },
+      orderBy: { name: 'asc' },
+    }),
+    prisma.banner.findMany({ orderBy: { order: 'asc' } }),
+  ]);
 
   if (!post) {
     notFound();
   }
 
-  // Ensure it's published or we return 404
   if (post.status !== 'PUBLISHED') {
     notFound();
   }
-
-  // Fetch categories with active post count
-  const categories = await prisma.category.findMany({
-    include: {
-      _count: {
-        select: {
-          posts: { where: { status: 'PUBLISHED' } }
-        }
-      }
-    },
-    orderBy: { name: 'asc' }
-  });
-
-  // Fetch sidebar banners
-  const banners = await prisma.banner.findMany({
-    orderBy: { order: 'asc' }
-  });
 
   const decodedContent = decodeHTMLBlocks(post.content);
   const headings = parseHeadings(decodedContent);
@@ -124,6 +116,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             src={post.coverImage}
             alt={post.title}
             className="article-cover-img"
+            loading="eager"
           />
           {/* Back button lives ON the image, below the navbar */}
           <Link href="/blogs" className="cover-back-link">

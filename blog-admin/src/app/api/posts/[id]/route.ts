@@ -83,7 +83,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     if (error.code === 'P2025') {
       return NextResponse.json({ success: false, error: 'Post not found' }, { status: 404 });
     }
-    return NextResponse.json({ success: false, error: 'Failed to update post' }, { status: 500 });
+    if (error.code === 'P2002') {
+      return NextResponse.json({ success: false, error: 'A post with this slug already exists' }, { status: 409 });
+    }
+    return NextResponse.json({ success: false, error: 'Failed to update post', detail: error.message }, { status: 500 });
   }
 }
 

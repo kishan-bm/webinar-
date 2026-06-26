@@ -125,6 +125,14 @@
       "destination": "https://webinar-neon-one.vercel.app/settings"
     },
     {
+      "source": "/exit-intent",
+      "destination": "https://webinar-neon-one.vercel.app/exit-intent"
+    },
+    {
+      "source": "/exit-intent/:path*",
+      "destination": "https://webinar-neon-one.vercel.app/exit-intent/:path*"
+    },
+    {
       "source": "/banners",
       "destination": "https://webinar-neon-one.vercel.app/banners"
     },
