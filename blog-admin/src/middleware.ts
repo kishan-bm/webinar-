@@ -12,12 +12,13 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protect admin routes
-  const isAdminRoute = 
+  const isAdminRoute =
     pathname.startsWith('/site-config') ||
     pathname.startsWith('/banners') ||
     pathname.startsWith('/settings') ||
     pathname.startsWith('/replay') ||
     pathname.startsWith('/posts') ||
+    pathname.startsWith('/exit-intent') ||
     pathname === '/';
 
   if (isAdminRoute) {
