@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Save, Loader2, CheckCircle2, AlertCircle, ChevronRight, MousePointerClick } from 'lucide-react';
 
 const EXIT_FIELDS = [
@@ -25,6 +26,7 @@ const PAGES_WITH_EXIT = [
 ];
 
 export default function ExitIntentPage() {
+  const router = useRouter();
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [configs, setConfigs] = useState<Record<string, Record<string, string>>>({});
   const [formState, setFormState] = useState<Record<string, string>>({});
@@ -63,8 +65,13 @@ export default function ExitIntentPage() {
       const res = await fetch('/api/config', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ pageKey: selectedKey, config: formState }),
       });
+      if (res.status === 401) {
+        router.push('/login');
+        return;
+      }
       const data = await res.json();
       if (data.success) {
         setStatus({ type: 'success', message: 'Exit intent settings saved successfully!' });
