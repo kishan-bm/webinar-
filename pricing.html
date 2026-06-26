@@ -349,6 +349,9 @@
       border: 2px solid var(--orange);
       z-index: 10;
     }
+    .pricing-card.popular.pro-tier {
+      border-color: var(--gold);
+    }
 
     .pricing-card.popular:hover {
       transform: translateY(-8px);
@@ -367,6 +370,10 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pricing-card.pro-tier .popular-badge {
+      background: var(--gold);
     }
 
     .card-header {
@@ -1080,6 +1087,774 @@
       text-transform: uppercase;
     }
 
+    /* ── PRICING DETAILS V2 — Feature Matrix ── */
+    .pdv2-section {
+      background: #f4f6f9;
+      padding: 80px 0;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .pdv2-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .pdv2-eyebrow {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .pdv2-header h2 {
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800; color: #0d2e4e;
+      line-height: 1.15; letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    .pdv2-header h2 span { color: var(--orange); }
+    .pdv2-header p { font-size: 15px; color: #6b7280; max-width: 480px; margin: 0 auto; line-height: 1.6; }
+
+    /* Matrix table */
+    .pdv2-matrix {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #dde3ec;
+      box-shadow: 0 4px 32px rgba(13,46,78,0.07);
+    }
+    /* Plan header row */
+    .pdv2-matrix-head {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 120px;
+      background: #0d2e4e;
+    }
+    .pdv2-mh-label { padding: 22px 28px; }
+    .pdv2-mh-plan {
+      padding: 20px 10px;
+      text-align: center;
+      border-left: 1px solid rgba(255,255,255,0.08);
+    }
+    .pdv2-mh-plan.pdv2-mh-hot {
+      background: var(--orange);
+      position: relative;
+    }
+    .pdv2-mh-plan .pdv2-mh-name {
+      font-size: 13px; font-weight: 800; color: #fff;
+      display: block; letter-spacing: -.1px;
+    }
+    .pdv2-mh-plan .pdv2-mh-sub {
+      font-size: 10px; color: rgba(255,255,255,0.55);
+      display: block; margin-top: 2px;
+    }
+    .pdv2-mh-plan.pdv2-mh-hot .pdv2-mh-sub { color: rgba(255,255,255,0.75); }
+
+    /* Category group */
+    .pdv2-group-label {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 120px;
+      background: #e8edf4;
+      border-top: 1px solid #dde3ec;
+    }
+    .pdv2-group-label:first-child { border-top: none; }
+    .pdv2-gl-text {
+      padding: 10px 28px;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: #0d2e4e; opacity: .55;
+      grid-column: 1 / -1;
+    }
+
+    /* Feature rows */
+    .pdv2-row {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 120px;
+      border-top: 1px solid #eef0f4;
+      background: #fff;
+    }
+    .pdv2-row:hover { background: #fafbfd; }
+    .pdv2-row-label {
+      padding: 15px 28px;
+      font-size: 14px; font-weight: 600; color: #1e3a5f;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pdv2-row-label span {
+      font-size: 13px; font-weight: 400; color: #6b7280;
+      display: block; margin-top: 2px;
+    }
+    .pdv2-cell {
+      display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid #eef0f4;
+      padding: 15px 10px;
+    }
+    .pdv2-cell.pdv2-hot { background: rgba(200,66,10,0.04); border-left-color: rgba(200,66,10,0.12); }
+    /* Check icon */
+    .pdv2-yes {
+      width: 22px; height: 22px;
+      background: #ecfdf5; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pdv2-yes svg { width: 11px; height: 11px; color: #059669; }
+    /* Cross icon */
+    .pdv2-no {
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pdv2-no svg { width: 14px; height: 14px; color: #d1d5db; }
+    /* Text value (e.g. "5 courses") */
+    .pdv2-val {
+      font-size: 12px; font-weight: 700; color: #0d2e4e; text-align: center; line-height: 1.3;
+    }
+
+    /* CTA footer row */
+    .pdv2-footer {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px 120px;
+      background: #f8f9fb;
+      border-top: 2px solid #dde3ec;
+    }
+    .pdv2-footer-label { padding: 22px 28px; }
+    .pdv2-footer-cell {
+      display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid #eef0f4;
+      padding: 18px 12px;
+    }
+    .pdv2-footer-cell.pdv2-hot { background: rgba(200,66,10,0.04); border-left-color: rgba(200,66,10,0.12); }
+    .pdv2-footer-btn {
+      display: block; text-align: center;
+      padding: 9px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 800;
+      text-decoration: none;
+      background: rgba(13,46,78,0.07);
+      color: #0d2e4e;
+      transition: background .18s;
+      white-space: nowrap;
+    }
+    .pdv2-footer-btn:hover { background: rgba(13,46,78,0.13); }
+    .pdv2-footer-cell.pdv2-hot .pdv2-footer-btn {
+      background: var(--orange); color: #fff;
+    }
+    .pdv2-footer-cell.pdv2-hot .pdv2-footer-btn:hover { background: #b5390a; }
+
+    /* ── PRICING DETAILS V5 — Journey Path ── */
+    .pdv5-section {
+      background: #f0f3f8;
+      padding: 90px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* faint circuit-board lines */
+    .pdv5-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(13,46,78,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13,46,78,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .pdv5-inner { position: relative; z-index: 2; }
+
+    .pdv5-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .pdv5-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 14px;
+    }
+    .pdv5-eyebrow::before, .pdv5-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--orange); opacity: .45;
+    }
+    .pdv5-header h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800; color: #0d2e4e;
+      line-height: 1.12; letter-spacing: -.03em; margin-bottom: 10px;
+    }
+    .pdv5-header h2 span { color: var(--orange); }
+    .pdv5-header p { font-size: 15px; color: #6b7280; max-width: 440px; margin: 0 auto; }
+
+    /* ── Journey track ── */
+    .pdv5-track {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr 56px 1fr;
+      align-items: start;
+      position: relative;
+    }
+
+    /* Connector between stops */
+    .pdv5-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 28px; /* align with node center */
+    }
+    .pdv5-conn-line {
+      width: 100%;
+      height: 2px;
+      position: relative;
+    }
+    .pdv5-conn-line::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, rgba(13,46,78,0.15), var(--orange), rgba(13,46,78,0.15));
+    }
+    .pdv5-conn-arrow {
+      margin-top: 8px;
+      background: #fff;
+      border: 1px solid rgba(200,66,10,0.3);
+      border-radius: 50px;
+      padding: 3px 10px;
+      font-size: 9px; font-weight: 900;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--orange);
+      white-space: nowrap;
+    }
+
+    /* ── Each stop ── */
+    .pdv5-stop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Node circle on the path */
+    .pdv5-node {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #d1d9e6;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 15px; font-weight: 800; color: #8fa3bd;
+      margin-bottom: 20px;
+      position: relative; z-index: 2;
+      flex-shrink: 0;
+    }
+    .pdv5-stop.pdv5-hot .pdv5-node {
+      width: 70px; height: 70px;
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+      font-size: 17px;
+      box-shadow:
+        0 0 0 10px rgba(200,66,10,0.12),
+        0 0 0 20px rgba(200,66,10,0.06),
+        0 8px 28px rgba(200,66,10,0.4);
+      margin-bottom: 16px;
+    }
+
+    /* Plan identity */
+    .pdv5-plan-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff; font-size: 9px; font-weight: 900;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 50px;
+      margin-bottom: 8px;
+    }
+    .pdv5-plan-name {
+      font-size: 22px; font-weight: 800; color: #0d2e4e;
+      letter-spacing: -.3px; margin: 0 0 4px;
+    }
+    .pdv5-plan-price {
+      font-size: 13px; font-weight: 700; color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    /* Feature tags */
+    .pdv5-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .pdv5-tag {
+      background: #fff;
+      border: 1px solid #dde4ef;
+      color: #3d5a7a;
+      font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 50px;
+      line-height: 1.3;
+      box-shadow: 0 1px 3px rgba(13,46,78,0.05);
+    }
+    .pdv5-stop.pdv5-hot .pdv5-tag {
+      background: rgba(200,66,10,0.08);
+      border-color: rgba(200,66,10,0.25);
+      color: #8a2a0a;
+    }
+    .pdv5-tag.pdv5-tag-new {
+      background: #0d2e4e;
+      border-color: #0d2e4e;
+      color: #fff;
+      font-weight: 700;
+    }
+    .pdv5-stop.pdv5-hot .pdv5-tag.pdv5-tag-new {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+
+    /* Plan card wrapper */
+    .pdv5-plan-card {
+      background: #fff;
+      border: 1px solid #dde4ef;
+      border-radius: 20px;
+      padding: 32px 24px;
+      width: 100%;
+      box-shadow: 0 2px 16px rgba(13,46,78,0.06);
+    }
+    .pdv5-stop.pdv5-hot .pdv5-plan-card {
+      border-color: var(--orange);
+      box-shadow: 0 4px 32px rgba(200,66,10,0.12), 0 0 0 1px var(--orange);
+    }
+
+    .pdv5-cta {
+      display: block;
+      padding: 12px 20px; border-radius: 10px;
+      font-size: 13px; font-weight: 800;
+      text-decoration: none; text-align: center;
+      background: #0d2e4e;
+      color: #fff;
+      transition: all .18s;
+      margin-top: 4px;
+    }
+    .pdv5-cta:hover { background: #163d65; }
+    .pdv5-stop.pdv5-hot .pdv5-cta {
+      background: var(--orange);
+      box-shadow: 0 4px 16px rgba(200,66,10,0.35);
+    }
+    .pdv5-stop.pdv5-hot .pdv5-cta:hover { background: #b5390a; }
+
+    @media (max-width: 860px) {
+      .pdv5-track { grid-template-columns: 1fr; gap: 0; }
+      .pdv5-connector { flex-direction: row; padding-top: 0; padding: 10px 0; }
+      .pdv5-conn-line { width: 40px; height: 2px; }
+    }
+
+    /* ── GOLD (Pro) accent ── */
+    :root { --gold: #c9a020; --gold-light: rgba(201,160,32,0.15); --gold-border: rgba(201,160,32,0.35); }
+
+    /* V2 matrix — gold Pro column */
+    .pdv2-mh-plan.pdv2-mh-gold { background: var(--gold); }
+    .pdv2-cell.pdv2-gold { background: rgba(201,160,32,0.05); border-left-color: rgba(201,160,32,0.18); }
+    .pdv2-footer-cell.pdv2-gold { background: rgba(201,160,32,0.05); border-left-color: rgba(201,160,32,0.18); }
+    .pdv2-footer-cell.pdv2-gold .pdv2-footer-btn { background: var(--gold); color: #fff; }
+    .pdv2-footer-cell.pdv2-gold .pdv2-footer-btn:hover { background: #a8840f; }
+
+    /* V3 horizontal card — gold Pro */
+    .pdv3-card.pdv3-gold {
+      border-color: var(--gold);
+      background: rgba(201,160,32,0.05);
+      box-shadow: 0 0 0 1px var(--gold), 0 12px 40px rgba(201,160,32,0.14);
+    }
+    .pdv3-card.pdv3-gold .pdv3-card-left { border-right-color: rgba(201,160,32,0.25); }
+    .pdv3-card.pdv3-gold .pdv3-hot-badge { background: var(--gold); }
+    .pdv3-card.pdv3-gold .pdv3-cta { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .pdv3-card.pdv3-gold .pdv3-cta:hover { background: #a8840f; }
+    .pdv3-card.pdv3-gold .pdv3-feat-icon { background: rgba(201,160,32,0.15); }
+    .pdv3-card.pdv3-gold .pdv3-feat-icon svg { color: var(--gold); }
+    .pdv3-card.pdv3-gold .pdv3-feat-text { color: rgba(255,255,255,0.9); }
+    .pdv3-card.pdv3-gold .pdv3-plan-price { color: var(--gold); }
+
+    /* V4 terminal panel — gold Pro */
+    .pdv4-panel.pdv4-gold {
+      background: linear-gradient(160deg, #120e00 0%, #0d1a2e 100%);
+      border-right: 1px solid rgba(201,160,32,0.25);
+      border-left: 1px solid rgba(201,160,32,0.25);
+    }
+    .pdv4-panel.pdv4-gold::before {
+      background: repeating-linear-gradient(
+        -45deg, transparent, transparent 6px,
+        rgba(201,160,32,0.06) 6px, rgba(201,160,32,0.06) 7px
+      );
+    }
+    .pdv4-panel.pdv4-gold .pdv4-panel-bar { background: var(--gold); box-shadow: 0 0 12px rgba(201,160,32,0.5); }
+    .pdv4-panel.pdv4-gold .pdv4-panel-head { border-bottom-color: rgba(201,160,32,0.15); }
+    .pdv4-panel.pdv4-gold .pdv4-num { color: rgba(201,160,32,0.12); }
+    .pdv4-panel.pdv4-gold .pdv4-hot-pill { background: var(--gold); }
+    .pdv4-panel.pdv4-gold .pdv4-panel-price { color: var(--gold); }
+    .pdv4-panel.pdv4-gold .pdv4-cta { background: var(--gold); color: #fff; border-color: transparent; box-shadow: 0 4px 18px rgba(201,160,32,0.3); }
+    .pdv4-panel.pdv4-gold .pdv4-cta:hover { background: #a8840f; }
+    .pdv4-panel.pdv4-gold .pdv4-feat-dot { background: var(--gold); }
+    .pdv4-panel.pdv4-gold .pdv4-feat-name { color: #fff; }
+    @media (max-width: 800px) { .pdv4-panel.pdv4-gold { border-left: none; } }
+
+    /* V5 journey — gold Pro */
+    .pdv5-stop.pdv5-gold .pdv5-node {
+      width: 70px; height: 70px;
+      background: var(--gold); border-color: var(--gold);
+      color: #fff; font-size: 17px;
+      box-shadow: 0 0 0 10px rgba(201,160,32,0.12), 0 0 0 20px rgba(201,160,32,0.06), 0 8px 28px rgba(201,160,32,0.35);
+      margin-bottom: 16px;
+    }
+    .pdv5-stop.pdv5-gold .pdv5-plan-badge { background: var(--gold); }
+    .pdv5-stop.pdv5-gold .pdv5-plan-name { color: var(--gold); }
+    .pdv5-stop.pdv5-gold .pdv5-plan-price { color: var(--gold); }
+    .pdv5-stop.pdv5-gold .pdv5-plan-card { border-color: var(--gold); box-shadow: 0 4px 32px rgba(201,160,32,0.14), 0 0 0 1px var(--gold); }
+    .pdv5-stop.pdv5-gold .pdv5-tag { background: rgba(201,160,32,0.1); border-color: rgba(201,160,32,0.3); color: #7a5e00; }
+    .pdv5-stop.pdv5-gold .pdv5-tag.pdv5-tag-new { background: var(--gold); border-color: var(--gold); color: #fff; }
+    .pdv5-stop.pdv5-gold .pdv5-cta { background: var(--gold); box-shadow: 0 4px 16px rgba(201,160,32,0.3); }
+    .pdv5-stop.pdv5-gold .pdv5-cta:hover { background: #a8840f; }
+
+    /* ── PRICING DETAILS V4 — Blueprint / Terminal ── */
+    .pdv4-section {
+      background: #060f1e;
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Dot-grid pattern */
+    .pdv4-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    /* Orange glow blob top-right */
+    .pdv4-section::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pdv4-inner { position: relative; z-index: 2; }
+
+    .pdv4-header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .pdv4-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--orange);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .pdv4-eyebrow::before,
+    .pdv4-eyebrow::after {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--orange); opacity: .5;
+    }
+    .pdv4-header h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800; color: #fff;
+      line-height: 1.12; letter-spacing: -.03em;
+      margin-bottom: 12px;
+    }
+    .pdv4-header h2 span { color: var(--orange); }
+    .pdv4-header p { font-size: 15px; color: rgba(255,255,255,0.38); max-width: 460px; margin: 0 auto; }
+
+    /* 3-panel grid */
+    .pdv4-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      max-width: 1160px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .pdv4-panel {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .pdv4-panel:last-child { border-right: none; }
+
+    /* Featured middle panel */
+    .pdv4-panel.pdv4-hot {
+      background: linear-gradient(160deg, #1a0a02 0%, #0d1a2e 100%);
+      border-right: 1px solid rgba(200,66,10,0.25);
+      border-left: 1px solid rgba(200,66,10,0.25);
+    }
+    /* Diagonal stripe decoration on featured */
+    .pdv4-panel.pdv4-hot::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 180px; height: 180px;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 6px,
+        rgba(200,66,10,0.06) 6px,
+        rgba(200,66,10,0.06) 7px
+      );
+      pointer-events: none;
+    }
+
+    /* Sketch chart SVG decoration on featured */
+    .pdv4-chart-sketch {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 160px; height: 90px;
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    /* Panel top bar */
+    .pdv4-panel-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+    }
+    .pdv4-panel.pdv4-hot .pdv4-panel-bar {
+      background: var(--orange);
+      box-shadow: 0 0 12px rgba(200,66,10,0.6);
+    }
+
+    /* Panel content */
+    .pdv4-panel-head {
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .pdv4-panel.pdv4-hot .pdv4-panel-head {
+      border-bottom-color: rgba(200,66,10,0.15);
+    }
+    /* Big watermark plan number */
+    .pdv4-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 64px; font-weight: 800;
+      color: rgba(255,255,255,0.04);
+      line-height: 1; letter-spacing: -3px;
+      margin-bottom: -16px;
+      display: block;
+    }
+    .pdv4-panel.pdv4-hot .pdv4-num { color: rgba(200,66,10,0.12); }
+    .pdv4-hot-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--orange);
+      color: #fff; font-size: 9px; font-weight: 900;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .pdv4-panel-name {
+      font-size: 20px; font-weight: 800; color: #fff;
+      letter-spacing: -.3px; margin: 0 0 4px;
+    }
+    .pdv4-panel-price {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; font-weight: 600;
+      color: var(--orange); margin-bottom: 12px;
+      letter-spacing: .5px;
+    }
+    .pdv4-panel-desc {
+      font-size: 13px; color: rgba(255,255,255,0.38);
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .pdv4-cta {
+      display: block; text-align: center;
+      padding: 11px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 800;
+      text-decoration: none;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all .18s;
+    }
+    .pdv4-cta:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .pdv4-panel.pdv4-hot .pdv4-cta {
+      background: var(--orange); color: #fff; border-color: transparent;
+      box-shadow: 0 4px 18px rgba(200,66,10,0.35);
+    }
+    .pdv4-panel.pdv4-hot .pdv4-cta:hover { background: #b5390a; }
+
+    /* Feature list */
+    .pdv4-feats { padding: 20px 28px 32px; flex: 1; }
+    .pdv4-feat {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .pdv4-feat:last-child { border-bottom: none; }
+    .pdv4-feat-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .pdv4-panel.pdv4-hot .pdv4-feat-dot { background: var(--orange); }
+    .pdv4-feat-body { min-width: 0; }
+    .pdv4-feat-name {
+      font-size: 13.5px; font-weight: 700; color: rgba(255,255,255,0.8);
+      line-height: 1.3;
+    }
+    .pdv4-feat-sub {
+      font-size: 11.5px; color: rgba(255,255,255,0.3);
+      margin-top: 1px;
+    }
+    .pdv4-panel.pdv4-hot .pdv4-feat-name { color: #fff; }
+
+    @media (max-width: 800px) {
+      .pdv4-panels { grid-template-columns: 1fr; border-radius: 16px; }
+      .pdv4-panel { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .pdv4-panel:last-child { border-bottom: none; }
+      .pdv4-panel.pdv4-hot { border-left: none; }
+    }
+
+    /* ── PRICING DETAILS V3 — Horizontal Cards ── */
+    .pdv3-section {
+      background: #0d2e4e;
+      padding: 80px 0;
+    }
+    .pdv3-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .pdv3-eyebrow {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .pdv3-header h2 {
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800; color: #fff;
+      line-height: 1.15; letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    .pdv3-header h2 span { color: var(--orange); }
+    .pdv3-header p { font-size: 15px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto; line-height: 1.6; }
+
+    .pdv3-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pdv3-card {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: border-color .2s;
+    }
+    .pdv3-card:hover { border-color: rgba(255,255,255,0.14); }
+    .pdv3-card.pdv3-featured {
+      border-color: var(--orange);
+      background: rgba(200,66,10,0.07);
+      box-shadow: 0 0 0 1px var(--orange), 0 12px 40px rgba(200,66,10,0.18);
+    }
+
+    /* Left panel — plan identity */
+    .pdv3-card-left {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+    }
+    .pdv3-card.pdv3-featured .pdv3-card-left {
+      border-right-color: rgba(200,66,10,0.25);
+    }
+    .pdv3-hot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 9px; font-weight: 900;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 50px;
+      margin-bottom: 6px;
+      width: fit-content;
+    }
+    .pdv3-plan-name {
+      font-size: 22px; font-weight: 800; color: #fff;
+      letter-spacing: -.3px; margin: 0 0 4px;
+    }
+    .pdv3-plan-price {
+      font-size: 13px; font-weight: 700;
+      color: var(--orange); margin-bottom: 10px;
+    }
+    .pdv3-plan-desc {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      line-height: 1.6; margin-bottom: 20px;
+    }
+    .pdv3-cta {
+      display: inline-block;
+      padding: 11px 22px; border-radius: 8px;
+      font-size: 13px; font-weight: 800;
+      text-decoration: none;
+      background: rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: all .18s;
+      text-align: center;
+    }
+    .pdv3-cta:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .pdv3-card.pdv3-featured .pdv3-cta {
+      background: var(--orange); color: #fff; border-color: var(--orange);
+    }
+    .pdv3-card.pdv3-featured .pdv3-cta:hover { background: #b5390a; }
+
+    /* Right panel — features grid */
+    .pdv3-card-right {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px 24px;
+      align-content: center;
+    }
+    .pdv3-feat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .pdv3-feat-icon {
+      width: 18px; height: 18px; flex-shrink: 0;
+      background: rgba(52,211,153,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .pdv3-feat-icon svg { width: 9px; height: 9px; color: #34d399; }
+    .pdv3-feat-text {
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.4;
+    }
+    .pdv3-feat-text small {
+      display: block;
+      font-size: 11px; font-weight: 400;
+      color: rgba(255,255,255,0.35);
+      margin-top: 1px;
+    }
+    .pdv3-card.pdv3-featured .pdv3-feat-icon {
+      background: rgba(200,66,10,0.15);
+    }
+    .pdv3-card.pdv3-featured .pdv3-feat-icon svg { color: var(--orange); }
+    .pdv3-card.pdv3-featured .pdv3-feat-text { color: rgba(255,255,255,0.9); }
+
+    @media (max-width: 760px) {
+      .pdv3-card { grid-template-columns: 1fr; }
+      .pdv3-card-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .pdv3-card-right { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ── PRICING DETAILS SECTION ── */
     .pricing-details-section {
       background: #f4f6f9;
@@ -1305,8 +2080,9 @@
         <a href="https://whop.com/navigationtrading/ntfree/" class="card-cta" data-config="whopFree">Join Free</a>
       </div>
 
-      <!-- Pro Membership -->
-      <div class="pricing-card pro-tier">
+      <!-- Pro Membership (Popular) -->
+      <div class="pricing-card popular pro-tier">
+        <div class="popular-badge">Most Popular</div>
         <div class="card-header">
           <h3>Pro</h3>
           <div class="card-price">Ultimate<span>/mo</span></div>
@@ -1321,9 +2097,8 @@
         <a href="https://whop.com/navigationtrading/ntpro/" class="card-cta" data-config="whopPro">Get Pro Access</a>
       </div>
 
-      <!-- Day Trading Membership (Popular) -->
-      <div class="pricing-card popular day-tier">
-        <div class="popular-badge">Most Popular</div>
+      <!-- Day Trading Membership -->
+      <div class="pricing-card day-tier">
         <div class="card-header">
           <h3>Day Trading</h3>
           <div class="card-price">Join Now<span>/mo</span></div>
@@ -1465,6 +2240,424 @@
       document.querySelectorAll('.plan-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + plan));
     }
   </script>
+
+  <!-- ── PRICING DETAILS V2 — Feature Matrix ── -->
+  <section class="pdv2-section">
+    <div class="container">
+      <div class="pdv2-header">
+        <span class="pdv2-eyebrow">Version 2 — Plan Comparison</span>
+        <h2>See Exactly What You <span>Get</span></h2>
+        <p>Every feature across all plans — compare at a glance.</p>
+      </div>
+
+      <div class="pdv2-matrix">
+
+        <!-- Header row -->
+        <div class="pdv2-matrix-head">
+          <div class="pdv2-mh-label"></div>
+          <div class="pdv2-mh-plan">
+            <span class="pdv2-mh-name">Free</span>
+            <span class="pdv2-mh-sub">$0 / forever</span>
+          </div>
+          <div class="pdv2-mh-plan">
+            <span class="pdv2-mh-name">Day Trading</span>
+            <span class="pdv2-mh-sub">Join Now</span>
+          </div>
+          <div class="pdv2-mh-plan pdv2-mh-gold">
+            <span class="pdv2-mh-name">Pro</span>
+            <span class="pdv2-mh-sub">Most Popular</span>
+          </div>
+        </div>
+
+        <!-- Community -->
+        <div class="pdv2-group-label"><span class="pdv2-gl-text">Community &amp; Support</span></div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Discord Community</div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">NT Team Support</div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Live Chat During Streams</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+
+        <!-- Education -->
+        <div class="pdv2-group-label"><span class="pdv2-gl-text">Education</span></div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Strategy Courses</div>
+          <div class="pdv2-cell"><div class="pdv2-val">5 courses</div></div>
+          <div class="pdv2-cell"><div class="pdv2-val">10 courses</div></div>
+          <div class="pdv2-cell"><div class="pdv2-val">17+ courses</div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Options Trading Courses</div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">TradeHacker's Playbook Ebook</div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Advanced Spread Strategies</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+
+        <!-- Live Trading -->
+        <div class="pdv2-group-label"><span class="pdv2-gl-text">Live Trading</span></div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Twice-Daily Live Streams</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Real-Time Trade Alerts</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">Custom Indicators &amp; Watch Lists</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+        <div class="pdv2-row">
+          <div class="pdv2-row-label">FLUX Software Access</div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div></div>
+          <div class="pdv2-cell"><div class="pdv2-yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="pdv2-footer">
+          <div class="pdv2-footer-label"></div>
+          <div class="pdv2-footer-cell">
+            <a href="https://whop.com/navigationtrading/ntfree/" class="pdv2-footer-btn" data-config="whopFree">Join Free</a>
+          </div>
+          <div class="pdv2-footer-cell">
+            <a href="https://whop.com/navigationtrading/ntday/" class="pdv2-footer-btn" data-config="whopDay">Start Now →</a>
+          </div>
+          <div class="pdv2-footer-cell pdv2-gold">
+            <a href="https://whop.com/navigationtrading/ntpro/" class="pdv2-footer-btn" data-config="whopPro">Get Pro →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING DETAILS V4 — Blueprint / Terminal ── -->
+  <section class="pdv4-section">
+    <div class="container pdv4-inner">
+      <div class="pdv4-header">
+        <div class="pdv4-eyebrow">Version 4 — Plan Details</div>
+        <h2>Built for Every Stage of Your <span>Trading Journey</span></h2>
+        <p>Pick the plan that matches where you are. Upgrade anytime.</p>
+      </div>
+
+      <div class="pdv4-panels">
+
+        <!-- FREE -->
+        <div class="pdv4-panel">
+          <div class="pdv4-panel-bar"></div>
+          <div class="pdv4-panel-head">
+            <span class="pdv4-num">01</span>
+            <p class="pdv4-panel-name">Free</p>
+            <p class="pdv4-panel-price">$0 / FOREVER</p>
+            <p class="pdv4-panel-desc">Start with the foundations — community, core education, and zero commitment.</p>
+            <a href="https://whop.com/navigationtrading/ntfree/" class="pdv4-cta" data-config="whopFree">Join Free →</a>
+          </div>
+          <div class="pdv4-feats">
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Discord Community</div><div class="pdv4-feat-sub">3,600+ active members</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">NT Team Support</div><div class="pdv4-feat-sub">Direct channel access</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">5 Strategy Courses</div><div class="pdv4-feat-sub">Core curriculum</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Options Trading Courses</div><div class="pdv4-feat-sub">Foundation level</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">TradeHacker's Playbook</div><div class="pdv4-feat-sub">Ebook download</div></div></div>
+          </div>
+        </div>
+
+        <!-- DAY TRADING -->
+        <div class="pdv4-panel">
+          <div class="pdv4-panel-bar"></div>
+          <div class="pdv4-panel-head">
+            <span class="pdv4-num">02</span>
+            <p class="pdv4-panel-name">Day Trading</p>
+            <p class="pdv4-panel-price">JOIN NOW / MO</p>
+            <p class="pdv4-panel-desc">Live streams, real-time trade calls, and everything you need to trade every day.</p>
+            <a href="https://whop.com/navigationtrading/ntday/" class="pdv4-cta" data-config="whopDay">Start Now →</a>
+          </div>
+          <div class="pdv4-feats">
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Twice-Daily Live Streams</div><div class="pdv4-feat-sub">Every market day</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Real-Time Trade Calls</div><div class="pdv4-feat-sub">Follow live setups</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Day Trading Alerts</div><div class="pdv4-feat-sub">Instant notifications</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">10 Strategy Courses</div><div class="pdv4-feat-sub">Full curriculum</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Custom Indicators</div><div class="pdv4-feat-sub">NT-built tools</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Live Chat During Streams</div><div class="pdv4-feat-sub">Direct interaction</div></div></div>
+          </div>
+          <!-- Sketch chart decoration -->
+          <svg class="pdv4-chart-sketch" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="0,70 20,55 40,62 60,38 80,45 100,20 120,28 140,10 160,18" stroke="#c8420a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="0,80 20,72 40,75 60,58 80,63 100,40 120,48 140,30 160,35" stroke="#c8420a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+
+        <!-- PRO (featured) -->
+        <div class="pdv4-panel pdv4-hot pdv4-gold">
+          <div class="pdv4-panel-bar"></div>
+          <div class="pdv4-panel-head">
+            <span class="pdv4-num">03</span>
+            <span class="pdv4-hot-pill">★ Most Popular</span>
+            <p class="pdv4-panel-name">Pro</p>
+            <p class="pdv4-panel-price">ULTIMATE / MO</p>
+            <p class="pdv4-panel-desc">The complete system. Every strategy, every tool, every alert — all access.</p>
+            <a href="https://whop.com/navigationtrading/ntpro/" class="pdv4-cta" data-config="whopPro">Get Pro Access →</a>
+          </div>
+          <div class="pdv4-feats">
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">17+ Advanced Courses</div><div class="pdv4-feat-sub">Full course library</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Advanced Spread Strategies</div><div class="pdv4-feat-sub">Transformer system</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Alerts for All Strategies</div><div class="pdv4-feat-sub">Every system covered</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">FLUX Software Access</div><div class="pdv4-feat-sub">Proprietary platform</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Custom Watch Lists</div><div class="pdv4-feat-sub">Pre-built setups</div></div></div>
+            <div class="pdv4-feat"><div class="pdv4-feat-dot"></div><div class="pdv4-feat-body"><div class="pdv4-feat-name">Priority Support</div><div class="pdv4-feat-sub">Direct team access</div></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING DETAILS V3 — Horizontal Cards ── -->
+  <section class="pdv3-section">
+    <div class="container">
+      <div class="pdv3-header">
+        <span class="pdv3-eyebrow">Version 3 — Plan Cards</span>
+        <h2>Choose the Plan That <span>Fits You</span></h2>
+        <p>Every plan built for a different stage — see what's inside each one.</p>
+      </div>
+
+      <div class="pdv3-stack">
+
+        <!-- FREE -->
+        <div class="pdv3-card">
+          <div class="pdv3-card-left">
+            <div>
+              <p class="pdv3-plan-name">Free</p>
+              <p class="pdv3-plan-price">$0 / forever</p>
+              <p class="pdv3-plan-desc">Core education and community access. Start learning with no commitment.</p>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntfree/" class="pdv3-cta" data-config="whopFree">Join Free →</a>
+          </div>
+          <div class="pdv3-card-right">
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Discord Community<small>3,600+ members</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">NT Team Support<small>Direct access</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">5 Strategy Courses<small>Core curriculum</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Options Courses<small>Foundations</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Playbook Ebook<small>TradeHacker's guide</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY TRADING (featured) -->
+        <div class="pdv3-card">
+          <div class="pdv3-card-left">
+            <div>
+              <p class="pdv3-plan-name">Day Trading</p>
+              <p class="pdv3-plan-price">Join Now / mo</p>
+              <p class="pdv3-plan-desc">Live streams every morning, real-time calls, and 10 full strategy courses.</p>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntday/" class="pdv3-cta" data-config="whopDay">Start Trading →</a>
+          </div>
+          <div class="pdv3-card-right">
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Twice-Daily Streams<small>Every market day</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Real-Time Trade Calls<small>Follow live setups</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Day Trading Alerts<small>Instant notifications</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">10 Strategy Courses<small>Full curriculum</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Custom Indicators<small>NT-built tools</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Live Chat Access<small>During all streams</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRO -->
+        <div class="pdv3-card pdv3-featured pdv3-gold">
+          <div class="pdv3-card-left">
+            <div>
+              <span class="pdv3-hot-badge">★ Most Popular</span>
+              <p class="pdv3-plan-name">Pro</p>
+              <p class="pdv3-plan-price">Ultimate / mo</p>
+              <p class="pdv3-plan-desc">Every tool, every strategy, every alert. The complete trading system.</p>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntpro/" class="pdv3-cta" data-config="whopPro">Get Pro Access →</a>
+          </div>
+          <div class="pdv3-card-right">
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">17+ Advanced Courses<small>Full library</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Advanced Spreads<small>Transformer strategies</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">All Alerts &amp; Streams<small>Every strategy</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">FLUX Software<small>Proprietary platform</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Custom Watch Lists<small>Pre-built setups</small></div>
+            </div>
+            <div class="pdv3-feat-item">
+              <div class="pdv3-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="pdv3-feat-text">Priority Support<small>Direct team access</small></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING DETAILS V5 — Journey Path ── -->
+  <section class="pdv5-section">
+    <div class="container pdv5-inner">
+      <div class="pdv5-header">
+        <div class="pdv5-eyebrow">Version 5 — Your Trading Path</div>
+        <h2>Every Plan Is a <span>Step Forward</span></h2>
+        <p>Start free. Upgrade when you're ready. Each level unlocks more firepower.</p>
+      </div>
+
+      <div class="pdv5-track">
+
+        <!-- STOP 1: FREE -->
+        <div class="pdv5-stop">
+          <div class="pdv5-node">01</div>
+          <div class="pdv5-plan-card">
+            <p class="pdv5-plan-name">Free</p>
+            <p class="pdv5-plan-price">$0 / forever</p>
+            <div class="pdv5-tags">
+              <span class="pdv5-tag pdv5-tag-new">Discord</span>
+              <span class="pdv5-tag pdv5-tag-new">NT Support</span>
+              <span class="pdv5-tag pdv5-tag-new">5 Courses</span>
+              <span class="pdv5-tag pdv5-tag-new">Options Courses</span>
+              <span class="pdv5-tag pdv5-tag-new">Playbook Ebook</span>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntfree/" class="pdv5-cta" data-config="whopFree">Start for Free →</a>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div class="pdv5-connector">
+          <div class="pdv5-conn-line"></div>
+          <span class="pdv5-conn-arrow">Upgrade</span>
+        </div>
+
+        <!-- STOP 2: DAY TRADING -->
+        <div class="pdv5-stop">
+          <div class="pdv5-node">02</div>
+          <div class="pdv5-plan-card">
+            <p class="pdv5-plan-name">Day Trading</p>
+            <p class="pdv5-plan-price">Join Now / mo</p>
+            <div class="pdv5-tags">
+              <span class="pdv5-tag">Discord</span>
+              <span class="pdv5-tag">NT Support</span>
+              <span class="pdv5-tag">Options Courses</span>
+              <span class="pdv5-tag">Playbook Ebook</span>
+              <span class="pdv5-tag pdv5-tag-new">Live Streams ×2</span>
+              <span class="pdv5-tag pdv5-tag-new">Trade Calls</span>
+              <span class="pdv5-tag pdv5-tag-new">10 Courses</span>
+              <span class="pdv5-tag pdv5-tag-new">Day Alerts</span>
+              <span class="pdv5-tag pdv5-tag-new">Indicators</span>
+              <span class="pdv5-tag pdv5-tag-new">Live Chat</span>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntday/" class="pdv5-cta" data-config="whopDay">Start Trading →</a>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div class="pdv5-connector">
+          <div class="pdv5-conn-line"></div>
+          <span class="pdv5-conn-arrow">Upgrade</span>
+        </div>
+
+        <!-- STOP 3: PRO (featured) -->
+        <div class="pdv5-stop pdv5-gold">
+          <div class="pdv5-node">03</div>
+          <div class="pdv5-plan-card">
+            <span class="pdv5-plan-badge">★ Most Popular</span>
+            <p class="pdv5-plan-name">Pro</p>
+            <p class="pdv5-plan-price">Ultimate / mo</p>
+            <div class="pdv5-tags">
+              <span class="pdv5-tag">Discord</span>
+              <span class="pdv5-tag">NT Support</span>
+              <span class="pdv5-tag">Live Streams ×2</span>
+              <span class="pdv5-tag">Trade Calls</span>
+              <span class="pdv5-tag">Indicators</span>
+              <span class="pdv5-tag">Live Chat</span>
+              <span class="pdv5-tag pdv5-tag-new">17+ Courses</span>
+              <span class="pdv5-tag pdv5-tag-new">Spreads Strategy</span>
+              <span class="pdv5-tag pdv5-tag-new">All Alerts</span>
+              <span class="pdv5-tag pdv5-tag-new">FLUX Software</span>
+              <span class="pdv5-tag pdv5-tag-new">Watch Lists</span>
+              <span class="pdv5-tag pdv5-tag-new">Priority Support</span>
+            </div>
+            <a href="https://whop.com/navigationtrading/ntpro/" class="pdv5-cta" data-config="whopPro">Get Pro Access →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
       <!-- ── FAQ SECTION ── -->
   <section class="faq" id="faq">
