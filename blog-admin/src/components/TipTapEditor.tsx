@@ -126,9 +126,9 @@ function ResizableImageNodeView({ node, updateAttributes, selected, editor, getP
   const getWrapperStyle = (): React.CSSProperties => {
     if (floatSide === 'left') return { float: 'left', marginRight: '20px', marginBottom: '12px', marginTop: '4px', display: 'inline-block' };
     if (floatSide === 'right') return { float: 'right', marginLeft: '20px', marginBottom: '12px', marginTop: '4px', display: 'inline-block' };
-    if (imgAlign === 'left') return { display: 'block', marginLeft: '0', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
-    if (imgAlign === 'right') return { display: 'block', marginLeft: 'auto', marginRight: '0', marginTop: '12px', marginBottom: '4px' };
-    return { display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
+    if (imgAlign === 'left') return { marginLeft: '0', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
+    if (imgAlign === 'right') return { marginLeft: 'auto', marginRight: '0', marginTop: '12px', marginBottom: '4px' };
+    return { marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
   };
 
   // Select node programmatically on click/mousedown
