@@ -1125,6 +1125,8 @@ interface TipTapEditorProps {
 export default function TipTapEditor({ content, onChange, toolbarPortalId }: TipTapEditorProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInteractingRef = useRef(false);
+  const [tableCtxMenu, setTableCtxMenu] = useState<{ x: number; y: number } | null>(null);
+  const tableCtxMenuRef = useRef<HTMLDivElement>(null);
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkText, setLinkText] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
@@ -1928,6 +1930,36 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
     </div>
   );
 
+  // ── TABLE RIGHT-CLICK CONTEXT MENU ──
+  useEffect(() => {
+    const close = (e: MouseEvent | KeyboardEvent) => {
+      if ('key' in e && e.key !== 'Escape') return;
+      if (tableCtxMenuRef.current && e instanceof MouseEvent && tableCtxMenuRef.current.contains(e.target as globalThis.Node)) return;
+      setTableCtxMenu(null);
+    };
+    document.addEventListener('mousedown', close);
+    document.addEventListener('keydown', close);
+    return () => { document.removeEventListener('mousedown', close); document.removeEventListener('keydown', close); };
+  }, []);
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('td, th')) return;
+    e.preventDefault();
+    setTableCtxMenu({ x: e.clientX, y: e.clientY });
+  };
+
+  const tableActions = [
+    { label: 'Insert row above', fn: () => editor?.chain().focus().addRowBefore().run(), danger: false },
+    { label: 'Insert row below', fn: () => editor?.chain().focus().addRowAfter().run(), danger: false },
+    { label: 'Insert column to the left', fn: () => editor?.chain().focus().addColumnBefore().run(), danger: false },
+    { label: 'Insert column to the right', fn: () => editor?.chain().focus().addColumnAfter().run(), danger: false },
+    null,
+    { label: 'Delete row', fn: () => editor?.chain().focus().deleteRow().run(), danger: true },
+    { label: 'Delete column', fn: () => editor?.chain().focus().deleteColumn().run(), danger: true },
+    { label: 'Delete table', fn: () => editor?.chain().focus().deleteTable().run(), danger: true },
+  ];
+
   return (
     <div ref={containerRef} style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
       
@@ -2117,9 +2149,32 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
       {/* ── TOP EDITOR TOOLBAR PORTALED OR INLINE ── */}
       {portalElement ? createPortal(toolbarAndModal, portalElement) : toolbarAndModal}
       
-      <div className={portalElement ? 'editor-content-only' : ''}>
+      <div className={portalElement ? 'editor-content-only' : ''} onContextMenu={handleContextMenu}>
         <EditorContent editor={editor} />
       </div>
+
+      {tableCtxMenu && (
+        <div
+          ref={tableCtxMenuRef}
+          className="table-context-menu"
+          style={{ top: tableCtxMenu.y, left: tableCtxMenu.x }}
+        >
+          {tableActions.map((action, i) =>
+            action === null ? (
+              <div key={`div-${i}`} className="table-context-menu-divider" />
+            ) : (
+              <button
+                key={action.label}
+                type="button"
+                className={`table-context-menu-item${action.danger ? ' danger' : ''}`}
+                onMouseDown={e => { e.preventDefault(); action.fn(); setTableCtxMenu(null); }}
+              >
+                {action.label}
+              </button>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 }
