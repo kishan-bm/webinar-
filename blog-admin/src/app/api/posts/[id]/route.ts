@@ -28,7 +28,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const body = await request.json();
 
     let categoryUpdate: any = undefined;
-    let categoryIdUpdate: any = undefined;
 
     if (body.categoryName !== undefined) {
       if (body.categoryName && body.categoryName.trim() !== '') {
@@ -40,7 +39,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
           }
         };
       } else {
-        categoryIdUpdate = null; // Clear category link if empty
+        categoryUpdate = { disconnect: true };
       }
     }
 
@@ -71,7 +70,6 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
           connect: { id: body.authorId }
         } : undefined,
         category: categoryUpdate,
-        categoryId: categoryIdUpdate,
         tags: tagsUpdate,
         publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
       },
