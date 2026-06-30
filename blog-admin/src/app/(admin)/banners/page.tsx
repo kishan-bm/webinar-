@@ -8,6 +8,7 @@ type Banner = {
   id: string;
   title: string | null;
   imageUrl: string;
+  imageAlt: string | null;
   linkUrl: string | null;
   order: number;
 };
@@ -18,6 +19,7 @@ export default function BannersPage() {
   
   // Form state
   const [title, setTitle] = useState('');
+  const [imageAlt, setImageAlt] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -100,6 +102,7 @@ export default function BannersPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: title.trim() || null,
+          imageAlt: imageAlt.trim() || null,
           linkUrl: formattedLink,
           imageUrl,
         }),
@@ -108,6 +111,7 @@ export default function BannersPage() {
 
       if (data.success) {
         setTitle('');
+        setImageAlt('');
         setLinkUrl('');
         setImageUrl('');
         fetchBanners();
@@ -235,7 +239,7 @@ export default function BannersPage() {
                       <td style={{ verticalAlign: 'middle' }}>
                         <img
                           src={banner.imageUrl}
-                          alt={banner.title || 'Banner'}
+                          alt={banner.imageAlt || banner.title || 'Banner'}
                           style={{
                             width: '80px',
                             height: '50px',
@@ -329,6 +333,17 @@ export default function BannersPage() {
                   placeholder="e.g. Get Flagship Course Free!"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group" style={{ marginBottom: 0 }}>
+                <label className="form-label">Image Alt Text (Optional)</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="Describe the banner image for SEO and accessibility..."
+                  value={imageAlt}
+                  onChange={(e) => setImageAlt(e.target.value)}
                 />
               </div>
 

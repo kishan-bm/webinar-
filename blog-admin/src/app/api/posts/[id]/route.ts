@@ -63,6 +63,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         content: body.content,
         excerpt: body.excerpt,
         coverImage: body.coverImage,
+        coverImageAlt: body.coverImageAlt !== undefined ? (body.coverImageAlt || null) : undefined,
         seoTitle: body.seoTitle,
         seoDescription: body.seoDescription,
         status: body.status,

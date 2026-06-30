@@ -105,6 +105,164 @@ const IMAGE_POSITIONS = [
 
 const WIDTH_PRESETS = ['25%', '33%', '50%', '66%', '75%', '100%', 'auto'];
 
+const FONT_SIZE_PRESETS = ['8', '9', '10', '11', '12', '14', '16', '18', '20', '24', '28', '30', '36', '48', '60', '72'];
+
+function FontSizePicker({ value, onChange }: { value: string; onChange: (val: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [customMode, setCustomMode] = useState(false);
+  const [customValue, setCustomValue] = useState('');
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Derive numeric display from e.g. "16px" → "16"
+  const numericVal = value ? value.replace('px', '') : '16';
+  const isPreset = FONT_SIZE_PRESETS.includes(numericVal);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as globalThis.Node)) {
+        setOpen(false);
+        setCustomMode(false);
+      }
+    };
+    if (open) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
+
+  const applyCustom = () => {
+    const parsed = parseFloat(customValue);
+    if (!isNaN(parsed) && parsed > 0) {
+      onChange(`${parsed}px`);
+    }
+    setCustomMode(false);
+    setOpen(false);
+  };
+
+  return (
+    <div ref={wrapperRef} style={{ position: 'relative' }}>
+      <button
+        type="button"
+        onClick={() => { setOpen(o => !o); setCustomMode(false); }}
+        className="toolbar-select"
+        style={{
+          width: '60px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          gap: '4px',
+          padding: '4px 8px',
+          fontSize: '13px',
+        }}
+        title="Font Size"
+      >
+        <span>{numericVal}</span>
+        <span style={{ fontSize: '9px', opacity: 0.6 }}>▾</span>
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute',
+          top: 'calc(100% + 4px)',
+          left: 0,
+          background: 'white',
+          border: '1px solid var(--border-color)',
+          borderRadius: '6px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+          zIndex: 999,
+          width: '120px',
+          overflow: 'hidden',
+        }}>
+          <div style={{ maxHeight: '240px', overflowY: 'auto' }}>
+            {FONT_SIZE_PRESETS.map(size => (
+              <div
+                key={size}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  onChange(`${size}px`);
+                  setOpen(false);
+                  setCustomMode(false);
+                }}
+                style={{
+                  padding: '7px 14px',
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  background: numericVal === size ? 'var(--accent-color, #c8420a)' : 'transparent',
+                  color: numericVal === size ? 'white' : 'var(--text-main)',
+                  fontWeight: numericVal === size ? 600 : 400,
+                }}
+                onMouseEnter={e => { if (numericVal !== size) (e.currentTarget as HTMLDivElement).style.background = '#f3f4f6'; }}
+                onMouseLeave={e => { if (numericVal !== size) (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}
+              >
+                {size}
+              </div>
+            ))}
+          </div>
+          {/* Custom option */}
+          <div style={{ borderTop: '1px solid var(--border-color)' }}>
+            {customMode ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 8px' }}>
+                <input
+                  type="number"
+                  step="0.1"
+                  min="1"
+                  max="400"
+                  autoFocus
+                  value={customValue}
+                  onChange={e => setCustomValue(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') applyCustom();
+                    if (e.key === 'Escape') { setCustomMode(false); setOpen(false); }
+                  }}
+                  placeholder="e.g. 13.5"
+                  style={{
+                    width: '64px',
+                    padding: '4px 6px',
+                    fontSize: '12px',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '4px',
+                    outline: 'none',
+                  }}
+                />
+                <button
+                  type="button"
+                  onMouseDown={e => { e.preventDefault(); applyCustom(); }}
+                  style={{
+                    background: 'var(--accent-color, #c8420a)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    padding: '4px 8px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                  }}
+                >
+                  ✓
+                </button>
+              </div>
+            ) : (
+              <div
+                onMouseDown={e => { e.preventDefault(); setCustomMode(true); setCustomValue(isPreset ? numericVal : ''); }}
+                style={{
+                  padding: '7px 14px',
+                  fontSize: '12px',
+                  cursor: 'pointer',
+                  color: 'var(--accent-color, #c8420a)',
+                  fontWeight: 600,
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = '#fff5f0'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}
+              >
+                Custom…
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // React NodeView component for resizable images with drag handle
 function ResizableImageNodeView({ node, updateAttributes, selected, editor, getPos }: any) {
   const { src, alt, title, href, width, align } = node.attrs;
@@ -442,6 +600,40 @@ const FontSize = Extension.create({
           .run();
       },
     };
+  },
+});
+
+// Custom Line Height Extension — applies line-height to paragraphs and headings
+const LineHeight = Extension.create({
+  name: 'lineHeight',
+  addGlobalAttributes() {
+    return [
+      {
+        types: ['paragraph', 'heading'],
+        attributes: {
+          lineHeight: {
+            default: null,
+            parseHTML: (element: HTMLElement) => element.style.lineHeight || null,
+            renderHTML: (attributes: Record<string, any>) => {
+              if (!attributes.lineHeight) return {};
+              return { style: `line-height: ${attributes.lineHeight}` };
+            },
+          },
+        },
+      },
+    ];
+  },
+  addCommands() {
+    return {
+      setLineHeight: (lineHeight: string) => ({ commands }: { commands: any }) => {
+        return commands.updateAttributes('paragraph', { lineHeight }) &&
+               commands.updateAttributes('heading', { lineHeight });
+      },
+      unsetLineHeight: () => ({ commands }: { commands: any }) => {
+        return commands.updateAttributes('paragraph', { lineHeight: null }) &&
+               commands.updateAttributes('heading', { lineHeight: null });
+      },
+    } as any;
   },
 });
 
@@ -794,6 +986,7 @@ const extensions = [
   Color,
   FontSize,
   FontFamily,
+  LineHeight,
   CustomHorizontalRule,
   HTMLBlock,
 ];
@@ -1309,29 +1502,43 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
 
         <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
 
-        {/* Font Size Select */}
+        {/* Font Size Picker */}
+        <FontSizePicker
+          value={editor.getAttributes('textStyle').fontSize || '16px'}
+          onChange={(size) => {
+            (editor.chain().focus() as any).setFontSize(size).run();
+          }}
+        />
+
+        <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
+
+        {/* Line Spacing Select */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
           <select
             className="toolbar-select"
-            value={editor.getAttributes('textStyle').fontSize || '16px'}
+            value={
+              editor.getAttributes('paragraph').lineHeight ||
+              editor.getAttributes('heading').lineHeight ||
+              'default'
+            }
             onChange={(e) => {
-              const size = e.target.value;
-              if (size === 'default') {
-                (editor.chain().focus() as any).unsetFontSize().run();
+              const val = e.target.value;
+              if (val === 'default') {
+                (editor.chain().focus() as any).unsetLineHeight().run();
               } else {
-                (editor.chain().focus() as any).setFontSize(size).run();
+                (editor.chain().focus() as any).setLineHeight(val).run();
               }
             }}
-            title="Font Size"
+            title="Line Spacing"
+            style={{ width: '90px' }}
           >
-            <option value="12px">12px</option>
-            <option value="14px">14px</option>
-            <option value="16px">16px (Default)</option>
-            <option value="18px">18px</option>
-            <option value="20px">20px</option>
-            <option value="24px">24px</option>
-            <option value="30px">30px</option>
-            <option value="36px">36px</option>
+            <option value="default">Spacing</option>
+            <option value="1">Single</option>
+            <option value="1.15">1.15</option>
+            <option value="1.5">1.5</option>
+            <option value="2">Double</option>
+            <option value="2.5">2.5</option>
+            <option value="3">Triple</option>
           </select>
         </div>
 

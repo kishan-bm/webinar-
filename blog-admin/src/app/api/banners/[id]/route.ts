@@ -12,6 +12,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       data: {
         title: body.title !== undefined ? body.title : undefined,
         imageUrl: body.imageUrl !== undefined ? body.imageUrl : undefined,
+        imageAlt: body.imageAlt !== undefined ? body.imageAlt : undefined,
         linkUrl: body.linkUrl !== undefined ? body.linkUrl : undefined,
         order: body.order !== undefined ? body.order : undefined,
       },

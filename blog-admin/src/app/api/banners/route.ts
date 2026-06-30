@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       data: {
         title: body.title || null,
         imageUrl: body.imageUrl,
+        imageAlt: body.imageAlt || null,
         linkUrl: body.linkUrl || null,
         order: body.order !== undefined ? body.order : nextOrder,
       },

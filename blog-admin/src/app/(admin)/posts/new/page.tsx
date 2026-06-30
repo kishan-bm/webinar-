@@ -22,6 +22,7 @@ export default function NewPost() {
     authorId: '',
     excerpt: '',
     coverImage: '',
+    coverImageAlt: '',
     categoryName: '',
     tagNames: ''
   });
@@ -180,10 +181,20 @@ export default function NewPost() {
               <label className="form-label">Featured Image (Cover)</label>
               {formData.coverImage && (
                 <div style={{ marginBottom: '8px' }}>
-                  <img src={formData.coverImage} alt="Cover" style={{ width: '100%', borderRadius: '8px' }} />
+                  <img src={formData.coverImage} alt={formData.coverImageAlt || 'Cover'} style={{ width: '100%', borderRadius: '8px' }} />
                 </div>
               )}
               <input type="file" accept="image/*" onChange={uploadCoverImage} className="form-input" />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Cover Image Alt Text</label>
+              <input
+                type="text"
+                className="form-input"
+                placeholder="Describe the image for SEO and accessibility..."
+                value={formData.coverImageAlt}
+                onChange={e => setFormData({...formData, coverImageAlt: e.target.value})}
+              />
             </div>
 
             <div className="form-group">
