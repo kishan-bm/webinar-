@@ -9,7 +9,11 @@ import Color from '@tiptap/extension-color';
 import { Mark, mergeAttributes, Extension, Node } from '@tiptap/core';
 import { Plugin, PluginKey, NodeSelection, Selection } from '@tiptap/pm/state';
 import { Decoration, DecorationSet } from '@tiptap/pm/view';
-import { Bold, Italic, Heading2, List, ListOrdered, ImageIcon, LinkIcon, Code, Edit2, Trash2, Check, X, AlignLeft, AlignCenter, AlignRight, AlignJustify, FileCode, Minus } from 'lucide-react';
+import { Table } from '@tiptap/extension-table';
+import { TableRow } from '@tiptap/extension-table-row';
+import { TableCell } from '@tiptap/extension-table-cell';
+import { TableHeader } from '@tiptap/extension-table-header';
+import { Bold, Italic, Heading2, List, ListOrdered, ImageIcon, LinkIcon, Code, Edit2, Trash2, Check, X, AlignLeft, AlignCenter, AlignRight, AlignJustify, FileCode, Minus, Table as TableIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useCallback, useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -971,6 +975,123 @@ const HTMLBlock = Node.create({
   },
 });
 
+// Grid picker for table insert (rows × cols)
+function TableInsertButton({ editor }: { editor: any }) {
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState<{ rows: number; cols: number } | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const ROWS = 8;
+  const COLS = 10;
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as globalThis.Node)) {
+        setOpen(false);
+        setHovered(null);
+      }
+    };
+    if (open) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
+
+  const insertTable = (rows: number, cols: number) => {
+    editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
+    setOpen(false);
+    setHovered(null);
+  };
+
+  return (
+    <div ref={wrapperRef} style={{ position: 'relative', display: 'inline-flex' }}>
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className={`toolbar-btn ${editor.isActive('table') ? 'is-active' : ''}`}
+        title="Insert Table"
+      >
+        <TableIcon size={18} />
+      </button>
+
+      {open && (
+        <div style={{
+          position: 'absolute',
+          top: 'calc(100% + 6px)',
+          left: 0,
+          background: 'white',
+          border: '1px solid var(--border-color)',
+          borderRadius: '8px',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.13)',
+          zIndex: 999,
+          padding: '12px',
+          minWidth: '220px',
+        }}>
+          <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            {hovered ? `${hovered.rows} × ${hovered.cols} table` : 'Select size'}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, 20px)`, gap: '3px' }}>
+            {Array.from({ length: ROWS }, (_, r) =>
+              Array.from({ length: COLS }, (_, c) => {
+                const row = r + 1;
+                const col = c + 1;
+                const active = hovered && row <= hovered.rows && col <= hovered.cols;
+                return (
+                  <div
+                    key={`${row}-${col}`}
+                    onMouseEnter={() => setHovered({ rows: row, cols: col })}
+                    onMouseLeave={() => setHovered(null)}
+                    onMouseDown={e => { e.preventDefault(); insertTable(row, col); }}
+                    style={{
+                      width: '18px',
+                      height: '18px',
+                      borderRadius: '3px',
+                      background: active ? 'var(--accent-color, #c8420a)' : '#e5e7eb',
+                      cursor: 'pointer',
+                      transition: 'background 0.1s',
+                    }}
+                  />
+                );
+              })
+            )}
+          </div>
+          {editor.isActive('table') && (
+            <div style={{ borderTop: '1px solid var(--border-color)', marginTop: '10px', paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Table actions</div>
+              {[
+                { label: 'Add row above', fn: () => editor.chain().focus().addRowBefore().run() },
+                { label: 'Add row below', fn: () => editor.chain().focus().addRowAfter().run() },
+                { label: 'Add column left', fn: () => editor.chain().focus().addColumnBefore().run() },
+                { label: 'Add column right', fn: () => editor.chain().focus().addColumnAfter().run() },
+                { label: 'Delete row', fn: () => editor.chain().focus().deleteRow().run() },
+                { label: 'Delete column', fn: () => editor.chain().focus().deleteColumn().run() },
+                { label: 'Delete table', fn: () => editor.chain().focus().deleteTable().run() },
+              ].map(({ label, fn }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onMouseDown={e => { e.preventDefault(); fn(); setOpen(false); }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: '5px 8px',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    color: label.startsWith('Delete') ? '#ef4444' : 'var(--text-main)',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#f3f4f6'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'none'; }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const extensions = [
   StarterKit.configure({
     horizontalRule: false,
@@ -989,6 +1110,10 @@ const extensions = [
   LineHeight,
   CustomHorizontalRule,
   HTMLBlock,
+  Table.configure({ resizable: true }),
+  TableRow,
+  TableCell,
+  TableHeader,
 ];
 
 interface TipTapEditorProps {
@@ -1426,17 +1551,18 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
         >
           <FileCode size={18} />
         </button>
-        <button 
-          type="button" 
-          onClick={() => (editor.chain().focus() as any).setHorizontalRule().run()} 
+        <button
+          type="button"
+          onClick={() => (editor.chain().focus() as any).setHorizontalRule().run()}
           className="toolbar-btn"
           title="Insert Divider Line"
         >
           <Minus size={18} />
         </button>
-        
+        <TableInsertButton editor={editor} />
+
         <div style={{ width: '1px', background: 'var(--border-color)', margin: '0 8px' }}></div>
-        
+
         {/* Alignment Buttons */}
         <button 
           type="button" 

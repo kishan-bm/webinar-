@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { supabase } from '@/lib/supabase';
@@ -17,6 +17,8 @@ export default function EditPost({ params }: EditPostProps) {
   
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [autoSaveStatus, setAutoSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const lastSavedDataRef = useRef<string>('');
   const [authors, setAuthors] = useState<{id: string, name: string}[]>([]);
   
   const [formData, setFormData] = useState({
@@ -51,7 +53,7 @@ export default function EditPost({ params }: EditPostProps) {
       .then(data => {
         if (data.success && data.data) {
           const post = data.data;
-          setFormData({
+          const loaded = {
             title: post.title || '',
             slug: post.slug || '',
             seoTitle: post.seoTitle || '',
@@ -64,7 +66,9 @@ export default function EditPost({ params }: EditPostProps) {
             coverImageAlt: post.coverImageAlt || '',
             categoryName: post.category?.name || '',
             tagNames: post.tags?.map((t: any) => t.name).join(', ') || ''
-          });
+          };
+          setFormData(loaded);
+          lastSavedDataRef.current = JSON.stringify(loaded);
         } else {
           alert('Failed to load post data');
         }
@@ -76,6 +80,40 @@ export default function EditPost({ params }: EditPostProps) {
         setLoading(false);
       });
   }, [id]);
+
+  // Auto-save every 10 seconds if there are unsaved changes
+  const formDataRef = useRef(formData);
+  formDataRef.current = formData;
+
+  useEffect(() => {
+    if (loading) return;
+
+    const interval = setInterval(async () => {
+      const current = JSON.stringify(formDataRef.current);
+      if (current === lastSavedDataRef.current) return; // nothing changed
+
+      setAutoSaveStatus('saving');
+      try {
+        const res = await fetch(`/api/posts/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...formDataRef.current, status: 'DRAFT' }),
+        });
+        const data = await res.json();
+        if (data.success) {
+          lastSavedDataRef.current = current;
+          setAutoSaveStatus('saved');
+          setTimeout(() => setAutoSaveStatus('idle'), 3000);
+        } else {
+          setAutoSaveStatus('error');
+        }
+      } catch {
+        setAutoSaveStatus('error');
+      }
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [id, loading]);
 
   const uploadCoverImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -143,8 +181,24 @@ export default function EditPost({ params }: EditPostProps) {
 
   return (
     <div className="card">
-      <h1>Edit Post</h1>
-      
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '8px' }}>
+        <h1 style={{ margin: 0 }}>Edit Post</h1>
+        {autoSaveStatus === 'saving' && (
+          <span style={{ fontSize: '13px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', animation: 'pulse 1s infinite' }} />
+            Auto-saving…
+          </span>
+        )}
+        {autoSaveStatus === 'saved' && (
+          <span style={{ fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            ✓ Draft auto-saved
+          </span>
+        )}
+        {autoSaveStatus === 'error' && (
+          <span style={{ fontSize: '13px', color: '#ef4444' }}>Auto-save failed</span>
+        )}
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
           
