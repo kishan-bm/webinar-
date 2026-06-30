@@ -55,11 +55,26 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       };
     }
 
+    // Determine slug to use — never auto-update to empty, never conflict with another post
+    let slugToSet: string | undefined = undefined;
+    if (body.slug && body.slug.trim()) {
+      const trimmedSlug = body.slug.trim();
+      const conflict = await prisma.post.findFirst({
+        where: { slug: trimmedSlug, id: { not: id } },
+        select: { id: true },
+      });
+      if (conflict) {
+        return NextResponse.json({ success: false, error: 'A post with this slug already exists' }, { status: 409 });
+      }
+      slugToSet = trimmedSlug;
+    }
+    // If body.slug is empty/missing, slugToSet remains undefined → Prisma won't touch the slug field
+
     const post = await prisma.post.update({
       where: { id },
       data: {
         title: body.title,
-        slug: body.slug,
+        slug: slugToSet,
         content: body.content,
         excerpt: body.excerpt,
         coverImage: body.coverImage,

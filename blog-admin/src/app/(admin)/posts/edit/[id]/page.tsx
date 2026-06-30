@@ -107,13 +107,11 @@ export default function EditPost({ params }: EditPostProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return; // Don't save if post data hasn't loaded yet
     setSaving(true);
 
-    // Auto-generate slug if empty
-    let submitData = { ...formData };
-    if (!submitData.slug) {
-      submitData.slug = submitData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-    }
+    const submitData = { ...formData };
+    // On edit, never auto-generate slug from title — the API will preserve the existing slug if empty
 
     try {
       const res = await fetch(`/api/posts/${id}`, {
@@ -299,8 +297,8 @@ export default function EditPost({ params }: EditPostProps) {
               ></textarea>
             </div>
             
-            <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '16px' }} disabled={saving}>
-              {saving ? 'Updating...' : 'Update Post'}
+            <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '16px' }} disabled={saving || loading}>
+              {saving ? 'Updating...' : loading ? 'Loading...' : 'Update Post'}
             </button>
           </div>
         </div>
