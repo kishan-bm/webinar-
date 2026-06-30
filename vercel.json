@@ -1,5 +1,19 @@
 {
   "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(home|pricing|podcast|contact|brokers|performance|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|indexV3|indexV4)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/",
