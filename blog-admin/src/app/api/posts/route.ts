@@ -68,10 +68,17 @@ export async function POST(request: Request) {
       }
     }
 
+    // Ensure the slug is unique — append -2, -3, ... if taken
+    let finalSlug = body.slug;
+    let suffix = 2;
+    while (await prisma.post.findFirst({ where: { slug: finalSlug }, select: { id: true } })) {
+      finalSlug = `${body.slug}-${suffix++}`;
+    }
+
     const post = await prisma.post.create({
       data: {
         title: body.title,
-        slug: body.slug,
+        slug: finalSlug,
         content: body.content,
         excerpt: body.excerpt,
         coverImage: body.coverImage,
@@ -92,7 +99,7 @@ export async function POST(request: Request) {
     console.error('Failed to create post:', error);
     if (error.code === 'P2002') {
       return NextResponse.json(
-        { success: false, error: 'A post with this slug already exists' },
+        { success: false, error: 'Failed to create post: duplicate value. Try a different slug.' },
         { status: 409 }
       );
     }

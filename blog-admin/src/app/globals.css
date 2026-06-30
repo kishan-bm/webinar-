@@ -908,3 +908,60 @@ tr:hover {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+/* ── TABLE STYLES IN EDITOR ── */
+.ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-color, #e2e8f0);
+  table-layout: fixed;
+}
+.ProseMirror table td,
+.ProseMirror table th {
+  border: 1px solid var(--border-color, #e2e8f0);
+  padding: 10px 14px;
+  min-width: 80px;
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.ProseMirror table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  text-align: left;
+  color: var(--primary-color, #0d2e4e);
+}
+.ProseMirror table td:focus,
+.ProseMirror table th:focus {
+  outline: none;
+}
+.ProseMirror table .selectedCell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 66, 10, 0.1);
+  pointer-events: none;
+}
+.ProseMirror table .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-color, #c8420a);
+  cursor: col-resize;
+  opacity: 0;
+  z-index: 20;
+}
+.ProseMirror table .column-resize-handle:hover,
+.ProseMirror:focus table .column-resize-handle {
+  opacity: 1;
+}
+.tableWrapper {
+  overflow-x: auto;
+  margin: 16px 0;
+}
