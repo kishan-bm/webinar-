@@ -1061,8 +1061,8 @@
     }
 
     .dt-curriculum .pm-container {
-      max-width: 1280px;
-      width: 92%;
+      max-width: 1400px;
+      width: 96%;
       position: relative;
       z-index: 2;
     }
@@ -2137,7 +2137,7 @@
     .dt-curr-cluster-head {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       gap: 14px;
       padding: 28px 28px 32px;
       cursor: default;
@@ -2213,7 +2213,7 @@
 
     .dt-curr-row {
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr;
       gap: 20px;
       padding: 22px 32px;
       background: transparent;
@@ -2237,15 +2237,7 @@
       font-size: 13.5px; color: rgba(255,255,255,0.55);
       line-height: 1.65; margin: 0;
     }
-    .dt-curr-row-time {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px; color: #fff;
-      letter-spacing: 0.5px; padding: 6px 14px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50px; border: 1px solid rgba(255,255,255,0.15);
-      text-transform: uppercase; white-space: nowrap;
-      text-align: center; justify-self: end; font-weight: 700;
-    }
+    .dt-curr-row-time { display: none; }
 
     .dt-curr-cta-wrap { text-align: center; margin-top: 40px; }
 
@@ -4568,7 +4560,7 @@
     <div class="pm-container">
       <div class="pm-section-head light reveal">
         <span class="pm-eyebrow">Institutional Curriculum</span>
-        <h2>4+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
+        <h2>11+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
         <p>The live streams show you how it's done. The courses teach you why. Each is a full structured course with
           video lessons, trade examples, and clear rules.</p>
       </div>
@@ -4716,7 +4708,7 @@
         <!-- Section eyebrow + title (compact, lives in pin) -->
         <div class="dt-orb-title">
           <span class="pm-eyebrow">Institutional Curriculum</span>
-          <h2>4+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
+          <h2>11+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
         </div>
 
         <!-- Stage -->
@@ -4901,7 +4893,7 @@
     <div class="pm-container">
       <div class="pm-section-head light reveal" style="margin-bottom:50px;">
         <span class="pm-eyebrow">Institutional Curriculum</span>
-        <h2>4+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
+        <h2>11+ Strategy Courses. <em style="color:var(--orange)">Master the Market.</em></h2>
         <p>The live streams show you how it's done. The courses teach you why. Each is a full structured course with video lessons, trade examples, and clear rules.</p>
       </div>
 
@@ -4914,7 +4906,7 @@
             <h3>Directional Courses</h3>
             <p class="dt-curr-tagline">The foundation strategies — high-probability setups across the full trading day.</p>
           </div>
-          <span class="dt-curr-count">3 courses</span>
+          <span class="dt-curr-count">5 courses</span>
           <span class="dt-curr-chevron">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </span>
@@ -4938,7 +4930,6 @@
                 </div>
                 <span class="dt-curr-row-time">All Session</span>
               </div>
-              <!--
               <div class="dt-curr-row">
                 <span class="dt-curr-row-num">03</span>
                 <div class="dt-curr-row-body">
@@ -4955,7 +4946,6 @@
                 </div>
                 <span class="dt-curr-row-time">All Session</span>
               </div>
-              -->
               <div class="dt-curr-row">
                 <span class="dt-curr-row-num">05</span>
                 <div class="dt-curr-row-body">
@@ -4978,7 +4968,7 @@
             <h3>0DTE / Delta Neutral Courses</h3>
             <p class="dt-curr-tagline">Same-day expiration strategies with defined risk and precise entry timing.</p>
           </div>
-          <span class="dt-curr-count">3 courses</span>
+          <span class="dt-curr-count">4 courses</span>
           <span class="dt-curr-chevron">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </span>
@@ -5009,6 +4999,14 @@
                   <p>When the market moves big, reverse iron condors profit. Recognize high-volatility conditions and deploy a strategy that benefits from large moves rather than range-bound markets.</p>
                 </div>
                 <span class="dt-curr-row-time">High-Vol Days</span>
+              </div>
+              <div class="dt-curr-row">
+                <span class="dt-curr-row-num">09</span>
+                <div class="dt-curr-row-body">
+                  <h4>ELMO Mini Course</h4>
+                  <p>A focused mini-course covering a specific 0 DTE setup for precise, rules-based entries on same-day expiration options.</p>
+                </div>
+                <span class="dt-curr-row-time">Intraday</span>
               </div>
             </div>
           </div>
@@ -5211,8 +5209,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <div class="dt-who-content">
-            <div class="dt-who-title">For trades lasting longer than intraday, join the <a href="https://whop.com/navigationtrading/ntpro/" style="color:var(--orange); text-decoration:underline;" data-config="whopProLink">Pro Membership</a></div>
-            <p class="dt-who-desc">Day Trading focuses on 0 DTE and intraday. For butterflies and calendars, join the Pro Membership.</p>
+            <div class="dt-who-title">For longer-term strategies and swing trades, join the <a href="https://whop.com/navigationtrading/ntpro/" style="color:var(--orange); text-decoration:underline;" data-config="whopProLink">Pro Membership</a></div>
+            <p class="dt-who-desc">For longer-term strategies and swing trades, join the Pro Membership.</p>
           </div>
         </div>
         <div class="dt-who-row">
@@ -5244,7 +5242,7 @@
           <div class="dt-plan-price">$0 — Lifetime Access</div>
           <ul class="dt-plan-features">
             <li class="dt-plan-feature">
-              <div class="dt-plan-chk yes">✓</div><span><strong>5 Beginner Strategy Courses</strong> — options
+              <div class="dt-plan-chk yes">✓</div><span><strong>8 Beginner Strategy Courses</strong> — options
                 fundamentals and basic strategies</span>
             </li>
             <li class="dt-plan-feature">
@@ -5255,7 +5253,7 @@
               <div class="dt-plan-chk no">—</div><span>Daily Live Trading Streams</span>
             </li>
             <li class="dt-plan-feature">
-              <div class="dt-plan-chk no">—</div><span>Day Trading Strategy Courses (10)</span>
+              <div class="dt-plan-chk no">—</div><span>Day Trading Strategy Courses (11)</span>
             </li>
             <li class="dt-plan-feature">
               <div class="dt-plan-chk no">—</div><span>Live Trade Calls in Real Time</span>
@@ -5278,7 +5276,7 @@
           <div class="dt-plan-price">$129 / month — Cancel Anytime</div>
           <ul class="dt-plan-features">
             <li class="dt-plan-feature">
-              <div class="dt-plan-chk yes">✓</div><span><strong>5 Beginner Courses</strong> — included from Free</span>
+              <div class="dt-plan-chk yes">✓</div><span><strong>8 Beginner Courses</strong> — included from Free</span>
             </li>
             <li class="dt-plan-feature">
               <div class="dt-plan-chk yes">✓</div><span><strong>TradeHacker Discord</strong> — included</span>
@@ -5288,7 +5286,7 @@
                 Hour, every market day</span>
             </li>
             <li class="dt-plan-feature">
-              <div class="dt-plan-chk yes">✓</div><span><strong>10 Day Trading Strategy Courses</strong> — full day
+              <div class="dt-plan-chk yes">✓</div><span><strong>11 Day Trading Strategy Courses</strong> — full day
                 trading + 0 DTE curriculum</span>
             </li>
             <li class="dt-plan-feature">
@@ -5481,7 +5479,7 @@
               <div class="pm-faq-icon">+</div>
             </div>
             <div class="pm-faq-ans">
-              <div class="pm-faq-ans-inner">You get 10 complete day trading strategy courses, daily live trading streams
+              <div class="pm-faq-ans-inner">You get 11 complete day trading strategy courses, daily live trading streams
                 (twice per day — morning open and Power Hour), live trade calls in real time, day trading trade alerts,
                 professional chart indicators, 0 DTE strategy tools, live chat rooms, and access to the TradeHacker
                 Discord community. Everything is available instantly when you sign up.</div>
@@ -5493,7 +5491,7 @@
               <div class="pm-faq-icon">+</div>
             </div>
             <div class="pm-faq-ans">
-              <div class="pm-faq-ans-inner">That's $4.30 per day for a live trading room with a professional trader, 10
+              <div class="pm-faq-ans-inner">That's $4.30 per day for a live trading room with a professional trader, 11
                 strategy courses, real-time trade alerts, and custom chart indicators. Most traders lose more than that
                 on a single impulsive trade made without proper guidance. The membership pays for itself the first time
                 it keeps you out of a bad trade — or puts you into a good one with the right plan.</div>
@@ -5544,7 +5542,7 @@
               <div class="pm-faq-icon">+</div>
             </div>
             <div class="pm-faq-ans">
-              <div class="pm-faq-ans-inner">Day Trading ($129/month) focuses on day trading and 0 DTE strategies — 4+ courses, daily live streams, and day trading alerts and indicators. <a href="https://whop.com/navigationtrading/ntpro/" style="color:var(--orange); text-decoration:underline;" data-config="whopProLink">Pro ($179/month)</a> includes everything in Day Trading plus additional advanced strategy courses (income spreads, trend trading, portfolio strategies), trade alerts for every strategy, and the full suite of custom chart indicators and watch lists. If you want to go beyond day trading, Pro gives you the complete system.</div>
+              <div class="pm-faq-ans-inner">Day Trading ($129/month) focuses on day trading and 0 DTE strategies — 11 courses, daily live streams, and day trading alerts and indicators. <a href="https://whop.com/navigationtrading/ntpro/" style="color:var(--orange); text-decoration:underline;" data-config="whopProLink">Pro ($179/month)</a> includes everything in Day Trading plus additional advanced strategy courses (income spreads, trend trading, portfolio strategies), trade alerts for every strategy, and the full suite of custom chart indicators and watch lists. If you want to go beyond day trading, Pro gives you the complete system.</div>
             </div>
           </div>
           <div class="pm-faq-item">
@@ -5572,7 +5570,7 @@
             <span class="dt-live-dot"></span> System Online
           </div>
           <h2>Join the <em>Live Trading Room</em></h2>
-          <p>10 day trading courses. Daily live streams with real-time trade calls. Professional chart indicators. 0 DTE strategies. An active community of traders who show up every morning ready to trade.</p>
+          <p>11 day trading courses. Daily live streams with real-time trade calls. Professional chart indicators. 0 DTE strategies. An active community of traders who show up every morning ready to trade.</p>
           
           <div class="dt-volume-profile">
             <div class="dt-vol-bar"></div>
@@ -5687,7 +5685,7 @@
   <!-- ── STICKY CTA ── -->
   <div class="sticky-cta">
     <div class="sticky-cta-text">
-      <strong>Day Trading Membership</strong> — Live Streams, 10 Courses, Trade Alerts
+      <strong>Day Trading Membership</strong> — Live Streams, 11 Courses, Trade Alerts
     </div>
     <div class="sticky-cta-right">
       <div class="sticky-price">$129<small>/mo</small></div>

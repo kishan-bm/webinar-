@@ -295,8 +295,13 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'yearPdfUrl2019', label: '2019 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2019 annual performance report', group: 'Year Report Links' },
       { key: 'yearPdfUrl2018', label: '2018 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2018 annual performance report', group: 'Year Report Links' },
       { key: 'yearPdfUrl2017', label: '2017 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2017 inception year performance report', group: 'Year Report Links' },
-      { key: 'video1Url', label: 'Video 1 — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the first live execution video (left card)', group: 'Live Execution Videos' },
-      { key: 'video2Url', label: 'Video 2 — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the second live execution video (right card)', group: 'Live Execution Videos' }
+      { key: 'video1Url', label: 'Live Stream — Latest Replay Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the Day Trading Live Stream latest replay (single video card)', group: 'Live Execution Videos' },
+      { key: 'video2026Jun', label: 'June 2026 — YouTube Video ID', type: 'text', placeholder: 'e.g. abc123XYZ', description: 'YouTube video ID for June 2026 Trade Results (add when published)', group: '2026 Monthly Videos' },
+      { key: 'video2026May', label: 'May 2026 — YouTube Video ID', type: 'text', placeholder: 'Qfx4XipgSAU', description: 'YouTube video ID for May 2026 Trade Results', group: '2026 Monthly Videos' },
+      { key: 'video2026Apr', label: 'April 2026 — YouTube Video ID', type: 'text', placeholder: 'e.g. abc123XYZ', description: 'YouTube video ID for April 2026 Trade Results (add when published)', group: '2026 Monthly Videos' },
+      { key: 'video2026Mar', label: 'March 2026 — YouTube Video ID', type: 'text', placeholder: '66jFo1mil58', description: 'YouTube video ID for March 2026 Trade Results', group: '2026 Monthly Videos' },
+      { key: 'video2026Feb', label: 'February 2026 — YouTube Video ID', type: 'text', placeholder: 'pDSgzEA9cEU', description: 'YouTube video ID for February 2026 Trade Results', group: '2026 Monthly Videos' },
+      { key: 'video2026Jan', label: 'January 2026 — YouTube Video ID', type: 'text', placeholder: 'WNYu-z02mfg', description: 'YouTube video ID for January 2026 Trade Results', group: '2026 Monthly Videos' }
     ]
   },
   {

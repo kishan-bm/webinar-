@@ -924,8 +924,8 @@
 
     /* ── VIDEO SECTION ── */
     .video-section {
-      padding: 110px 0;
-      background: #ffffff;
+      padding: 100px 0;
+      background: #0D2E4E;
       position: relative;
       overflow: hidden;
     }
@@ -943,15 +943,43 @@
 
     .video-cards-wrap {
       padding: 0;
-      margin-top: 60px;
+      margin-top: 0;
       position: relative;
       z-index: 1;
+    }
+
+    /* 2-col layout: text left, video right */
+    .video-section .container {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .video-section-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     .video-section::before,
     .video-section::after { display: none; }
 
     .va-band { display: none; }
+
+    /* Override text colors for dark bg */
+    .video-section .section-header h2 { color: #ffffff !important; }
+    .video-section .section-header h2 .hl { color: var(--orange) !important; }
+    .video-section .section-header p { color: rgba(255,255,255,0.65) !important; }
+    .video-section .s-eyebrow { color: var(--orange) !important; }
+    .video-section-left,
+    .video-section-left .section-header,
+    .video-section-left .s-eyebrow { text-align: left; margin-left: 0; }
+
+    @media (max-width: 900px) {
+      .video-section .container { grid-template-columns: 1fr; gap: 40px; }
+    }
 
     @keyframes vaFloat1 {
       0%,100% { transform: rotate(-5deg) translateY(0px);  opacity: 0.85; }
@@ -979,11 +1007,8 @@
       z-index: 2;
     }
 
-    .video-section .section-header h2 { color: #050d17; }
-    .video-section .section-header h2 .hl { color: var(--orange); }
     .perf-hero h1 em { color: var(--orange); font-style: normal; }
     .track-section .section-header h2 .hl { color: var(--orange); }
-    .video-section .section-header p { color: var(--text-dim); }
 
     .video-grid {
       display: grid;
@@ -1092,6 +1117,94 @@
 
     /* ── CTA CANVAS DOTS ── */
     #ctaCanvas { display: none; }
+
+    /* ── 2026 MONTHLY RESULTS ── */
+    .monthly-section {
+      padding: 100px 0;
+      background: #f8fafc;
+      border-top: 1px solid rgba(30,111,168,0.08);
+    }
+
+    .monthly-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .monthly-sidebar {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .month-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 14px 20px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      color: #475569;
+      transition: all 0.2s;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .month-btn:hover {
+      background: rgba(30,111,168,0.06);
+      color: #1e6fa8;
+    }
+
+    .month-btn.active {
+      background: rgba(30,111,168,0.08);
+      border-left-color: #1e6fa8;
+      color: #1e6fa8;
+    }
+
+    .month-btn.empty {
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .monthly-video-area {
+      min-width: 0;
+    }
+
+    .monthly-video-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: #1e6fa8;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .monthly-video-label::before {
+      content: '';
+      width: 22px;
+      height: 1.5px;
+      background: #1e6fa8;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .monthly-layout { grid-template-columns: 1fr; }
+      .monthly-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+      .month-btn { width: auto; border-left: none; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0; }
+      .month-btn.active { border-bottom-color: #1e6fa8; border-left-color: transparent; }
+    }
 
     /* ── CTA SECTION (LIGHT) ── */
     /* ── REDESIGNED PERFORMANCE CTA (SPLIT-DECK) ── */
@@ -1662,7 +1775,7 @@
           <span class="stat-emoji">🛡️</span>
           <div class="stat-text">
             <span class="stat-value">9+ Years</span>
-            <span class="stat-label">VERIFIED HISTORY</span>
+            <span class="stat-label">DOCUMENTED PERFORMANCE</span>
           </div>
         </div>
         <div class="stat-btn">
@@ -1701,7 +1814,7 @@
       <div class="track-split">
 
         <!-- LEFT: tall 2025 featured card -->
-        <a href="https://navigationtrading.com/wp-content/uploads/2026/02/2025-Monthly-Performance-Links.pdf"
+        <a href="https://navigationtrading.com/wp-content/uploads/2026/06/2025-Monthly-Performance-Links.pdf"
           target="_blank" class="year-featured reveal" data-config="featuredYearPdfUrl">
           <div class="yf-watermark">2025</div>
           <div class="yf-top">
@@ -1806,42 +1919,63 @@
   </section>
 
   <!-- ── VIDEO WALKTHROUGHS ── -->
-  <section class="video-section" id="videos">
-    <div class="video-header-band">
-      <div class="video-section-topline"></div>
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="s-eyebrow dark">LIVE EXECUTION</span>
-          <h2>Watch Real Trades <span class="hl">in Action</span></h2>
-          <p>See exactly how we navigate markets and manage alerts in real-time.</p>
-        </div>
-      </div>
-    </div>
-    <div class="video-cards-wrap">
+  <!-- ── 2026 MONTHLY TRADE RESULTS ── -->
+  <section class="monthly-section" id="monthly-2026">
     <div class="container">
-      <div class="video-grid">
-        <div class="video-card reveal reveal-d1" data-seq="01">
-          <div class="video-title">Trade Results — February 2026</div>
+      <div class="section-header reveal">
+        <span class="s-eyebrow dark">2026 PERFORMANCE</span>
+        <h2>2026 Monthly <span class="hl">Trade Results</span></h2>
+        <p>Every month documented live — click any month to watch the full review.</p>
+      </div>
+      <div class="monthly-layout">
+
+        <!-- Left: month sidebar -->
+        <div class="monthly-sidebar">
+          <button class="month-btn empty" data-video-id="" data-label="Trade Results — June 2026" data-config-video="video2026Jun">June</button>
+          <button class="month-btn active" data-video-id="Qfx4XipgSAU" data-label="Trade Results — May 2026" data-config-video="video2026May">May</button>
+          <button class="month-btn empty" data-video-id="" data-label="Trade Results — April 2026" data-config-video="video2026Apr">April</button>
+          <button class="month-btn" data-video-id="66jFo1mil58" data-label="Trade Results — March 2026" data-config-video="video2026Mar">March</button>
+          <button class="month-btn" data-video-id="pDSgzEA9cEU" data-label="Trade Results — February 2026" data-config-video="video2026Feb">February</button>
+          <button class="month-btn" data-video-id="WNYu-z02mfg" data-label="Trade Results — January 2026" data-config-video="video2026Jan">January</button>
+        </div>
+
+        <!-- Right: video embed -->
+        <div class="monthly-video-area">
+          <div class="monthly-video-label" id="monthly-video-label">Trade Results — May 2026</div>
           <div class="iframe-wrap">
-            <iframe src="https://www.youtube.com/embed/pDSgzEA9cEU" frameborder="0" allowfullscreen data-config="video1Url"></iframe>
-          </div>
-          <div class="video-info">
-            <h4>Account Review & Execution</h4>
-            <p>A deep dive into our live account execution and trade management strategies.</p>
+            <iframe id="monthly-iframe"
+              src="https://www.youtube.com/embed/Qfx4XipgSAU"
+              frameborder="0" allowfullscreen
+              data-config-may="video2026May"
+              data-config-apr="video2026Apr"
+              data-config-mar="video2026Mar"
+              data-config-feb="video2026Feb"
+              data-config-jan="video2026Jan">
+            </iframe>
           </div>
         </div>
-        <div class="video-card reveal reveal-d2" data-seq="02">
-          <div class="video-title">Trade Results — January 2026</div>
-          <div class="iframe-wrap">
-            <iframe src="https://www.youtube.com/embed/WNYu-z02mfg" frameborder="0" allowfullscreen data-config="video2Url"></iframe>
-          </div>
-          <div class="video-info">
-            <h4>Trade Alert Workflow</h4>
-            <p>Understanding how alerts are generated and sent to our community.</p>
-          </div>
-        </div>
+
       </div>
     </div>
+  </section>
+
+  <section class="video-section" id="videos">
+    <div class="container">
+
+      <!-- Left: heading & text -->
+      <div class="video-section-left reveal">
+        <span class="s-eyebrow" style="color:var(--orange);margin-bottom:16px;display:block;">LIVE EXECUTION</span>
+        <h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-1.5px;margin:0 0 20px;">Watch Real Trades <span class="hl">in Action</span></h2>
+        <p style="font-size:16px;line-height:1.75;color:rgba(255,255,255,0.65);max-width:440px;margin:0;">See exactly how we navigate markets and manage alerts in real-time.</p>
+      </div>
+
+      <!-- Right: video embed -->
+      <div class="reveal reveal-d1">
+        <div class="iframe-wrap" style="border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+          <iframe src="https://www.youtube.com/embed/Qfx4XipgSAU" frameborder="0" allowfullscreen data-config="video1Url"></iframe>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1986,6 +2120,24 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── 2026 MONTHLY VIDEO SWITCHER ──
+    (function () {
+      const iframe = document.getElementById('monthly-iframe');
+      const label  = document.getElementById('monthly-video-label');
+      const btns   = document.querySelectorAll('.month-btn');
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const videoId = this.dataset.videoId;
+          if (!videoId) return;
+          btns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          if (label) label.textContent = this.dataset.label || '';
+          if (iframe) iframe.src = 'https://www.youtube.com/embed/' + videoId;
+        });
+      });
+    })();
   </script>
   <script src="site-config.js" data-page="performance"></script>
 </body>

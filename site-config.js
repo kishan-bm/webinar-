@@ -85,7 +85,24 @@
         }
       });
 
-      // 3. Exit Intent Popup show/hide toggle
+      // 3. 2026 Monthly Video Buttons — update video IDs from admin config
+      document.querySelectorAll('[data-config-video]').forEach(function(btn) {
+        var key = btn.getAttribute('data-config-video');
+        if (config[key] && config[key].trim()) {
+          btn.dataset.videoId = config[key].trim();
+          btn.classList.remove('empty');
+        }
+      });
+      // Refresh active button's iframe in case its ID was updated
+      var activeMonthBtn = document.querySelector('.month-btn.active');
+      if (activeMonthBtn && activeMonthBtn.dataset.videoId) {
+        var monthIframe = document.getElementById('monthly-iframe');
+        if (monthIframe) monthIframe.src = 'https://www.youtube.com/embed/' + activeMonthBtn.dataset.videoId;
+        var monthLabel = document.getElementById('monthly-video-label');
+        if (monthLabel) monthLabel.textContent = activeMonthBtn.dataset.label || '';
+      }
+
+      // 4. Exit Intent Popup show/hide toggle
       if (config.exitPopupShow === 'false') {
         window.EXIT_POPUP_DISABLED = true;
         var popup = document.getElementById('exit-popup');
