@@ -1489,6 +1489,18 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
     }
   };
 
+  // ── TABLE RIGHT-CLICK CONTEXT MENU close handler ──
+  useEffect(() => {
+    const close = (e: MouseEvent | KeyboardEvent) => {
+      if ('key' in e && (e as KeyboardEvent).key !== 'Escape') return;
+      if (tableCtxMenuRef.current && e instanceof MouseEvent && tableCtxMenuRef.current.contains(e.target as globalThis.Node)) return;
+      setTableCtxMenu(null);
+    };
+    document.addEventListener('mousedown', close);
+    document.addEventListener('keydown', close);
+    return () => { document.removeEventListener('mousedown', close); document.removeEventListener('keydown', close); };
+  }, []);
+
   if (!editor) return null;
 
   const { selection: activeSelection } = editor.state;
@@ -1930,18 +1942,6 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
     </div>
   );
 
-  // ── TABLE RIGHT-CLICK CONTEXT MENU ──
-  useEffect(() => {
-    const close = (e: MouseEvent | KeyboardEvent) => {
-      if ('key' in e && e.key !== 'Escape') return;
-      if (tableCtxMenuRef.current && e instanceof MouseEvent && tableCtxMenuRef.current.contains(e.target as globalThis.Node)) return;
-      setTableCtxMenu(null);
-    };
-    document.addEventListener('mousedown', close);
-    document.addEventListener('keydown', close);
-    return () => { document.removeEventListener('mousedown', close); document.removeEventListener('keydown', close); };
-  }, []);
-
   const handleContextMenu = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (!target.closest('td, th')) return;
@@ -1950,14 +1950,14 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
   };
 
   const tableActions = [
-    { label: 'Insert row above', fn: () => editor?.chain().focus().addRowBefore().run(), danger: false },
-    { label: 'Insert row below', fn: () => editor?.chain().focus().addRowAfter().run(), danger: false },
-    { label: 'Insert column to the left', fn: () => editor?.chain().focus().addColumnBefore().run(), danger: false },
-    { label: 'Insert column to the right', fn: () => editor?.chain().focus().addColumnAfter().run(), danger: false },
+    { label: 'Insert row above', fn: () => editor.chain().focus().addRowBefore().run(), danger: false },
+    { label: 'Insert row below', fn: () => editor.chain().focus().addRowAfter().run(), danger: false },
+    { label: 'Insert column to the left', fn: () => editor.chain().focus().addColumnBefore().run(), danger: false },
+    { label: 'Insert column to the right', fn: () => editor.chain().focus().addColumnAfter().run(), danger: false },
     null,
-    { label: 'Delete row', fn: () => editor?.chain().focus().deleteRow().run(), danger: true },
-    { label: 'Delete column', fn: () => editor?.chain().focus().deleteColumn().run(), danger: true },
-    { label: 'Delete table', fn: () => editor?.chain().focus().deleteTable().run(), danger: true },
+    { label: 'Delete row', fn: () => editor.chain().focus().deleteRow().run(), danger: true },
+    { label: 'Delete column', fn: () => editor.chain().focus().deleteColumn().run(), danger: true },
+    { label: 'Delete table', fn: () => editor.chain().focus().deleteTable().run(), danger: true },
   ];
 
   return (
