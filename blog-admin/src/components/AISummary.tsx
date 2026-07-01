@@ -52,7 +52,7 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
         <div
           style={{
             background: 'linear-gradient(135deg, #0d2e4e 0%, #173d63 100%)',
-            padding: '24px 32px',
+            padding: '16px 28px',
             borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
@@ -66,26 +66,22 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div
               style={{
-                width: '40px',
-                height: '40px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 background: 'rgba(255, 255, 255, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#ff7c47',
+                flexShrink: 0,
               }}
             >
-              <Sparkles size={20} />
+              <Sparkles size={18} />
             </div>
-            <div>
-              <h3 style={{ margin: 0, color: '#ffffff', fontSize: '18px', fontWeight: 700 }}>
-                Looking for a Shorter Overview?
-              </h3>
-              <p style={{ margin: '4px 0 0 0', color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px' }}>
-                Let our AI scan the article to generate key moments and a high-level summary.
-              </p>
-            </div>
+            <h3 style={{ margin: 0, color: '#ffffff', fontSize: '18px', fontWeight: 700, whiteSpace: 'nowrap' }}>
+              Looking for a Shorter Overview?
+            </h3>
           </div>
           <button
             onClick={generateSummary}
@@ -93,7 +89,7 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
               background: '#c8420a',
               color: '#ffffff',
               border: 'none',
-              padding: '12px 24px',
+              padding: '10px 20px',
               borderRadius: '8px',
               fontSize: '14px',
               fontWeight: 700,
@@ -188,55 +184,22 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
       {summary && !loading && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           
-          {/* Quote Card */}
-          <div
-            style={{
-              position: 'relative',
-              background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-              borderLeft: '4px solid #c8420a',
-              borderRadius: '0 12px 12px 0',
-              padding: '32px 40px',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.03)',
-              overflow: 'hidden',
-            }}
-          >
-            {/* Background watermark quote icon */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '-10px',
-                left: '20px',
-                fontSize: '120px',
-                color: 'rgba(200, 66, 10, 0.05)',
-                fontFamily: 'Georgia, serif',
-                lineHeight: 1,
-                userSelect: 'none',
-                pointerEvents: 'none',
-              }}
-            >
-              “
-            </div>
-            
+          {/* Quote Section */}
+          <div style={{ position: 'relative', margin: '0 0 24px 0' }}>
             <p
               style={{
                 fontSize: '18px',
-                lineHeight: '1.7',
-                color: '#0d2e4e',
-                fontWeight: 600,
-                fontStyle: 'italic',
-                margin: 0,
-                position: 'relative',
-                zIndex: 2,
+                lineHeight: '1.8',
+                color: '#334155',
+                margin: '0 0 8px 0',
               }}
             >
               {summary.quote}
             </p>
-
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'flex-end',
-                marginTop: '16px',
                 fontSize: '11px',
                 fontWeight: 700,
                 color: '#94a3b8',
