@@ -774,6 +774,10 @@ footer::before {
     padding: 24px 20px 32px !important;
   }
 
+  .article-summary-container {
+    padding: 0 20px !important;
+  }
+
   /* Blog title smaller on mobile */
   .blog-title {
     font-size: 26px !important;
