@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, Download, ChevronDown } from 'lucide-react';
 import '../blogs/public.css';
 
 type Post = {
   id: string;
   title: string;
+  slug: string;
   status: string;
   createdAt: string;
   author: { name: string };
@@ -43,10 +44,46 @@ function injectHeadingIds(html: string) {
   });
 }
 
+const BASE_URL = 'https://webclass.navigationtrading.com';
+
 export default function Dashboard() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPreviewPost, setSelectedPreviewPost] = useState<Post | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
+  const [exportFilter, setExportFilter] = useState<'ALL' | 'DRAFT' | 'PUBLISHED'>('ALL');
+  const exportRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (exportRef.current && !exportRef.current.contains(e.target as Node)) {
+        setExportOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const handleExport = () => {
+    const filtered = exportFilter === 'ALL'
+      ? posts
+      : posts.filter(p => p.status === exportFilter);
+
+    const rows = [['S.No', 'URL']];
+    filtered.forEach((post, i) => {
+      rows.push([(i + 1).toString(), `${BASE_URL}/blogs/${post.slug}`]);
+    });
+
+    const csv = rows.map(r => r.map(cell => `"${cell.replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `posts-${exportFilter.toLowerCase()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setExportOpen(false);
+  };
 
   useEffect(() => {
     fetch('/api/posts')
@@ -80,9 +117,61 @@ export default function Dashboard() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <h1>Posts</h1>
-        <Link href="/posts/new" className="btn-primary">
-          <Plus size={18} /> Create Post
-        </Link>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {/* Export dropdown */}
+          <div ref={exportRef} style={{ position: 'relative' }}>
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => setExportOpen(o => !o)}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px' }}
+            >
+              <Download size={16} />
+              Export
+              <ChevronDown size={14} style={{ opacity: 0.7 }} />
+            </button>
+            {exportOpen && (
+              <div style={{
+                position: 'absolute', top: 'calc(100% + 6px)', right: 0,
+                background: 'var(--card-bg, #fff)', border: '1px solid var(--border-color, #e2e8f0)',
+                borderRadius: '8px', boxShadow: '0 6px 24px rgba(0,0,0,0.12)',
+                zIndex: 100, minWidth: '180px', padding: '6px',
+              }}>
+                {(['ALL', 'DRAFT', 'PUBLISHED'] as const).map(opt => (
+                  <label key={opt} style={{
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    padding: '8px 10px', borderRadius: '5px', cursor: 'pointer',
+                    fontSize: '13px', fontWeight: exportFilter === opt ? 600 : 400,
+                    background: exportFilter === opt ? 'rgba(200,66,10,0.07)' : 'transparent',
+                  }}>
+                    <input
+                      type="radio"
+                      name="exportFilter"
+                      value={opt}
+                      checked={exportFilter === opt}
+                      onChange={() => setExportFilter(opt)}
+                      style={{ accentColor: 'var(--accent-color, #c8420a)' }}
+                    />
+                    {opt.charAt(0) + opt.slice(1).toLowerCase()}
+                  </label>
+                ))}
+                <div style={{ borderTop: '1px solid var(--border-color, #e2e8f0)', marginTop: '4px', paddingTop: '6px' }}>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={handleExport}
+                    style={{ width: '100%', justifyContent: 'center', padding: '8px' }}
+                  >
+                    <Download size={14} /> Download CSV
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          <Link href="/posts/new" className="btn-primary">
+            <Plus size={18} /> Create Post
+          </Link>
+        </div>
       </div>
 
       <div className="table-container">

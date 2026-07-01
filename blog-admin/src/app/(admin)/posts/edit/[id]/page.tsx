@@ -278,8 +278,21 @@ export default function EditPost({ params }: EditPostProps) {
             <div className="form-group">
               <label className="form-label">Featured Image (Cover)</label>
               {formData.coverImage && (
-                <div style={{ marginBottom: '8px' }}>
-                  <img src={formData.coverImage} alt={formData.coverImageAlt || 'Cover'} style={{ width: '100%', borderRadius: '8px' }} />
+                <div style={{ marginBottom: '8px', position: 'relative', display: 'inline-block', width: '100%' }}>
+                  <img src={formData.coverImage} alt={formData.coverImageAlt || 'Cover'} style={{ width: '100%', borderRadius: '8px', display: 'block' }} />
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, coverImage: '', coverImageAlt: '' }))}
+                    title="Remove image"
+                    style={{
+                      position: 'absolute', top: '6px', right: '6px',
+                      background: 'rgba(0,0,0,0.6)', color: '#fff',
+                      border: 'none', borderRadius: '50%',
+                      width: '26px', height: '26px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      cursor: 'pointer', fontSize: '16px', lineHeight: 1,
+                    }}
+                  >×</button>
                 </div>
               )}
               <input type="file" accept="image/*" onChange={uploadCoverImage} className="form-input" />

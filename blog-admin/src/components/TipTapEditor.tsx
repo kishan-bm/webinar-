@@ -268,7 +268,7 @@ function FontSizePicker({ value, onChange }: { value: string; onChange: (val: st
 }
 
 // React NodeView component for resizable images with drag handle
-function ResizableImageNodeView({ node, updateAttributes, selected, editor, getPos }: any) {
+function ResizableImageNodeView({ node, updateAttributes, selected }: any) {
   const { src, alt, title, href, width, align } = node.attrs;
   const [isResizing, setIsResizing] = useState(false);
   const startXRef = useRef(0);
@@ -291,34 +291,6 @@ function ResizableImageNodeView({ node, updateAttributes, selected, editor, getP
     if (imgAlign === 'left') return { marginLeft: '0', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
     if (imgAlign === 'right') return { marginLeft: 'auto', marginRight: '0', marginTop: '12px', marginBottom: '4px' };
     return { marginLeft: 'auto', marginRight: 'auto', marginTop: '12px', marginBottom: '4px' };
-  };
-
-  // Select node programmatically on click/mousedown
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (typeof getPos === 'function' && editor) {
-      try {
-        const pos = getPos();
-        const { selection } = editor.state;
-        const isCurrentlySelected = selection instanceof NodeSelection && selection.from === pos;
-
-        if (isCurrentlySelected) {
-          // Deselect node by setting a text selection at the same position
-          const tr = editor.state.tr.setSelection(editor.state.selection.constructor.near(editor.state.doc.resolve(pos)));
-          editor.view.dispatch(tr);
-        } else {
-          // Select the image node
-          const tr = editor.state.tr.setSelection(NodeSelection.create(editor.state.doc, pos));
-          editor.view.dispatch(tr);
-        }
-        setTimeout(() => {
-          editor.view.focus();
-        }, 10);
-      } catch (err) {
-        console.error("Failed to select node", err);
-      }
-    }
   };
 
   // Resize drag (right handle)
@@ -383,9 +355,6 @@ function ResizableImageNodeView({ node, updateAttributes, selected, editor, getP
         cursor: isResizing ? 'ew-resize' : isInText ? 'grab' : 'pointer',
         userSelect: 'none',
         transition: 'border 0.15s, box-shadow 0.15s',
-      }}
-      onClick={(e) => {
-        handleClick(e);
       }}
       onMouseDown={(e) => {
         if (isInText) {
