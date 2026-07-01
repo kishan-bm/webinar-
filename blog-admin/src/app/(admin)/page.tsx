@@ -69,9 +69,9 @@ export default function Dashboard() {
       ? posts
       : posts.filter(p => p.status === exportFilter);
 
-    const rows = [['S.No', 'URL']];
+    const rows = [['S.No', 'URL', 'Status']];
     filtered.forEach((post, i) => {
-      rows.push([(i + 1).toString(), `${BASE_URL}/blogs/${post.slug}`]);
+      rows.push([(i + 1).toString(), `${BASE_URL}/blogs/${post.slug}`, post.status]);
     });
 
     const csv = rows.map(r => r.map(cell => `"${cell.replace(/"/g, '""')}"`).join(',')).join('\n');

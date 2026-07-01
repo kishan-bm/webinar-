@@ -285,12 +285,13 @@ export default function EditPost({ params }: EditPostProps) {
                     onClick={() => setFormData(prev => ({ ...prev, coverImage: '', coverImageAlt: '' }))}
                     title="Remove image"
                     style={{
-                      position: 'absolute', top: '6px', right: '6px',
-                      background: 'rgba(0,0,0,0.6)', color: '#fff',
-                      border: 'none', borderRadius: '50%',
-                      width: '26px', height: '26px',
+                      position: 'absolute', top: '8px', right: '8px',
+                      background: 'rgba(15,15,15,0.75)', color: '#fff',
+                      border: '2px solid rgba(255,255,255,0.4)', borderRadius: '50%',
+                      width: '34px', height: '34px',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      cursor: 'pointer', fontSize: '16px', lineHeight: 1,
+                      cursor: 'pointer', fontSize: '20px', lineHeight: 1,
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
                     }}
                   >×</button>
                 </div>

@@ -1116,6 +1116,7 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
 
   // Portal target element state
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+  const [, forceUpdate] = useState(0);
 
   useEffect(() => {
     if (toolbarPortalId) {
@@ -1132,6 +1133,9 @@ export default function TipTapEditor({ content, onChange, toolbarPortalId }: Tip
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
+    },
+    onSelectionUpdate: () => {
+      forceUpdate(v => v + 1);
     },
     editorProps: {
       handleClickOn(view, pos, node, nodePos, event, direct) {
