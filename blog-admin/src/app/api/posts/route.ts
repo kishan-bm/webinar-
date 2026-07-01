@@ -68,41 +68,49 @@ export async function POST(request: Request) {
       }
     }
 
-    // Ensure the slug is unique — append -2, -3, ... if taken
+    // Ensure slug is unique. Uses a retry loop that also handles the race condition
+    // where two simultaneous requests both see the slug as available and one gets P2002.
     let finalSlug = body.slug;
     let suffix = 2;
-    while (await prisma.post.findFirst({ where: { slug: finalSlug }, select: { id: true } })) {
-      finalSlug = `${body.slug}-${suffix++}`;
+    let post;
+    while (true) {
+      // Pre-check (avoids P2002 in the common non-concurrent case)
+      const taken = await prisma.post.findFirst({ where: { slug: finalSlug }, select: { id: true } });
+      if (taken) {
+        finalSlug = `${body.slug}-${suffix++}`;
+        continue;
+      }
+      try {
+        post = await prisma.post.create({
+          data: {
+            title: body.title,
+            slug: finalSlug,
+            content: body.content,
+            excerpt: body.excerpt,
+            coverImage: body.coverImage,
+            seoTitle: body.seoTitle,
+            seoDescription: body.seoDescription,
+            status: body.status || 'DRAFT',
+            author: { connect: { id: body.authorId } },
+            category: categoryData,
+            tags: tagsData,
+            publishedAt: body.publishedAt ? new Date(body.publishedAt) : null,
+          },
+        });
+        break; // success
+      } catch (err: any) {
+        if (err.code === 'P2002') {
+          // Race condition: another request claimed this slug between our check and create
+          finalSlug = `${body.slug}-${suffix++}`;
+        } else {
+          throw err; // unrelated error — rethrow to outer catch
+        }
+      }
     }
-
-    const post = await prisma.post.create({
-      data: {
-        title: body.title,
-        slug: finalSlug,
-        content: body.content,
-        excerpt: body.excerpt,
-        coverImage: body.coverImage,
-        seoTitle: body.seoTitle,
-        seoDescription: body.seoDescription,
-        status: body.status || 'DRAFT',
-        author: {
-          connect: { id: body.authorId }
-        },
-        category: categoryData,
-        tags: tagsData,
-        publishedAt: body.publishedAt ? new Date(body.publishedAt) : null,
-      },
-    });
 
     return NextResponse.json({ success: true, data: post }, { status: 201 });
   } catch (error: any) {
     console.error('Failed to create post:', error);
-    if (error.code === 'P2002') {
-      return NextResponse.json(
-        { success: false, error: 'Failed to create post: duplicate value. Try a different slug.' },
-        { status: 409 }
-      );
-    }
     return NextResponse.json(
       { success: false, error: 'Failed to create post' },
       { status: 500 }
