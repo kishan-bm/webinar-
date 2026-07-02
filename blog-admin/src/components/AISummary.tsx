@@ -131,7 +131,7 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
             animation: 'pulse 1.5s infinite ease-in-out',
           }}
         >
-          <Loader2 className="animate-spin" size={32} style={{ color: '#0d2e4e' }} />
+          <Loader2 className="ai-loading-spinner" size={32} style={{ color: '#0d2e4e' }} />
           <div>
             <h4 style={{ margin: 0, color: '#0d2e4e', fontWeight: 700 }}>AI is reading this article...</h4>
             <p style={{ margin: '4px 0 0 0', color: '#64748b', fontSize: '13px' }}>Extracting core lessons and key trading moments.</p>
@@ -141,6 +141,13 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
               0% { opacity: 0.6; }
               50% { opacity: 1; }
               100% { opacity: 0.6; }
+            }
+            @keyframes spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+            .ai-loading-spinner {
+              animation: spin 1s linear infinite;
             }
           `}</style>
         </div>
