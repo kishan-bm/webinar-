@@ -8,7 +8,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|indexV3|indexV4)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -77,6 +77,26 @@
     {
       "source": "/day-trading-offer",
       "destination": "/day-trading-offer"
+    },
+    {
+      "source": "/options-basics",
+      "destination": "/options-basics"
+    },
+    {
+      "source": "/iron-condors",
+      "destination": "/iron-condors"
+    },
+    {
+      "source": "/calendar-spreads",
+      "destination": "/calendar-spreads"
+    },
+    {
+      "source": "/butterfly-spreads",
+      "destination": "/butterfly-spreads"
+    },
+    {
+      "source": "/vertical-spreads",
+      "destination": "/vertical-spreads"
     },
     {
       "source": "/dtt-6/16",

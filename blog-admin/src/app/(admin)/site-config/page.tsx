@@ -320,6 +320,86 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'dateLabel', label: 'Webinar Date Label', type: 'text', placeholder: 'e.g. March 19th, 2026', description: 'Webinar date text in Details card', group: 'Webinar Date & Time' },
       { key: 'timeLabel', label: 'Webinar Time Label', type: 'text', placeholder: 'e.g. 3:30 PM Central Time', description: 'Webinar time text in Details card', group: 'Webinar Date & Time' }
     ]
+  },
+  {
+    key: 'options-basics',
+    title: 'Options Basics — Free Course',
+    path: '/options-basics',
+    deployedUrl: 'https://webclass.navigationtrading.com/options-basics',
+    description: 'Beginner free video course landing page: how options work, from zero.',
+    fields: [
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors try to leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', description: 'Semicolon (;) separated bullet points, replaces the default 3', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
+    key: 'iron-condors',
+    title: 'Iron Condors for Income — Free Course',
+    path: '/iron-condors',
+    deployedUrl: 'https://webclass.navigationtrading.com/iron-condors',
+    description: 'Beginner-softened free video course landing page on trading Iron Condors for income.',
+    fields: [
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors try to leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', description: 'Semicolon (;) separated bullet points, replaces the default 3', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
+    key: 'calendar-spreads',
+    title: 'Calendar Spreads for Income — Free Course',
+    path: '/calendar-spreads',
+    deployedUrl: 'https://webclass.navigationtrading.com/calendar-spreads',
+    description: 'Beginner-softened free video course landing page on trading Calendar Spreads for income.',
+    fields: [
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors try to leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', description: 'Semicolon (;) separated bullet points, replaces the default 3', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
+    key: 'butterfly-spreads',
+    title: 'Butterfly Spreads for Income — Free Course',
+    path: '/butterfly-spreads',
+    deployedUrl: 'https://webclass.navigationtrading.com/butterfly-spreads',
+    description: 'Beginner-softened free video course landing page on trading Butterfly Spreads for income.',
+    fields: [
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors try to leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', description: 'Semicolon (;) separated bullet points, replaces the default 3', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
+    key: 'vertical-spreads',
+    title: 'Verticals & Directional Strategies — Free Course',
+    path: '/vertical-spreads',
+    deployedUrl: 'https://webclass.navigationtrading.com/vertical-spreads',
+    description: 'Beginner-appropriate free video course landing page on trading Vertical Spreads directionally.',
+    fields: [
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors try to leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', description: 'Semicolon (;) separated bullet points, replaces the default 3', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
+    ]
   }
 ];
 
