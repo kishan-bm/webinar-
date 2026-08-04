@@ -3150,12 +3150,176 @@
         display: none;
       }
 
+
       .hero-form-body {
         padding: 16px 16px 0;
       }
 
       .form-input {
         font-size: 14px;
+      }
+    }
+
+    /* ── FLUX COMBINED CARD ── */
+    .results-section .container {
+      max-width: 1280px;
+      padding: 0 24px;
+    }
+    .flux-combined-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .flux-combined-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 107, 38, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 107, 38, 0.08);
+    }
+    .flux-combined-left {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .flux-tool-block {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 36px 40px 28px;
+    }
+    .flux-tool-block:first-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .flux-tool-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .flux-card-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 107, 38, 0.25);
+      background: rgba(255, 107, 38, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--orange);
+      transition: all 0.3s ease;
+      margin-top: 2px;
+    }
+    .flux-card-icon svg { width: 20px; height: 20px; }
+    .flux-combined-card:hover .flux-card-icon {
+      border-color: var(--orange);
+      background: rgba(255, 107, 38, 0.15);
+      box-shadow: 0 0 15px rgba(255, 107, 38, 0.2);
+    }
+    .flux-card-eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 4px;
+    }
+    .flux-tool-block h3 {
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .flux-tool-block p {
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .flux-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 4px 0;
+    }
+    .flux-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .flux-card-features li {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .flux-card-features li svg {
+      width: 15px;
+      height: 15px;
+      color: #10b981;
+      flex-shrink: 0;
+    }
+    .flux-combined-right {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.15);
+    }
+    .flux-mock-browser--tall {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 16px 0;
+      box-sizing: border-box;
+    }
+    .flux-mock-dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .flux-mock-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .flux-mock-dots span:nth-child(1) { background: #ff5f56; }
+    .flux-mock-dots span:nth-child(2) { background: #ffbd2e; }
+    .flux-mock-dots span:nth-child(3) { background: #27c93f; }
+    .flux-mock-browser--tall img {
+      width: 100%;
+      height: 655px;
+      object-fit: cover;
+      object-position: top left;
+      border-radius: 8px 8px 0 0;
+      display: block;
+    }
+    @media (max-width: 760px) {
+      .flux-combined-left {
+        grid-template-columns: 1fr;
+      }
+      .flux-tool-block:first-child {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .flux-card-features {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -3248,7 +3412,7 @@
               <line x1="8" y1="2" x2="8" y2="6" />
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
-            <span data-config="dateLabel">May 6</span>
+            <span data-config="dateLabel">August 18</span>
           </div>
           <div class="meta-chip">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -4273,7 +4437,7 @@
           <div class="get-accord-row">
             <div class="get-accord-left">
               <div class="get-accord-title">Live 75-Minute Training</div>
-              <div class="get-accord-sub" data-config="liveSessionLabel">Live session · May 6th</div>
+              <div class="get-accord-sub" data-config="liveSessionLabel">Live session · August 18th</div>
             </div>
             <div class="get-accord-plus">+</div>
           </div>
@@ -4354,7 +4518,7 @@
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-              <span data-config="overviewDateLabel">May 6, 2026</span>
+              <span data-config="overviewDateLabel">August 18, 2026</span>
             </div>
             <div class="get-card-stat">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -4453,59 +4617,64 @@
     <div class="container">
       <div class="results-header reveal">
         <div class="sec-label">The Tool That Times The Trade</div>
-        <h2 class="sec-title">Introducing FLUX — The DC Time Machine</h2>
+        <h2 class="sec-title">Introducing FLUX: The DC Time Machine</h2>
       </div>
 
-      <div class="v3-card reveal">
+      <!-- FLUX Combined Card -->
+      <div class="flux-combined-card reveal">
 
-        <!-- LEFT: checklist -->
-        <div class="v3-left">
-          <p class="v3-left-heading">What FLUX gives you</p>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">SEE</span>
-            <span class="v3-item-title">Volatility At A Glance</span>
-            <span class="v3-item-desc">See how expensive or cheap options are right now on SPX, QQQ, and SPY — updated every one minute so you're never guessing what the market is pricing.</span>
-          </div>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">KNOW</span>
-            <span class="v3-item-title">When To Enter</span>
-            <span class="v3-item-desc">Know the exact moment to place a Double Calendar trade. FLUX shows you when conditions line up in your favor, so you stop entering on a hunch and start entering on a signal.</span>
-          </div>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">COMPARE</span>
-            <span class="v3-item-title">Now vs. The Past 20 Days</span>
-            <span class="v3-item-desc">Compare today's market conditions against the last 5 and 20 days at a glance — so you can tell whether right now is a great setup or a waiting moment.</span>
-          </div>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">PICK</span>
-            <span class="v3-item-title">Your Trade Dates</span>
-            <span class="v3-item-desc">Pick the expiration dates you want to trade and instantly see how they line up. No more flipping between screens or guessing which combination makes sense.</span>
-          </div>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">TRADE</span>
-            <span class="v3-item-title">Like The Pros</span>
-            <span class="v3-item-desc">Trade with the same tool the NavigationTrading team uses every day — the one that recently helped turn a single trade into a risk-free position in just 13 minutes.</span>
-          </div>
-
-          <div class="v3-item">
-            <span class="v3-item-verb">GET</span>
-            <span class="v3-item-title">A $200 Tool, Free</span>
-            <span class="v3-item-desc">Get a professional-grade trading tool that would cost $200/month elsewhere — included free with your Pro membership. No extra subscriptions, no hidden fees.</span>
+        <!-- Top: full-width image -->
+        <div class="flux-combined-right">
+          <div class="flux-mock-browser--tall">
+            <div class="flux-mock-dots"><span></span><span></span><span></span></div>
+            <img src="newflux.png" alt="FLUX DC TimeMachine">
           </div>
         </div>
 
-        <!-- RIGHT: dashboard image -->
-        <div class="v3-right">
-          <img src="results2.png" alt="FLUX Live Trading Dashboard">
-          <div class="v3-badge">★&nbsp; $200/mo value — yours free</div>
+        <!-- Bottom: two tool blocks side by side -->
+        <div class="flux-combined-left">
+
+          <div class="flux-tool-block">
+            <div class="flux-tool-header">
+              <div class="flux-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </div>
+              <div>
+                <span class="flux-card-eyebrow">THE RATIO TOOL</span>
+                <h3>FLUX Volatility &amp; Calendar Ratio Tracker</h3>
+              </div>
+            </div>
+            <p>Track the precise relationship between front-month and back-month implied volatility across SPX, QQQ, and SPY. The Ratio Tool highlights when the spread is extended and primed for mean reversion — giving you the exact signal to enter your Double Calendar trades.</p>
+            <ul class="flux-card-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Real-Time IV Updates</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 5-Day &amp; 20-Day Comparisons</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Optimal Expiration Strips</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Precise Entry Signals</li>
+            </ul>
+          </div>
+
+          <div class="flux-tool-block">
+            <div class="flux-tool-header">
+              <div class="flux-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <span class="flux-card-eyebrow">EARNINGS &amp; TRANSFORMATION</span>
+                <h3>FLUX Earnings &amp; Live Trading Dashboard</h3>
+              </div>
+            </div>
+            <p>Trade earnings announcements with confidence. FLUX models volatility crush and identifies mispriced premiums. Use the proprietary <strong>Transformer Order</strong> approach to roll profitable spreads into risk-free Iron Condors.</p>
+            <ul class="flux-card-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Volatility Crush Modeler</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Transformer Order Planner</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Risk-Free Adjustments</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Value: $200/mo — Free with Pro</li>
+            </ul>
+          </div>
+
         </div>
 
-      </div><!-- /v3-card -->
+      </div>
     </div>
   </section>
 
@@ -5005,7 +5174,7 @@
     // Set target to 20 days + 4 hours + 5 minutes from now so it's always counting live
     // const end = Date.now() + (20 * 24 * 3600 + 4 * 3600 + 5 * 60) * 1000;
     // Set target to May 6th, 2026
-    let end = new Date('2026-05-06T15:30:00-05:00').getTime();
+    let end = new Date('2026-08-18T15:30:00-05:00').getTime();
     window.setCountdownTarget = function(newTarget) {
       end = new Date(newTarget).getTime();
       tick();
@@ -5388,7 +5557,7 @@
           <li>&#10003;&nbsp; Learn the Double Calendar setup</li>
           <li>&#10003;&nbsp; Get the $200/mo FLUX tool free</li>
         </ul>
-        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, May 6 &nbsp;|&nbsp; 8 PM IST</div>
+        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, August 18 &nbsp;|&nbsp; 3:30 PM CST</div>
       </div>
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>
