@@ -410,10 +410,9 @@
       border-radius: 14px; overflow: hidden;
       box-shadow: 0 24px 64px rgba(0,0,0,0.55);
       border: 1px solid rgba(255,255,255,0.1);
-      display: none;
+      display: block;
     }
-    .dt-hero-video-wrap.has-video { display: block; }
-    .dt-hero-video-wrap iframe { width: 100%; height: 100%; display: block; }
+    .dt-hero-video-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .hero-eyebrow {
       display: inline-flex;
@@ -4336,14 +4335,7 @@
       </div>
       <div class="dt-hero-right">
         <div class="dt-hero-video-wrap">
-          <iframe
-            src=""
-            data-config="heroVideoUrl"
-            title="Day Trading Membership Overview"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+          <img src="newflux.jpeg" alt="NavigationTrading FLUX tool">
         </div>
       </div>
     </div>
