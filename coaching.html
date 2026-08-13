@@ -100,14 +100,12 @@
     /* FORMAT CARDS */
     .format-section { padding: 88px 0 80px; background: #f8fafc; }
     .format-section .section-header h2 { color: var(--teal-900); }
-    .format-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .format-card { background: #fff; border: 1px solid rgba(13,46,78,0.09); border-radius: 20px; padding: 40px 36px; box-shadow: 0 4px 24px rgba(13,46,78,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
-    .format-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--orange-bright)); border-radius: 20px 20px 0 0; }
-    .format-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(13,46,78,0.13); }
-    .format-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
-    .format-card h3 { font-size: 22px; font-weight: 800; color: var(--teal-900); margin-bottom: 12px; letter-spacing: -0.5px; }
-    .format-card p { font-size: 15px; color: #546272; line-height: 1.7; }
-    .format-card-number { font-size: 64px; font-weight: 900; color: rgba(13,46,78,0.05); position: absolute; bottom: 12px; right: 24px; font-family: 'DM Mono', monospace; line-height: 1; user-select: none; pointer-events: none; }
+    .format-cards { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(13,46,78,0.1); border-bottom: 1px solid rgba(13,46,78,0.1); }
+    .format-card { padding: 44px 36px; text-align: center; border-right: 1px solid rgba(13,46,78,0.1); }
+    .format-card:last-child { border-right: none; }
+    .format-card-tag { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+    .format-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--teal-900); margin-bottom: 18px; letter-spacing: -0.5px; }
+    .format-card p { font-size: 15px; color: #546272; line-height: 1.7; max-width: 300px; margin: 0 auto; }
 
     /* PROGRAM */
     .program-section { padding: 88px 0; background: var(--bg-dark); position: relative; overflow: hidden; }
@@ -206,14 +204,17 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .format-cards, .program-grid { grid-template-columns: 1fr 1fr; }
+      .program-grid { grid-template-columns: 1fr 1fr; }
       .instructor-inner, .pricing-inner { grid-template-columns: 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
       .navbar { padding: 14px 24px; }
       .nav-links { display: none; }
       .container { padding: 0 24px; }
-      .format-cards, .program-grid { grid-template-columns: 1fr; }
+      .program-grid { grid-template-columns: 1fr; }
+      .format-cards { grid-template-columns: 1fr; }
+      .format-card { border-right: none; border-bottom: 1px solid rgba(13,46,78,0.1); padding: 32px 20px; }
+      .format-card:last-child { border-bottom: none; }
       .dt-terminal-cta { grid-template-columns: 1fr; }
       .dt-term-right { border-left: none; border-top: 1px solid rgba(13,46,78,0.08); }
       .footer-top { padding: 40px 24px; }
@@ -261,7 +262,7 @@
     <div class="dot-grid" style="bottom:80px;left:40px;width:100px;height:80px;opacity:0.5;z-index:3"></div>
     <div class="hero-content">
       <span class="hero-label">Private 1-on-1 Coaching</span>
-      <h1>Trade Smarter.<br><em>Coached Directly.</em></h1>
+      <h1>Private Coaching</h1>
       <p class="hero-sub">Meet 1-on-1 with Eliot Sagor, a professional trader with 7+ years of experience. Design a trading plan to take your trading to the next level.</p>
       <div class="hero-format-pills">
         <div class="format-pill">
@@ -302,19 +303,16 @@
           <div class="format-card-tag">Format</div>
           <h3>Direct Access to Eliot</h3>
           <p>No group calls, no recordings, no PDFs to skim through. Every session is a live, personal conversation built around your trading and your goals.</p>
-          <div class="format-card-number">01</div>
         </div>
         <div class="format-card reveal reveal-d2">
           <div class="format-card-tag">Package</div>
           <h3>3 Sessions, 1 Journey</h3>
           <p>Discovery, plan-build, and execution review &#8212; paced around your trading. Each session builds on the last to create a coherent, executable system.</p>
-          <div class="format-card-number">02</div>
         </div>
         <div class="format-card reveal reveal-d3">
           <div class="format-card-tag">Outcome</div>
           <h3>A Plan That's Yours</h3>
           <p>A custom trading plan, built around how <em>you</em> trade &#8212; yours to keep, refine, and live by. Not a generic template. A real, working document.</p>
-          <div class="format-card-number">03</div>
         </div>
       </div>
     </div>
