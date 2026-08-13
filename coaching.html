@@ -61,7 +61,7 @@
 
     /* HERO */
     .coaching-hero { padding: 0; background: var(--bg-dark); position: relative; text-align: center; overflow: hidden; }
-    .hero-grid-bg { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+    .hero-bg-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.45; }
     .hero-bg-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(13,46,78,0.88) 0%, rgba(13,46,78,0.72) 50%, rgba(13,46,78,0.88) 100%); pointer-events: none; }
     .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 65%); top: -200px; right: -100px; pointer-events: none; z-index: 2; animation: pulseglow 6s ease-in-out infinite; }
     .hero-glow-2 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(30,100,200,0.22) 0%, transparent 65%); bottom: -100px; left: -50px; pointer-events: none; z-index: 2; }
@@ -70,11 +70,11 @@
     .hero-content { position: relative; z-index: 5; max-width: 880px; margin: 0 auto; padding: 140px 24px 100px; }
     .hero-label { display: inline-block; padding: 6px 16px; background: rgba(200,66,10,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(200,66,10,0.35); border-radius: 50px; color: #e87040; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
     .coaching-hero h1 { font-size: clamp(42px, 6vw, 68px); color: #fff; line-height: 1.05; margin-bottom: 20px; letter-spacing: -1.5px; font-weight: 800; }
-    .coaching-hero h1 em { font-style: normal; color: var(--gold); }
+    .coaching-hero h1 em { font-style: normal; color: var(--orange-bright); }
     .hero-sub { font-size: 18px; color: rgba(255,255,255,0.80); max-width: 660px; margin: 0 auto 48px; line-height: 1.65; }
     .hero-format-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
     .format-pill { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.35); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.13); border-radius: 14px; padding: 16px 28px; color: #fff; }
-    .format-pill-icon { font-size: 22px; }
+    .format-pill-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--orange-bright); }
     .format-pill-body { display: flex; flex-direction: column; align-items: flex-start; }
     .format-pill-value { font-size: 16px; font-weight: 700; line-height: 1.1; }
     .format-pill-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 600; }
@@ -102,7 +102,7 @@
     .format-section .section-header h2 { color: var(--teal-900); }
     .format-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .format-card { background: #fff; border: 1px solid rgba(13,46,78,0.09); border-radius: 20px; padding: 40px 36px; box-shadow: 0 4px 24px rgba(13,46,78,0.06); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
-    .format-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--gold)); border-radius: 20px 20px 0 0; }
+    .format-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--orange-bright)); border-radius: 20px 20px 0 0; }
     .format-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(13,46,78,0.13); }
     .format-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; }
     .format-card h3 { font-size: 22px; font-weight: 800; color: var(--teal-900); margin-bottom: 12px; letter-spacing: -0.5px; }
@@ -110,17 +110,23 @@
     .format-card-number { font-size: 64px; font-weight: 900; color: rgba(13,46,78,0.05); position: absolute; bottom: 12px; right: 24px; font-family: 'DM Mono', monospace; line-height: 1; user-select: none; pointer-events: none; }
 
     /* PROGRAM */
-    .program-section { padding: 88px 0; background: var(--bg-dark); }
+    .program-section { padding: 88px 0; background: var(--bg-dark); position: relative; overflow: hidden; }
+    .program-section::before { content: ''; position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+    .program-section .container { position: relative; z-index: 1; }
     .program-section .section-header h2 { color: #fff; }
     .program-section .section-header p { color: rgba(255,255,255,0.60); }
     .program-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .program-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 36px 30px; transition: background 0.3s, transform 0.3s, box-shadow 0.3s; }
-    .program-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
-    .program-num { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; font-family: 'DM Mono', monospace; }
-    .program-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .program-card h3 { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .program-card { position: relative; overflow: hidden; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 20px; padding: 34px 30px 30px; transition: background 0.3s, transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-bright)); opacity: 0; transition: opacity 0.3s; }
+    .program-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(200,66,10,0.35); transform: translateY(-5px); box-shadow: 0 20px 48px rgba(0,0,0,0.35); }
+    .program-card:hover::before { opacity: 1; }
+    .program-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+    .program-card-icon { width: 46px; height: 46px; flex-shrink: 0; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.32); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--orange-bright); }
+    .program-card-icon svg { width: 22px; height: 22px; }
+    .program-num { font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.1); font-family: 'DM Mono', monospace; line-height: 1; user-select: none; }
+    .program-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+    .program-card h3 { font-size: 19px; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.3px; }
     .program-card p { font-size: 14.5px; color: rgba(255,255,255,0.62); line-height: 1.7; }
-    .program-card-icon { width: 44px; height: 44px; background: rgba(200,66,10,0.18); border: 1px solid rgba(200,66,10,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 20px; }
 
     /* INSTRUCTOR */
     .instructor-section { padding: 100px 0; background: #f0f4f8; }
@@ -135,7 +141,7 @@
     .stat-block-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
     .stat-block.featured .stat-block-label { color: rgba(255,255,255,0.55); }
     .stat-block-value { font-size: 38px; font-weight: 900; color: var(--teal-900); letter-spacing: -2px; line-height: 1; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
-    .stat-block.featured .stat-block-value { color: var(--gold); }
+    .stat-block.featured .stat-block-value { color: var(--orange-bright); }
     .stat-block-sub { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
     .stat-block.featured .stat-block-sub { color: rgba(255,255,255,0.65); }
     .stat-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -153,7 +159,7 @@
     .pricing-left h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 800; color: #fff; letter-spacing: -1.2px; line-height: 1.1; margin-bottom: 18px; }
     .pricing-left p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 8px; }
     .pricing-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 44px 44px 40px; position: relative; overflow: hidden; }
-    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--gold)); }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-bright)); }
     .pricing-card-badge { display: inline-block; padding: 6px 14px; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.35); border-radius: 50px; color: #e87040; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
     .pricing-card h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; }
     .pricing-price { display: flex; align-items: baseline; gap: 4px; margin: 20px 0 4px; }
@@ -175,7 +181,7 @@
     .dt-live-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: live-blink 1.5s ease-in-out infinite; }
     @keyframes live-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .dt-term-left h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.15; margin-bottom: 14px; }
-    .dt-term-left h2 em { font-style: normal; color: var(--gold); }
+    .dt-term-left h2 em { font-style: normal; color: var(--orange-bright); }
     .dt-term-left p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 400px; }
     .dt-term-price-lbl { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
     .dt-term-features { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; margin-bottom: 32px; }
@@ -185,7 +191,9 @@
     .dt-term-action:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(200,66,10,0.5); }
 
     /* FOOTER */
-    footer { background: #050e1a; border-top: 1px solid rgba(255,255,255,0.06); }
+    footer { background: var(--teal-900); border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
+    footer > .footer-top, footer > .footer-bottom { position: relative; z-index: 1; }
     .footer-top { padding: 50px 60px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
     .footer-brand img { height: 24px; opacity: 0.6; transform: scale(4.5); transform-origin: left center; }
     .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; }
@@ -245,7 +253,7 @@
 
   <!-- HERO -->
   <section class="coaching-hero">
-    <div class="hero-grid-bg"></div>
+    <img class="hero-bg-img" src="WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg" alt="">
     <div class="hero-bg-overlay"></div>
     <div class="hero-glow"></div>
     <div class="hero-glow-2"></div>
@@ -257,21 +265,21 @@
       <p class="hero-sub">Meet 1-on-1 with Eliot Sagor, a professional trader with 7+ years of experience. Design a trading plan to take your trading to the next level.</p>
       <div class="hero-format-pills">
         <div class="format-pill">
-          <span class="format-pill-icon">&#127919;</span>
+          <span class="format-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
           <div class="format-pill-body">
             <span class="format-pill-value">1-on-1</span>
             <span class="format-pill-label">Direct Access</span>
           </div>
         </div>
         <div class="format-pill">
-          <span class="format-pill-icon">&#128203;</span>
+          <span class="format-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1z"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="13" y2="19"/></svg></span>
           <div class="format-pill-body">
             <span class="format-pill-value">3 Sessions</span>
             <span class="format-pill-label">Discovery to Execution</span>
           </div>
         </div>
         <div class="format-pill">
-          <span class="format-pill-icon">&#128200;</span>
+          <span class="format-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
           <div class="format-pill-body">
             <span class="format-pill-value">1 Custom Plan</span>
             <span class="format-pill-label">Yours to Keep</span>
@@ -317,48 +325,60 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="s-eyebrow light">The Curriculum</span>
-        <h2>What's Included in the <span style="color:var(--gold);">Coaching Program</span></h2>
+        <h2>What's Included in the <span style="color:var(--orange-bright);">Coaching Program</span></h2>
         <p style="color:rgba(255,255,255,0.60);">Six focused modules &#8212; from strategy and mindset to automation and accountability &#8212; designed to build a complete, durable trading practice.</p>
       </div>
       <div class="program-grid">
         <div class="program-card reveal reveal-d1">
-          <div class="program-num">01</div>
-          <div class="program-card-icon">&#128208;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8.3l-5.2 5.2-3-3-4.5 4.5"/></svg></div>
+            <div class="program-num">01</div>
+          </div>
           <div class="program-card-tag">Strategy</div>
           <h3>Strategy Coaching</h3>
           <p>British Iron Condors (BICs), Multi-tranche No-stop Umbrella Trades, and ELMOs (Price Action Iron Condors) &#8212; learned live, not from slides.</p>
         </div>
         <div class="program-card reveal reveal-d2">
-          <div class="program-num">02</div>
-          <div class="program-card-icon">&#129504;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></div>
+            <div class="program-num">02</div>
+          </div>
           <div class="program-card-tag">Mindset</div>
           <h3>Mindset Coaching</h3>
           <p>Having the right mindset is one of the most important parts of trading &#8212; and cultivating it can be one of the hardest things to do. Together, we'll get you there.</p>
         </div>
         <div class="program-card reveal reveal-d3">
-          <div class="program-num">03</div>
-          <div class="program-card-icon">&#129309;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="program-num">03</div>
+          </div>
           <div class="program-card-tag">Accountability</div>
           <h3>Accountability Check-ins</h3>
           <p>In difficult times or drawdowns, sticking to your plan can be hard. Having someone to hold you accountable is a must &#8212; not optional, essential.</p>
         </div>
         <div class="program-card reveal reveal-d1">
-          <div class="program-num">04</div>
-          <div class="program-card-icon">&#128221;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1z"/><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="13" y2="19"/></svg></div>
+            <div class="program-num">04</div>
+          </div>
           <div class="program-card-tag">Plan</div>
           <h3>Trading Plan Development</h3>
           <p>Building a robust trading plan is one of the best ways to make sure you actually follow your own rules &#8212; especially when it counts most.</p>
         </div>
         <div class="program-card reveal reveal-d2">
-          <div class="program-num">05</div>
-          <div class="program-card-icon">&#128300;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><path d="M8.5 11h5M11 8.5v5"/></svg></div>
+            <div class="program-num">05</div>
+          </div>
           <div class="program-card-tag">Backtesting</div>
           <h3>Backtesting Fundamentals</h3>
           <p>Most traders like to curve-fit their backtests. We use a backtest as proof of concept. Learn how to validate strategies with real data and meaningful metrics.</p>
         </div>
         <div class="program-card reveal reveal-d3">
-          <div class="program-num">06</div>
-          <div class="program-card-icon">&#9889;</div>
+          <div class="program-card-top">
+            <div class="program-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="program-num">06</div>
+          </div>
           <div class="program-card-tag">Automation</div>
           <h3>Trading Automation</h3>
           <p>Streamline execution and reduce human error with automation tools that fit how you actually trade &#8212; not how you think you should trade.</p>
