@@ -18,6 +18,7 @@ interface FieldConfig {
   description?: string;
   group?: string;
   columns?: ListColumn[]; // only used when type === 'list'
+  defaultItems?: Record<string, string>[]; // only used when type === 'list'; seeds the form when nothing has been saved yet
 }
 
 interface PageConfig {
@@ -306,6 +307,14 @@ const PAGES_CONFIG: PageConfig[] = [
           { key: 'year', label: 'Year', placeholder: 'e.g. 2026', width: '90px' },
           { key: 'videoId', label: 'YouTube Video ID', placeholder: 'e.g. abc123XYZ', width: 'flex' },
         ],
+        defaultItems: [
+          { month: 'June', year: '2026', videoId: '' },
+          { month: 'May', year: '2026', videoId: 'Qfx4XipgSAU' },
+          { month: 'April', year: '2026', videoId: '' },
+          { month: 'March', year: '2026', videoId: '66jFo1mil58' },
+          { month: 'February', year: '2026', videoId: 'pDSgzEA9cEU' },
+          { month: 'January', year: '2026', videoId: 'WNYu-z02mfg' },
+        ],
       },
       {
         key: 'yearReports',
@@ -318,6 +327,17 @@ const PAGES_CONFIG: PageConfig[] = [
           { key: 'badge', label: 'Badge', placeholder: 'Audited / Inception', width: '130px' },
           { key: 'sub', label: 'Subtitle', placeholder: 'Full Year / Where It Began', width: '180px' },
           { key: 'pdfUrl', label: 'Report PDF URL', placeholder: 'https://navigationtrading.com/...pdf', width: 'flex' },
+        ],
+        defaultItems: [
+          { year: '2025', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2026/06/2025-Monthly-Performance-Links.pdf' },
+          { year: '2024', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2025/01/2024-Monthly-Performance-Links-1.pdf' },
+          { year: '2023', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2024/03/2023-Monthly-Performance-Links.pdf' },
+          { year: '2022', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2023/01/2022-Performance-Links.pdf' },
+          { year: '2021', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2022/02/Trade_Results_2021.pdf' },
+          { year: '2020', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2021/05/2020NavALERTSperformanceStats.pdf' },
+          { year: '2019', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2021/05/2019NavALERTSperformanceStats.pdf' },
+          { year: '2018', badge: 'Audited', sub: 'Full Year', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2021/05/2018NavALERTSperformanceStats.pdf' },
+          { year: '2017', badge: 'Inception', sub: 'Where It Began', pdfUrl: 'https://navigationtrading.com/wp-content/uploads/2021/05/2017NavALERTSPeformanceStats.pdf' },
         ],
       },
     ]
@@ -499,6 +519,9 @@ export default function SiteConfigPage() {
           const localValue = rawValue ? rawValue.substring(0, 16) : '';
           newFormState[field.key + '_local'] = localValue;
           newFormState[field.key + '_tz'] = tzValue;
+        } else if (field.type === 'list' && !pageValues[field.key] && field.defaultItems) {
+          // Nothing saved yet — seed the editor with what's actually live on the site
+          newFormState[field.key] = JSON.stringify(field.defaultItems);
         } else {
           newFormState[field.key] = pageValues[field.key] || '';
         }
