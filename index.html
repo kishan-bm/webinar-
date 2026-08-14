@@ -1411,8 +1411,20 @@
       z-index: 3;
     }
 
-    /* Card 2: Live trading widget (inline, no bg photo) */
+    /* Card 2: Live trading widget */
     .lpc-visual-widget, .lpc-visual-map { padding: 0; }
+    .lpc-visual-mic img {
+      width: 90%;
+      height: 85%;
+      object-fit: cover;
+      border-radius: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
+      filter: brightness(0.76) contrast(1.05);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    }
+    .learn-premium-card:hover .lpc-visual-mic img {
+      filter: brightness(0.86) contrast(1.05);
+    }
     .lpc-live-widget-inline {
       width: 100%;
       max-width: 280px;
