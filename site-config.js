@@ -85,53 +85,104 @@
         }
       });
 
-      // 3. 2026 Monthly Video Buttons — update video IDs from admin config
-      document.querySelectorAll('[data-config-video]').forEach(function(btn) {
-        var key = btn.getAttribute('data-config-video');
-        if (config[key] && config[key].trim()) {
-          btn.dataset.videoId = config[key].trim();
-          btn.classList.remove('empty');
-        }
-      });
-      // Refresh active button's iframe in case its ID was updated
-      var activeMonthBtn = document.querySelector('.month-btn.active');
-      if (activeMonthBtn && activeMonthBtn.dataset.videoId) {
-        var monthIframe = document.getElementById('monthly-iframe');
-        if (monthIframe) monthIframe.src = 'https://www.youtube.com/embed/' + activeMonthBtn.dataset.videoId;
-        var monthLabel = document.getElementById('monthly-video-label');
-        if (monthLabel) monthLabel.textContent = activeMonthBtn.dataset.label || '';
-      }
+      // 3. 2026 Monthly Trade Results — fully admin-managed list (add/edit/remove any month)
+      (function () {
+        var sidebar = document.querySelector('.monthly-sidebar');
+        if (!sidebar) return;
 
-      // 3b. Extra months added via admin (Performance page "Add New Months" list)
-      var extraMonthsContainer = document.getElementById('extra-month-btns');
-      if (extraMonthsContainer && config.extraMonthlyVideos) {
-        try {
-          var extraMonths = JSON.parse(config.extraMonthlyVideos);
-        } catch (e) {
-          extraMonths = [];
-        }
-        if (Array.isArray(extraMonths)) {
-          extraMonths.forEach(function(entry) {
-            if (!entry || !entry.month) return;
-            var videoId = (entry.videoId || '').trim();
-            var btn = document.createElement('button');
-            btn.className = 'month-btn' + (videoId ? '' : ' empty');
-            btn.dataset.videoId = videoId;
-            btn.dataset.label = 'Trade Results — ' + entry.month + ' ' + (entry.year || '');
-            btn.textContent = entry.month;
-            btn.addEventListener('click', function () {
-              if (!this.dataset.videoId) return;
-              document.querySelectorAll('.month-btn').forEach(function(b) { b.classList.remove('active'); });
-              this.classList.add('active');
-              var lbl = document.getElementById('monthly-video-label');
-              if (lbl) lbl.textContent = this.dataset.label || '';
-              var frame = document.getElementById('monthly-iframe');
-              if (frame) frame.src = 'https://www.youtube.com/embed/' + this.dataset.videoId;
+        var monthEntries = [];
+        var usingCustomList = false;
+
+        if (config.monthlyVideos) {
+          var parsedMonths = null;
+          try { parsedMonths = JSON.parse(config.monthlyVideos); } catch (e) { parsedMonths = null; }
+          if (Array.isArray(parsedMonths) && parsedMonths.length) {
+            usingCustomList = true;
+            sidebar.innerHTML = '';
+            parsedMonths.forEach(function(entry) {
+              if (!entry || !entry.month) return;
+              var videoId = (entry.videoId || '').trim();
+              var btn = document.createElement('button');
+              btn.className = 'month-btn' + (videoId ? '' : ' empty');
+              btn.dataset.videoId = videoId;
+              btn.dataset.label = 'Trade Results — ' + entry.month + ' ' + (entry.year || '');
+              btn.textContent = entry.month;
+              btn.addEventListener('click', function () {
+                if (!this.dataset.videoId) return;
+                sidebar.querySelectorAll('.month-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                var lbl = document.getElementById('monthly-video-label');
+                if (lbl) lbl.textContent = this.dataset.label || '';
+                var frame = document.getElementById('monthly-iframe');
+                if (frame) frame.src = 'https://www.youtube.com/embed/' + this.dataset.videoId;
+              });
+              sidebar.appendChild(btn);
+              monthEntries.push({ month: entry.month, year: entry.year, videoId: videoId, btn: btn });
             });
-            extraMonthsContainer.appendChild(btn);
+          }
+        }
+
+        if (!usingCustomList) {
+          sidebar.querySelectorAll('.month-btn').forEach(function(btn) {
+            var label = btn.dataset.label || '';
+            var yearMatch = label.match(/(\d{4})/);
+            monthEntries.push({
+              month: btn.textContent.trim(),
+              year: yearMatch ? yearMatch[1] : '',
+              videoId: (btn.dataset.videoId || '').trim(),
+              btn: btn
+            });
           });
         }
-      }
+
+        // Auto-select the most recent month that actually has a video
+        var MONTH_ORDER = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+        function monthSortKey(e) {
+          var y = parseInt(e.year, 10) || 0;
+          var mi = MONTH_ORDER.indexOf((e.month || '').trim().toLowerCase());
+          return y * 100 + (mi === -1 ? 0 : mi);
+        }
+        var withVideo = monthEntries.filter(function(e) { return e.videoId; });
+        if (withVideo.length) {
+          var latest = withVideo[0];
+          withVideo.forEach(function(e) { if (monthSortKey(e) > monthSortKey(latest)) latest = e; });
+          monthEntries.forEach(function(e) { e.btn.classList.remove('active'); });
+          latest.btn.classList.add('active');
+          var lbl2 = document.getElementById('monthly-video-label');
+          if (lbl2) lbl2.textContent = latest.btn.dataset.label || '';
+          var frame2 = document.getElementById('monthly-iframe');
+          if (frame2) frame2.src = 'https://www.youtube.com/embed/' + latest.videoId;
+        }
+      })();
+
+      // 3c. Annual Performance Reports — fully admin-managed list (add/edit/remove any year)
+      (function () {
+        var grid = document.getElementById('year-grid');
+        if (!grid || !config.yearReports) return;
+        var parsedYears = null;
+        try { parsedYears = JSON.parse(config.yearReports); } catch (e) { parsedYears = null; }
+        if (!Array.isArray(parsedYears) || !parsedYears.length) return;
+
+        grid.innerHTML = '';
+        parsedYears.forEach(function(entry) {
+          if (!entry || !entry.year) return;
+          var a = document.createElement('a');
+          a.className = 'year-card';
+          a.dataset.year = String(entry.year).slice(-2);
+          if (entry.pdfUrl) {
+            a.href = normalizeUrl(entry.pdfUrl);
+            a.target = '_blank';
+          } else {
+            a.href = '#';
+          }
+          a.innerHTML =
+            '<span class="year-badge">' + (entry.badge || 'Audited') + '</span>' +
+            '<div class="year-num">' + entry.year + '</div>' +
+            '<div class="year-sub">' + (entry.sub || 'Full Year') + '</div>' +
+            '<div class="view-report">View Report &rarr;</div>';
+          grid.appendChild(a);
+        });
+      })();
 
       // 4. Exit Intent Popup show/hide toggle
       if (config.exitPopupShow === 'false') {

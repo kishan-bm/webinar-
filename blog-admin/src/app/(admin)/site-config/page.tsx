@@ -3,19 +3,21 @@
 import { useEffect, useState, useTransition } from 'react';
 import { Search, Save, Globe, Loader2, CheckCircle2, AlertCircle, Calendar, Link as LinkIcon, Hash, Sliders, ChevronDown, ChevronRight, ExternalLink } from 'lucide-react';
 
+interface ListColumn {
+  key: string;
+  label: string;
+  placeholder?: string;
+  width?: string;
+}
+
 interface FieldConfig {
   key: string;
   label: string;
-  type: 'text' | 'datetime-local' | 'number' | 'boolean' | 'url' | 'textarea' | 'video-month-list';
+  type: 'text' | 'datetime-local' | 'number' | 'boolean' | 'url' | 'textarea' | 'list';
   placeholder?: string;
   description?: string;
   group?: string;
-}
-
-interface MonthVideoEntry {
-  month: string;
-  year: string;
-  videoId: string;
+  columns?: ListColumn[]; // only used when type === 'list'
 }
 
 interface PageConfig {
@@ -292,23 +294,32 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'pricingLink', label: 'Explore Memberships URL', type: 'url', placeholder: 'pricing.html', description: 'Explore Memberships bottom CTA button', group: 'URLs & Links' },
-      { key: 'yearPdfUrl2025', label: '2025 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2025 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2024', label: '2024 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2024 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2023', label: '2023 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2023 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2022', label: '2022 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2022 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2021', label: '2021 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2021 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2020', label: '2020 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2020 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2019', label: '2019 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2019 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2018', label: '2018 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2018 annual performance report', group: 'Year Report Links' },
-      { key: 'yearPdfUrl2017', label: '2017 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2017 inception year performance report', group: 'Year Report Links' },
       { key: 'video1Url', label: 'Live Stream — Latest Replay Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the Day Trading Live Stream latest replay (single video card)', group: 'Live Execution Videos' },
-      { key: 'video2026Jun', label: 'June 2026 — YouTube Video ID', type: 'text', placeholder: 'e.g. abc123XYZ', description: 'YouTube video ID for June 2026 Trade Results (add when published)', group: '2026 Monthly Videos' },
-      { key: 'video2026May', label: 'May 2026 — YouTube Video ID', type: 'text', placeholder: 'Qfx4XipgSAU', description: 'YouTube video ID for May 2026 Trade Results', group: '2026 Monthly Videos' },
-      { key: 'video2026Apr', label: 'April 2026 — YouTube Video ID', type: 'text', placeholder: 'e.g. abc123XYZ', description: 'YouTube video ID for April 2026 Trade Results (add when published)', group: '2026 Monthly Videos' },
-      { key: 'video2026Mar', label: 'March 2026 — YouTube Video ID', type: 'text', placeholder: '66jFo1mil58', description: 'YouTube video ID for March 2026 Trade Results', group: '2026 Monthly Videos' },
-      { key: 'video2026Feb', label: 'February 2026 — YouTube Video ID', type: 'text', placeholder: 'pDSgzEA9cEU', description: 'YouTube video ID for February 2026 Trade Results', group: '2026 Monthly Videos' },
-      { key: 'video2026Jan', label: 'January 2026 — YouTube Video ID', type: 'text', placeholder: 'WNYu-z02mfg', description: 'YouTube video ID for January 2026 Trade Results', group: '2026 Monthly Videos' },
-      { key: 'extraMonthlyVideos', label: 'Add New Months', type: 'video-month-list', description: 'Add a month here once its trade results video is ready (e.g. July 2026) — it appears on the Performance page automatically, above the months listed here, no code changes needed.', group: '2026 Monthly Videos' }
+      {
+        key: 'monthlyVideos',
+        label: '2026 Monthly Trade Videos',
+        type: 'list',
+        description: 'Add, edit, or remove any month here. The most recent month with a video is auto-selected as the default tab on the Performance page. Leave empty to keep the current live months unchanged.',
+        group: '2026 Monthly Videos',
+        columns: [
+          { key: 'month', label: 'Month', placeholder: 'e.g. July', width: '160px' },
+          { key: 'year', label: 'Year', placeholder: 'e.g. 2026', width: '90px' },
+          { key: 'videoId', label: 'YouTube Video ID', placeholder: 'e.g. abc123XYZ', width: 'flex' },
+        ],
+      },
+      {
+        key: 'yearReports',
+        label: 'Annual Performance Reports',
+        type: 'list',
+        description: 'Add, edit, or remove any year card shown in the Annual Performance Reports grid. Leave empty to keep the current live years unchanged.',
+        group: 'Year Report Links',
+        columns: [
+          { key: 'year', label: 'Year', placeholder: 'e.g. 2025', width: '90px' },
+          { key: 'badge', label: 'Badge', placeholder: 'Audited / Inception', width: '130px' },
+          { key: 'sub', label: 'Subtitle', placeholder: 'Full Year / Where It Began', width: '180px' },
+          { key: 'pdfUrl', label: 'Report PDF URL', placeholder: 'https://navigationtrading.com/...pdf', width: 'flex' },
+        ],
+      },
     ]
   },
   {
@@ -523,7 +534,7 @@ export default function SiteConfigPage() {
     }));
   };
 
-  const getMonthList = (key: string): MonthVideoEntry[] => {
+  const getListItems = (key: string): Record<string, string>[] => {
     try {
       const raw = formState[key];
       if (!raw) return [];
@@ -534,21 +545,23 @@ export default function SiteConfigPage() {
     }
   };
 
-  const setMonthList = (key: string, list: MonthVideoEntry[]) => {
+  const setListItems = (key: string, list: Record<string, string>[]) => {
     handleFieldChange(key, JSON.stringify(list));
   };
 
-  const addMonthEntry = (key: string) => {
-    setMonthList(key, [...getMonthList(key), { month: '', year: '2026', videoId: '' }]);
+  const addListItem = (field: FieldConfig) => {
+    const blank: Record<string, string> = {};
+    (field.columns || []).forEach(col => { blank[col.key] = ''; });
+    setListItems(field.key, [...getListItems(field.key), blank]);
   };
 
-  const updateMonthEntry = (key: string, index: number, patch: Partial<MonthVideoEntry>) => {
-    const updated = getMonthList(key).map((entry, i) => (i === index ? { ...entry, ...patch } : entry));
-    setMonthList(key, updated);
+  const updateListItem = (key: string, index: number, patch: Record<string, string>) => {
+    const updated = getListItems(key).map((entry, i) => (i === index ? { ...entry, ...patch } : entry));
+    setListItems(key, updated);
   };
 
-  const removeMonthEntry = (key: string, index: number) => {
-    setMonthList(key, getMonthList(key).filter((_, i) => i !== index));
+  const removeListItem = (key: string, index: number) => {
+    setListItems(key, getListItems(key).filter((_, i) => i !== index));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -890,38 +903,31 @@ export default function SiteConfigPage() {
                                         <option value="UTC">UTC / GMT</option>
                                       </select>
                                     </div>
-                                  ) : field.type === 'video-month-list' ? (
+                                  ) : field.type === 'list' ? (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                      {getMonthList(field.key).map((entry, idx) => (
+                                      {getListItems(field.key).map((entry, idx) => (
                                         <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Month (e.g. July)"
-                                            value={entry.month}
-                                            onChange={e => updateMonthEntry(field.key, idx, { month: e.target.value })}
-                                            style={{ width: '140px', fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
-                                          />
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Year"
-                                            value={entry.year}
-                                            onChange={e => updateMonthEntry(field.key, idx, { year: e.target.value })}
-                                            style={{ width: '80px', fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
-                                          />
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="YouTube Video ID"
-                                            value={entry.videoId}
-                                            onChange={e => updateMonthEntry(field.key, idx, { videoId: e.target.value })}
-                                            style={{ flex: 1, fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
-                                          />
+                                          {(field.columns || []).map(col => (
+                                            <input
+                                              key={col.key}
+                                              type="text"
+                                              className="form-control"
+                                              placeholder={col.placeholder}
+                                              value={entry[col.key] || ''}
+                                              onChange={e => updateListItem(field.key, idx, { [col.key]: e.target.value })}
+                                              style={{
+                                                width: col.width && col.width !== 'flex' ? col.width : undefined,
+                                                flex: col.width === 'flex' ? 1 : undefined,
+                                                fontSize: '13px',
+                                                borderRadius: '8px',
+                                                padding: '8px 10px',
+                                              }}
+                                            />
+                                          ))}
                                           <button
                                             type="button"
-                                            onClick={() => removeMonthEntry(field.key, idx)}
-                                            style={{ background: 'none', border: '1px solid rgba(225,29,72,0.3)', color: '#e11d48', cursor: 'pointer', padding: '7px 12px', fontSize: '12.5px', borderRadius: '8px', fontWeight: 600 }}
+                                            onClick={() => removeListItem(field.key, idx)}
+                                            style={{ background: 'none', border: '1px solid rgba(225,29,72,0.3)', color: '#e11d48', cursor: 'pointer', padding: '7px 12px', fontSize: '12.5px', borderRadius: '8px', fontWeight: 600, flexShrink: 0 }}
                                           >
                                             Remove
                                           </button>
@@ -929,11 +935,11 @@ export default function SiteConfigPage() {
                                       ))}
                                       <button
                                         type="button"
-                                        onClick={() => addMonthEntry(field.key)}
+                                        onClick={() => addListItem(field)}
                                         className="btn-secondary"
                                         style={{ alignSelf: 'flex-start', fontSize: '13px', padding: '9px 16px' }}
                                       >
-                                        + Add Month
+                                        + Add Row
                                       </button>
                                     </div>
                                   ) : (
