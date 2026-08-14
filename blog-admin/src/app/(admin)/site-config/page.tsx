@@ -286,6 +286,7 @@ const PAGES_CONFIG: PageConfig[] = [
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'pricingLink', label: 'Explore Memberships URL', type: 'url', placeholder: 'pricing.html', description: 'Explore Memberships bottom CTA button', group: 'URLs & Links' },
+      { key: 'yearPdfUrl2025', label: '2025 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2025 annual performance report', group: 'Year Report Links' },
       { key: 'yearPdfUrl2024', label: '2024 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2024 annual performance report', group: 'Year Report Links' },
       { key: 'yearPdfUrl2023', label: '2023 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2023 annual performance report', group: 'Year Report Links' },
       { key: 'yearPdfUrl2022', label: '2022 Report PDF URL', type: 'url', placeholder: 'https://navigationtrading.com/...pdf', description: 'PDF link for 2022 annual performance report', group: 'Year Report Links' },
