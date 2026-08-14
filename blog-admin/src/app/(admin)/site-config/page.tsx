@@ -6,10 +6,16 @@ import { Search, Save, Globe, Loader2, CheckCircle2, AlertCircle, Calendar, Link
 interface FieldConfig {
   key: string;
   label: string;
-  type: 'text' | 'datetime-local' | 'number' | 'boolean' | 'url' | 'textarea';
+  type: 'text' | 'datetime-local' | 'number' | 'boolean' | 'url' | 'textarea' | 'video-month-list';
   placeholder?: string;
   description?: string;
   group?: string;
+}
+
+interface MonthVideoEntry {
+  month: string;
+  year: string;
+  videoId: string;
 }
 
 interface PageConfig {
@@ -301,7 +307,8 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'video2026Apr', label: 'April 2026 — YouTube Video ID', type: 'text', placeholder: 'e.g. abc123XYZ', description: 'YouTube video ID for April 2026 Trade Results (add when published)', group: '2026 Monthly Videos' },
       { key: 'video2026Mar', label: 'March 2026 — YouTube Video ID', type: 'text', placeholder: '66jFo1mil58', description: 'YouTube video ID for March 2026 Trade Results', group: '2026 Monthly Videos' },
       { key: 'video2026Feb', label: 'February 2026 — YouTube Video ID', type: 'text', placeholder: 'pDSgzEA9cEU', description: 'YouTube video ID for February 2026 Trade Results', group: '2026 Monthly Videos' },
-      { key: 'video2026Jan', label: 'January 2026 — YouTube Video ID', type: 'text', placeholder: 'WNYu-z02mfg', description: 'YouTube video ID for January 2026 Trade Results', group: '2026 Monthly Videos' }
+      { key: 'video2026Jan', label: 'January 2026 — YouTube Video ID', type: 'text', placeholder: 'WNYu-z02mfg', description: 'YouTube video ID for January 2026 Trade Results', group: '2026 Monthly Videos' },
+      { key: 'extraMonthlyVideos', label: 'Add New Months', type: 'video-month-list', description: 'Add a month here once its trade results video is ready (e.g. July 2026) — it appears on the Performance page automatically, above the months listed here, no code changes needed.', group: '2026 Monthly Videos' }
     ]
   },
   {
@@ -514,6 +521,34 @@ export default function SiteConfigPage() {
       ...prev,
       [key]: value
     }));
+  };
+
+  const getMonthList = (key: string): MonthVideoEntry[] => {
+    try {
+      const raw = formState[key];
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const setMonthList = (key: string, list: MonthVideoEntry[]) => {
+    handleFieldChange(key, JSON.stringify(list));
+  };
+
+  const addMonthEntry = (key: string) => {
+    setMonthList(key, [...getMonthList(key), { month: '', year: '2026', videoId: '' }]);
+  };
+
+  const updateMonthEntry = (key: string, index: number, patch: Partial<MonthVideoEntry>) => {
+    const updated = getMonthList(key).map((entry, i) => (i === index ? { ...entry, ...patch } : entry));
+    setMonthList(key, updated);
+  };
+
+  const removeMonthEntry = (key: string, index: number) => {
+    setMonthList(key, getMonthList(key).filter((_, i) => i !== index));
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -854,6 +889,52 @@ export default function SiteConfigPage() {
                                         <option value="Asia/Kolkata">India Time (IST)</option>
                                         <option value="UTC">UTC / GMT</option>
                                       </select>
+                                    </div>
+                                  ) : field.type === 'video-month-list' ? (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                      {getMonthList(field.key).map((entry, idx) => (
+                                        <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Month (e.g. July)"
+                                            value={entry.month}
+                                            onChange={e => updateMonthEntry(field.key, idx, { month: e.target.value })}
+                                            style={{ width: '140px', fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
+                                          />
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Year"
+                                            value={entry.year}
+                                            onChange={e => updateMonthEntry(field.key, idx, { year: e.target.value })}
+                                            style={{ width: '80px', fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
+                                          />
+                                          <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="YouTube Video ID"
+                                            value={entry.videoId}
+                                            onChange={e => updateMonthEntry(field.key, idx, { videoId: e.target.value })}
+                                            style={{ flex: 1, fontSize: '13px', borderRadius: '8px', padding: '8px 10px' }}
+                                          />
+                                          <button
+                                            type="button"
+                                            onClick={() => removeMonthEntry(field.key, idx)}
+                                            style={{ background: 'none', border: '1px solid rgba(225,29,72,0.3)', color: '#e11d48', cursor: 'pointer', padding: '7px 12px', fontSize: '12.5px', borderRadius: '8px', fontWeight: 600 }}
+                                          >
+                                            Remove
+                                          </button>
+                                        </div>
+                                      ))}
+                                      <button
+                                        type="button"
+                                        onClick={() => addMonthEntry(field.key)}
+                                        className="btn-secondary"
+                                        style={{ alignSelf: 'flex-start', fontSize: '13px', padding: '9px 16px' }}
+                                      >
+                                        + Add Month
+                                      </button>
                                     </div>
                                   ) : (
                                     <input

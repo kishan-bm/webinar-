@@ -102,6 +102,37 @@
         if (monthLabel) monthLabel.textContent = activeMonthBtn.dataset.label || '';
       }
 
+      // 3b. Extra months added via admin (Performance page "Add New Months" list)
+      var extraMonthsContainer = document.getElementById('extra-month-btns');
+      if (extraMonthsContainer && config.extraMonthlyVideos) {
+        try {
+          var extraMonths = JSON.parse(config.extraMonthlyVideos);
+        } catch (e) {
+          extraMonths = [];
+        }
+        if (Array.isArray(extraMonths)) {
+          extraMonths.forEach(function(entry) {
+            if (!entry || !entry.month) return;
+            var videoId = (entry.videoId || '').trim();
+            var btn = document.createElement('button');
+            btn.className = 'month-btn' + (videoId ? '' : ' empty');
+            btn.dataset.videoId = videoId;
+            btn.dataset.label = 'Trade Results — ' + entry.month + ' ' + (entry.year || '');
+            btn.textContent = entry.month;
+            btn.addEventListener('click', function () {
+              if (!this.dataset.videoId) return;
+              document.querySelectorAll('.month-btn').forEach(function(b) { b.classList.remove('active'); });
+              this.classList.add('active');
+              var lbl = document.getElementById('monthly-video-label');
+              if (lbl) lbl.textContent = this.dataset.label || '';
+              var frame = document.getElementById('monthly-iframe');
+              if (frame) frame.src = 'https://www.youtube.com/embed/' + this.dataset.videoId;
+            });
+            extraMonthsContainer.appendChild(btn);
+          });
+        }
+      }
+
       // 4. Exit Intent Popup show/hide toggle
       if (config.exitPopupShow === 'false') {
         window.EXIT_POPUP_DISABLED = true;
