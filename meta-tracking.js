@@ -48,7 +48,7 @@
     // 2. Conversions API (server-side) — fire-and-forget, never blocks the
     // page's own redirect/thank-you flow if it's slow or fails.
     try {
-      fetch('/api/meta-capi', {
+      fetch('/api/collect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
