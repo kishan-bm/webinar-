@@ -50,9 +50,11 @@ export async function POST(request: NextRequest) {
       ],
     };
 
-    const testEventCode = process.env.META_TEST_EVENT_CODE;
+    // Never auto-apply a test_event_code from env: doing so silently routes
+    // every real production event into Meta's Test Events tab instead of the
+    // actual Events Manager / ad reporting, which is exactly the bug that
+    // made server-side events look like they weren't counting at all.
     const params = new URLSearchParams({ access_token: accessToken });
-    if (testEventCode) params.set('test_event_code', testEventCode);
 
     const metaRes = await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events?${params.toString()}`, {
       method: 'POST',
