@@ -54,10 +54,11 @@ export async function middleware(request: NextRequest) {
 
   // Protect sensitive API routes (write methods / admin operations)
   if (pathname.startsWith('/api/')) {
-    const isPublicApi = 
-      (request.method === 'GET' && 
+    const isPublicApi =
+      (request.method === 'GET' &&
        (pathname.startsWith('/api/config') || pathname.startsWith('/api/posts') || pathname.startsWith('/api/banners'))) ||
-      pathname.endsWith('/ai-summary');
+      pathname.endsWith('/ai-summary') ||
+      pathname.startsWith('/api/meta-capi');
       
     const isAuthApi = pathname.startsWith('/api/auth');
 
