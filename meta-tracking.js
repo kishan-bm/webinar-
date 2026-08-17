@@ -59,23 +59,41 @@
 
     // 2. Conversions API (server-side) — fire-and-forget, never blocks the
     // page's own redirect/thank-you flow if it's slow or fails.
-    try {
-      fetch('/api/collect', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: eventName,
-          event_id: eventId,
-          event_source_url: window.location.href,
-          email: opts.email || '',
-          phone: opts.phone || '',
-          first_name: opts.firstName || '',
-          fbp: getCookie('_fbp'),
-          fbc: getCookie('_fbc'),
-        }),
-        keepalive: true,
-      }).catch(function () {});
-    } catch (e) {}
+    //
+    // _fbp is set by fbevents.js itself, which loads asynchronously — on a
+    // freshly-loaded page (like the thank-you page right after redirect) it
+    // may not have finished setting the cookie yet. Wait briefly for it
+    // (capped) before reading, so server-side events carry the same browser
+    // identifiers as the Pixel call and match quality doesn't suffer.
+    function sendCapi() {
+      try {
+        fetch('/api/collect', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_name: eventName,
+            event_id: eventId,
+            event_source_url: window.location.href,
+            email: opts.email || '',
+            phone: opts.phone || '',
+            first_name: opts.firstName || '',
+            fbp: getCookie('_fbp'),
+            fbc: getCookie('_fbc'),
+          }),
+          keepalive: true,
+        }).catch(function () {});
+      } catch (e) {}
+    }
+
+    var waitedMs = 0;
+    (function waitForFbp() {
+      if (getCookie('_fbp') || waitedMs >= 1500) {
+        sendCapi();
+      } else {
+        waitedMs += 100;
+        setTimeout(waitForFbp, 100);
+      }
+    })();
   };
 
   // ── STORE-THEN-FIRE ON THANK-YOU PAGE ──
