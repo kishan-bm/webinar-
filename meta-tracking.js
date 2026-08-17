@@ -36,13 +36,25 @@
     return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2);
   }
 
+  // Meta Pixel standard event names — anything not in this list is a custom
+  // event and must be sent via fbq('trackCustom', ...) instead of fbq('track', ...).
+  var STANDARD_EVENTS = {
+    Lead: 1, Purchase: 1, CompleteRegistration: 1, Contact: 1, Subscribe: 1,
+    StartTrial: 1, ViewContent: 1, AddToCart: 1, InitiateCheckout: 1,
+  };
+
   window.metaTrackLead = function (opts) {
     opts = opts || {};
+    var eventName = opts.eventName || 'Lead';
     var eventId = generateEventId();
 
     // 1. Browser Pixel
     if (window.fbq) {
-      fbq('track', 'Lead', {}, { eventID: eventId });
+      if (STANDARD_EVENTS[eventName]) {
+        fbq('track', eventName, {}, { eventID: eventId });
+      } else {
+        fbq('trackCustom', eventName, {}, { eventID: eventId });
+      }
     }
 
     // 2. Conversions API (server-side) — fire-and-forget, never blocks the
@@ -52,11 +64,12 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          event_name: 'Lead',
+          event_name: eventName,
           event_id: eventId,
           event_source_url: window.location.href,
           email: opts.email || '',
           phone: opts.phone || '',
+          first_name: opts.firstName || '',
           fbp: getCookie('_fbp'),
           fbc: getCookie('_fbc'),
         }),

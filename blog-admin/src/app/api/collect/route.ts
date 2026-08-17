@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { event_name, event_id, event_source_url, email, phone, fbp, fbc } = body || {};
+    const { event_name, event_id, event_source_url, email, phone, first_name, fbp, fbc } = body || {};
 
     if (!event_name || !event_id) {
       return NextResponse.json({ success: false, error: 'event_name and event_id are required' }, { status: 400 });
@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
     if (userAgent) userData.client_user_agent = userAgent;
     if (email) userData.em = [sha256(email)];
     if (phone) userData.ph = [sha256(String(phone).replace(/[^0-9]/g, ''))];
+    if (first_name) userData.fn = [sha256(first_name)];
     if (fbp) userData.fbp = fbp;
     if (fbc) userData.fbc = fbc;
 

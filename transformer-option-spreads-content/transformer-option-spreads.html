@@ -5415,7 +5415,17 @@
   <script>
     window.cfields = [];
     window._show_thank_you = function (id, message, trackcmp_url, email) {
-      if (window.metaTrackLead) { window.metaTrackLead({ email: email }); }
+      if (window.metaTrackLead) {
+        var phoneField = document.getElementById('phone');
+        var nameField = document.getElementById('fullname');
+        var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
+        window.metaTrackLead({
+          eventName: 'w4-tos',
+          email: email,
+          phone: phoneField ? phoneField.value : '',
+          firstName: firstName,
+        });
+      }
       setTimeout(function () {
         window.location.href = 'tos-thankyou.html';
       }, 500);
