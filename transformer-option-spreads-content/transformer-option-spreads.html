@@ -5415,11 +5415,11 @@
   <script>
     window.cfields = [];
     window._show_thank_you = function (id, message, trackcmp_url, email) {
-      if (window.metaTrackLead) {
+      if (window.metaStoreLeadForThankYou) {
         var phoneField = document.getElementById('phone');
         var nameField = document.getElementById('fullname');
         var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
-        window.metaTrackLead({
+        window.metaStoreLeadForThankYou({
           eventName: 'w4-tos',
           email: email,
           phone: phoneField ? phoneField.value : '',

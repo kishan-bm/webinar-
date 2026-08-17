@@ -4100,7 +4100,7 @@
   <script>
     window.cfields = [];
     window._show_thank_you = function (id, message, trackcmp_url, email) {
-      if (window.metaTrackLead) { window.metaTrackLead({ email: email }); }
+      if (window.metaStoreLeadForThankYou) { window.metaStoreLeadForThankYou({ email: email }); }
       setTimeout(function () {
         window.location.href = 'thank-you-dtt.html';
       }, 500);

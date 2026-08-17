@@ -77,4 +77,31 @@
       }).catch(function () {});
     } catch (e) {}
   };
+
+  // ── STORE-THEN-FIRE ON THANK-YOU PAGE ──
+  // Firing the conversion at form-submit time (before the redirect) is racy —
+  // the page can navigate away mid-request. Instead, the form page stores the
+  // lead's details in sessionStorage right before redirecting, and the
+  // thank-you page (the page you only reach after a real successful
+  // submission) reads it back and fires the actual event once there.
+  var PENDING_KEY = '_metaPendingLead';
+
+  window.metaStoreLeadForThankYou = function (opts) {
+    try {
+      sessionStorage.setItem(PENDING_KEY, JSON.stringify(opts || {}));
+    } catch (e) {}
+  };
+
+  window.metaFireStoredLead = function () {
+    try {
+      var raw = sessionStorage.getItem(PENDING_KEY);
+      if (!raw) return;
+      sessionStorage.removeItem(PENDING_KEY);
+      window.metaTrackLead(JSON.parse(raw));
+    } catch (e) {}
+  };
+
+  // Auto-fire on every page load — a no-op unless the previous page actually
+  // stored a pending lead, and it self-clears so a refresh can't re-fire it.
+  window.metaFireStoredLead();
 })();
