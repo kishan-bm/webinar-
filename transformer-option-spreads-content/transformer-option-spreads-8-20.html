@@ -5839,7 +5839,8 @@
         }
 
         if (eipIti) {
-          phone.value = eipIti.getNumber();
+          var hiddenPhoneField = eipForm.querySelector('input[name="phone"]');
+          if (hiddenPhoneField) hiddenPhoneField.value = eipIti.getNumber();
         }
 
         submitBtn.disabled = true;
