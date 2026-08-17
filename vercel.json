@@ -207,6 +207,10 @@
       "destination": "https://webinar-neon-one.vercel.app/api/config/:path*"
     },
     {
+      "source": "/api/meta-capi",
+      "destination": "https://webinar-neon-one.vercel.app/api/meta-capi"
+    },
+    {
       "source": "/login",
       "destination": "https://webinar-neon-one.vercel.app/login"
     },

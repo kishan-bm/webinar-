@@ -12,6 +12,7 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-PM36KHB');</script>
   <!-- End Google Tag Manager -->
+  <script src="/meta-tracking.js"></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-W7EFVS3VNV"></script>
@@ -4111,6 +4112,7 @@
   <script>
     window.cfields = [];
     window._show_thank_you = function (id, message, trackcmp_url, email) {
+      if (window.metaTrackLead) { window.metaTrackLead({ email: email }); }
       setTimeout(function () {
         window.location.href = 'thank-you-dtt.html';
       }, 500);
