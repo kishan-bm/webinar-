@@ -8,7 +8,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -41,6 +41,14 @@
     {
       "source": "/tos-thank-you",
       "destination": "/transformer-option-spreads-content/tos-thankyou"
+    },
+    {
+      "source": "/transformer-option-spreads-8-20",
+      "destination": "/transformer-option-spreads-content/transformer-option-spreads-8-20"
+    },
+    {
+      "source": "/tos-thank-you-8-20",
+      "destination": "/transformer-option-spreads-content/tos-thankyou-8-20"
     },
     {
       "source": "/performance",
