@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            try {
+                if (sessionStorage.getItem('_tosVariant') === '8-20') {
+                    sessionStorage.removeItem('_tosVariant');
+                    window.location.replace('/tos-thank-you-8-20' + window.location.search);
+                }
+            } catch (e) {}
+        })();
+    </script>
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({

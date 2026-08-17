@@ -4062,6 +4062,7 @@
                             firstName: firstName,
                         });
                     }
+                    try { sessionStorage.setItem('_tosVariant', '8-20'); } catch (e) {}
                             var serialized = _form_serialize(document.getElementById('_form_136_')).replace(/%0A/g, '\\n');
                     var err = form_to_submit.querySelector('._form_error');
                     err ? err.parentNode.removeChild(err) : false;
@@ -5429,7 +5430,7 @@
       }
       // Allow AC to finish its internal tracking, then redirect
       setTimeout(function () {
-        window.location.href = '/tos-thank-you';
+        window.location.href = '/tos-thank-you-8-20';
       }, 500);
     };
   </script>
@@ -5855,6 +5856,7 @@
             firstName: firstName,
           });
         }
+        try { sessionStorage.setItem('_tosVariant', '8-20'); } catch (e) {}
 
         var serialized = eipFormSerialize(eipForm);
         var head = document.querySelector('head');
