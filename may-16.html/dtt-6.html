@@ -4549,6 +4549,10 @@
           var serialized = _form_serialize(document.getElementById('_form_134_')).replace(/%0A/g, '\\n');
           var err = form_to_submit.querySelector('._form_error');
           err ? err.parentNode.removeChild(err) : false;
+          if (window.metaStoreLeadForThankYou) {
+            var emailField = document.getElementById('email');
+            window.metaStoreLeadForThankYou({ email: emailField ? emailField.value : '' });
+          }
           _load_script('https://navigationtrading.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
         }
         return false;

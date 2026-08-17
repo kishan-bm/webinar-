@@ -4561,6 +4561,11 @@
         submitButton.disabled = true;
         submitButton.classList.add('processing');
 
+        if (window.metaStoreLeadForThankYou) {
+          var emailField = document.getElementById('email');
+          window.metaStoreLeadForThankYou({ email: emailField ? emailField.value : '' });
+        }
+
         var serialized = _form_serialize(form_to_submit);
         _load_script('https://navigationtrading.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
       });

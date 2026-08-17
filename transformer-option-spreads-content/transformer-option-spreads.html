@@ -4050,6 +4050,18 @@
                     var submitButton = e.target.querySelector('#_form_136_submit');
                     submitButton.disabled = true;
                     submitButton.classList.add('processing');
+                    if (window.metaStoreLeadForThankYou) {
+                        var emailField = document.getElementById('email');
+                        var phoneField = document.getElementById('phone');
+                        var nameField = document.getElementById('fullname');
+                        var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
+                        window.metaStoreLeadForThankYou({
+                            eventName: 'w4-tos',
+                            email: emailField ? emailField.value : '',
+                            phone: phoneField ? phoneField.value : '',
+                            firstName: firstName,
+                        });
+                    }
                             var serialized = _form_serialize(document.getElementById('_form_136_')).replace(/%0A/g, '\\n');
                     var err = form_to_submit.querySelector('._form_error');
                     err ? err.parentNode.removeChild(err) : false;
