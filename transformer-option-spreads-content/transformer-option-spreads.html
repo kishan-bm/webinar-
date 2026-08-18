@@ -5599,17 +5599,23 @@
         <p class="eip-form-title">Your Free Spot Is Still Open</p>
         <p class="eip-form-sub">Register in seconds — no credit card required.</p>
         <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="eip-form" novalidate>
-          <input type="hidden" name="u" value="132">
-          <input type="hidden" name="f" value="132">
+          <input type="hidden" name="u" value="136">
+          <input type="hidden" name="f" value="136">
           <input type="hidden" name="s" value="">
           <input type="hidden" name="c" value="0">
           <input type="hidden" name="m" value="0">
           <input type="hidden" name="act" value="sub">
           <input type="hidden" name="v" value="2">
-          <input type="hidden" name="or" value="0bd84310-9300-42fc-b42f-a518e37e890f">
-          <div class="eip-field"><input type="text" name="fullname" placeholder="Your Full Name *" required class="eip-input"></div>
-          <div class="eip-field"><input type="email" name="email" placeholder="Your Email Address *" required class="eip-input"></div>
-          <button type="submit" class="eip-submit">Reserve My Free Seat &rarr;</button>
+          <input type="hidden" name="or" value="ae453ba9-ba7e-40d7-8b05-4c33fe4820d0">
+          <div class="eip-field"><input type="text" id="eip_fullname" name="fullname" placeholder="Your Full Name *" required class="eip-input"></div>
+          <div class="eip-field"><input type="email" id="eip_email" name="email" placeholder="Your Email Address *" required class="eip-input"></div>
+          <div class="eip-field"><input type="text" id="eip_phone" name="phone" placeholder="Your Phone Number *" required class="eip-input"></div>
+          <label class="eip-consent-label">
+            <input type="checkbox" id="eip_sms_consent" name="sms_consent" required />
+            <span>By submitting this form, you agree to receive reminders and updates via text from NavigationTrading.</span>
+          </label>
+          <div class="eip-form-error" id="eip-form-error"></div>
+          <button type="submit" class="eip-submit" id="eip-submit-btn">Reserve My Free Seat &rarr;</button>
         </form>
         <p class="eip-dismiss" id="eip-dismiss">No thanks, I'm not interested</p>
       </div>
@@ -5714,6 +5720,16 @@
     }
     .eip-input:focus { border-color: #c8420a; box-shadow: 0 0 0 3px rgba(200,66,10,0.1); }
     .eip-input::placeholder { color: #a0aec0; }
+    .eip-consent-label {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 12.5px; color: #6b7280; line-height: 1.4;
+      margin-bottom: 14px; cursor: pointer;
+    }
+    .eip-consent-label input { margin-top: 3px; flex-shrink: 0; }
+    .eip-form-error {
+      font-size: 13px; color: #c8420a; margin-bottom: 10px; display: none;
+    }
+    .eip-form-error:not(:empty) { display: block; }
     .eip-submit {
       width: 100%; padding: 16px;
       background: #c8420a; color: #fff;
@@ -5758,6 +5774,100 @@
       document.getElementById('eip-close').addEventListener('click', function(e) { e.stopPropagation(); hide(); });
       document.getElementById('eip-dismiss').addEventListener('click', function(e) { e.stopPropagation(); hide(); });
       document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hide(); });
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var eipForm = document.getElementById('eip-form');
+      if (!eipForm) return;
+
+      var eipIti;
+      var eipPhoneInput = document.getElementById('eip_phone');
+      if (eipPhoneInput) {
+        var stylesheetLink = document.createElement('link');
+        stylesheetLink.rel = 'stylesheet';
+        stylesheetLink.href = 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.2.0/build/css/intlTelInput.css';
+        document.head.appendChild(stylesheetLink);
+        var itiScript = document.createElement('script');
+        itiScript.charset = 'utf-8';
+        itiScript.src = 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.2.0/build/js/intlTelInput.min.js';
+        itiScript.onload = function() {
+          eipPhoneInput.setAttribute('name', 'phone-iti');
+          eipIti = intlTelInput(eipPhoneInput, {
+            loadUtils: () => import('https://cdn.jsdelivr.net/npm/intl-tel-input@25.2.0/build/js/utils.js'),
+            hiddenInput: (telInputName) => ({ phone: 'phone' }),
+            separateDialCode: true,
+            autoPlaceholder: 'aggressive',
+            initialCountry: 'us',
+          });
+        };
+        document.head.appendChild(itiScript);
+      }
+
+      function eipFormSerialize(form) {
+        var q = [];
+        for (var i = 0; i < form.elements.length; i++) {
+          var el = form.elements[i];
+          if (!el.name) continue;
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            if (el.checked) q.push(el.name + '=' + encodeURIComponent(el.value));
+          } else {
+            q.push(el.name + '=' + encodeURIComponent(el.value));
+          }
+        }
+        return q.join('&');
+      }
+
+      eipForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fullname = document.getElementById('eip_fullname');
+        var email = document.getElementById('eip_email');
+        var phone = document.getElementById('eip_phone');
+        var consent = document.getElementById('eip_sms_consent');
+        var errorBox = document.getElementById('eip-form-error');
+        var submitBtn = document.getElementById('eip-submit-btn');
+        if (errorBox) errorBox.textContent = '';
+
+        if (!fullname.value.trim() || !email.value.trim() || !phone.value.trim()) {
+          if (errorBox) errorBox.textContent = 'Please fill in all required fields.';
+          return;
+        }
+        if (!consent || !consent.checked) {
+          if (errorBox) errorBox.textContent = 'Please check the box to continue.';
+          return;
+        }
+
+        if (eipIti) {
+          var hiddenPhoneField = eipForm.querySelector('input[name="phone"]');
+          if (hiddenPhoneField) hiddenPhoneField.value = eipIti.getNumber();
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('processing');
+
+        if (window.metaStoreLeadForThankYou) {
+          var firstName = fullname.value.trim().split(/\s+/)[0];
+          window.metaStoreLeadForThankYou({
+            eventName: 'w4-tos',
+            email: email.value,
+            phone: phone.value,
+            firstName: firstName,
+          });
+        }
+
+        var serialized = eipFormSerialize(eipForm);
+        var head = document.querySelector('head');
+        var s = document.createElement('script');
+        s.charset = 'utf-8';
+        s.src = 'https://navigationtrading.activehosted.com/proc.php?' + serialized + '&jsonp=true';
+        s.onerror = function() {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('processing');
+          if (errorBox) errorBox.textContent = 'Sorry, your submission failed. Please try again.';
+        };
+        head.appendChild(s);
+      });
     })();
   </script>
 
