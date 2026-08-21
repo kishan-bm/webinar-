@@ -1122,12 +1122,21 @@
     .section-head.light h2 { color: #fff; }
     .section-head.light p { color: rgba(255,255,255,.6); }
 
-    .results-pro { background: var(--navy-mid); padding: 60px 0; position: relative; overflow: hidden; }
+    .results-pro { background: var(--navy-mid); padding: 60px 0; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .results-pro::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(200,66,10,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(26,74,122,0.22) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .results-pro .container { position: relative; z-index: 2; }
     .orbital-scene-pro {
       position: relative;
       width: 100%; max-width: 1100px;
-      height: 560px;
-      margin: 64px auto 0;
+      height: 400px;
+      margin: 40px auto 0;
     }
     .oc-svg-pro {
       position: absolute; inset: 0;
@@ -1159,11 +1168,9 @@
     }
     .oi-item-pro { position: absolute; width: 260px; z-index: 4; }
     .oi-item-1 { top: 15px; left: 130px; text-align: left; }
-    .oi-item-2 { top: 205px; left: 10px; text-align: left; }
-    .oi-item-3 { top: 395px; left: 130px; text-align: left; }
+    .oi-item-3 { top: 245px; left: 130px; text-align: left; }
     .oi-item-4 { top: 15px; right: 130px; text-align: left; }
-    .oi-item-5 { top: 205px; right: 10px; text-align: left; }
-    .oi-item-6 { top: 395px; right: 130px; text-align: left; }
+    .oi-item-6 { top: 245px; right: 130px; text-align: left; }
 
     .oi-verb-pro {
       display: block; font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
@@ -1312,19 +1319,19 @@
 
       <div class="orbital-scene-pro">
         <!-- SVG Lines matching membership.html structure -->
-        <svg class="oc-svg-pro" viewBox="0 0 1100 560">
+        <svg class="oc-svg-pro" viewBox="0 0 1100 400">
           <!-- Left top -->
-          <path class="oc-line-pro" d="M 390,90 H 435 V 165"/>
-          <circle class="oc-dot-svg-pro" cx="435" cy="165" r="5"/>
+          <path class="oc-line-pro" d="M 390,64 H 435 V 118"/>
+          <circle class="oc-dot-svg-pro" cx="435" cy="118" r="5"/>
           <!-- Left bot -->
-          <path class="oc-line-pro" d="M 390,470 H 435 V 400"/>
-          <circle class="oc-dot-svg-pro" cx="435" cy="400" r="5"/>
+          <path class="oc-line-pro" d="M 390,336 H 435 V 286"/>
+          <circle class="oc-dot-svg-pro" cx="435" cy="286" r="5"/>
           <!-- Right top -->
-          <path class="oc-line-pro" d="M 665,165 V 90 H 710"/>
-          <circle class="oc-dot-svg-pro" cx="665" cy="165" r="5"/>
+          <path class="oc-line-pro" d="M 665,118 V 64 H 710"/>
+          <circle class="oc-dot-svg-pro" cx="665" cy="118" r="5"/>
           <!-- Right bot -->
-          <path class="oc-line-pro" d="M 665,400 V 470 H 710"/>
-          <circle class="oc-dot-svg-pro" cx="665" cy="400" r="5"/>
+          <path class="oc-line-pro" d="M 665,286 V 336 H 710"/>
+          <circle class="oc-dot-svg-pro" cx="665" cy="286" r="5"/>
         </svg>
 
         <!-- Center logo -->
