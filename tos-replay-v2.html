@@ -1122,16 +1122,21 @@
     .section-head.light h2 { color: #fff; }
     .section-head.light p { color: rgba(255,255,255,.6); }
 
-    .results-pro { background: var(--navy-mid); padding: 60px 0; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .results-pro { background: #f8fafc; padding: 60px 0; position: relative; overflow: hidden; border-bottom: 1px solid rgba(13,46,78,0.08); }
     .results-pro::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 15% 15%, rgba(200,66,10,0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 85%, rgba(26,74,122,0.22) 0%, transparent 50%);
+        radial-gradient(ellipse at 15% 15%, rgba(200,66,10,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(13,46,78,0.05) 0%, transparent 50%);
       pointer-events: none;
     }
     .results-pro .container { position: relative; z-index: 2; }
+    .results-pro .section-head h2 { color: var(--navy); }
+    .results-pro .section-head p { color: rgba(0,0,0,.55); }
+    .results-pro .oi-item-pro h4 { color: var(--navy); }
+    .results-pro .oi-item-pro p { color: rgba(0,0,0,.55); }
+    .results-pro .oc-logo-pro { filter: brightness(0) drop-shadow(0 0 12px rgba(200,66,10,.2)); opacity: 0.85; }
     .orbital-scene-pro {
       position: relative;
       width: 100%; max-width: 1100px;
