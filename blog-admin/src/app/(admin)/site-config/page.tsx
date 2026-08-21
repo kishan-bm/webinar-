@@ -248,7 +248,6 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'whopReplayUrl', label: 'Main Replay Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
       { key: 'whopOfferUrl', label: 'Middle Offer Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
       { key: 'whopFinalUrl', label: 'Final Bottom Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
-      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
       { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
       { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. TIME', group: 'Promo Settings' },
     ]
@@ -261,7 +260,6 @@ const PAGES_CONFIG: PageConfig[] = [
     description: 'Standard Transformer Option Spreads replay page.',
     fields: [
       { key: 'whopLink', label: 'Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
-      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
       { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
       { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. TIME', group: 'Promo Settings' },
     ]
