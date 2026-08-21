@@ -40,6 +40,7 @@
 
     :root {
       --teal-900: #0D2E4E;
+      --navy: #0D2E4E;
       --orange: #c8420a;
       --orange-bright: #e04d10;
       --orange-glow: rgba(200, 66, 10, 0.35);
@@ -174,6 +175,28 @@
       padding: 48px 60px 32px;
       position: relative;
       overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat;
+      opacity: 0.12;
+      z-index: 0;
+    }
+
+    footer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 0%, rgba(13, 46, 78, 0.6) 100%);
+      z-index: 0;
+    }
+
+    footer > * {
+      position: relative;
+      z-index: 1;
     }
 
     .footer-top {
@@ -467,6 +490,208 @@
         display: none;
       }
     }
+
+    /* ── FLUX SECTION (copied from paid-membership.html) ── */
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .eyebrow.white { color: rgba(255,255,255,.6); }
+    .section-head { text-align: center; margin-bottom: 64px; }
+    .section-head .eyebrow { display: block; text-align: center; }
+    .section-head h2 {
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin-top: 18px; font-size: 16px; line-height: 1.7;
+      color: rgba(0,0,0,.6); max-width: 680px; margin-left: auto; margin-right: auto;
+    }
+    .section-head.light h2 { color: #fff; }
+    .section-head.light p { color: rgba(255,255,255,.6); }
+    .btn-hero {
+      background: var(--gold); color: #fff;
+      padding: 20px 48px; border-radius: 10px; font-size: 18px; font-weight: 800;
+      text-decoration: none; text-align: center;
+      transition: all .3s cubic-bezier(.175,.885,.32,1.275);
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .btn-hero:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 25px 50px rgba(212,160,64,.25); }
+    .tools-section { padding: 64px 0; background: #fff; }
+    .flux-combined-card {
+      background: #ffffff;
+      border: 1px solid rgba(13, 46, 78, 0.08);
+      border-radius: 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      box-shadow: 0 20px 50px rgba(13, 46, 78, 0.04), inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .flux-combined-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(200, 66, 10, 0.2);
+      box-shadow: 0 30px 60px rgba(13, 46, 78, 0.08), 0 0 40px rgba(200, 66, 10, 0.04);
+    }
+    .flux-combined-left {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 32px 40px 36px;
+      border-top: 1px solid rgba(13,46,78,0.1);
+      background: #f8fafc;
+    }
+    .flux-tool-block {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 36px 40px 28px;
+    }
+    .flux-tool-block:first-child {
+      border-right: 1px solid rgba(13, 46, 78, 0.08);
+    }
+    .flux-tool-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .flux-card-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid rgba(200, 66, 10, 0.2);
+      background: rgba(200, 66, 10, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--orange);
+      transition: all 0.3s ease;
+      margin-top: 2px;
+    }
+    .flux-card-icon svg { width: 20px; height: 20px; }
+    .flux-combined-card:hover .flux-card-icon {
+      border-color: var(--orange);
+      background: rgba(200, 66, 10, 0.1);
+      box-shadow: 0 0 15px rgba(200, 66, 10, 0.15);
+    }
+    .flux-card-eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .flux-tool-block h3 {
+      font-size: 22px;
+      color: #0d2e4e;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .flux-tool-block p {
+      font-size: 14.5px;
+      color: rgba(0,0,0,.62);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .flux-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+    }
+    .flux-card-features li {
+      font-size: 13.5px;
+      color: #4b5563;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .flux-card-features li svg {
+      width: 15px;
+      height: 15px;
+      color: #10b981;
+      flex-shrink: 0;
+    }
+    .flux-combined-right {
+      border-bottom: 1px solid rgba(13, 46, 78, 0.08);
+      background: #f1f5f9;
+    }
+    .flux-mock-browser--tall {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 16px 0;
+      box-sizing: border-box;
+    }
+    .flux-mock-dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+    .flux-mock-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .flux-mock-dots span:nth-child(1) { background: #ff5f56; }
+    .flux-mock-dots span:nth-child(2) { background: #ffbd2e; }
+    .flux-mock-dots span:nth-child(3) { background: #27c93f; }
+    .flux-mock-browser--tall img {
+      width: 100%;
+      height: 655px;
+      object-fit: cover;
+      object-position: top left;
+      border-radius: 8px 8px 0 0;
+      display: block;
+    }
+    @media (max-width: 760px) {
+      .flux-combined-left {
+        grid-template-columns: 1fr;
+      }
+      .flux-tool-block:first-child {
+        border-right: none;
+        border-bottom: 1px solid rgba(13, 46, 78, 0.08);
+      }
+      .flux-card-features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── FAQ SECTION (copied from paid-membership.html, recolored blue/white) ── */
+    .faq { background: var(--teal-900); padding: 120px 0; }
+    .faq-layout { display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start; }
+    .faq-left { position: sticky; top: 100px; }
+    .faq-left h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.02em; margin-top: 10px; margin-bottom: 16px; }
+    .faq-left p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.75; margin-bottom: 32px; }
+    .faq-contact { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+    .faq-contact-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: rgba(212,160,64,.16); border: 1px solid rgba(212,160,64,.3); display: flex; align-items: center; justify-content: center; }
+    .faq-contact-icon svg { width: 16px; height: 16px; color: var(--gold); }
+    .faq-contact-text strong { display: block; font-size: 13px; color: #fff; font-weight: 700; }
+    .faq-contact-text span { font-size: 12px; color: rgba(255,255,255,.55); }
+    .faq-right { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; overflow: hidden; transition: border-color .25s, background .25s; }
+    .faq-item.open { background: rgba(255,255,255,.08); border-color: rgba(212,160,64,.4); }
+    .faq-q { padding: 22px 28px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 16px; font-weight: 700; color: #fff; user-select: none; }
+    .faq-q:hover { color: rgba(255,255,255,.85); }
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,160,64,.14); border: 1px solid rgba(212,160,64,.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; color: var(--gold); transition: transform .3s, background .3s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(212,160,64,.28); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-a-inner { padding: 0 28px 24px; font-size: 14.5px; color: rgba(255,255,255,.7); line-height: 1.75; }
+    @media (max-width: 900px) {
+      .faq-layout { grid-template-columns: 1fr; gap: 48px; }
+      .faq-left { position: static; }
+    }
   </style>
   <script src="/site-config.js" data-page="tos-replay" defer></script>
 </head>
@@ -550,6 +775,201 @@
       <h2 class="mid-cta-heading" style="font-size:clamp(22px,2.5vw,34px);margin-bottom:32px;">Use code "<span data-config="promoCode">TIME</span>" for an exclusive discount — expires Monday at 11:59 PM CST!</h2>
       <div>
         <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntpro/" class="btn-main" style="text-transform:none;letter-spacing:0;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;" data-config="whopLink">Join Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools-section" id="tools" style="background: #ffffff; color: #111; padding: 50px 0; border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06);">
+    <div class="container" style="max-width: 1400px;">
+      <div class="section-head reveal" style="margin-bottom: 40px;">
+        <span class="eyebrow" style="color: var(--gold);">Pro-Exclusive Software</span>
+        <h2 style="color: var(--navy); text-transform: uppercase; letter-spacing: -0.01em;">Introducing FLUX — The DC Time Machine</h2>
+        <p style="color: rgba(0,0,0,.6); max-width: 720px; margin-left: auto; margin-right: auto;">Stop entering on a hunch. Trade with the proprietary volatility tool developed by the NavigationTrading team to find optimal entry windows and manage positions with mathematical precision.</p>
+      </div>
+
+      <!-- FLUX Combined Card -->
+      <div class="flux-combined-card reveal">
+
+        <!-- Top: full-width image -->
+        <div class="flux-combined-right">
+          <div class="flux-mock-browser--tall">
+            <div class="flux-mock-dots"><span></span><span></span><span></span></div>
+            <img src="newflux.jpeg" alt="FLUX DC TimeMachine">
+          </div>
+        </div>
+
+        <!-- Bottom: two tool blocks side by side -->
+        <div class="flux-combined-left">
+
+          <div class="flux-tool-block">
+            <div class="flux-tool-header">
+              <div class="flux-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </div>
+              <div>
+                <span class="flux-card-eyebrow">THE RATIO TOOL</span>
+                <h3>FLUX Volatility &amp; Calendar Ratio Tracker</h3>
+              </div>
+            </div>
+            <p>Track the precise relationship between front-month and back-month implied volatility across SPX, QQQ, and SPY. The Ratio Tool highlights when the spread is extended and primed for mean reversion — giving you the exact signal to enter your Double Calendar trades.</p>
+            <ul class="flux-card-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Real-Time IV Updates</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 5-Day &amp; 20-Day Comparisons</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Optimal Expiration Strips</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Precise Entry Signals</li>
+            </ul>
+          </div>
+
+          <div class="flux-tool-block">
+            <div class="flux-tool-header">
+              <div class="flux-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div>
+                <span class="flux-card-eyebrow">EARNINGS &amp; TRANSFORMATION</span>
+                <h3>FLUX Earnings &amp; Live Trading Dashboard</h3>
+              </div>
+            </div>
+            <p>Trade earnings announcements with confidence. FLUX models volatility crush and identifies mispriced premiums. Use the proprietary <strong>Transformer Order</strong> approach to roll profitable spreads into risk-free Iron Condors.</p>
+            <ul class="flux-card-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Volatility Crush Modeler</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Transformer Order Planner</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Risk-Free Adjustments</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Value: $200/mo — Free with Pro</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CTA Button -->
+      <div style="margin-top: 50px; text-align: center;" class="reveal">
+        <a href="https://whop.com/navigationtrading/ntpro/" class="btn-hero" data-config="whopLink" style="background: var(--gold); padding: 18px 44px; font-size: 16px;">Get Pro Tools and Alerts for $179/month</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="faq section" id="faq">
+    <div class="container">
+      <div class="faq-layout">
+        <!-- Left: Title & Contact -->
+        <div class="faq-left reveal">
+          <span class="eyebrow" style="color:var(--gold);">FREQUENTLY ASKED QUESTIONS</span>
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about the Pro membership and how it fits your trading style.</p>
+          <div class="faq-contact">
+            <div class="faq-contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div class="faq-contact-text">
+              <strong>Still Have Questions?</strong>
+              <span>support@navigationtrading.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Accordion -->
+        <div class="faq-right reveal">
+
+          <div class="faq-item open">
+            <div class="faq-q">
+              What's the difference between Pro and Day Trading membership?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a" style="max-height: 500px;">
+              <div class="faq-a-inner">
+                The Day Trading membership ($129/month) includes 10 day trading strategy courses, daily live streams, and trade alerts for day trading setups. Pro ($179/month) includes everything in Day Trading plus 7 additional advanced strategy courses covering income spreads, trend trading, and portfolio strategies. Pro members also get trade alerts for every strategy we teach — not just day trading — plus the full suite of custom chart indicators and watch lists. For $50 more per month, you get the complete NavigationTrading system.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Is $179/month worth it?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                That's $5.96 per day for daily live trading sessions, 17+ strategy courses, real-time alerts across every strategy, custom tools, and access to an active community of serious traders. Most traders lose more than that on a single bad trade made without proper education. The question isn't whether $179 is a lot. It's whether not having the right strategies and tools is costing you more.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              I'm a complete beginner. Should I start with Pro?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                If you've never traded options before, we recommend starting with our Free Membership to learn the fundamentals. The free courses cover options basics, how contracts work, and beginner strategies. Once you're comfortable with the foundations, Pro is where you take it to the next level. That said, if you're motivated and ready to commit, Pro gives you everything from day one — including the foundational knowledge.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Can I cancel anytime?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Yes. There are no long-term contracts. Your membership renews monthly, and you can cancel anytime. If you cancel, you keep access through the end of your current billing period.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              What time are the live streams?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                The morning session starts around 9:15 AM Eastern, before the market opens at 9:30. The Power Hour session begins around 3:00 PM Eastern for the final hour of trading. Both sessions run every market day (Monday through Friday, excluding market holidays).
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Do I need a large account to trade these strategies?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                No. Many of our strategies — especially the day trading and 0 DTE setups, can be traded with accounts of $5,000 or less. The courses cover how to match strategies to your account size. Some of the advanced strategies like portfolio margin are designed for larger accounts, but you don't need to trade every strategy to get value from Pro. Start with what fits your account and expand as you grow.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Will I get overwhelmed with 17+ strategies?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                No, and this is important. You don't learn all 17 strategies at once. They're organized by category (day trading, 0 DTE, income, trend, portfolio), and most members start with one category that matches their current goals. The live streams and alerts cover all strategies, but you choose which ones to focus on. Think of it as a library you grow into, not a firehose you drink from.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Can I talk to someone if I have questions?
+              <div class="faq-icon">+</div>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Absolutely. The live trading room has real-time chat where you can ask questions during the stream. The TradeHacker Discord community is active throughout the day. Experienced members and the NavigationTrading team are there to help. You're never trading alone.
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -644,6 +1064,24 @@
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* FAQ accordion */
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          const ia = i.querySelector('.faq-a');
+          if (ia) ia.style.maxHeight = '0';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          a.style.maxHeight = a.scrollHeight + 'px';
+        }
+      });
     });
   </script>
 </body>
