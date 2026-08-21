@@ -494,7 +494,7 @@
     /* ── FLUX SECTION (copied from paid-membership.html) ── */
     .eyebrow {
       display: inline-block; font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 2.5px; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 2.5px; color: var(--orange);
       margin-bottom: 14px;
     }
     .eyebrow.white { color: rgba(255,255,255,.6); }
@@ -511,14 +511,14 @@
     .section-head.light h2 { color: #fff; }
     .section-head.light p { color: rgba(255,255,255,.6); }
     .btn-hero {
-      background: var(--gold); color: #fff;
+      background: var(--orange); color: #fff;
       padding: 20px 48px; border-radius: 10px; font-size: 18px; font-weight: 800;
       text-decoration: none; text-align: center;
       transition: all .3s cubic-bezier(.175,.885,.32,1.275);
       display: inline-flex; align-items: center; justify-content: center; gap: 12px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
-    .btn-hero:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 25px 50px rgba(212,160,64,.25); }
+    .btn-hero:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 25px 50px rgba(200,66,10,.25); }
     .tools-section { padding: 64px 0; background: #fff; }
     .flux-combined-card {
       background: #ffffff;
@@ -585,7 +585,7 @@
       font-weight: 800;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--orange);
       margin-bottom: 4px;
     }
     .flux-tool-block h3 {
@@ -668,26 +668,26 @@
       }
     }
 
-    /* ── FAQ SECTION (copied from paid-membership.html, recolored blue/white) ── */
-    .faq { background: var(--teal-900); padding: 120px 0; }
+    /* ── FAQ SECTION (copied from paid-membership.html, recolored white) ── */
+    .faq { background: #ffffff; padding: 120px 0; }
     .faq-layout { display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start; }
     .faq-left { position: sticky; top: 100px; }
-    .faq-left h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.02em; margin-top: 10px; margin-bottom: 16px; }
-    .faq-left p { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.75; margin-bottom: 32px; }
-    .faq-contact { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
-    .faq-contact-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: rgba(212,160,64,.16); border: 1px solid rgba(212,160,64,.3); display: flex; align-items: center; justify-content: center; }
-    .faq-contact-icon svg { width: 16px; height: 16px; color: var(--gold); }
-    .faq-contact-text strong { display: block; font-size: 13px; color: #fff; font-weight: 700; }
-    .faq-contact-text span { font-size: 12px; color: rgba(255,255,255,.55); }
+    .faq-left h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -.02em; margin-top: 10px; margin-bottom: 16px; }
+    .faq-left p { font-size: 14px; color: rgba(0,0,0,.55); line-height: 1.75; margin-bottom: 32px; }
+    .faq-contact { display: flex; align-items: center; gap: 12px; padding: 16px 20px; border-radius: 12px; background: rgba(13,46,78,.04); border: 1px solid rgba(13,46,78,.1); }
+    .faq-contact-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; background: rgba(200,66,10,.1); border: 1px solid rgba(200,66,10,.25); display: flex; align-items: center; justify-content: center; }
+    .faq-contact-icon svg { width: 16px; height: 16px; color: var(--orange); }
+    .faq-contact-text strong { display: block; font-size: 13px; color: var(--navy); font-weight: 700; }
+    .faq-contact-text span { font-size: 12px; color: rgba(0,0,0,.5); }
     .faq-right { display: flex; flex-direction: column; gap: 8px; }
-    .faq-item { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; overflow: hidden; transition: border-color .25s, background .25s; }
-    .faq-item.open { background: rgba(255,255,255,.08); border-color: rgba(212,160,64,.4); }
-    .faq-q { padding: 22px 28px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 16px; font-weight: 700; color: #fff; user-select: none; }
-    .faq-q:hover { color: rgba(255,255,255,.85); }
-    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,160,64,.14); border: 1px solid rgba(212,160,64,.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; color: var(--gold); transition: transform .3s, background .3s; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(212,160,64,.28); }
+    .faq-item { background: #f8fafc; border: 1px solid rgba(13,46,78,.08); border-radius: 14px; overflow: hidden; transition: border-color .25s, background .25s; }
+    .faq-item.open { background: #f1f5f9; border-color: rgba(200,66,10,.35); }
+    .faq-q { padding: 22px 28px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 16px; font-weight: 700; color: var(--navy); user-select: none; }
+    .faq-q:hover { color: var(--orange); }
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(200,66,10,.1); border: 1px solid rgba(200,66,10,.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; color: var(--orange); transition: transform .3s, background .3s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(200,66,10,.2); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-a-inner { padding: 0 28px 24px; font-size: 14.5px; color: rgba(255,255,255,.7); line-height: 1.75; }
+    .faq-a-inner { padding: 0 28px 24px; font-size: 14.5px; color: rgba(0,0,0,.62); line-height: 1.75; }
     @media (max-width: 900px) {
       .faq-layout { grid-template-columns: 1fr; gap: 48px; }
       .faq-left { position: static; }
@@ -782,7 +782,7 @@
   <section class="tools-section" id="tools" style="background: #ffffff; color: #111; padding: 50px 0; border-top: 1px solid rgba(0,0,0,.06); border-bottom: 1px solid rgba(0,0,0,.06);">
     <div class="container" style="max-width: 1400px;">
       <div class="section-head reveal" style="margin-bottom: 40px;">
-        <span class="eyebrow" style="color: var(--gold);">Pro-Exclusive Software</span>
+        <span class="eyebrow" style="color: var(--orange);">Pro-Exclusive Software</span>
         <h2 style="color: var(--navy); text-transform: uppercase; letter-spacing: -0.01em;">Introducing FLUX — The DC Time Machine</h2>
         <p style="color: rgba(0,0,0,.6); max-width: 720px; margin-left: auto; margin-right: auto;">Stop entering on a hunch. Trade with the proprietary volatility tool developed by the NavigationTrading team to find optimal entry windows and manage positions with mathematical precision.</p>
       </div>
@@ -845,7 +845,7 @@
 
       <!-- CTA Button -->
       <div style="margin-top: 50px; text-align: center;" class="reveal">
-        <a href="https://whop.com/navigationtrading/ntpro/" class="btn-hero" data-config="whopLink" style="background: var(--gold); padding: 18px 44px; font-size: 16px;">Get Pro Tools and Alerts for $179/month</a>
+        <a href="https://whop.com/navigationtrading/ntpro/" class="btn-hero" data-config="whopLink" style="background: var(--orange); padding: 18px 44px; font-size: 16px;">Get Pro Tools and Alerts for $179/month</a>
       </div>
 
     </div>
@@ -856,7 +856,7 @@
       <div class="faq-layout">
         <!-- Left: Title & Contact -->
         <div class="faq-left reveal">
-          <span class="eyebrow" style="color:var(--gold);">FREQUENTLY ASKED QUESTIONS</span>
+          <span class="eyebrow" style="color:var(--orange);">FREQUENTLY ASKED QUESTIONS</span>
           <h2>Frequently Asked Questions</h2>
           <p>Everything you need to know about the Pro membership and how it fits your trading style.</p>
           <div class="faq-contact">
