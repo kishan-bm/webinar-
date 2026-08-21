@@ -224,6 +224,49 @@ const PAGES_CONFIG: PageConfig[] = [
     ]
   },
   {
+    key: 'tos-replay-noshow',
+    title: 'TOS Replay NoShow Page',
+    path: '/tos-replay-noshow',
+    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay-noshow',
+    description: 'Transformer Option Spreads replay page for registered users who missed the live webinar.',
+    fields: [
+      { key: 'whopLink', label: 'Main CTA Offer Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', description: 'Redirect URL for Claim Offer and Claim Discount buttons', group: 'URLs & Links' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', group: 'Exit Intent Popup' },
+      { key: 'exitPopupRedirectUrl', label: 'Exit Popup Button Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', description: 'Redirect URL when clicking Join Now inside exit popup', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
+    key: 'tos-replay-v2',
+    title: 'TOS Replay V2',
+    path: '/tos-replay-v2',
+    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay-v2',
+    description: 'Variant Transformer Option Spreads replay page showing different CTAs.',
+    fields: [
+      { key: 'whopReplayUrl', label: 'Main Replay Join Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', group: 'URLs & Links' },
+      { key: 'whopOfferUrl', label: 'Middle Offer Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', group: 'URLs & Links' },
+      { key: 'whopFinalUrl', label: 'Final Bottom Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', group: 'URLs & Links' },
+      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
+      { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. TIME', group: 'Promo Settings' },
+    ]
+  },
+  {
+    key: 'tos-replay',
+    title: 'TOS Replay',
+    path: '/tos-replay',
+    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay',
+    description: 'Standard Transformer Option Spreads replay page.',
+    fields: [
+      { key: 'whopLink', label: 'Join Now Link', type: 'url', placeholder: 'https://navigationtrading.com/pro', group: 'URLs & Links' },
+      { key: 'freeOnePagersLink', label: 'Access Free One Pagers Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
+      { key: 'promoPercent', label: 'Promo Discount Percentage', type: 'text', placeholder: 'e.g. 30%', group: 'Promo Settings' },
+      { key: 'promoCode', label: 'Promo Code Text', type: 'text', placeholder: 'e.g. TIME', group: 'Promo Settings' },
+    ]
+  },
+  {
     key: 'day-trading-membership',
     title: 'Day Trading Membership Welcome',
     path: '/day-trading-membership',
