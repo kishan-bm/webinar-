@@ -61,9 +61,9 @@ export function Stats() {
       </div>
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">By the numbers</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#e87040" }}>By the numbers</p>
           <h2 className="mt-4 font-display text-4xl leading-[1.05] text-white text-balance md:text-6xl">
-            Outbound results, <span className="gradient-text italic">quantified.</span>
+            Outbound results, <span className="italic" style={{ color: "#e87040" }}>quantified.</span>
           </h2>
         </div>
         <div className="relative mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-4">
