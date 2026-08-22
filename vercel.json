@@ -31,6 +31,10 @@
       "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/"
     },
     {
+      "source": "/flux/assets/:path*",
+      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/assets/:path*"
+    },
+    {
       "source": "/flux/:path*",
       "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/:path*"
     },
