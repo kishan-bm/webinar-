@@ -11,10 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features.index'
-import { Route as FeaturesLeadDatabasesRouteImport } from './routes/features.lead-databases'
-import { Route as FeaturesEmailVerificationRouteImport } from './routes/features.email-verification'
-import { Route as FeaturesDeliverabilityRouteImport } from './routes/features.deliverability'
 import { Route as FeaturesColdEmailToolsRouteImport } from './routes/features.cold-email-tools'
+import { Route as FeaturesDeliverabilityRouteImport } from './routes/features.deliverability'
+import { Route as FeaturesEmailVerificationRouteImport } from './routes/features.email-verification'
+import { Route as FeaturesLeadDatabasesRouteImport } from './routes/features.lead-databases'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,9 +26,14 @@ const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   path: '/features/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FeaturesLeadDatabasesRoute = FeaturesLeadDatabasesRouteImport.update({
-  id: '/features/lead-databases',
-  path: '/features/lead-databases',
+const FeaturesColdEmailToolsRoute = FeaturesColdEmailToolsRouteImport.update({
+  id: '/features/cold-email-tools',
+  path: '/features/cold-email-tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesDeliverabilityRoute = FeaturesDeliverabilityRouteImport.update({
+  id: '/features/deliverability',
+  path: '/features/deliverability',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesEmailVerificationRoute =
@@ -37,14 +42,9 @@ const FeaturesEmailVerificationRoute =
     path: '/features/email-verification',
     getParentRoute: () => rootRouteImport,
   } as any)
-const FeaturesDeliverabilityRoute = FeaturesDeliverabilityRouteImport.update({
-  id: '/features/deliverability',
-  path: '/features/deliverability',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FeaturesColdEmailToolsRoute = FeaturesColdEmailToolsRouteImport.update({
-  id: '/features/cold-email-tools',
-  path: '/features/cold-email-tools',
+const FeaturesLeadDatabasesRoute = FeaturesLeadDatabasesRouteImport.update({
+  id: '/features/lead-databases',
+  path: '/features/lead-databases',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -125,18 +125,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/features/lead-databases': {
-      id: '/features/lead-databases'
-      path: '/features/lead-databases'
-      fullPath: '/features/lead-databases'
-      preLoaderRoute: typeof FeaturesLeadDatabasesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/features/email-verification': {
-      id: '/features/email-verification'
-      path: '/features/email-verification'
-      fullPath: '/features/email-verification'
-      preLoaderRoute: typeof FeaturesEmailVerificationRouteImport
+    '/features/cold-email-tools': {
+      id: '/features/cold-email-tools'
+      path: '/features/cold-email-tools'
+      fullPath: '/features/cold-email-tools'
+      preLoaderRoute: typeof FeaturesColdEmailToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features/deliverability': {
@@ -146,11 +139,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesDeliverabilityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/features/cold-email-tools': {
-      id: '/features/cold-email-tools'
-      path: '/features/cold-email-tools'
-      fullPath: '/features/cold-email-tools'
-      preLoaderRoute: typeof FeaturesColdEmailToolsRouteImport
+    '/features/email-verification': {
+      id: '/features/email-verification'
+      path: '/features/email-verification'
+      fullPath: '/features/email-verification'
+      preLoaderRoute: typeof FeaturesEmailVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features/lead-databases': {
+      id: '/features/lead-databases'
+      path: '/features/lead-databases'
+      fullPath: '/features/lead-databases'
+      preLoaderRoute: typeof FeaturesLeadDatabasesRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

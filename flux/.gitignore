@@ -4,6 +4,7 @@ dist
 .vercel
 .vinxi
 .tanstack
+.wrangler
 *.log
 .DS_Store
 .env

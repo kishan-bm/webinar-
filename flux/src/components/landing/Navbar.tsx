@@ -1,159 +1,56 @@
-import { useEffect, useState } from "react";
-import { ChevronDown, Sparkles } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { categories } from "@/data/suite";
-
-const links = [
-  { label: "How it works", href: "/#workflow" },
-  { label: "Customers", href: "/#customers" },
-  { label: "Pricing", href: "/#pricing" },
-];
+const NAV_CSS = `
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, box-shadow 0.4s, padding 0.3s; }
+  .navbar.scrolled { background: rgba(13,46,78,0.98); backdrop-filter: blur(20px); padding: 12px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.2); }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--orange) !important; font-weight: 700; }
+  .nav-item-dropdown { position: relative; }
+  .nav-item-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .nav-chevron { font-size: 9px; transition: transform 0.25s; opacity: 0.7; }
+  .nav-item-dropdown:hover .nav-chevron { transform: rotate(180deg); }
+  .dropdown-menu { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(7,24,44,0.97); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--orange); border-radius: 12px; min-width: 215px; padding: 6px; opacity: 0; visibility: hidden; transition: all 0.22s ease; z-index: 200; box-shadow: 0 20px 50px rgba(0,0,0,0.45); pointer-events: none; }
+  .dropdown-menu::before { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+  .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all; }
+  .dropdown-menu a { display: block; padding: 10px 14px; color: rgba(255,255,255,0.8) !important; font-size: 13.5px; font-weight: 500; border-radius: 8px; transition: background 0.18s, color 0.18s; white-space: nowrap; text-decoration: none; }
+  .dropdown-menu a:hover { background: rgba(200,66,10,0.18) !important; color: #e86428 !important; }
+  .nav-cta { background: var(--orange); color: #fff; padding: 10px 22px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; border: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--orange-bright); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,66,10,0.35); }
+  @media (max-width: 768px) {
+    .navbar { padding: 14px 24px; }
+    .nav-links { display: none; }
+  }
+`;
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [openSuite, setOpenSuite] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
-      <nav
-        className={`flex w-full max-w-6xl items-center justify-between rounded-full border px-3 py-2 transition-all duration-300 ${
-          scrolled
-            ? "border-border/70 bg-white/70 shadow-elegant backdrop-blur-xl"
-            : "border-transparent bg-white/30 backdrop-blur-md"
-        }`}
-      >
-        <Link to="/" className="flex items-center gap-2 pl-2">
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-lg gradient-forest text-white">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <span className="text-lg font-semibold tracking-tight text-ink">
-            Lumina
-          </span>
-        </Link>
-        <ul className="hidden items-center gap-1 md:flex">
-          <li
-            className="relative"
-            onMouseEnter={() => setOpenSuite(true)}
-            onMouseLeave={() => setOpenSuite(false)}
-          >
-            <button
-              type="button"
-              onClick={() => setOpenSuite(true)}
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-ink"
-            >
-              Explore suite
-              <ChevronDown
-                className={`h-3.5 w-3.5 transition-transform duration-300 ${openSuite ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            <div
-              className={`absolute left-[-6rem] top-full w-[min(60rem,84vw)] origin-top pt-3 transition-all duration-300 ${
-                openSuite
-                  ? "pointer-events-auto opacity-100 translate-y-0"
-                  : "pointer-events-none -translate-y-2 opacity-0"
-              }`}
-            >
-              {/* invisible bridge so the pointer can travel from the trigger into the panel */}
-              <div className="rounded-[26px] border border-border/60 bg-white/95 p-6 shadow-elegant backdrop-blur-xl">
-                <div className="grid gap-7 md:grid-cols-4">
-                  {categories.map((c) => (
-                    <div key={c.slug}>
-                      <Link
-                        to={c.route as "/"}
-                        onClick={() => setOpenSuite(false)}
-                        className="group block border-b border-border/60 pb-3"
-                      >
-                        <span className="flex items-center gap-2">
-                          <span className="h-1.5 w-1.5 rounded-full bg-forest" />
-                          <span className="font-display text-[15px] text-ink group-hover:text-forest">
-                            {c.title}
-                          </span>
-                        </span>
-                        <span className="mt-1 block pl-3.5 text-[12px] text-muted-foreground">
-                          {c.navBlurb}
-                        </span>
-                      </Link>
-                      <ul className="mt-3 space-y-3">
-                        {c.tools.map((t) => (
-                          <li key={t.name}>
-                            <Link
-                              to={c.route as "/"}
-                              hash={t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-                              onClick={() => setOpenSuite(false)}
-                              className="group flex items-start gap-2.5"
-                            >
-                              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-border/60 bg-secondary/60 text-forest transition-colors group-hover:bg-secondary">
-                                <t.icon className="h-3.5 w-3.5" />
-                              </span>
-                              <span>
-                                <span className="flex items-center gap-1.5">
-                                  <span className="text-[13px] font-medium text-ink group-hover:text-forest">
-                                    {t.name}
-                                  </span>
-                                  {t.badge && (
-                                    <span className="font-eyebrow rounded-full bg-secondary px-1.5 py-0.5 text-[7px] text-forest">
-                                      {t.badge}
-                                    </span>
-                                  )}
-                                </span>
-                                <span className="mt-0.5 block text-[11.5px] leading-snug text-muted-foreground">
-                                  {t.blurb}
-                                </span>
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 flex items-center justify-between border-t border-border/60 pt-4">
-                  <p className="text-[12.5px] text-muted-foreground">
-                    Every tool included in one workspace.
-                  </p>
-                  <Link
-                    to="/features"
-                    className="text-[12.5px] font-medium text-forest hover:underline"
-                  >
-                    See the full suite →
-                  </Link>
-                </div>
-              </div>
+    <>
+      <style>{NAV_CSS}</style>
+      <nav className="navbar scrolled">
+        <a href="/home" className="nav-logo">
+          <img src="/logo.png" alt="NavigationTrading" />
+        </a>
+        <ul className="nav-links">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/performance">Performance</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li className="nav-item-dropdown">
+            <a href="#">Services <span className="nav-chevron">&#9662;</span></a>
+            <div className="dropdown-menu">
+              <a href="/free-membership">Free Membership</a>
+              <a href="/day-trading-membership">Day Trade Membership</a>
+              <a href="/paid-membership">Pro Membership</a>
+              <a href="/coaching">Private Coaching</a>
+              <a href="/flux" className="active">Flux</a>
             </div>
           </li>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-ink"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          <li><a href="/podcast">Podcast</a></li>
+          <li><a href="/blogs">Blog</a></li>
+          <li><a href="/contact">Contact Us</a></li>
         </ul>
-        <div className="flex items-center gap-2 pr-1">
-          <a
-            href="#waitlist"
-            className="hidden text-sm font-medium text-foreground/70 hover:text-ink sm:inline-flex sm:px-3 sm:py-2"
-          >
-            Sign in
-          </a>
-          <a
-            href="#waitlist"
-            className="inline-flex items-center gap-1.5 rounded-full gradient-forest px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-[1.02]"
-          >
-            Join waitlist
-          </a>
-        </div>
+        <a href="/pricing" className="nav-cta">Get Trade Alerts</a>
       </nav>
-    </header>
+    </>
   );
 }

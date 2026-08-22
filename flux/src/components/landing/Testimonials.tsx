@@ -1,7 +1,7 @@
 const quotes = [
-  { q: "Every rep is more productive with Lumina. We booked 75% more meetings while cutting manual work in half.", author: "Andrew Froning", role: "BDR Leader · Cyera" },
-  { q: "We shut down four tools the week we turned Lumina on. Reply rates doubled by month two.", author: "Maya Iqbal", role: "Head of Growth · Baseline" },
-  { q: "Onebox alone is worth it. Our SDRs stopped losing hot replies inside three shared inboxes.", author: "Diego Álvarez", role: "Founder · Cascade" },
+  { q: "Just joined a couple of weeks ago and love it. Winner on my first trade. This trading method is in line with my philosophy on making money in the market with smaller controlled positions.", author: "Michael R.", role: "Verified Member" },
+  { q: "After years of trading, I feel that I am not on the bullish side or bearish side of the market, but finally on the profitable side. The strategies taught here are the best. Thank you.", author: "Suresh N.", role: "Pro Member" },
+  { q: "The live trade calls changed everything for me. Seeing the reasoning behind every entry — that's the part you can't get from a recorded course. Worth every penny.", author: "James K.", role: "Day Trading Member" },
 ];
 
 export function Testimonials() {
@@ -61,9 +61,9 @@ export function Testimonials() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">Loved by revenue teams</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">What Members Say</p>
           <h2 className="mt-4 font-display text-4xl leading-[1.05] text-ink text-balance md:text-6xl">
-            The pipeline speaks for <span className="gradient-text italic">itself.</span>
+            Real traders, <span className="gradient-text italic">real results.</span>
           </h2>
         </div>
         <div className="mt-16 grid gap-6 md:grid-cols-3">
