@@ -2,14 +2,14 @@ import { ArrowRight, Play } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden gradient-hero pt-32 pb-24">
-      <div className="absolute inset-0 grid-bg pointer-events-none" />
-      <div className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[oklch(0.85_0.1495_235/0.35)] blur-[120px]" />
+    <section className="relative overflow-hidden pt-32 pb-24" style={{ background: "#0D2E4E" }}>
+      <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+      <div className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[oklch(0.5_0.19_40/0.25)] blur-[120px]" />
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <a
           href="#features"
-          className="animate-rise inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/70 px-4 py-1.5 text-xs font-medium text-foreground/70 shadow-sm backdrop-blur"
+          className="animate-rise inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 shadow-sm backdrop-blur"
         >
           <span className="flex h-1.5 w-1.5 rounded-full bg-forest" />
           Introducing FLUX — Our Exclusive Trading Tool
@@ -17,7 +17,7 @@ export function Hero() {
         </a>
 
         <h1
-          className="animate-rise mx-auto mt-8 max-w-5xl font-display text-5xl leading-[1.02] text-ink text-balance md:text-7xl lg:text-[88px]"
+          className="animate-rise mx-auto mt-8 max-w-5xl font-display text-5xl leading-[1.02] text-white text-balance md:text-7xl lg:text-[88px]"
           style={{ animationDelay: "80ms" }}
         >
           Trade the market with{" "}
@@ -25,7 +25,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="animate-rise mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg"
+          className="animate-rise mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/65 md:text-lg"
           style={{ animationDelay: "160ms" }}
         >
           FLUX gives you a real-time edge on market direction and timing, so you
@@ -45,9 +45,9 @@ export function Hero() {
           </a>
           <a
             href="#product"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-white/80 px-6 py-3.5 text-sm font-medium text-ink backdrop-blur transition-colors hover:bg-white"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/20"
           >
-            <Play className="h-4 w-4 fill-ink" />
+            <Play className="h-4 w-4 fill-white" />
             See How It Works
           </a>
         </div>
@@ -56,8 +56,8 @@ export function Hero() {
           className="animate-rise relative mx-auto mt-20 max-w-6xl"
           style={{ animationDelay: "420ms" }}
         >
-          <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-b from-[oklch(0.9_0.115_235/0.5)] to-transparent blur-2xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-border/60 shadow-2xl">
+          <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-b from-[oklch(0.5_0.19_40/0.3)] to-transparent blur-2xl" />
+          <div className="relative overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
             <img
               src="/newflux.jpeg"
               alt="FLUX trading tool"

@@ -12,9 +12,8 @@ export function Stats() {
     { t: "Replies handled in one place.", x: "4%", y: "70%" },
   ];
   return (
-    <section id="how" className="relative overflow-hidden py-32">
-      <div className="absolute inset-0 gradient-hero" />
-      <div className="absolute inset-0 grid-bg opacity-60" />
+    <section id="how" className="relative overflow-hidden py-32" style={{ background: "#0D2E4E" }}>
+      <div className="absolute inset-0 grid-bg opacity-15" />
       {/* Line-art infographic */}
       <svg
         aria-hidden
@@ -53,7 +52,7 @@ export function Stats() {
         {notes.map((n, i) => (
           <p
             key={i}
-            className="absolute max-w-[180px] text-center font-display text-base italic leading-snug text-forest-deep/60"
+            className="absolute max-w-[180px] text-center font-display text-base italic leading-snug text-white/40"
             style={{ left: n.x, top: n.y }}
           >
             "{n.t}"
@@ -63,15 +62,15 @@ export function Stats() {
       <div className="relative mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">By the numbers</p>
-          <h2 className="mt-4 font-display text-4xl leading-[1.05] text-ink text-balance md:text-6xl">
+          <h2 className="mt-4 font-display text-4xl leading-[1.05] text-white text-balance md:text-6xl">
             Outbound results, <span className="gradient-text italic">quantified.</span>
           </h2>
         </div>
-        <div className="relative mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border/60 bg-border/60 md:grid-cols-4">
+        <div className="relative mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.l} className="group relative bg-white/85 p-8 backdrop-blur transition-colors hover:bg-white">
-              <p className="font-display text-5xl leading-none text-ink md:text-6xl">{s.v}</p>
-              <p className="mt-3 text-sm text-muted-foreground">{s.l}</p>
+            <div key={s.l} className="group relative bg-[#0D2E4E] p-8 backdrop-blur transition-colors hover:bg-white/5">
+              <p className="font-display text-5xl leading-none text-white md:text-6xl">{s.v}</p>
+              <p className="mt-3 text-sm text-white/60">{s.l}</p>
               <span className="absolute inset-x-8 bottom-6 h-px scale-x-0 gradient-forest transition-transform duration-500 group-hover:scale-x-100 origin-left" />
             </div>
           ))}
@@ -82,9 +81,9 @@ export function Stats() {
             { title: "4× SDR efficiency", who: "Cascade · Head of Growth" },
             { title: "64% lower tech stack cost", who: "Fern Labs · CFO" },
           ].map((c) => (
-            <div key={c.title} className="rounded-2xl border border-border/70 bg-white p-6 shadow-elegant">
-              <p className="font-display text-2xl leading-tight text-ink">{c.title}</p>
-              <p className="mt-4 text-xs uppercase tracking-wider text-muted-foreground">{c.who}</p>
+            <div key={c.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <p className="font-display text-2xl leading-tight text-white">{c.title}</p>
+              <p className="mt-4 text-xs uppercase tracking-wider text-white/50">{c.who}</p>
             </div>
           ))}
         </div>
