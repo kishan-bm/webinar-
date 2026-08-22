@@ -8,7 +8,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -25,6 +25,14 @@
     {
       "source": "/home",
       "destination": "/index"
+    },
+    {
+      "source": "/flux",
+      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/"
+    },
+    {
+      "source": "/flux/:path*",
+      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/:path*"
     },
     {
       "source": "/transformer-option-spreads",

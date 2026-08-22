@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // Served from webclass.navigationtrading.com/flux via a Vercel rewrite,
+    // not from this app's own domain root — every asset URL needs this prefix.
+    base: "/flux/",
+  },
 });
