@@ -8,7 +8,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="relative overflow-hidden bg-white py-32">
+    <section id="features" className="relative overflow-hidden gradient-section py-32">
       {/* Line-art infographic background */}
       <FeatureInfographic />
       <div className="pointer-events-none absolute inset-0 opacity-70">
