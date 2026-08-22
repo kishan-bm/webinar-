@@ -4,84 +4,58 @@ const quotes = [
   { q: "The live trade calls changed everything for me. Seeing the reasoning behind every entry — that's the part you can't get from a recorded course. Worth every penny.", author: "James K.", role: "Day Trading Member" },
 ];
 
+const track = [...quotes, ...quotes];
+
+const TESTIMONIALS_CSS = `
+  .flux-testimonials { padding: 100px 0; background: #0D2E4E; position: relative; overflow: hidden; }
+  .flux-testimonials::before { content: ''; position: absolute; inset: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') top center / cover no-repeat; opacity: 0.8; z-index: 1; pointer-events: none; }
+  .flux-testimonials::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,32,64,.96) 0%, rgba(13,32,64,.82) 55%, rgba(13,32,64,.92) 100%); z-index: 2; pointer-events: none; }
+  .flux-test-header { position: relative; z-index: 10; text-align: center; margin-bottom: 40px; padding: 0 24px; }
+  .flux-test-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.32); border-radius: 50px; color: #e87040; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .flux-test-header h2 { font-size: clamp(32px, 4vw, 48px); color: #fff; letter-spacing: -1.5px; margin: 0 auto; font-weight: 800; line-height: 1.1; }
+  .flux-test-header h2 span { background: linear-gradient(135deg, #fff 0%, #c8420a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .flux-marquee-container { position: relative; z-index: 10; width: 100%; overflow: hidden; margin-top: 20px; -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
+  .flux-marquee-track { display: flex; gap: 20px; width: max-content; animation: flux-marquee-scroll 45s linear infinite; }
+  .flux-marquee-track:hover { animation-play-state: paused; }
+  @keyframes flux-marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
+  .flux-test-card { width: 420px; flex-shrink: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; transition: all 0.3s ease; }
+  .flux-test-card:hover { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); transform: translateY(-5px); }
+  .flux-test-stars { display: flex; gap: 3px; color: #c8420a; margin-bottom: 20px; }
+  .flux-test-stars svg { width: 14px; height: 14px; fill: currentColor; }
+  .flux-test-card p { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.8); margin-bottom: 24px; flex-grow: 1; }
+  .flux-test-author { display: flex; align-items: center; gap: 12px; }
+  .flux-test-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 16px; flex-shrink: 0; }
+  .flux-test-author-info { display: flex; flex-direction: column; }
+  .flux-test-author-info strong { font-size: 14px; font-weight: 700; color: #fff; }
+  .flux-test-author-info span { font-size: 11px; color: rgba(255,255,255,0.5); }
+`;
+
 export function Testimonials() {
   return (
-    <section id="customers" className="relative overflow-hidden gradient-section py-32">
-      {/* Ambient background: soft glows + line-art curves */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-      >
-        <div
-          className="absolute -left-40 top-10 h-[520px] w-[520px] rounded-full blur-[140px]"
-          style={{ background: "oklch(0.85 0.1495 235 / 0.35)" }}
-        />
-        <div
-          className="absolute -right-32 bottom-0 h-[460px] w-[460px] rounded-full blur-[140px]"
-          style={{ background: "oklch(0.9 0.1035 235 / 0.4)" }}
-        />
+    <section id="customers" className="flux-testimonials">
+      <style>{TESTIMONIALS_CSS}</style>
+      <div className="flux-test-header">
+        <div className="flux-test-eyebrow">What Members Say</div>
+        <h2>Real traders, <span>real results.</span></h2>
       </div>
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 1200 900"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="tStroke" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="oklch(0.55 0.1495 235)" stopOpacity="0" />
-            <stop offset="50%" stopColor="oklch(0.55 0.1495 235)" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="oklch(0.55 0.1495 235)" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M -40 180 C 260 60, 520 320, 780 180 S 1120 60, 1260 220"
-          fill="none"
-          stroke="url(#tStroke)"
-          strokeWidth="1.4"
-          strokeDasharray="5 7"
-        />
-        <path
-          d="M -40 760 C 240 640, 520 860, 800 720 S 1080 620, 1260 780"
-          fill="none"
-          stroke="url(#tStroke)"
-          strokeWidth="1.4"
-          strokeDasharray="5 7"
-        />
-        <circle cx="180" cy="140" r="140" fill="none" stroke="oklch(0.55 0.1495 235 / 0.14)" strokeDasharray="3 6" />
-        <circle cx="1040" cy="760" r="180" fill="none" stroke="oklch(0.55 0.1495 235 / 0.14)" strokeDasharray="3 6" />
-      </svg>
-      {/* Floating category chips like the reference */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <span className="absolute left-[6%] top-[6%] rounded-full border border-forest/20 bg-white/70 px-3 py-1 text-[10px] font-medium text-forest-deep backdrop-blur">deliverability</span>
-        <span className="absolute right-[7%] top-[9%] rounded-full border border-forest/20 bg-white/70 px-3 py-1 text-[10px] font-medium text-forest-deep backdrop-blur">onebox</span>
-        <span className="absolute left-[10%] bottom-[8%] rounded-full border border-forest/20 bg-white/70 px-3 py-1 text-[10px] font-medium text-forest-deep backdrop-blur">prospecting</span>
-        <span className="absolute right-[8%] bottom-[10%] rounded-full border border-forest/20 bg-white/70 px-3 py-1 text-[10px] font-medium text-forest-deep backdrop-blur">personalization</span>
-      </div>
-
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">What Members Say</p>
-          <h2 className="mt-4 font-display text-4xl leading-[1.05] text-ink text-balance md:text-6xl">
-            Real traders, <span className="gradient-text italic">real results.</span>
-          </h2>
-        </div>
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {quotes.map((t, i) => (
-            <figure key={i} className="flex h-full flex-col justify-between rounded-3xl border border-border/60 bg-white p-8 shadow-elegant">
-              <blockquote className="font-display text-2xl leading-snug text-ink text-balance">
-                "{t.q}"
-              </blockquote>
-              <figcaption className="mt-8 flex items-center gap-3 border-t border-border/60 pt-5">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full gradient-forest text-sm font-semibold text-white">
-                  {t.author.split(" ").map(n => n[0]).join("")}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-ink">{t.author}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
+      <div className="flux-marquee-container">
+        <div className="flux-marquee-track">
+          {track.map((t, i) => (
+            <div key={i} className="flux-test-card">
+              <div className="flux-test-stars">
+                {[0, 1, 2, 3, 4].map((s) => (
+                  <svg key={s} viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ))}
+              </div>
+              <p>"{t.q}"</p>
+              <div className="flux-test-author">
+                <div className="flux-test-avatar">{t.author[0]}</div>
+                <div className="flux-test-author-info">
+                  <strong>{t.author}</strong>
+                  <span>{t.role}</span>
                 </div>
-              </figcaption>
-            </figure>
+              </div>
+            </div>
           ))}
         </div>
       </div>

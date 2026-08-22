@@ -19,7 +19,7 @@ export function Waitlist() {
         </p>
         <form onSubmit={(e) => { e.preventDefault(); if (email) setSubmitted(true); }} className="mx-auto mt-10 flex max-w-xl flex-col items-stretch gap-2 rounded-2xl border border-border/60 bg-secondary/40 p-2 backdrop-blur sm:flex-row">
           <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@email.com" className="flex-1 rounded-xl bg-transparent px-4 py-3 text-sm text-ink placeholder:text-muted-foreground focus:outline-none" />
-          <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:bg-forest-deep">
+          <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-xl bg-forest px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] hover:bg-forest-deep">
             {submitted ? (<><Check className="h-4 w-4" /> You're on the list</>) : (<>Get Access <ArrowRight className="h-4 w-4" /></>)}
           </button>
         </form>

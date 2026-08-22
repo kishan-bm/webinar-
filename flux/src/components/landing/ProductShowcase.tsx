@@ -164,7 +164,7 @@ export function ProductShowcase() {
                 <div key={`c-${scene.key}`} className="animate-blur-in mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "160ms" }}>
                   <a
                     href="#waitlist"
-                    className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-forest-deep hover:shadow-glow"
+                    className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-forest-deep hover:shadow-glow"
                   >
                     Get Access to FLUX
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

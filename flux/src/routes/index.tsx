@@ -4,7 +4,6 @@ import { Hero } from "@/components/landing/Hero";
 import { LogoMarquee } from "@/components/landing/LogoMarquee";
 import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { IntegrationFlow } from "@/components/landing/IntegrationFlow";
-import { LlmControl } from "@/components/landing/LlmControl";
 import { Stats } from "@/components/landing/Stats";
 import { Features } from "@/components/landing/Features";
 import { Testimonials } from "@/components/landing/Testimonials";
@@ -26,7 +25,6 @@ function Index() {
         <IntegrationFlow />
         <Stats />
         <Features />
-        <LlmControl />
         <Testimonials />
         <Waitlist />
       </main>
