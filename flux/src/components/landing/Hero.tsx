@@ -3,8 +3,24 @@ import { ArrowRight, Play } from "lucide-react";
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-24" style={{ background: "#0D2E4E" }}>
-      <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-      <div className="absolute left-1/2 top-24 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[oklch(0.5_0.19_40/0.25)] blur-[120px]" />
+      <img
+        src="/WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg"
+        alt=""
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        style={{ opacity: 0.45 }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ background: "linear-gradient(135deg, rgba(13,46,78,0.88) 0%, rgba(13,46,78,0.72) 50%, rgba(13,46,78,0.88) 100%)" }}
+      />
+      <div
+        className="pointer-events-none absolute"
+        style={{ width: 700, height: 700, top: -200, right: -100, borderRadius: "50%", background: "radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 65%)" }}
+      />
+      <div
+        className="pointer-events-none absolute"
+        style={{ width: 500, height: 500, bottom: -100, left: -50, borderRadius: "50%", background: "radial-gradient(circle, rgba(30,100,200,0.22) 0%, transparent 65%)" }}
+      />
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <a
@@ -21,7 +37,7 @@ export function Hero() {
           style={{ animationDelay: "80ms" }}
         >
           Trade the market with{" "}
-          <span className="gradient-text italic">precision.</span>
+          <span className="italic" style={{ color: "#e04d10" }}>precision.</span>
         </h1>
 
         <p
@@ -56,7 +72,6 @@ export function Hero() {
           className="animate-rise relative mx-auto mt-20 max-w-6xl"
           style={{ animationDelay: "420ms" }}
         >
-          <div className="absolute -inset-8 rounded-[3rem] bg-gradient-to-b from-[oklch(0.5_0.19_40/0.3)] to-transparent blur-2xl" />
           <div className="relative overflow-hidden rounded-2xl border border-white/15 shadow-2xl">
             <img
               src="/newflux.jpeg"

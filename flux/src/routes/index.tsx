@@ -22,9 +22,9 @@ function Index() {
         <Hero />
         <LogoMarquee />
         <ProductShowcase />
+        <Features />
         <IntegrationFlow />
         <Stats />
-        <Features />
         <Testimonials />
         <Waitlist />
       </main>

@@ -109,11 +109,11 @@ export function ProductShowcase() {
     <section
       id="product"
       ref={sectionRef}
-      className="relative"
-      style={{ height: `${scenes.length * 110 + 70}vh`, background: "#0D2E4E" }}
+      className="relative gradient-section"
+      style={{ height: `${scenes.length * 110 + 70}vh` }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-12">
-        <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+        <div className="absolute inset-0 grid-bg opacity-70 pointer-events-none" />
 
         <div className="relative mx-auto w-full max-w-6xl px-6">
           {/* Tab strip */}
@@ -131,11 +131,11 @@ export function ProductShowcase() {
                     window.scrollTo({ top: target, behavior: "smooth" });
                   }}
                   className="relative overflow-hidden rounded-full px-4 py-3 text-center transition-all duration-700 ease-out"
-                  style={{ background: isActive ? s.tint : "rgba(255,255,255,0.08)" }}
+                  style={{ background: isActive ? s.tint : "oklch(0.955 0.0132 235 / 0.75)" }}
                 >
                   <span
                     className={`font-eyebrow relative z-10 text-[10px] transition-colors duration-500 ${
-                      isActive ? "text-forest-deep" : "text-white/60"
+                      isActive ? "text-forest-deep" : "text-muted-foreground/80"
                     }`}
                   >
                     {s.tab}
@@ -156,7 +156,7 @@ export function ProductShowcase() {
                 <div className="overflow-hidden">
                   <h2
                     key={`t-${scene.key}`}
-                    className="animate-line-up font-display text-[2.1rem] leading-[1.02] text-white text-balance md:text-[3.4rem]"
+                    className="animate-line-up font-display text-[2.1rem] leading-[1.02] text-ink text-balance md:text-[3.4rem]"
                   >
                     {scene.title}
                   </h2>
@@ -171,7 +171,7 @@ export function ProductShowcase() {
                   </a>
                   <a
                     href="#features"
-                    className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/20"
+                    className="inline-flex items-center rounded-full border border-border/70 bg-white/70 px-6 py-3.5 text-sm font-medium text-ink backdrop-blur transition-colors hover:bg-white"
                   >
                     Learn more
                   </a>
@@ -182,10 +182,10 @@ export function ProductShowcase() {
                 {scene.bullets.map((b, bi) => (
                   <li
                     key={b.text}
-                    className="animate-blur-in flex items-center gap-3.5 text-[0.95rem] text-white/80"
+                    className="animate-blur-in flex items-center gap-3.5 text-[0.95rem] text-foreground/80"
                     style={{ animationDelay: `${220 + bi * 90}ms` }}
                   >
-                    <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-white/15 bg-white/10">
+                    <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-border/60 bg-white/70">
                       <b.icon className="h-3.5 w-3.5 text-forest" />
                     </span>
                     {b.text}
