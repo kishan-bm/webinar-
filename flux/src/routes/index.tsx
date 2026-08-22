@@ -7,6 +7,7 @@ import { IntegrationFlow } from "@/components/landing/IntegrationFlow";
 import { Stats } from "@/components/landing/Stats";
 import { Features } from "@/components/landing/Features";
 import { Testimonials } from "@/components/landing/Testimonials";
+import { Faq } from "@/components/landing/Faq";
 import { Waitlist } from "@/components/landing/Waitlist";
 import { Footer } from "@/components/landing/Footer";
 
@@ -26,6 +27,7 @@ function Index() {
         <Stats />
         <IntegrationFlow />
         <Testimonials />
+        <Faq />
         <Waitlist />
       </main>
       <Footer />
