@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Search, Sparkles, Inbox, ShieldCheck, MapPin, Mail, ArrowRight,
-  Zap, BarChart3, Bot, CalendarCheck, Target, Send,
+  ArrowRight, SlidersHorizontal, CalendarClock, Radar, Timer,
+  LineChart, History, ListFilter, Gauge, Repeat, TrendingUp, Send,
 } from "lucide-react";
 
 type Scene = {
@@ -9,59 +9,64 @@ type Scene = {
   tab: string;
   title: string;
   bullets: { icon: any; text: string }[];
+  icon: any;
   tint: string;
   panel: string;
 };
 
 const scenes: Scene[] = [
   {
-    key: "prospect",
-    tab: "Prospecting",
-    title: "Turn hours of prospecting into minutes",
+    key: "analyzer",
+    tab: "Analyzer",
+    title: "Model any options position before you risk a dollar",
+    icon: SlidersHorizontal,
     bullets: [
-      { icon: Target, text: "275M+ verified contacts and 30M+ companies" },
-      { icon: Search, text: "Filter by intent, tech stack and hiring signals" },
-      { icon: Sparkles, text: "AI builds the list from a single prompt" },
-      { icon: BarChart3, text: "Lead scoring that ranks who to email first" },
+      { icon: SlidersHorizontal, text: "Single legs, spreads, calendars, iron condors and more" },
+      { icon: LineChart, text: "P&L curve at expiration and in real time" },
+      { icon: Repeat, text: "Scrub forward through time or shift implied volatility" },
+      { icon: Send, text: "Send a pre-filled order to ThinkorSwim, Tradier or IBKR" },
     ],
     tint: "oklch(0.885 0.0794 235)",
     panel: "oklch(0.24 0.0794 235)",
   },
   {
-    key: "write",
-    tab: "Personalization",
-    title: "Write like a human, at machine scale",
+    key: "earnings",
+    tab: "Earnings",
+    title: "Know what the market is pricing in before every report",
+    icon: CalendarClock,
     bullets: [
-      { icon: Bot, text: "A unique opener for every single prospect" },
-      { icon: Sparkles, text: "Researched from role, news and recent activity" },
-      { icon: Mail, text: "Multi-step sequences generated in one click" },
-      { icon: Zap, text: "Spam-score checks before anything sends" },
+      { icon: CalendarClock, text: "Weekly calendar of expected earnings moves" },
+      { icon: TrendingUp, text: "See what the options market is pricing in" },
+      { icon: History, text: "20-quarter track record of post-earnings moves" },
+      { icon: ListFilter, text: "Fundamentals behind every ticker, in one view" },
     ],
     tint: "oklch(0.855 0.1058 235)",
     panel: "oklch(0.23 0.0926 235)",
   },
   {
-    key: "deliver",
-    tab: "Deliverability",
-    title: "Land in the inbox, not the promotions tab",
+    key: "ntt",
+    tab: "NTT Scanner",
+    title: "A live trend-signal feed across your whole watchlist",
+    icon: Radar,
     bullets: [
-      { icon: ShieldCheck, text: "Automatic warmup across every mailbox" },
-      { icon: BarChart3, text: "Live inbox placement and spam monitoring" },
-      { icon: Zap, text: "SPF, DKIM and DMARC checked continuously" },
-      { icon: Send, text: "Smart sending limits that protect reputation" },
+      { icon: Radar, text: "Every symbol tagged with its current setup" },
+      { icon: TrendingUp, text: "Buy the Dip, Sell the Rip, and more" },
+      { icon: Gauge, text: "Volatility and next earnings date at a glance" },
+      { icon: ListFilter, text: "Filter, sort and star the names worth watching" },
     ],
     tint: "oklch(0.8 0.1323 235)",
     panel: "oklch(0.2 0.1058 235)",
   },
   {
-    key: "reply",
-    tab: "Deal execution",
-    title: "Every reply. One inbox. Zero chaos.",
+    key: "0dte",
+    tab: "0 DTE",
+    title: "A live, intraday view built for same-day SPX decisions",
+    icon: Timer,
     bullets: [
-      { icon: Inbox, text: "All mailboxes unified into one Onebox" },
-      { icon: Bot, text: "Replies auto-categorised by intent" },
-      { icon: CalendarCheck, text: "Hot leads routed straight to your calendar" },
-      { icon: BarChart3, text: "Pipeline reporting on every conversation" },
+      { icon: LineChart, text: "Price tracked against expected-move bands" },
+      { icon: Gauge, text: "VIX movement alongside price, in real time" },
+      { icon: Radar, text: "Gamma exposure to see where dealers are positioned" },
+      { icon: Timer, text: "Replay the session minute by minute" },
     ],
     tint: "oklch(0.745 0.1587 235)",
     panel: "oklch(0.17 0.119 235)",
@@ -161,7 +166,7 @@ export function ProductShowcase() {
                     href="#waitlist"
                     className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-forest-deep hover:shadow-glow"
                   >
-                    Get started for free
+                    Get Access to FLUX
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                   <a
@@ -203,8 +208,18 @@ export function ProductShowcase() {
                 className="animate-pop-down relative mx-8 mb-0 w-full max-w-[560px] overflow-hidden rounded-t-[20px] border border-white/15 bg-white shadow-elegant"
                 style={{ height: "82%" }}
               >
-                <div className="h-full overflow-hidden p-5">
-                  <SceneCard which={scene.key} accent={scene.tab} />
+                <div className="flex h-full flex-col p-6">
+                  <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-secondary/60 px-3 py-2 text-xs font-semibold text-forest-deep">
+                    <scene.icon className="h-4 w-4" /> {scene.tab}
+                  </div>
+                  <div className="mt-5 grid flex-1 grid-cols-2 gap-3">
+                    {scene.bullets.map((b) => (
+                      <div key={b.text} className="flex flex-col justify-center rounded-xl border border-border/60 bg-white p-4">
+                        <b.icon className="h-4 w-4 text-forest" />
+                        <p className="mt-2 text-[11px] leading-snug text-ink">{b.text}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,134 +227,5 @@ export function ProductShowcase() {
         </div>
       </div>
     </section>
-  );
-}
-
-function SceneCard({ which, accent }: { which: string; accent: string }) {
-  if (which === "prospect") {
-    return (
-      <div className="grid h-full grid-rows-[auto_1fr] gap-4">
-        <div className="flex items-center justify-between rounded-2xl border border-border/60 bg-white/90 p-3">
-          <div className="flex items-center gap-2 rounded-lg bg-secondary px-3 py-1.5 text-xs text-muted-foreground">
-            <Search className="h-3.5 w-3.5" /> Head of Growth · SaaS · 50–200 · US
-          </div>
-          <span className="rounded-full bg-mint px-2.5 py-1 text-[10px] font-semibold text-forest-deep">{accent}</span>
-        </div>
-        <div className="grid grid-cols-2 gap-3 overflow-hidden">
-          {[
-            { name: "Sarah Chen", role: "VP Marketing", co: "Northwind", city: "Austin, TX", score: 94 },
-            { name: "Marcus Reyes", role: "Head of Growth", co: "Cascade", city: "SF, CA", score: 91 },
-            { name: "Priya Patel", role: "Director of RevOps", co: "Fern Labs", city: "NYC", score: 88 },
-            { name: "Liam O'Neill", role: "Growth Lead", co: "Baseline", city: "Boston", score: 86 },
-          ].map((p) => (
-            <div key={p.name} className="rounded-xl border border-border/60 bg-white p-3">
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-xs font-semibold text-ink">{p.name}</p>
-                  <p className="text-[10px] text-muted-foreground">{p.role} · {p.co}</p>
-                </div>
-                <span className="rounded-md bg-mint px-1.5 py-0.5 text-[10px] font-semibold text-forest-deep">{p.score}</span>
-              </div>
-              <div className="mt-2 flex items-center gap-1 text-[10px] text-muted-foreground">
-                <MapPin className="h-3 w-3" /> {p.city}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  if (which === "write") {
-    return (
-      <div className="grid h-full grid-rows-[auto_1fr] gap-3">
-        <div className="flex items-center justify-between rounded-2xl border border-border/60 bg-white/90 px-4 py-2.5 text-xs">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Mail className="h-3.5 w-3.5" /> To: sarah@northwind.io
-          </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-mint px-2 py-0.5 text-[10px] font-semibold text-forest-deep">
-            <Sparkles className="h-3 w-3" /> Smart draft
-          </span>
-        </div>
-        <div className="rounded-2xl border border-border/60 bg-white p-5 text-left text-sm leading-relaxed text-ink">
-          <p className="text-xs font-medium text-muted-foreground">Subject</p>
-          <p className="mb-3 text-sm font-semibold">Northwind's Q4 pricing test — quick idea</p>
-          <p className="text-sm">Hi Sarah,</p>
-          <p className="mt-2 text-sm">
-            Saw the <span className="rounded bg-mint px-1 text-forest-deep">pricing revamp you shipped last week</span> — clean move on the annual tier.
-          </p>
-          <p className="mt-2 text-sm">
-            We help teams like <span className="rounded bg-mint px-1 text-forest-deep">Northwind</span> add a second outbound motion without hiring more SDRs. Open to a 15-min walkthrough Thursday?
-          </p>
-          <p className="mt-2 text-sm">— Alex, Lumina</p>
-          <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3 text-[10px] text-muted-foreground">
-            <span>Personalized from 6 signals</span>
-            <span className="font-semibold text-forest">Spam score 0.4 / 10</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  if (which === "deliver") {
-    return (
-      <div className="grid h-full grid-rows-[auto_1fr_auto] gap-3">
-        <div className="flex items-center justify-between rounded-2xl border border-border/60 bg-white/90 px-4 py-2.5">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <ShieldCheck className="h-3.5 w-3.5" /> alex@lumina.ai
-          </div>
-          <span className="rounded-full bg-mint px-2 py-0.5 text-[10px] font-semibold text-forest-deep">Inbox placement</span>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            { label: "Inbox rate", v: "97.2%", trend: "+2.4%" },
-            { label: "Spam rate", v: "0.3%", trend: "-1.1%" },
-            { label: "Warmup score", v: "A+", trend: "stable" },
-            { label: "DNS health", v: "100%", trend: "SPF · DKIM · DMARC" },
-          ].map((k) => (
-            <div key={k.label} className="rounded-xl border border-border/60 bg-white p-3">
-              <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{k.label}</p>
-              <p className="mt-1 font-display text-2xl text-ink">{k.v}</p>
-              <p className="mt-0.5 text-[10px] font-medium text-forest">{k.trend}</p>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-xl border border-border/60 bg-white p-3">
-          <p className="mb-2 text-[10px] uppercase tracking-wider text-muted-foreground">Placement · last 30 days</p>
-          <div className="flex h-14 items-end gap-1">
-            {Array.from({ length: 30 }).map((_, i) => (
-              <div key={i} className="flex-1 rounded-sm gradient-forest opacity-80" style={{ height: `${50 + Math.sin(i * 0.7) * 20 + (i % 5) * 4}%` }} />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="grid h-full grid-rows-[auto_1fr] gap-3">
-      <div className="flex items-center justify-between rounded-2xl border border-border/60 bg-white/90 px-4 py-2.5">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <Inbox className="h-3.5 w-3.5" /> Onebox · 24 unread
-        </div>
-        <span className="rounded-full bg-mint px-2 py-0.5 text-[10px] font-semibold text-forest-deep">All mailboxes</span>
-      </div>
-      <div className="space-y-2 overflow-hidden">
-        {[
-          { from: "Sarah Chen", co: "Northwind", msg: "Interested — Thursday 2pm works.", tag: "Interested", tone: "hot" },
-          { from: "Marcus Reyes", co: "Cascade", msg: "Not the right time, try in Q1.", tag: "Not now", tone: "cool" },
-          { from: "Priya Patel", co: "Fern Labs", msg: "Can you send a one-pager first?", tag: "Info request", tone: "warm" },
-          { from: "Liam O'Neill", co: "Baseline", msg: "Let's book a call — send times.", tag: "Meeting", tone: "hot" },
-        ].map((r, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl border border-border/60 bg-white p-3">
-            <div className={`flex h-8 w-8 flex-none items-center justify-center rounded-full text-[11px] font-semibold ${r.tone === "hot" ? "bg-mint text-forest-deep" : r.tone === "warm" ? "bg-secondary text-ink" : "bg-muted text-muted-foreground"}`}>
-              {r.from.split(" ").map((n) => n[0]).join("")}
-            </div>
-            <div className="min-w-0 flex-1 text-left">
-              <p className="truncate text-xs font-semibold text-ink">{r.from} · <span className="font-normal text-muted-foreground">{r.co}</span></p>
-              <p className="truncate text-[11px] text-muted-foreground">{r.msg}</p>
-            </div>
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${r.tone === "hot" ? "bg-mint text-forest-deep" : r.tone === "warm" ? "bg-secondary text-ink" : "bg-muted text-muted-foreground"}`}>{r.tag}</span>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }

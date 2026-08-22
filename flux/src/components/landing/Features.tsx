@@ -1,12 +1,9 @@
-import { Radar, PenLine, ShieldCheck, Inbox, Users, LineChart } from "lucide-react";
+import { CalendarClock, Newspaper, Percent } from "lucide-react";
 
 const features = [
-  { icon: Radar, title: "Intent-based prospecting", body: "Filter 275M contacts by hiring signals, tech stack, and buying intent — then push them straight into a sequence." },
-  { icon: PenLine, title: "AI personalization", body: "One-to-one openers generated from LinkedIn, news, and firmographic context — sent at scale, felt one at a time." },
-  { icon: ShieldCheck, title: "Deliverability engine", body: "Automated warmup, DNS auditing, and spam-word detection keep your domain reputation glowing." },
-  { icon: Inbox, title: "Onebox for every reply", body: "All conversations across every sending mailbox, auto-tagged, auto-routed, and one click from your calendar." },
-  { icon: Users, title: "Unlimited mailboxes", body: "Connect Gmail, Outlook, and SMTP domains. Rotate sends intelligently to protect deliverability at any volume." },
-  { icon: LineChart, title: "Revenue analytics", body: "Track opens, replies, meetings, and closed pipeline per sequence — with attribution back to the exact email." },
+  { icon: CalendarClock, title: "Calendar IV", body: "Time your calendar and double-calendar entries around real volatility signals instead of guesswork. FLUX tracks the implied-volatility relationship between any two expirations, charts the term structure over time, and scans every front/back combination to surface pairs whose IV has dropped furthest from its recent high." },
+  { icon: Newspaper, title: "News", body: "The market backdrop in one place: a live economic calendar and real-time news feed, the day's top S&P 500 gainers and losers, and CNN's Fear & Greed Index — so you always know what's moving and how the market feels before you trade." },
+  { icon: Percent, title: "Prediction Markets", body: "Live, market-implied odds — sourced from the regulated exchange Kalshi — on the macro events that move markets: Fed rate decisions, inflation prints, jobs data, and more. See what traders are actually pricing in, not just what they're saying." },
 ];
 
 export function Features() {
@@ -22,12 +19,12 @@ export function Features() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">Everything you need</p>
             <h2 className="mt-4 font-display text-4xl leading-[1.05] text-ink text-balance md:text-6xl">
-              A full outbound stack.<br />
-              <span className="gradient-text italic">Zero duct tape.</span>
+              One dashboard.<br />
+              <span className="gradient-text italic">Every edge in reach.</span>
             </h2>
           </div>
           <p className="max-w-md text-base text-muted-foreground md:text-lg">
-            Lumina replaces your prospecting tool, your sending platform, your warmup vendor, and your reply inbox — with something faster, prettier, and cheaper.
+            FLUX brings volatility signals, market news and prediction markets together in one live view — so you always know what's moving and why.
           </p>
         </div>
         <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-border/60 bg-border/60 md:grid-cols-3">
@@ -106,20 +103,20 @@ function FeatureInfographic() {
       {/* floating pill labels */}
       <g fontFamily="Inter, sans-serif" fontSize="10" fill="oklch(0.35 0.1035 235)" fillOpacity="0.55">
         <g transform="translate(90 130)">
-          <rect width="86" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
-          <text x="10" y="13">prospecting</text>
+          <rect width="72" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
+          <text x="10" y="13">calendar IV</text>
         </g>
         <g transform="translate(1180 90)">
-          <rect width="92" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
-          <text x="10" y="13">personalization</text>
+          <rect width="46" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
+          <text x="10" y="13">news</text>
         </g>
         <g transform="translate(60 810)">
-          <rect width="90" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
-          <text x="10" y="13">deliverability</text>
+          <rect width="112" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
+          <text x="10" y="13">prediction markets</text>
         </g>
         <g transform="translate(1260 820)">
-          <rect width="58" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
-          <text x="10" y="13">onebox</text>
+          <rect width="70" height="20" rx="10" fill="oklch(0.96 0.046 235)" fillOpacity="0.7" stroke="oklch(0.55 0.161 235)" strokeOpacity="0.25" />
+          <text x="10" y="13">volatility</text>
         </g>
       </g>
     </svg>

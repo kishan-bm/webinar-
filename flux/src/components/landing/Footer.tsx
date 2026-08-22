@@ -1,11 +1,12 @@
 const FOOTER_CSS = `
-  footer.nt-footer { background: var(--teal-900, #0D2E4E); border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  footer.nt-footer { background: #0D2E4E; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  footer.nt-footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
   footer.nt-footer > .footer-top, footer.nt-footer > .footer-bottom { position: relative; z-index: 1; }
   .footer-top { padding: 50px 60px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
   .footer-brand img { height: 24px; opacity: 0.6; transform: scale(4.5); transform-origin: left center; }
   .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; }
   .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; text-decoration: none; }
-  .social-icon:hover { background: var(--orange); color: #fff; }
+  .social-icon:hover { background: #c8420a; color: #fff; }
   .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
   .footer-link:hover { color: rgba(255,255,255,0.9); }
   .footer-bottom { padding: 24px 60px; border-top: 1px solid rgba(255,255,255,0.06); }
