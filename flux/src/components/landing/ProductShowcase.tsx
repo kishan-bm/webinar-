@@ -109,10 +109,11 @@ export function ProductShowcase() {
     <section
       id="product"
       ref={sectionRef}
-      className="relative gradient-section"
+      className="relative"
       style={{ height: `${scenes.length * 110 + 70}vh` }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-12">
+        <div className="absolute inset-0 gradient-section" />
         <div className="absolute inset-0 grid-bg opacity-70 pointer-events-none" />
 
         <div className="relative mx-auto w-full max-w-6xl px-6">
