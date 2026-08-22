@@ -6,6 +6,7 @@ export function Waitlist() {
   const [submitted, setSubmitted] = useState(false);
   return (
     <section id="waitlist" className="relative overflow-hidden bg-white py-32">
+      <div className="pointer-events-none absolute inset-0 grid-bg opacity-70" />
       <div className="relative mx-auto max-w-4xl px-6">
         <div className="relative overflow-hidden rounded-[2rem] px-8 py-16 text-center sm:px-16" style={{ background: "#0D2E4E" }}>
           <div className="pointer-events-none absolute inset-0 grid-bg opacity-15" />
