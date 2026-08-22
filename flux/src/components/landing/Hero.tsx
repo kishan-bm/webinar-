@@ -37,7 +37,7 @@ export function Hero() {
           style={{ animationDelay: "80ms" }}
         >
           Trade the market with{" "}
-          <span className="italic" style={{ color: "#e04d10" }}>precision.</span>
+          <span style={{ color: "#e04d10" }}>precision.</span>
         </h1>
 
         <p
