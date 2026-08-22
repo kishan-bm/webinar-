@@ -131,7 +131,7 @@ export function ProductShowcase() {
                     window.scrollTo({ top: target, behavior: "smooth" });
                   }}
                   className="relative overflow-hidden rounded-full px-4 py-3 text-center transition-all duration-700 ease-out"
-                  style={{ background: isActive ? s.tint : "oklch(0.955 0.0132 235 / 0.75)" }}
+                  style={{ background: isActive ? "#ffffff" : "oklch(0.955 0.0132 235 / 0.75)" }}
                 >
                   <span
                     className={`font-eyebrow relative z-10 text-[10px] transition-colors duration-500 ${
