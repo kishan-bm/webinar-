@@ -23,8 +23,8 @@ function Index() {
         <LogoMarquee />
         <ProductShowcase />
         <Features />
-        <IntegrationFlow />
         <Stats />
+        <IntegrationFlow />
         <Testimonials />
         <Waitlist />
       </main>
