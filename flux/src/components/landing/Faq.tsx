@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "What time are the live streams?",
-    a: "The morning session starts around 9:15 AM Eastern, before the market opens at 9:30. The Power Hour session begins around 3:00 PM Eastern for the final hour of trading. Both sessions run every market day (Monday through Friday, excluding market holidays).",
+    a: "The morning session starts around 9:15 AM Eastern, before the market opens at 9:30. The Power Hour session begins around 3:15 PM Eastern for the final hour of trading. Both sessions run every market day (Monday through Friday, excluding market holidays).",
   },
   {
     q: "Do I need a large account to trade these strategies?",
