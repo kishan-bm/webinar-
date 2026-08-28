@@ -96,7 +96,7 @@ export function IntegrationFlow() {
               <g key={`o${k}`}>
                 <path d={d} fill="none" stroke="url(#lfOut)" strokeWidth={k === signal.out ? 2.4 : 1.2} />
                 <circle r={k === signal.out ? "5" : "3"} fill="oklch(0.42 0.1455 235)" opacity={k === signal.out ? 1 : 0.45}>
-                  <animateMotion dur="2.4s" begin={`${1.2 + k * 0.3}s`} repeatCount="indefinite" path={d} keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" />
+                  <animateMotion dur="2.4s" begin={`${1.2 + k * 0.3}s`} repeatCount="indefinite" path={d} keyPoints="1;0" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" />
                 </circle>
               </g>
             ))}
