@@ -1,46 +1,42 @@
 import { useEffect, useState } from "react";
 import {
-  Linkedin,
-  Youtube,
-  Instagram,
-  MapPin,
-  Globe,
-  ShieldCheck,
-  PenLine,
-  Send,
-  Inbox,
-  Sparkles,
+  SlidersHorizontal,
+  CalendarClock,
+  TrendingUp,
+  Radar,
+  Timer,
+  Percent,
+  Activity,
+  Newspaper,
 } from "lucide-react";
 
 const sources = [
-  { icon: Linkedin, label: "LinkedIn" },
-  { icon: MapPin, label: "Google Maps" },
-  { icon: Youtube, label: "YouTube" },
-  { icon: Instagram, label: "Instagram" },
-  { icon: Globe, label: "Company sites" },
+  { icon: SlidersHorizontal, label: "Unparalleled Analyze Tab" },
+  { icon: CalendarClock, label: "Calendar Spread IV Ratio Monitor" },
+  { icon: TrendingUp, label: "Earnings Calendar & Statistics" },
+  { icon: Radar, label: "NTT Scanner" },
 ];
 
 const outputs = [
-  { icon: ShieldCheck, label: "Verified", note: "triple-checked" },
-  { icon: PenLine, label: "Personalized", note: "3 facts each" },
-  { icon: Send, label: "Campaigns", note: "paced sending" },
-  { icon: Inbox, label: "Onebox", note: "replies routed" },
+  { icon: Timer, label: "0 DTE Dashboard" },
+  { icon: Percent, label: "Prediction Market Odds" },
+  { icon: Activity, label: "Live Options Data" },
+  { icon: Newspaper, label: "Live News Feed" },
 ];
 
-const leads = [
-  { name: "Bright Smile Dental", email: "hello@brightsmile.com", src: 1, out: 0 },
-  { name: "Lumen Studio", email: "studio@lumen.gr", src: 3, out: 1 },
-  { name: "Sarah Chen", email: "sarah@northwind.io", src: 0, out: 2 },
-  { name: "Cascade Labs", email: "growth@cascade.io", src: 4, out: 3 },
-  { name: "Harbor Fitness", email: "team@harborfit.com", src: 2, out: 1 },
+const signals = [
+  { name: "SPX Calendar", note: "IV ratio 0.92 · 3 DTE", src: 1, out: 0 },
+  { name: "AAPL Earnings", note: "Expected move ±3.4%", src: 2, out: 3 },
+  { name: "NTT Trend Flip", note: "Buy the Dip → confirmed", src: 3, out: 2 },
+  { name: "0DTE Gamma", note: "Dealers short gamma", src: 0, out: 0 },
+  { name: "Fed Rate Odds", note: "83% hold, per Kalshi", src: 2, out: 1 },
 ];
 
 const inPaths = [
-  "M120,52 C300,52 340,225 460,225",
-  "M120,138 C300,138 350,225 460,225",
-  "M120,225 C280,225 340,225 460,225",
-  "M120,312 C300,312 350,225 460,225",
-  "M120,398 C300,398 340,225 460,225",
+  "M120,70 C300,70 340,225 460,225",
+  "M120,173 C300,173 350,225 460,225",
+  "M120,277 C300,277 350,225 460,225",
+  "M120,380 C300,380 340,225 460,225",
 ];
 const outPaths = [
   "M540,225 C660,225 700,70 880,70",
@@ -52,10 +48,10 @@ const outPaths = [
 export function IntegrationFlow() {
   const [i, setI] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setI((v) => (v + 1) % leads.length), 2400);
+    const id = setInterval(() => setI((v) => (v + 1) % signals.length), 2400);
     return () => clearInterval(id);
   }, []);
-  const lead = leads[i];
+  const signal = signals[i];
 
   return (
     <section id="integrations" className="relative overflow-hidden py-28">
@@ -66,11 +62,11 @@ export function IntegrationFlow() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-forest">One engine, end to end</p>
           <h2 className="mt-4 font-display text-4xl leading-[1.02] text-ink text-balance md:text-6xl">
-            Raw signal in. <span className="gradient-text">Sendable pipeline out.</span>
+            Every signal in. <span className="gradient-text">One trading edge out.</span>
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
-            Lumina pulls prospects from anywhere on the open web, then does the verification, research, writing and
-            sending itself — no third-party stack in the middle.
+            FLUX pulls together volatility, earnings, trend, and market-wide data, then models and surfaces it
+            all in one live dashboard — no switching between tools mid-trade.
           </p>
         </div>
 
@@ -89,8 +85,8 @@ export function IntegrationFlow() {
 
             {inPaths.map((d, k) => (
               <g key={`i${k}`}>
-                <path d={d} fill="none" stroke="url(#lfIn)" strokeWidth={k === lead.src ? 2.4 : 1.2} />
-                <circle r={k === lead.src ? "5" : "3"} fill="oklch(0.34 0.1455 235)" opacity={k === lead.src ? 1 : 0.45}>
+                <path d={d} fill="none" stroke="url(#lfIn)" strokeWidth={k === signal.src ? 2.4 : 1.2} />
+                <circle r={k === signal.src ? "5" : "3"} fill="oklch(0.34 0.1455 235)" opacity={k === signal.src ? 1 : 0.45}>
                   <animateMotion dur="2.4s" begin={`${k * 0.3}s`} repeatCount="indefinite" path={d} keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" />
                 </circle>
               </g>
@@ -98,23 +94,23 @@ export function IntegrationFlow() {
 
             {outPaths.map((d, k) => (
               <g key={`o${k}`}>
-                <path d={d} fill="none" stroke="url(#lfOut)" strokeWidth={k === lead.out ? 2.4 : 1.2} />
-                <circle r={k === lead.out ? "5" : "3"} fill="oklch(0.42 0.1455 235)" opacity={k === lead.out ? 1 : 0.45}>
+                <path d={d} fill="none" stroke="url(#lfOut)" strokeWidth={k === signal.out ? 2.4 : 1.2} />
+                <circle r={k === signal.out ? "5" : "3"} fill="oklch(0.42 0.1455 235)" opacity={k === signal.out ? 1 : 0.45}>
                   <animateMotion dur="2.4s" begin={`${1.2 + k * 0.3}s`} repeatCount="indefinite" path={d} keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" />
                 </circle>
               </g>
             ))}
           </svg>
 
-          <div className="absolute left-0 top-0 flex h-full flex-col justify-between">
+          <div className="absolute left-0 top-0 flex h-full flex-col justify-around">
             {sources.map((s, k) => (
-              <Node key={s.label} icon={s.icon} label={s.label} active={k === lead.src} />
+              <Node key={s.label} icon={s.icon} label={s.label} active={k === signal.src} />
             ))}
           </div>
 
           <div className="absolute right-0 top-0 flex h-full flex-col justify-around">
             {outputs.map((o, k) => (
-              <Node key={o.label} icon={o.icon} label={o.label} note={o.note} align="right" active={k === lead.out} />
+              <Node key={o.label} icon={o.icon} label={o.label} align="right" active={k === signal.out} />
             ))}
           </div>
 
@@ -127,12 +123,9 @@ export function IntegrationFlow() {
                 className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/20"
                 style={{ animationDelay: "1.1s" }}
               />
-              <div className="relative flex h-32 w-32 flex-col items-center justify-center gap-2 rounded-[2rem] border border-border/60 bg-white shadow-elegant md:h-36 md:w-36">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl gradient-forest text-white">
-                  <Sparkles className="h-5 w-5" />
-                </span>
-                <span className="font-display text-lg text-ink">Lumina</span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">engine</span>
+              <div className="relative flex h-32 w-32 flex-col items-center justify-center gap-2 rounded-[2rem] border border-border/60 bg-white p-3 shadow-elegant md:h-36 md:w-36">
+                <img src="/logo.png" alt="NavigationTrading" className="h-7 w-auto object-contain md:h-8" />
+                <span className="text-center font-display text-[13px] leading-tight text-ink md:text-sm">Navigation Trading</span>
               </div>
 
               <div className="absolute left-1/2 top-full mt-6 w-64 -translate-x-1/2">
@@ -141,12 +134,12 @@ export function IntegrationFlow() {
                   className="animate-rise rounded-2xl border border-border/70 bg-white px-4 py-3 shadow-elegant"
                 >
                   <div className="flex items-center justify-between">
-                    <p className="truncate text-[11px] font-semibold text-ink">{lead.name}</p>
+                    <p className="truncate text-[11px] font-semibold text-ink">{signal.name}</p>
                     <span className="font-mono text-[9px] uppercase tracking-wider text-forest">
-                      {outputs[lead.out].label}
+                      {outputs[signal.out].label}
                     </span>
                   </div>
-                  <p className="truncate font-mono text-[10px] text-muted-foreground">{lead.email}</p>
+                  <p className="truncate font-mono text-[10px] text-muted-foreground">{signal.note}</p>
                   <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
                     <div className="relative h-full w-full gradient-forest"><span className="absolute inset-y-0 -left-1/3 w-1/3 animate-sweep bg-gradient-to-r from-transparent via-white/70 to-transparent" /></div>
                   </div>
@@ -163,18 +156,16 @@ export function IntegrationFlow() {
 function Node({
   icon: Icon,
   label,
-  note,
   align = "left",
   active,
 }: {
   icon: any;
   label: string;
-  note?: string;
   align?: "left" | "right";
   active?: boolean;
 }) {
   return (
-    <div className={`flex flex-col gap-1.5 ${align === "right" ? "items-end" : "items-start"}`}>
+    <div className={`flex max-w-[140px] flex-col gap-1.5 ${align === "right" ? "items-end text-right" : "items-start"}`}>
       <span
         className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all duration-500 md:h-14 md:w-14 ${
           active
@@ -184,8 +175,7 @@ function Node({
       >
         <Icon className="h-5 w-5 md:h-6 md:w-6" />
       </span>
-      <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
-      {note && <span className="font-mono text-[9px] text-muted-foreground/70">{note}</span>}
+      <span className="text-[10px] font-semibold uppercase leading-snug tracking-[0.08em] text-muted-foreground">{label}</span>
     </div>
   );
 }
