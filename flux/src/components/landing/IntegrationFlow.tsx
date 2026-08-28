@@ -123,27 +123,8 @@ export function IntegrationFlow() {
                 className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/20"
                 style={{ animationDelay: "1.1s" }}
               />
-              <div className="relative flex h-32 w-32 flex-col items-center justify-center gap-2 rounded-[2rem] border border-border/60 bg-white p-3 shadow-elegant md:h-36 md:w-36">
-                <img src="/logo.png" alt="NavigationTrading" className="h-7 w-auto object-contain md:h-8" />
-                <span className="text-center font-display text-[13px] leading-tight text-ink md:text-sm">Navigation Trading</span>
-              </div>
-
-              <div className="absolute left-1/2 top-full mt-6 w-64 -translate-x-1/2">
-                <div
-                  key={i}
-                  className="animate-rise rounded-2xl border border-border/70 bg-white px-4 py-3 shadow-elegant"
-                >
-                  <div className="flex items-center justify-between">
-                    <p className="truncate text-[11px] font-semibold text-ink">{signal.name}</p>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-forest">
-                      {outputs[signal.out].label}
-                    </span>
-                  </div>
-                  <p className="truncate font-mono text-[10px] text-muted-foreground">{signal.note}</p>
-                  <div className="mt-2 h-1 overflow-hidden rounded-full bg-secondary">
-                    <div className="relative h-full w-full gradient-forest"><span className="absolute inset-y-0 -left-1/3 w-1/3 animate-sweep bg-gradient-to-r from-transparent via-white/70 to-transparent" /></div>
-                  </div>
-                </div>
+              <div className="relative flex h-32 w-32 items-center justify-center md:h-36 md:w-36">
+                <img src="/logo.png" alt="NavigationTrading" className="h-24 w-auto object-contain md:h-28" />
               </div>
             </div>
           </div>
