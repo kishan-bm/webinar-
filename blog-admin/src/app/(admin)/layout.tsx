@@ -58,7 +58,7 @@ export default function RootLayout({
           {/* Sidebar */}
           <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
             {/* Logo */}
-            <div className="sidebar-logo" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '0 0 16px', margin: '0 16px 20px', minHeight: 'auto', height: 'auto', overflow: 'visible' }}>
+            <div className="sidebar-logo" style={{ borderBottom: '1px solid var(--sidebar-border)', padding: '0 0 16px', margin: '0 16px 20px', minHeight: 'auto', height: 'auto', overflow: 'visible' }}>
               {collapsed ? (
                 <div className="sidebar-logo-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent', width: '36px', height: '36px', overflow: 'hidden' }}>
                   <img src="/logo.png" alt="NT" style={{ width: 'auto', height: '90px', objectFit: 'contain', marginTop: '-24px', marginBottom: '-24px' }} />
@@ -80,14 +80,10 @@ export default function RootLayout({
             </button>
 
             {/* Nav Items */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '0 0 24px' }}>
+            <div className="sidebar-groups">
               {/* Blog Group */}
               <div>
-                {!collapsed && (
-                  <div style={{ padding: '0 20px 8px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.4)' }}>
-                    Blog
-                  </div>
-                )}
+                {!collapsed && <div className="sidebar-group-label">Blog</div>}
                 <ul className="nav-menu">
                   {blogItems.map(item => (
                     <li key={item.href}>
@@ -95,7 +91,6 @@ export default function RootLayout({
                         href={item.href}
                         className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
                         title={collapsed ? item.label : undefined}
-                        style={{ paddingLeft: collapsed ? '12px' : '32px' }}
                       >
                         <span className="nav-icon">{item.icon}</span>
                         {!collapsed && <span className="nav-label">{item.label}</span>}
@@ -107,12 +102,8 @@ export default function RootLayout({
 
               {/* Video Group */}
               <div>
-                {!collapsed && (
-                  <div style={{ padding: '0 20px 8px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.4)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px', margin: '0 16px 8px' }}>
-                    Video
-                  </div>
-                )}
-                {collapsed && <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 16px 16px' }}></div>}
+                {!collapsed && <div className="sidebar-group-label with-divider">Video</div>}
+                {collapsed && <div className="sidebar-group-divider"></div>}
                 <ul className="nav-menu">
                   {videoItems.map(item => (
                     <li key={item.href}>
@@ -120,7 +111,6 @@ export default function RootLayout({
                         href={item.href}
                         className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
                         title={collapsed ? item.label : undefined}
-                        style={{ paddingLeft: collapsed ? '12px' : '32px' }}
                       >
                         <span className="nav-icon">{item.icon}</span>
                         {!collapsed && <span className="nav-label">{item.label}</span>}
@@ -132,12 +122,8 @@ export default function RootLayout({
 
               {/* Popups Group */}
               <div>
-                {!collapsed && (
-                  <div style={{ padding: '0 20px 8px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.4)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px', margin: '0 16px 8px' }}>
-                    Popups
-                  </div>
-                )}
-                {collapsed && <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 16px 16px' }}></div>}
+                {!collapsed && <div className="sidebar-group-label with-divider">Popups</div>}
+                {collapsed && <div className="sidebar-group-divider"></div>}
                 <ul className="nav-menu">
                   {popupItems.map(item => (
                     <li key={item.href}>
@@ -145,7 +131,6 @@ export default function RootLayout({
                         href={item.href}
                         className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
                         title={collapsed ? item.label : undefined}
-                        style={{ paddingLeft: collapsed ? '12px' : '32px' }}
                       >
                         <span className="nav-icon">{item.icon}</span>
                         {!collapsed && <span className="nav-label">{item.label}</span>}
@@ -157,12 +142,8 @@ export default function RootLayout({
 
               {/* System/Settings Group */}
               <div>
-                {!collapsed && (
-                  <div style={{ padding: '0 20px 8px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.4)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '16px', margin: '0 16px 8px' }}>
-                    System
-                  </div>
-                )}
-                {collapsed && <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 16px 16px' }}></div>}
+                {!collapsed && <div className="sidebar-group-label with-divider">System</div>}
+                {collapsed && <div className="sidebar-group-divider"></div>}
                 <ul className="nav-menu">
                   {settingsItems.map(item => (
                     <li key={item.href}>
@@ -170,7 +151,6 @@ export default function RootLayout({
                         href={item.href}
                         className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
                         title={collapsed ? item.label : undefined}
-                        style={{ paddingLeft: collapsed ? '12px' : '32px' }}
                       >
                         <span className="nav-icon">{item.icon}</span>
                         {!collapsed && <span className="nav-label">{item.label}</span>}
@@ -182,13 +162,12 @@ export default function RootLayout({
             </div>
 
             {/* Bottom: Logout */}
-            <div style={{ marginTop: 'auto' }}>
+            <div className="sidebar-footer">
               <ul className="nav-menu">
                 <li>
                   <a
                     href="/api/auth/logout"
-                    className="nav-item"
-                    style={{ color: '#ef4444' }}
+                    className="nav-item nav-item-danger"
                     title={collapsed ? 'Logout' : undefined}
                   >
                     <span className="nav-icon"><LogOut size={20} /></span>
@@ -202,17 +181,17 @@ export default function RootLayout({
           {/* Main Content Area */}
           <main className="main-content">
             <header className="topbar">
-              <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+              <div className="topbar-title">
                 Blog Management System
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '14px', fontWeight: 500 }}>Admin User</span>
-                <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'var(--accent-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+              <div className="topbar-account">
+                <span className="topbar-account-name">Admin User</span>
+                <div className="topbar-avatar">
                   A
                 </div>
               </div>
             </header>
-            
+
             <div className="page-container">
               {children}
             </div>

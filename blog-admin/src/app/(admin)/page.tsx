@@ -133,8 +133,8 @@ export default function Dashboard() {
             {exportOpen && (
               <div style={{
                 position: 'absolute', top: 'calc(100% + 6px)', right: 0,
-                background: 'var(--card-bg, #fff)', border: '1px solid var(--border-color, #e2e8f0)',
-                borderRadius: '8px', boxShadow: '0 6px 24px rgba(0,0,0,0.12)',
+                background: 'var(--bg-surface)', border: '1px solid var(--border-color)',
+                borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-md)',
                 zIndex: 100, minWidth: '180px', padding: '6px',
               }}>
                 {(['ALL', 'DRAFT', 'PUBLISHED'] as const).map(opt => (
@@ -142,7 +142,7 @@ export default function Dashboard() {
                     display: 'flex', alignItems: 'center', gap: '8px',
                     padding: '8px 10px', borderRadius: '5px', cursor: 'pointer',
                     fontSize: '13px', fontWeight: exportFilter === opt ? 600 : 400,
-                    background: exportFilter === opt ? 'rgba(200,66,10,0.07)' : 'transparent',
+                    background: exportFilter === opt ? 'var(--accent)' : 'transparent',
                   }}>
                     <input
                       type="radio"
@@ -150,12 +150,12 @@ export default function Dashboard() {
                       value={opt}
                       checked={exportFilter === opt}
                       onChange={() => setExportFilter(opt)}
-                      style={{ accentColor: 'var(--accent-color, #c8420a)' }}
+                      style={{ accentColor: 'var(--accent-color)' }}
                     />
                     {opt.charAt(0) + opt.slice(1).toLowerCase()}
                   </label>
                 ))}
-                <div style={{ borderTop: '1px solid var(--border-color, #e2e8f0)', marginTop: '4px', paddingTop: '6px' }}>
+                <div style={{ borderTop: '1px solid var(--border-color)', marginTop: '4px', paddingTop: '6px' }}>
                   <button
                     type="button"
                     className="btn-primary"
@@ -311,7 +311,7 @@ export default function Dashboard() {
 
                     <h1 className="blog-title" style={{
                       fontSize: '34px',
-                      color: '#0d2e4e',
+                      color: 'var(--primary-color)',
                       lineHeight: '1.25',
                       marginBottom: '20px',
                       fontWeight: 800
@@ -319,7 +319,7 @@ export default function Dashboard() {
                       {selectedPreviewPost.title}
                     </h1>
 
-                    <div className="blog-meta" style={{ marginTop: '16px', marginBottom: 0, color: '#94a3b8' }}>
+                    <div className="blog-meta" style={{ marginTop: '16px', marginBottom: 0, color: 'var(--text-secondary)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div style={{
                           width: '40px',
