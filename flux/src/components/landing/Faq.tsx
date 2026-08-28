@@ -2,36 +2,24 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "What's the difference between Pro and Day Trading membership?",
-    a: "The Day Trading membership ($129/month) includes 10 day trading strategy courses, daily live streams, and trade alerts for day trading setups. Pro ($179/month) includes everything in Day Trading plus 7 additional advanced strategy courses covering income spreads, trend trading, and portfolio strategies. Pro members also get trade alerts for every strategy we teach — not just day trading — plus the full suite of custom chart indicators and watch lists. For $50 more per month, you get the complete NavigationTrading system.",
+    q: "Is FLUX included with my membership?",
+    a: "FLUX is available exclusively to Pro Members. If you're on a different plan, upgrading to Pro unlocks the full toolkit — Analyzer, Calendar IV, Earnings, NTT Scanner, 0 DTE, News, and Prediction Markets.",
   },
   {
-    q: "Is $179/month worth it?",
-    a: "That's $5.96 per day for daily live trading sessions, 17+ strategy courses, real-time alerts across every strategy, custom tools, and access to an active community of serious traders. Most traders lose more than that on a single bad trade made without proper education. The question isn't whether $179 is a lot. It's whether not having the right strategies and tools is costing you more.",
+    q: "Does FLUX place trades for me?",
+    a: "No. FLUX is a read-only analysis tool — it models positions, tracks volatility, and surfaces signals, but every order goes through you. When you're ready to act, it hands you a pre-filled ticket or order string for ThinkorSwim, Tradier, or IBKR, and you review and submit it in your own broker.",
   },
   {
-    q: "I'm a complete beginner. Should I start with Pro?",
-    a: "If you've never traded options before, we recommend starting with our Free Membership to learn the fundamentals. The free courses cover options basics, how contracts work, and beginner strategies. Once you're comfortable with the foundations, Pro is where you take it to the next level. That said, if you're motivated and ready to commit, Pro gives you everything from day one — including the foundational knowledge.",
+    q: "How current is the data in FLUX?",
+    a: "Prices refresh automatically about every 30 seconds during U.S. market hours, with select feeds — like SPX in the Analyzer and 0 DTE — streaming live. Outside market hours, FLUX shows the last close and stops polling. All data is for analysis, not order routing, so always confirm live prices in your broker before trading.",
   },
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. There are no long-term contracts. Your membership renews monthly, and you can cancel anytime. If you cancel, you keep access through the end of your current billing period.",
+    q: "What can I actually do in the Analyzer?",
+    a: "Build any options position — single legs, verticals, iron condors, calendars, and more — right-click to add structures, drag strikes to reshape a trade, and scrub time and volatility to see how it evolves. You can save, share, and import models, pull positions in directly from ThinkorSwim, and compare multiple trades side by side before ever placing an order.",
   },
   {
-    q: "What time are the live streams?",
-    a: "The morning session starts around 9:15 AM Eastern, before the market opens at 9:30. The Power Hour session begins around 3:15 PM Eastern for the final hour of trading. Both sessions run every market day (Monday through Friday, excluding market holidays).",
-  },
-  {
-    q: "Do I need a large account to trade these strategies?",
-    a: "No. Many of our strategies — especially the day trading and 0 DTE setups, can be traded with accounts of $5,000 or less. The courses cover how to match strategies to your account size. Some of the advanced strategies like portfolio margin are designed for larger accounts, but you don't need to trade every strategy to get value from Pro. Start with what fits your account and expand as you grow.",
-  },
-  {
-    q: "Will I get overwhelmed with 17+ strategies?",
-    a: "No, and this is important. You don't learn all 17 strategies at once. They're organized by category (day trading, 0 DTE, income, trend, portfolio), and most members start with one category that matches their current goals. The live streams and alerts cover all strategies, but you choose which ones to focus on. Think of it as a library you grow into, not a firehose you drink from.",
-  },
-  {
-    q: "Can I talk to someone if I have questions?",
-    a: "Absolutely. The live trading room has real-time chat where you can ask questions during the stream. The TradeHacker Discord community is active throughout the day. Experienced members and the NavigationTrading team are there to help. You're never trading alone.",
+    q: "Will FLUX tell me exactly when to enter a trade?",
+    a: "FLUX gives you the signals and analysis to make that call yourself — like IV ratios in Calendar IV, trend states in the NTT Scanner, and expected-move data in Earnings and 0 DTE — but it doesn't issue trade recommendations or place trades. Every tool is built to inform your decision, not make it for you.",
   },
 ];
 
@@ -72,7 +60,7 @@ export function Faq() {
         <div className="flux-faq-left">
           <span className="flux-faq-eyebrow">FREQUENTLY ASKED QUESTIONS</span>
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about the Pro membership and how it fits your trading style.</p>
+          <p>Everything you need to know about FLUX and how it fits into your trading.</p>
           <div className="flux-faq-contact">
             <div className="flux-faq-contact-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
