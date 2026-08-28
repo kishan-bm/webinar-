@@ -123,7 +123,10 @@ export function IntegrationFlow() {
                 className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/20"
                 style={{ animationDelay: "1.1s" }}
               />
-              <div className="relative flex h-32 w-32 items-center justify-center md:h-36 md:w-36">
+              <div
+                className="relative flex h-36 w-36 items-center justify-center rounded-[2rem] shadow-elegant md:h-40 md:w-40"
+                style={{ background: "#0D2E4E" }}
+              >
                 <img src="/logo.png" alt="NavigationTrading" className="h-24 w-auto object-contain md:h-28" />
               </div>
             </div>
