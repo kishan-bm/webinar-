@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, SlidersHorizontal, MousePointerClick } from 'lucide-react';
+import { Compass, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, LayoutPanelLeft, Video } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function RootLayout({
@@ -12,11 +12,24 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [accountLabel, setAccountLabel] = useState('Admin User');
 
   // Persist collapse state across page loads
   useEffect(() => {
     const saved = localStorage.getItem('sidebar-collapsed');
     if (saved === 'true') setCollapsed(true);
+  }, []);
+
+  // Pull the real logged-in admin's email from the session, if available
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (data?.success && data.user?.email) {
+          setAccountLabel(data.user.email);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const toggleCollapse = () => {
@@ -27,27 +40,25 @@ export default function RootLayout({
   };
 
   const isActive = (path: string) => {
-    if (path === '/admin-blog' && pathname === '/') return true;
-    if (path !== '/admin-blog' && pathname.startsWith(path)) return true;
+    if (path === '/' && (pathname === '/' || pathname === '/admin-blog')) return true;
+    if (path === '/posts' && pathname === '/posts') return true;
+    if (path !== '/' && path !== '/posts' && pathname.startsWith(path)) return true;
     return false;
   };
 
   const blogItems = [
-    { href: '/admin-blog', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
+    { href: '/', icon: <Compass size={20} />, label: 'Overview' },
+    { href: '/posts', icon: <FileText size={20} />, label: 'Posts' },
     { href: '/posts/new', icon: <Plus size={20} />, label: 'New Post' },
     { href: '/banners', icon: <Image size={20} />, label: 'Sidebar Banners' },
   ];
 
-  const videoItems = [
-    { href: '/replay', icon: <FileText size={20} />, label: 'Replay Video' },
-  ];
-
-  const popupItems = [
-    { href: '/exit-intent', icon: <MousePointerClick size={20} />, label: 'Exit Intent Popups' },
+  const marketingItems = [
+    { href: '/site-config', icon: <LayoutPanelLeft size={20} />, label: 'Pages' },
+    { href: '/replay', icon: <Video size={20} />, label: 'Replay Video' },
   ];
 
   const settingsItems = [
-    { href: '/site-config', icon: <SlidersHorizontal size={20} />, label: 'Site Config' },
     { href: '/settings', icon: <Settings size={20} />, label: 'Settings' },
   ];
 
@@ -100,32 +111,12 @@ export default function RootLayout({
                 </ul>
               </div>
 
-              {/* Video Group */}
+              {/* Marketing Group */}
               <div>
-                {!collapsed && <div className="sidebar-group-label with-divider">Video</div>}
+                {!collapsed && <div className="sidebar-group-label with-divider">Marketing</div>}
                 {collapsed && <div className="sidebar-group-divider"></div>}
                 <ul className="nav-menu">
-                  {videoItems.map(item => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
-                        title={collapsed ? item.label : undefined}
-                      >
-                        <span className="nav-icon">{item.icon}</span>
-                        {!collapsed && <span className="nav-label">{item.label}</span>}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Popups Group */}
-              <div>
-                {!collapsed && <div className="sidebar-group-label with-divider">Popups</div>}
-                {collapsed && <div className="sidebar-group-divider"></div>}
-                <ul className="nav-menu">
-                  {popupItems.map(item => (
+                  {marketingItems.map(item => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
@@ -185,9 +176,9 @@ export default function RootLayout({
                 Blog Management System
               </div>
               <div className="topbar-account">
-                <span className="topbar-account-name">Admin User</span>
+                <span className="topbar-account-name">{accountLabel}</span>
                 <div className="topbar-avatar">
-                  A
+                  {accountLabel.charAt(0).toUpperCase()}
                 </div>
               </div>
             </header>

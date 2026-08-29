@@ -1,24 +1,41 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { User, Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, X } from 'lucide-react';
 
 type Author = {
   id: string;
   name: string;
   email: string;
+  postCount?: number;
+};
+
+type SessionUser = {
+  name: string;
+  email: string;
 };
 
 export default function SettingsPage() {
+  const [activeTab, setActiveTab] = useState<'authors' | 'account'>('authors');
+
   const [authors, setAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
 
+  const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
+
   useEffect(() => {
     fetchAuthors();
+    fetch('/api/auth/me')
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (data?.success && data.user) setSessionUser(data.user);
+      })
+      .catch(() => {});
   }, []);
 
   const fetchAuthors = () => {
@@ -27,8 +44,6 @@ export default function SettingsPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // Fetch complete fields (needs schema fields, since GET by default returned just id and name, let's allow it)
-          // Wait, the API GET route returns { id, name }. That is enough to list them.
           setAuthors(data.data);
         }
         setLoading(false);
@@ -57,6 +72,7 @@ export default function SettingsPage() {
       if (data.success) {
         setName('');
         setEmail('');
+        setShowAddModal(false);
         fetchAuthors();
       } else {
         setError(data.error || 'Failed to add author');
@@ -91,59 +107,116 @@ export default function SettingsPage() {
       <div className="page-header">
         <div className="page-header-heading">
           <h1 className="page-title">Settings</h1>
-          <p className="page-description">Manage the authors who can be attributed to blog posts.</p>
+          <p className="page-description">Authors and account preferences for the admin portal.</p>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'start', maxWidth: '900px' }}>
-        {/* Author List */}
-        <div>
-          <h2 className="section-heading">Manage authors ({authors.length})</h2>
+      <div className="tab-bar">
+        <button
+          type="button"
+          className={`tab-pill ${activeTab === 'authors' ? 'active' : ''}`}
+          onClick={() => setActiveTab('authors')}
+        >
+          Authors
+        </button>
+        <button
+          type="button"
+          className={`tab-pill ${activeTab === 'account' ? 'active' : ''}`}
+          onClick={() => setActiveTab('account')}
+        >
+          Account
+        </button>
+      </div>
 
-          <div className="table-container" style={{ padding: '0px' }}>
-            {loading ? (
-              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-dim)' }}>Loading authors...</div>
-            ) : authors.length === 0 ? (
-              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-dim)' }}>No authors registered.</div>
-            ) : (
-              <table style={{ margin: 0 }}>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th style={{ textAlign: 'right' }}>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {authors.map((author) => (
-                    <tr key={author.id}>
-                      <td style={{ display: 'flex', alignItems: 'center', gap: '8px', border: 'none' }}>
-                        <div style={{ width: '28px', height: '28px', borderRadius: '50%', backgroundColor: 'var(--accent-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '12px' }}>
-                          {author.name.charAt(0).toUpperCase()}
-                        </div>
-                        <span style={{ fontWeight: 500 }}>{author.name}</span>
-                      </td>
-                      <td style={{ textAlign: 'right', border: 'none' }}>
-                        <button
-                          onClick={() => handleDeleteAuthor(author.id)}
-                          className="btn-secondary"
-                          style={{ padding: '4px 8px', color: '#ef4444', borderColor: '#fecaca' }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+      {activeTab === 'authors' ? (
+        <div className="table-container">
+          <div className="panel-header">
+            <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>
+              {authors.length} author{authors.length === 1 ? '' : 's'}
+            </span>
+            <button type="button" className="btn-primary" onClick={() => setShowAddModal(true)}>
+              <Plus size={16} /> Add author
+            </button>
           </div>
+
+          {loading ? (
+            <div style={{ padding: '32px', textAlign: 'center', color: 'var(--text-secondary)' }}>Loading authors...</div>
+          ) : authors.length === 0 ? (
+            <div style={{ padding: '32px', textAlign: 'center', color: 'var(--text-secondary)' }}>No authors registered.</div>
+          ) : (
+            <div className="recent-list">
+              {authors.map((author) => (
+                <div className="recent-list-row" key={author.id}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'var(--accent-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '14px', flexShrink: 0 }}>
+                      {author.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div className="recent-list-title">{author.name}</div>
+                      <div className="recent-list-meta">{author.email}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '18px', flexShrink: 0 }}>
+                    {typeof author.postCount === 'number' && (
+                      <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                        {author.postCount} post{author.postCount === 1 ? '' : 's'}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => handleDeleteAuthor(author.id)}
+                      className="btn-secondary"
+                      style={{ padding: '6px 8px', color: '#ef4444', borderColor: '#fecaca' }}
+                      title="Delete author"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+      ) : (
+        <div className="card" style={{ maxWidth: '480px' }}>
+          <h2 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '12px', marginBottom: '20px' }}>
+            Signed in as
+          </h2>
+          {sessionUser ? (
+            <div className="form-group" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div>
+                <label className="form-label">Name</label>
+                <div style={{ fontSize: '14.5px', color: 'var(--text-primary)', fontWeight: 500 }}>{sessionUser.name}</div>
+              </div>
+              <div>
+                <label className="form-label">Email</label>
+                <div style={{ fontSize: '14.5px', color: 'var(--text-primary)', fontWeight: 500 }}>{sessionUser.email}</div>
+              </div>
+            </div>
+          ) : (
+            <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', margin: 0 }}>
+              Account details are unavailable in this session.
+            </p>
+          )}
+        </div>
+      )}
 
-        {/* Add Author Form */}
-        <div>
-          <h2 className="section-heading">Add new author</h2>
+      {/* Add Author Modal */}
+      {showAddModal && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, backgroundColor: 'rgba(13, 46, 78, 0.5)', backdropFilter: 'blur(4px)',
+            zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
+          }}
+          onClick={() => setShowAddModal(false)}
+        >
+          <div className="card" style={{ width: '100%', maxWidth: '420px' }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <h2 className="section-heading" style={{ margin: 0 }}>Add new author</h2>
+              <button type="button" onClick={() => setShowAddModal(false)} className="btn-secondary" style={{ padding: '6px' }}>
+                <X size={16} />
+              </button>
+            </div>
 
-          <div className="card" style={{ padding: '24px' }}>
             <form onSubmit={handleAddAuthor} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Full Name</label>
@@ -186,7 +259,7 @@ export default function SettingsPage() {
             </form>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

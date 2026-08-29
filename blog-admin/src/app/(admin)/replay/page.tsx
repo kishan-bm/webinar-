@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Eye, Key, Save, ExternalLink, RefreshCw, CheckCircle, XCircle } from 'lucide-react';
+import { Eye, Key, Save, ExternalLink, RefreshCw, CheckCircle, XCircle, Copy, Check, Video } from 'lucide-react';
 
 export default function ReplayAdminPage() {
   const ADMIN_PASSWORD = 'ntreplay2026';
@@ -29,6 +29,15 @@ export default function ReplayAdminPage() {
 
   // Google Sheet Method State
   const [sheetStatus, setSheetStatus] = useState<{ type: 'success' | 'error' | 'loading' | null; msg: string }>({ type: null, msg: '' });
+
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    if (!hasVideoClass) return;
+    navigator.clipboard.writeText(currentVideo).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }).catch(() => {});
+  };
 
   // Handle Login
   const handleLogin = () => {
@@ -190,22 +199,21 @@ export default function ReplayAdminPage() {
       </div>
 
       {/* Current video display */}
-      <div className="card" style={{ marginBottom: '24px' }}>
-        <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
-          Current Video Status
-        </h3>
-        <div style={{
-          padding: '14px 16px',
-          borderRadius: '8px',
-          border: '1.5px solid',
-          borderColor: hasVideoClass ? 'rgba(34,197,94,0.4)' : 'var(--border-color)',
-          background: hasVideoClass ? 'rgba(34,197,94,0.05)' : '#f8fafc',
-          color: hasVideoClass ? '#22c55e' : 'var(--text-secondary)',
-          fontSize: '14px',
-          fontWeight: 600,
-          wordBreak: 'break-all'
-        }}>
-          {hasVideoClass ? '✅ Active Video: ' : ''}{currentVideo}
+      <div className="table-container" style={{ marginBottom: '24px', padding: '20px 24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <span className={`replay-status-icon ${hasVideoClass ? 'is-active' : ''}`}>
+            {hasVideoClass ? <CheckCircle size={20} /> : <XCircle size={20} />}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div className="section-heading" style={{ margin: '0 0 4px' }}>Current active video</div>
+            <div style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
+              {currentVideo}
+            </div>
+          </div>
+          <button type="button" className="btn-secondary" onClick={handleCopy} disabled={!hasVideoClass} style={{ flexShrink: 0 }}>
+            {copied ? <Check size={14} /> : <Copy size={14} />}
+            {copied ? 'Copied' : 'Copy'}
+          </button>
         </div>
       </div>
 
@@ -215,29 +223,32 @@ export default function ReplayAdminPage() {
           Set New Video URL
         </h3>
 
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
-          <button
-            onClick={() => setActiveTab('github')}
-            style={{
-              flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
-              borderColor: activeTab === 'github' ? 'var(--accent-color)' : 'var(--border-color)',
-              background: activeTab === 'github' ? 'rgba(200,66,10,0.08)' : 'transparent',
-              color: activeTab === 'github' ? 'var(--accent-color)' : 'var(--text-secondary)'
-            }}
-          >
-            ⚡ Method 1 — GitHub Deploy
-          </button>
-          <button
-            onClick={() => setActiveTab('sheet')}
-            style={{
-              flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
-              borderColor: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--border-color)',
-              background: activeTab === 'sheet' ? 'rgba(200,66,10,0.08)' : 'transparent',
-              color: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--text-secondary)'
-            }}
-          >
-            📋 Method 2 — Google Sheet
-          </button>
+        <div className="form-group">
+          <label className="form-label">Deploy method</label>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              onClick={() => setActiveTab('github')}
+              style={{
+                flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
+                borderColor: activeTab === 'github' ? 'var(--accent-color)' : 'var(--border-color)',
+                background: activeTab === 'github' ? 'rgba(200,66,10,0.08)' : 'transparent',
+                color: activeTab === 'github' ? 'var(--accent-color)' : 'var(--text-secondary)'
+              }}
+            >
+              GitHub deploy
+            </button>
+            <button
+              onClick={() => setActiveTab('sheet')}
+              style={{
+                flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
+                borderColor: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--border-color)',
+                background: activeTab === 'sheet' ? 'rgba(200,66,10,0.08)' : 'transparent',
+                color: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--text-secondary)'
+              }}
+            >
+              Google Sheet
+            </button>
+          </div>
         </div>
 
         {/* Tab 1: GitHub */}
@@ -376,6 +387,10 @@ export default function ReplayAdminPage() {
           </div>
         )}
       </div>
+
+      <p style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '16px' }}>
+        <Video size={14} /> Both /replay and /day-trading-replay-noshow read from this single value.
+      </p>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus, Trash2, ArrowUp, ArrowDown, ExternalLink } from 'lucide-react';
+import { Plus, Trash2, ArrowUp, ArrowDown, ExternalLink, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 type Banner = {
@@ -16,7 +16,8 @@ type Banner = {
 export default function BannersPage() {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [loading, setLoading] = useState(true);
-  
+  const [showAddModal, setShowAddModal] = useState(false);
+
   // Form state
   const [title, setTitle] = useState('');
   const [imageAlt, setImageAlt] = useState('');
@@ -81,6 +82,14 @@ export default function BannersPage() {
     }
   };
 
+  const resetForm = () => {
+    setTitle('');
+    setImageAlt('');
+    setLinkUrl('');
+    setImageUrl('');
+    setError('');
+  };
+
   const handleAddBanner = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!imageUrl) {
@@ -110,10 +119,8 @@ export default function BannersPage() {
       const data = await res.json();
 
       if (data.success) {
-        setTitle('');
-        setImageAlt('');
-        setLinkUrl('');
-        setImageUrl('');
+        resetForm();
+        setShowAddModal(false);
         fetchBanners();
       } else {
         setError(data.error || 'Failed to create banner');
@@ -149,7 +156,6 @@ export default function BannersPage() {
     const above = banners[index - 1];
 
     try {
-      // Swap order values
       const currentOrder = current.order;
       const aboveOrder = above.order;
 
@@ -177,7 +183,6 @@ export default function BannersPage() {
     const below = banners[index + 1];
 
     try {
-      // Swap order values
       const currentOrder = current.order;
       const belowOrder = below.order;
 
@@ -205,129 +210,105 @@ export default function BannersPage() {
         <div className="page-header-heading">
           <h1 className="page-title">Sidebar Banners</h1>
           <p className="page-description">
-            Manage graphic posters that appear in the right-side column of all published blog articles.
+            Graphic posters that appear in the right-side column of all published blog articles.
           </p>
+        </div>
+        <div className="page-header-actions">
+          <button type="button" className="btn-primary" onClick={() => setShowAddModal(true)}>
+            <Plus size={18} /> Add banner
+          </button>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '24px', alignItems: 'start' }}>
-        {/* Left Side: Banners List */}
-        <div>
-          <h2 className="section-heading">
-            Active banners ({banners.length})
-          </h2>
-
-          <div className="table-container" style={{ padding: '0px' }}>
-            {loading ? (
-              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-dim)' }}>
-                Loading banners...
-              </div>
-            ) : banners.length === 0 ? (
-              <div style={{ padding: '32px', textAlign: 'center', color: 'var(--text-dim)' }}>
-                No active banners. Add one using the form on the right.
-              </div>
-            ) : (
-              <table style={{ margin: 0 }}>
-                <thead>
-                  <tr>
-                    <th>Poster</th>
-                    <th>Heading</th>
-                    <th>Link URL</th>
-                    <th style={{ width: '100px', textAlign: 'center' }}>Sort</th>
-                    <th style={{ width: '80px', textAlign: 'right' }}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {banners.map((banner, index) => (
-                    <tr key={banner.id}>
-                      <td style={{ verticalAlign: 'middle' }}>
-                        <img
-                          src={banner.imageUrl}
-                          alt={banner.imageAlt || banner.title || 'Banner'}
-                          style={{
-                            width: '80px',
-                            height: '50px',
-                            objectFit: 'cover',
-                            borderRadius: '4px',
-                            border: '1px solid var(--border-color)',
-                          }}
-                        />
-                      </td>
-                      <td style={{ verticalAlign: 'middle', fontWeight: 600 }}>
-                        {banner.title || (
-                          <span style={{ color: 'var(--text-dim)', fontStyle: 'italic', fontWeight: 400 }}>
-                            No Title
-                          </span>
-                        )}
-                      </td>
-                      <td style={{ verticalAlign: 'middle', fontSize: '13px' }}>
-                        {banner.linkUrl ? (
-                          <a
-                            href={banner.linkUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '4px',
-                              color: 'var(--accent-color)',
-                              textDecoration: 'none',
-                              fontWeight: 500,
-                            }}
-                          >
-                            Link <ExternalLink size={12} />
-                          </a>
-                        ) : (
-                          <span style={{ color: 'var(--text-dim)', fontStyle: 'italic' }}>None</span>
-                        )}
-                      </td>
-                      <td style={{ verticalAlign: 'middle', textAlign: 'center' }}>
-                        <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
-                          <button
-                            onClick={() => handleMoveUp(index)}
-                            disabled={index === 0}
-                            className="btn-secondary"
-                            style={{ padding: '4px 6px', opacity: index === 0 ? 0.4 : 1 }}
-                            title="Move Up"
-                          >
-                            <ArrowUp size={14} />
-                          </button>
-                          <button
-                            onClick={() => handleMoveDown(index)}
-                            disabled={index === banners.length - 1}
-                            className="btn-secondary"
-                            style={{ padding: '4px 6px', opacity: index === banners.length - 1 ? 0.4 : 1 }}
-                            title="Move Down"
-                          >
-                            <ArrowDown size={14} />
-                          </button>
-                        </div>
-                      </td>
-                      <td style={{ verticalAlign: 'middle', textAlign: 'right' }}>
-                        <button
-                          onClick={() => handleDeleteBanner(banner.id)}
-                          className="btn-secondary"
-                          style={{ padding: '6px', color: '#ef4444', borderColor: '#fecaca' }}
-                          title="Delete Banner"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </div>
+      {loading ? (
+        <div className="table-container" style={{ padding: '32px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+          Loading banners...
         </div>
+      ) : banners.length === 0 ? (
+        <div className="table-container" style={{ padding: '48px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+          No banners yet. Click "Add banner" to create your first one.
+        </div>
+      ) : (
+        <div className="banner-grid">
+          {banners.map((banner, index) => (
+            <div className="banner-card" key={banner.id}>
+              <div className="banner-card-thumb">
+                <img src={banner.imageUrl} alt={banner.imageAlt || banner.title || 'Banner'} />
+              </div>
+              <div className="banner-card-body">
+                <div className="banner-card-title">
+                  {banner.title || <span style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--text-secondary)' }}>No Title</span>}
+                </div>
+                {banner.linkUrl ? (
+                  <a href={banner.linkUrl} target="_blank" rel="noopener noreferrer" className="banner-card-link">
+                    {banner.linkUrl.replace(/^https?:\/\//, '')} <ExternalLink size={12} />
+                  </a>
+                ) : (
+                  <span className="banner-card-link" style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>No link</span>
+                )}
+                <div className="banner-card-footer">
+                  <span className="banner-card-sort">Sort {index + 1}</span>
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <button
+                      onClick={() => handleMoveUp(index)}
+                      disabled={index === 0}
+                      className="btn-secondary"
+                      style={{ padding: '5px 7px', opacity: index === 0 ? 0.4 : 1 }}
+                      title="Move Up"
+                    >
+                      <ArrowUp size={13} />
+                    </button>
+                    <button
+                      onClick={() => handleMoveDown(index)}
+                      disabled={index === banners.length - 1}
+                      className="btn-secondary"
+                      style={{ padding: '5px 7px', opacity: index === banners.length - 1 ? 0.4 : 1 }}
+                      title="Move Down"
+                    >
+                      <ArrowDown size={13} />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteBanner(banner.id)}
+                      className="btn-secondary"
+                      style={{ padding: '5px 7px', color: '#ef4444', borderColor: '#fecaca' }}
+                      title="Delete Banner"
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
-        {/* Right Side: Add Form */}
-        <div>
-          <h2 className="section-heading">
-            Add banner
-          </h2>
+      {/* Add Banner Modal */}
+      {showAddModal && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, backgroundColor: 'rgba(13, 46, 78, 0.5)', backdropFilter: 'blur(4px)',
+            zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px',
+          }}
+          onClick={() => { setShowAddModal(false); resetForm(); }}
+        >
+          <div
+            className="card"
+            style={{ width: '100%', maxWidth: '480px', maxHeight: '90vh', overflowY: 'auto' }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+              <h2 className="section-heading" style={{ margin: 0 }}>Add banner</h2>
+              <button
+                type="button"
+                onClick={() => { setShowAddModal(false); resetForm(); }}
+                className="btn-secondary"
+                style={{ padding: '6px' }}
+              >
+                <X size={16} />
+              </button>
+            </div>
 
-          <div className="card" style={{ padding: '24px' }}>
             <form onSubmit={handleAddBanner} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Heading / Title (Optional)</label>
@@ -415,7 +396,7 @@ export default function BannersPage() {
             </form>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

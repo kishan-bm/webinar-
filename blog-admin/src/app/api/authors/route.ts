@@ -4,9 +4,15 @@ import prisma from '@/lib/prisma';
 export async function GET() {
   try {
     const authors = await prisma.user.findMany({
-      select: { id: true, name: true }
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        _count: { select: { posts: true } },
+      }
     });
-    return NextResponse.json({ success: true, data: authors });
+    const data = authors.map(({ _count, ...rest }) => ({ ...rest, postCount: _count.posts }));
+    return NextResponse.json({ success: true, data });
   } catch (error) {
     return NextResponse.json({ success: false, error: 'Failed to fetch authors' }, { status: 500 });
   }

@@ -45,6 +45,12 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. March 19, 2026', description: 'Overview section tag text', group: 'Countdown & Date Settings' },
       { key: 'fullDateSubtext', label: 'Register Button Subtext', type: 'text', placeholder: 'e.g. Wednesday, March 19 · 7:00 PM ET · Free & Live', description: 'Extended subtext under the register button', group: 'Countdown & Date Settings' },
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Show the popup when visitors try to leave the page', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Headline', type: 'text', placeholder: 'e.g. Turn Any Options Trade Into a Risk-Free Position', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Tagline', type: 'text', placeholder: 'e.g. Using the DC TimeMachine strategy — live, with real trades.', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Bullet Points (semicolon-separated)', type: 'textarea', placeholder: 'Point one; Point two; Point three', description: 'Each bullet separated by a semicolon (;)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Webinar Date Text', type: 'text', placeholder: 'e.g. Tuesday, May 6 | 8 PM IST', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'ActiveCampaign Form ID (Exit Popup)', type: 'number', placeholder: 'e.g. 132', group: 'Exit Intent Popup' },
     ]
   },
   {
@@ -73,6 +79,12 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · June 16', group: 'Countdown & Date Settings' },
       { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. June 16, 2026', group: 'Countdown & Date Settings' },
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 134', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Show the popup when visitors try to leave the page', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Headline', type: 'text', placeholder: 'e.g. Turn Any Options Trade Into a Risk-Free Position', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Tagline', type: 'text', placeholder: 'e.g. Using the DC TimeMachine strategy — live, with real trades.', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Bullet Points (semicolon-separated)', type: 'textarea', placeholder: 'Point one; Point two; Point three', description: 'Each bullet separated by a semicolon (;)', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Webinar Date Text', type: 'text', placeholder: 'e.g. Tuesday, May 6 | 8 PM IST', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'ActiveCampaign Form ID (Exit Popup)', type: 'number', placeholder: 'e.g. 132', group: 'Exit Intent Popup' },
     ]
   },
   {
@@ -482,6 +494,17 @@ const PAGES_CONFIG: PageConfig[] = [
   }
 ];
 
+const CONFIG_TABS = ['Countdown', 'Redirects & Forms', 'Exit-Intent Popup', 'SEO'] as const;
+type ConfigTab = typeof CONFIG_TABS[number];
+
+function groupToTab(group?: string): ConfigTab {
+  const g = (group || '').toLowerCase();
+  if (g.includes('countdown') || g.includes('date') || g.includes('webinar date')) return 'Countdown';
+  if (g.includes('exit intent')) return 'Exit-Intent Popup';
+  if (g.includes('seo')) return 'SEO';
+  return 'Redirects & Forms';
+}
+
 function getOffsetString(timezone: string, localDateTimeStr: string): string {
   try {
     const naiveDate = new Date(localDateTimeStr + ':00Z');
@@ -535,7 +558,7 @@ export default function SiteConfigPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [configs, setConfigs] = useState<Record<string, Record<string, string>>>({});
   const [formState, setFormState] = useState<Record<string, string>>({});
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+  const [activeTab, setActiveTab] = useState<ConfigTab>('Countdown');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
@@ -546,34 +569,43 @@ export default function SiteConfigPage() {
     fetchConfigs();
   }, []);
 
-  // Update current form fields and open accordions when selected page or configs change
+  const buildFormStateFromConfigs = (page: PageConfig, allConfigs: Record<string, Record<string, string>>) => {
+    const pageValues = allConfigs[page.key] || {};
+    const newFormState: Record<string, string> = {};
+
+    page.fields.forEach(field => {
+      if (field.type === 'datetime-local') {
+        const rawValue = pageValues[field.key] || '';
+        const tzValue = pageValues[field.key + '_tz'] || 'America/Chicago';
+        const localValue = rawValue ? rawValue.substring(0, 16) : '';
+        newFormState[field.key + '_local'] = localValue;
+        newFormState[field.key + '_tz'] = tzValue;
+      } else if (field.type === 'list' && !pageValues[field.key] && field.defaultItems) {
+        // Nothing saved yet — seed the editor with what's actually live on the site
+        newFormState[field.key] = JSON.stringify(field.defaultItems);
+      } else {
+        newFormState[field.key] = pageValues[field.key] || '';
+      }
+    });
+
+    return newFormState;
+  };
+
+  // Update current form fields and pick the first available tab when selected page or configs change
   useEffect(() => {
     if (selectedPage) {
-      const pageValues = configs[selectedPage.key] || {};
-      const newFormState: Record<string, string> = {};
-      const initialExpanded: Record<string, boolean> = {};
+      setFormState(buildFormStateFromConfigs(selectedPage, configs));
 
-      selectedPage.fields.forEach(field => {
-        if (field.type === 'datetime-local') {
-          const rawValue = pageValues[field.key] || '';
-          const tzValue = pageValues[field.key + '_tz'] || 'America/Chicago';
-          const localValue = rawValue ? rawValue.substring(0, 16) : '';
-          newFormState[field.key + '_local'] = localValue;
-          newFormState[field.key + '_tz'] = tzValue;
-        } else if (field.type === 'list' && !pageValues[field.key] && field.defaultItems) {
-          // Nothing saved yet — seed the editor with what's actually live on the site
-          newFormState[field.key] = JSON.stringify(field.defaultItems);
-        } else {
-          newFormState[field.key] = pageValues[field.key] || '';
-        }
-        initialExpanded[field.group || 'General Settings'] = true;
-      });
-
-      setFormState(newFormState);
-      setExpandedGroups(initialExpanded);
+      const availableTabs = CONFIG_TABS.filter(tab => selectedPage.fields.some(f => groupToTab(f.group) === tab));
+      setActiveTab(prev => (availableTabs.includes(prev) ? prev : (availableTabs[0] || 'Countdown')));
       setStatus({ type: null, message: '' });
     }
   }, [selectedPage, configs]);
+
+  const handleDiscard = () => {
+    setFormState(buildFormStateFromConfigs(selectedPage, configs));
+    setStatus({ type: null, message: '' });
+  };
 
   const fetchConfigs = () => {
     setLoading(true);
@@ -699,9 +731,10 @@ export default function SiteConfigPage() {
     }
   };
 
-  // Group fields for the selected page
+  // Fields for the selected page belonging to the active tab, sub-grouped by their original group label
+  const tabFields = selectedPage.fields.filter(f => groupToTab(f.group) === activeTab);
   const groupedFields: Record<string, FieldConfig[]> = {};
-  selectedPage.fields.forEach(field => {
+  tabFields.forEach(field => {
     const groupName = field.group || 'General Settings';
     if (!groupedFields[groupName]) {
       groupedFields[groupName] = [];
@@ -709,13 +742,16 @@ export default function SiteConfigPage() {
     groupedFields[groupName].push(field);
   });
 
+  const isPopupOn = (pageKey: string) => configs[pageKey]?.exitPopupShow === 'true';
+  const hasPopupField = (page: PageConfig) => page.fields.some(f => f.key === 'exitPopupShow');
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <div className="page-header" style={{ marginBottom: 0 }}>
         <div className="page-header-heading">
-          <h1 className="page-title">Site Config</h1>
+          <h1 className="page-title">Pages</h1>
           <p className="page-description">
-            Manage countdown clocks, checkout/Whop redirects, form IDs, and exit-intent popup content for all pages.
+            Countdown clocks, checkout redirects, form IDs and exit-intent popups — one page at a time.
           </p>
         </div>
       </div>
@@ -736,17 +772,23 @@ export default function SiteConfigPage() {
               <input
                 type="text"
                 className="form-input"
-                placeholder="Search marketing pages..."
+                placeholder="Search pages..."
                 style={{ paddingLeft: '40px', width: '100%', borderRadius: '10px' }}
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
               />
             </div>
 
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} /> Popup on
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--border-color)', display: 'inline-block' }} /> Popup off
+              </span>
+            </div>
+
             <div className="table-container" style={{ padding: 0, overflow: 'hidden', borderRadius: '12px' }}>
-              <div style={{ padding: '12px 16px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)', borderBottom: '1px solid var(--border-color)', backgroundColor: 'rgba(0,0,0,0.02)' }}>
-                Pages ({filteredPages.length})
-              </div>
               <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '600px', overflowY: 'auto' }}>
                 {filteredPages.length === 0 ? (
                   <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '13.5px' }}>
@@ -781,9 +823,17 @@ export default function SiteConfigPage() {
                           if (!isSelected) e.currentTarget.style.backgroundColor = 'transparent';
                         }}
                       >
-                        <span style={{ fontWeight: 600, fontSize: '14px', color: isSelected ? 'var(--accent-color)' : 'var(--text-primary)' }}>
-                          {page.title}
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                          <span style={{ fontWeight: 600, fontSize: '14px', color: isSelected ? 'var(--accent-color)' : 'var(--text-primary)' }}>
+                            {page.title}
+                          </span>
+                          {hasPopupField(page) && (
+                            <span
+                              title={isPopupOn(page.key) ? 'Popup on' : 'Popup off'}
+                              style={{ width: '7px', height: '7px', borderRadius: '50%', flexShrink: 0, background: isPopupOn(page.key) ? 'var(--success)' : 'var(--border-color)' }}
+                            />
+                          )}
+                        </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <span style={{ fontSize: '10.5px', background: 'rgba(0,0,0,0.05)', padding: '2px 6px', borderRadius: '4px', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>
                             {page.path}
@@ -839,6 +889,20 @@ export default function SiteConfigPage() {
                 </div>
               </div>
 
+              {/* Section tabs */}
+              <div className="tab-bar">
+                {CONFIG_TABS.filter(tab => selectedPage.fields.some(f => groupToTab(f.group) === tab)).map(tab => (
+                  <button
+                    key={tab}
+                    type="button"
+                    className={`tab-pill ${activeTab === tab ? 'active' : ''}`}
+                    onClick={() => setActiveTab(tab)}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
               <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginTop: '-8px', marginBottom: '28px', lineHeight: 1.5 }}>
                 {selectedPage.description}
               </p>
@@ -871,39 +935,29 @@ export default function SiteConfigPage() {
               {/* Form */}
               <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {Object.entries(groupedFields).map(([groupName, fields]) => {
-                    const isExpanded = !!expandedGroups[groupName];
+                  {tabFields.length === 0 ? (
+                    <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '13.5px' }}>
+                      No fields in this section for this page.
+                    </div>
+                  ) : Object.entries(groupedFields).map(([groupName, fields]) => {
                     return (
                       <div key={groupName} style={{ border: '1px solid var(--border-color)', borderRadius: '12px', overflow: 'hidden', backgroundColor: 'var(--bg-main)', marginBottom: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                        <button
-                          type="button"
-                          onClick={() => setExpandedGroups(prev => ({ ...prev, [groupName]: !prev[groupName] }))}
+                        <div
                           style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '100%',
-                            padding: '18px 24px',
+                            padding: '16px 24px',
                             backgroundColor: 'rgba(0,0,0,0.015)',
-                            border: 'none',
-                            borderBottom: isExpanded ? '1px solid var(--border-color)' : 'none',
+                            borderBottom: '1px solid var(--border-color)',
                             fontWeight: 700,
-                            fontSize: '14px',
+                            fontSize: '13px',
                             textTransform: 'uppercase',
                             letterSpacing: '0.8px',
-                            textAlign: 'left',
-                            cursor: 'pointer',
                             color: 'var(--text-primary)',
-                            transition: 'background 0.2s',
                           }}
-                          onMouseOver={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.03)'}
-                          onMouseOut={e => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.015)'}
                         >
-                          <span>{groupName}</span>
-                          {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-                        </button>
+                          {groupName}
+                        </div>
 
-                        {isExpanded && (
+                        {(
                           <div style={{ padding: '30px 32px', display: 'flex', flexDirection: 'column', gap: '20px', backgroundColor: 'white' }}>
                             {fields.map(field => {
                               const value = formState[field.key];
@@ -1032,25 +1086,38 @@ export default function SiteConfigPage() {
                   })}
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px', borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
-                  <button
-                    type="submit"
-                    className="btn-primary"
-                    disabled={saving}
-                    style={{ minWidth: '140px', justifyContent: 'center' }}
-                  >
-                    {saving ? (
-                      <>
-                        <Loader2 className="animate-spin" size={16} />
-                        Saving...
-                      </>
-                    ) : (
-                      <>
-                        <Save size={16} />
-                        Save Changes
-                      </>
-                    )}
-                  </button>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px', borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
+                  <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                    {status.type === 'success' ? 'All changes saved' : ' '}
+                  </span>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      type="button"
+                      className="btn-secondary"
+                      onClick={handleDiscard}
+                      disabled={saving}
+                    >
+                      Discard
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn-primary"
+                      disabled={saving}
+                      style={{ minWidth: '140px', justifyContent: 'center' }}
+                    >
+                      {saving ? (
+                        <>
+                          <Loader2 className="animate-spin" size={16} />
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          <Save size={16} />
+                          Save changes
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
