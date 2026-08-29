@@ -40,14 +40,14 @@ export default function RootLayout({
   };
 
   const isActive = (path: string) => {
-    if (path === '/' && (pathname === '/' || pathname === '/admin-blog')) return true;
+    if (path === '/admin-blog' && (pathname === '/' || pathname === '/admin-blog')) return true;
     if (path === '/posts' && pathname === '/posts') return true;
-    if (path !== '/' && path !== '/posts' && pathname.startsWith(path)) return true;
+    if (path !== '/admin-blog' && path !== '/posts' && pathname.startsWith(path)) return true;
     return false;
   };
 
   const blogItems = [
-    { href: '/', icon: <Compass size={20} />, label: 'Overview' },
+    { href: '/admin-blog', icon: <Compass size={20} />, label: 'Overview' },
     { href: '/posts', icon: <FileText size={20} />, label: 'Posts' },
     { href: '/posts/new', icon: <Plus size={20} />, label: 'New Post' },
     { href: '/banners', icon: <Image size={20} />, label: 'Sidebar Banners' },
