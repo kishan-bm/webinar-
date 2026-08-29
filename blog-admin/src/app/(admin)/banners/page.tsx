@@ -233,7 +233,7 @@ export default function BannersPage() {
           {banners.map((banner, index) => (
             <div className="banner-card" key={banner.id}>
               <div className="banner-card-thumb">
-                <img src={banner.imageUrl} alt={banner.imageAlt || banner.title || 'Banner'} />
+                <img src={banner.imageUrl} alt={banner.imageAlt || banner.title || 'Banner'} loading="lazy" decoding="async" />
               </div>
               <div className="banner-card-body">
                 <div className="banner-card-title">

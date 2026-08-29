@@ -188,7 +188,7 @@ export default function ReplayAdminPage() {
   }
 
   return (
-    <div style={{ maxWidth: '680px' }}>
+    <div style={{ maxWidth: '680px', margin: '0 auto' }}>
       <div className="page-header">
         <div className="page-header-heading">
           <h1 className="page-title">Replay Video</h1>

@@ -7,19 +7,35 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
     const authorId = searchParams.get('authorId');
+    const summary = searchParams.get('summary') === 'true';
 
-    const posts = await prisma.post.findMany({
-      where: {
-        ...(status ? { status: status as any } : {}),
-        ...(authorId ? { authorId } : {}),
-      },
-      include: {
-        author: { select: { name: true, avatarUrl: true } },
-        category: true,
-        tags: true,
-      },
-      orderBy: { createdAt: 'desc' },
-    });
+    const where = {
+      ...(status ? { status: status as any } : {}),
+      ...(authorId ? { authorId } : {}),
+    };
+
+    const posts = summary
+      ? await prisma.post.findMany({
+          where,
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            status: true,
+            createdAt: true,
+            author: { select: { name: true } },
+          },
+          orderBy: { createdAt: 'desc' },
+        })
+      : await prisma.post.findMany({
+          where,
+          include: {
+            author: { select: { name: true, avatarUrl: true } },
+            category: true,
+            tags: true,
+          },
+          orderBy: { createdAt: 'desc' },
+        });
 
     return NextResponse.json({ success: true, data: posts });
   } catch (error: any) {

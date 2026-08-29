@@ -62,6 +62,20 @@ export default function PostsPage() {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+  const toggleSelectAll = (checked: boolean) => {
+    setSelectedIds(checked ? new Set(pagedPosts.map(p => p.id)) : new Set());
+  };
+
+  const toggleSelectOne = (id: string, checked: boolean) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      if (checked) next.add(id); else next.delete(id);
+      return next;
+    });
+  };
+
   // Search + filters + sort + pagination
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'DRAFT' | 'PUBLISHED'>('ALL');
@@ -281,7 +295,13 @@ export default function PostsPage() {
             <thead>
               <tr>
                 <th style={{ width: '36px' }}>
-                  <input type="checkbox" className="table-checkbox" aria-label="Select all" disabled />
+                  <input
+                    type="checkbox"
+                    className="table-checkbox"
+                    aria-label="Select all"
+                    checked={pagedPosts.length > 0 && pagedPosts.every(p => selectedIds.has(p.id))}
+                    onChange={(e) => toggleSelectAll(e.target.checked)}
+                  />
                 </th>
                 <th>Title</th>
                 <th>Author</th>
@@ -303,7 +323,13 @@ export default function PostsPage() {
               {pagedPosts.map((post) => (
                 <tr key={post.id}>
                   <td>
-                    <input type="checkbox" className="table-checkbox" aria-label={`Select ${post.title}`} />
+                    <input
+                      type="checkbox"
+                      className="table-checkbox"
+                      aria-label={`Select ${post.title}`}
+                      checked={selectedIds.has(post.id)}
+                      onChange={(e) => toggleSelectOne(post.id, e.target.checked)}
+                    />
                   </td>
                   <td style={{ fontWeight: 500 }}>
                     <Link href={`/posts/edit/${post.id}`} style={{ color: 'var(--primary-color)', textDecoration: 'none' }}>
@@ -460,6 +486,8 @@ export default function PostsPage() {
                     alt={selectedPreviewPost.title}
                     className="article-cover-img"
                     style={{ height: '320px', objectFit: 'cover' }}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               )}

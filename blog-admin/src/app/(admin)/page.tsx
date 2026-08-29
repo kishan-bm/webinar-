@@ -28,7 +28,7 @@ export default function Overview() {
   const publishedCount = posts.filter(p => p.status === 'PUBLISHED').length;
 
   useEffect(() => {
-    fetch('/api/posts')
+    fetch('/api/posts?summary=true')
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setPosts(data.data);
