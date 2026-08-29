@@ -180,25 +180,31 @@ export default function EditPost({ params }: EditPostProps) {
   }
 
   return (
-    <div className="card">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '8px' }}>
-        <h1 style={{ margin: 0 }}>Edit Post</h1>
-        {autoSaveStatus === 'saving' && (
-          <span style={{ fontSize: '13px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', animation: 'pulse 1s infinite' }} />
-            Auto-saving…
-          </span>
-        )}
-        {autoSaveStatus === 'saved' && (
-          <span style={{ fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '5px' }}>
-            ✓ Draft auto-saved
-          </span>
-        )}
-        {autoSaveStatus === 'error' && (
-          <span style={{ fontSize: '13px', color: '#ef4444' }}>Auto-save failed</span>
-        )}
+    <div>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <h1 className="page-title" style={{ margin: 0 }}>Edit Post</h1>
+            {autoSaveStatus === 'saving' && (
+              <span style={{ fontSize: '13px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b', animation: 'pulse 1s infinite' }} />
+                Auto-saving…
+              </span>
+            )}
+            {autoSaveStatus === 'saved' && (
+              <span style={{ fontSize: '13px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                ✓ Draft auto-saved
+              </span>
+            )}
+            {autoSaveStatus === 'error' && (
+              <span style={{ fontSize: '13px', color: '#ef4444' }}>Auto-save failed</span>
+            )}
+          </div>
+          <p className="page-description">Changes to drafts are auto-saved every 10 seconds.</p>
+        </div>
       </div>
 
+      <div className="card">
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
           
@@ -371,6 +377,7 @@ export default function EditPost({ params }: EditPostProps) {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }

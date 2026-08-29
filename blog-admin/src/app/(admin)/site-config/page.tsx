@@ -711,10 +711,10 @@ export default function SiteConfigPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ margin: 0 }}>Website Configuration</h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', margin: '4px 0 0 0' }}>
+      <div className="page-header" style={{ marginBottom: 0 }}>
+        <div className="page-header-heading">
+          <h1 className="page-title">Site Config</h1>
+          <p className="page-description">
             Manage countdown clocks, checkout/Whop redirects, form IDs, and exit-intent popup content for all pages.
           </p>
         </div>
@@ -735,7 +735,7 @@ export default function SiteConfigPage() {
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-input"
                 placeholder="Search marketing pages..."
                 style={{ paddingLeft: '40px', width: '100%', borderRadius: '10px' }}
                 value={searchQuery}
@@ -937,7 +937,7 @@ export default function SiteConfigPage() {
                                     </div>
                                   ) : field.type === 'textarea' ? (
                                     <textarea
-                                      className="form-control"
+                                      className="form-input"
                                       rows={3}
                                       placeholder={field.placeholder}
                                       value={value || ''}
@@ -948,13 +948,13 @@ export default function SiteConfigPage() {
                                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center', width: '100%' }}>
                                       <input
                                         type="datetime-local"
-                                        className="form-control"
+                                        className="form-input"
                                         value={formState[field.key + '_local'] || ''}
                                         onChange={e => handleFieldChange(field.key + '_local', e.target.value)}
                                         style={{ flex: 1, fontSize: '14px', borderRadius: '8px', padding: '10px 12px' }}
                                       />
                                       <select
-                                        className="form-control"
+                                        className="form-input"
                                         value={formState[field.key + '_tz'] || 'America/Chicago'}
                                         onChange={e => handleFieldChange(field.key + '_tz', e.target.value)}
                                         style={{ width: '220px', fontSize: '14px', borderRadius: '8px', padding: '10px 12px', cursor: 'pointer', backgroundColor: '#fff', border: '1px solid var(--border-color)' }}
@@ -975,7 +975,7 @@ export default function SiteConfigPage() {
                                             <input
                                               key={col.key}
                                               type="text"
-                                              className="form-control"
+                                              className="form-input"
                                               placeholder={col.placeholder}
                                               value={entry[col.key] || ''}
                                               onChange={e => updateListItem(field.key, idx, { [col.key]: e.target.value })}
@@ -1009,7 +1009,7 @@ export default function SiteConfigPage() {
                                   ) : (
                                     <input
                                       type="text"
-                                      className="form-control"
+                                      className="form-input"
                                       placeholder={field.placeholder}
                                       value={value || ''}
                                       onChange={e => handleFieldChange(field.key, e.target.value)}

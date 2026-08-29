@@ -87,14 +87,19 @@ export default function SettingsPage() {
   };
 
   return (
-    <div style={{ maxWidth: '800px' }}>
-      <h1 style={{ marginBottom: '24px' }}>Settings</h1>
+    <div>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <h1 className="page-title">Settings</h1>
+          <p className="page-description">Manage the authors who can be attributed to blog posts.</p>
+        </div>
+      </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', alignItems: 'start', maxWidth: '900px' }}>
         {/* Author List */}
         <div>
-          <h2 style={{ fontSize: '18px', marginBottom: '16px', color: 'var(--text-secondary)' }}>Manage Authors</h2>
-          
+          <h2 className="section-heading">Manage authors ({authors.length})</h2>
+
           <div className="table-container" style={{ padding: '0px' }}>
             {loading ? (
               <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-dim)' }}>Loading authors...</div>
@@ -136,15 +141,15 @@ export default function SettingsPage() {
 
         {/* Add Author Form */}
         <div>
-          <h2 style={{ fontSize: '18px', marginBottom: '16px', color: 'var(--text-secondary)' }}>Add New Author</h2>
-          
-          <div style={{ backgroundColor: 'white', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '24px' }}>
+          <h2 className="section-heading">Add new author</h2>
+
+          <div className="card" style={{ padding: '24px' }}>
             <form onSubmit={handleAddAuthor} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Full Name</label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-input"
                   placeholder="e.g. Kishan B M"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -156,7 +161,7 @@ export default function SettingsPage() {
                 <label className="form-label">Email Address</label>
                 <input
                   type="email"
-                  className="form-control"
+                  className="form-input"
                   placeholder="e.g. kishan@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

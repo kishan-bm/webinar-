@@ -179,17 +179,19 @@ export default function ReplayAdminPage() {
   }
 
   return (
-    <div style={{ maxWidth: '680px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '28px', fontWeight: 800, margin: '0 0 8px 0' }}>Set Replay Video</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', margin: 0 }}>
-          After the webinar ends, paste the Vimeo URL below to make it live on both replay pages.
-        </p>
+    <div style={{ maxWidth: '680px' }}>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <h1 className="page-title">Replay Video</h1>
+          <p className="page-description">
+            After the webinar ends, paste the Vimeo URL below to make it live on both replay pages.
+          </p>
+        </div>
       </div>
 
       {/* Current video display */}
       <div className="card" style={{ marginBottom: '24px' }}>
-        <h3 style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '16px', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+        <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
           Current Video Status
         </h3>
         <div style={{
@@ -209,7 +211,7 @@ export default function ReplayAdminPage() {
 
       {/* Method tabs */}
       <div className="card">
-        <h3 style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-secondary)', marginBottom: '16px', borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+        <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
           Set New Video URL
         </h3>
 

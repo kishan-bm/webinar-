@@ -98,9 +98,15 @@ export default function NewPost() {
   };
 
   return (
-    <div className="card">
-      <h1>Create New Post</h1>
-      
+    <div>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <h1 className="page-title">Create New Post</h1>
+          <p className="page-description">Write and publish a new article to the blog.</p>
+        </div>
+      </div>
+
+      <div className="card">
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
           
@@ -259,6 +265,7 @@ export default function NewPost() {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }

@@ -200,17 +200,21 @@ export default function BannersPage() {
   };
 
   return (
-    <div style={{ maxWidth: '1000px' }}>
-      <h1 style={{ marginBottom: '8px' }}>Sidebar Banners</h1>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
-        Manage graphic posters that appear in the right-side column of all published blog articles.
-      </p>
+    <div>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <h1 className="page-title">Sidebar Banners</h1>
+          <p className="page-description">
+            Manage graphic posters that appear in the right-side column of all published blog articles.
+          </p>
+        </div>
+      </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '24px', alignItems: 'start' }}>
         {/* Left Side: Banners List */}
         <div>
-          <h2 style={{ fontSize: '18px', marginBottom: '16px', color: 'var(--text-secondary)' }}>
-            Active Banners ({banners.length})
+          <h2 className="section-heading">
+            Active banners ({banners.length})
           </h2>
 
           <div className="table-container" style={{ padding: '0px' }}>
@@ -319,8 +323,8 @@ export default function BannersPage() {
 
         {/* Right Side: Add Form */}
         <div>
-          <h2 style={{ fontSize: '18px', marginBottom: '16px', color: 'var(--text-secondary)' }}>
-            Add Banner
+          <h2 className="section-heading">
+            Add banner
           </h2>
 
           <div className="card" style={{ padding: '24px' }}>

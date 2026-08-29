@@ -92,12 +92,20 @@ export default function ExitIntentPage() {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '24px', alignItems: 'start' }}>
+    <div>
+      <div className="page-header">
+        <div className="page-header-heading">
+          <h1 className="page-title">Exit Intent Popups</h1>
+          <p className="page-description">Configure the exit-intent popup shown to visitors leaving each marketing page.</p>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '24px', alignItems: 'start' }}>
 
       {/* Left — page list */}
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-color)' }}>
-          <h2 style={{ fontSize: '13px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-secondary)', margin: 0 }}>Pages</h2>
+          <h2 className="section-heading" style={{ margin: 0 }}>Pages</h2>
         </div>
         <ul style={{ listStyle: 'none', margin: 0, padding: '8px 0' }}>
           {PAGES_WITH_EXIT.map(page => {
@@ -155,7 +163,7 @@ export default function ExitIntentPage() {
 
           {/* Header */}
           <div>
-            <h1 style={{ fontSize: '22px', fontWeight: 800, margin: '0 0 4px' }}>{selectedPage.title}</h1>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>{selectedPage.title}</h2>
             <p style={{ fontSize: '13.5px', color: 'var(--text-secondary)', margin: 0 }}>
               Exit intent popup settings for <code style={{ background: 'rgba(0,0,0,0.06)', padding: '1px 6px', borderRadius: '4px', fontSize: '12px' }}>{selectedPage.path}</code>
             </p>
@@ -252,6 +260,7 @@ export default function ExitIntentPage() {
           </button>
         </form>
       )}
+      </div>
     </div>
   );
 }
