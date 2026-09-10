@@ -717,29 +717,49 @@
       line-height: 1.6;
     }
 
-    /* Two-column layout: left content, right video */
-    .approach-bento {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
+    /* Single-column, centered layout */
+    .approach-single {
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 40px;
+      max-width: 980px;
+      margin: 0 auto;
     }
 
-    .approach-left { display: flex; flex-direction: column; gap: 24px; }
-
-    .approach-left h3 {
-      font-size: clamp(20px, 2.2vw, 28px);
+    .approach-single h3 {
+      font-size: clamp(22px, 2.6vw, 32px);
       font-weight: 800;
       color: #0d2e4e;
       line-height: 1.3;
       letter-spacing: -0.5px;
       margin: 0;
+      text-align: center;
     }
 
     .bento-pillars {
       display: flex;
       flex-direction: column;
       gap: 32px;
+    }
+
+    .bento-pillars-row {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .bento-pillars-row .bento-pillar {
+      flex: 1 1 260px;
+      max-width: 300px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bento-pillars-row .bento-pillar-text {
+      align-items: center;
     }
 
     .bento-pillar {
@@ -782,25 +802,20 @@
     .approach-cta-row {
       display: flex;
       align-items: center;
-      gap: 24px;
-      margin-top: 24px;
-      padding-left: 90px;
-      position: relative;
+      justify-content: center;
+      gap: 8px;
     }
 
     .approach-pointer {
-      position: absolute;
-      left: -20px;
-      top: 50%;
-      width: 90px;
+      width: 70px;
       mix-blend-mode: multiply;
       opacity: 0.9;
       animation: pointSlide 1.5s ease-in-out infinite;
     }
 
     @keyframes pointSlide {
-      0%, 100% { transform: translate(-15px, -20%); }
-      50% { transform: translate(5px, -20%); }
+      0%, 100% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
     }
 
     .approach-cta-btn {
@@ -842,56 +857,9 @@
       transform: translateY(-2px); 
     }
 
-    /* Right: proof stats */
-    .approach-proof {
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 12px 48px rgba(13,46,78,0.15);
-      border: 1px solid rgba(13,46,78,0.06);
-      padding: 40px;
-    }
-
-    .approach-proof-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px 24px;
-    }
-
-    .approach-proof-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .approach-proof-num {
-      font-size: clamp(30px, 3.4vw, 42px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--orange), #f97316);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .approach-proof-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: #64748b;
-      line-height: 1.4;
-    }
-
-    .approach-proof-divider {
-      grid-column: 1 / -1;
-      height: 1px;
-      background: rgba(13,46,78,0.08);
-      margin: 4px 0;
-    }
-
-    @media (max-width: 1024px) {
-      .approach-bento { grid-template-columns: 1fr; }
-      .approach-proof { order: -1; }
+    @media (max-width: 640px) {
+      .bento-pillars-row { flex-direction: column; align-items: center; }
+      .bento-pillars-row .bento-pillar { max-width: 100%; }
     }
 
     .approach-feature {
@@ -3308,9 +3276,6 @@
       .ecosystem-right { margin-top: 40px; }
       .orbit-container { max-width: 400px; }
 
-      /* Approach section mobile */
-      .approach-bento { grid-template-columns: 1fr; }
-      .approach-proof { order: -1; margin-bottom: 32px; }
 
       /* Tradehacker mobile */
       .tradehacker-grid { grid-template-columns: 1fr; }
@@ -5017,69 +4982,41 @@
         <p style="font-size:18px; color:var(--text-dim); margin-top:16px; line-height:1.6;">Simple, straightforward strategies grounded in real math.</p>
       </div>
 
-      <div class="approach-bento">
-
-        <!-- Left: content -->
-        <div class="approach-left">
-          <h3>Statistics &amp; probability, not hype or guesswork.</h3>
-          <div class="bento-pillars">
-            <div class="bento-pillar">
-              <div class="bento-pillar-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div class="bento-pillar-text">
-                <strong>Probability-based setups</strong>
-                <span>Every trade has a statistical edge — no crystal ball required.</span>
-              </div>
+      <div class="approach-single">
+        <h3>Statistics &amp; probability, not hype or guesswork.</h3>
+        <div class="bento-pillars bento-pillars-row">
+          <div class="bento-pillar">
+            <div class="bento-pillar-icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <div class="bento-pillar">
-              <div class="bento-pillar-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div class="bento-pillar-text">
-                <strong>Full transparency</strong>
-                <span>Winners and losers both published — no cherry-picking.</span>
-              </div>
-            </div>
-            <div class="bento-pillar">
-              <div class="bento-pillar-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              </div>
-              <div class="bento-pillar-text">
-                <strong>Direction-neutral strategies</strong>
-                <span>We profit in up, down, and sideways markets.</span>
-              </div>
+            <div class="bento-pillar-text">
+              <strong>Probability-based setups</strong>
+              <span>Every trade has a statistical edge — no crystal ball required.</span>
             </div>
           </div>
-          <div class="approach-cta-row">
-            <img src="pointer.jpeg" alt="Look here" class="approach-pointer">
-            <a href="/performance" class="approach-cta-btn" data-config="viewResultsLink">View Results &rarr;</a>
+          <div class="bento-pillar">
+            <div class="bento-pillar-icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="bento-pillar-text">
+              <strong>Full transparency</strong>
+              <span>Winners and losers both published — no cherry-picking.</span>
+            </div>
           </div>
-        </div>
-
-        <!-- Right: proof stats -->
-        <div class="approach-proof">
-          <div class="approach-proof-grid">
-            <div class="approach-proof-item">
-              <div class="approach-proof-num">3,400+</div>
-              <div class="approach-proof-label">Active Community Members</div>
+          <div class="bento-pillar">
+            <div class="bento-pillar-icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             </div>
-            <div class="approach-proof-item">
-              <div class="approach-proof-num">4.9★</div>
-              <div class="approach-proof-label">Average Community Rating</div>
-            </div>
-            <div class="approach-proof-divider"></div>
-            <div class="approach-proof-item">
-              <div class="approach-proof-num">9+ Yrs</div>
-              <div class="approach-proof-label">Documented Track Record</div>
-            </div>
-            <div class="approach-proof-item">
-              <div class="approach-proof-num">100%</div>
-              <div class="approach-proof-label">Trades Posted, Win or Lose</div>
+            <div class="bento-pillar-text">
+              <strong>Direction-neutral strategies</strong>
+              <span>We profit in up, down, and sideways markets.</span>
             </div>
           </div>
         </div>
-
+        <div class="approach-cta-row">
+          <img src="pointer.jpeg" alt="Look here" class="approach-pointer">
+          <a href="/performance" class="approach-cta-btn" data-config="viewResultsLink">View Results &rarr;</a>
+        </div>
       </div>
     </div>
   </section>
