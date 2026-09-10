@@ -842,24 +842,56 @@
       transform: translateY(-2px); 
     }
 
-    /* Right: video */
-    .approach-video {
+    /* Right: proof stats */
+    .approach-proof {
+      background: #fff;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 12px 48px rgba(13,46,78,0.15);
-      aspect-ratio: 16/9;
+      border: 1px solid rgba(13,46,78,0.06);
+      padding: 40px;
     }
 
-    .approach-video iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
+    .approach-proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 24px;
+    }
+
+    .approach-proof-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .approach-proof-num {
+      font-size: clamp(30px, 3.4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--orange), #f97316);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .approach-proof-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .approach-proof-divider {
+      grid-column: 1 / -1;
+      height: 1px;
+      background: rgba(13,46,78,0.08);
+      margin: 4px 0;
     }
 
     @media (max-width: 1024px) {
       .approach-bento { grid-template-columns: 1fr; }
-      .approach-video { order: -1; }
+      .approach-proof { order: -1; }
     }
 
     .approach-feature {
@@ -3278,7 +3310,7 @@
 
       /* Approach section mobile */
       .approach-bento { grid-template-columns: 1fr; }
-      .approach-video { order: -1; margin-bottom: 32px; }
+      .approach-proof { order: -1; margin-bottom: 32px; }
 
       /* Tradehacker mobile */
       .tradehacker-grid { grid-template-columns: 1fr; }
@@ -5025,9 +5057,27 @@
           </div>
         </div>
 
-        <!-- Right: video -->
-        <div class="approach-video">
-          <iframe src="https://www.youtube.com/embed/pDSgzEA9cEU?rel=0" data-config="youtubeVideoUrl" title="Welcome to NavigationTrading" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Right: proof stats -->
+        <div class="approach-proof">
+          <div class="approach-proof-grid">
+            <div class="approach-proof-item">
+              <div class="approach-proof-num">3,400+</div>
+              <div class="approach-proof-label">Active Community Members</div>
+            </div>
+            <div class="approach-proof-item">
+              <div class="approach-proof-num">4.9★</div>
+              <div class="approach-proof-label">Average Community Rating</div>
+            </div>
+            <div class="approach-proof-divider"></div>
+            <div class="approach-proof-item">
+              <div class="approach-proof-num">9+ Yrs</div>
+              <div class="approach-proof-label">Documented Track Record</div>
+            </div>
+            <div class="approach-proof-item">
+              <div class="approach-proof-num">100%</div>
+              <div class="approach-proof-label">Trades Posted, Win or Lose</div>
+            </div>
+          </div>
         </div>
 
       </div>
