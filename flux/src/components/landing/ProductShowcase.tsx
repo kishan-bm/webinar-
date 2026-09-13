@@ -12,6 +12,7 @@ type Scene = {
   icon: any;
   tint: string;
   panel: string;
+  gif: string;
 };
 
 const scenes: Scene[] = [
@@ -28,6 +29,7 @@ const scenes: Scene[] = [
     ],
     tint: "oklch(0.885 0.0794 235)",
     panel: "oklch(0.24 0.0794 235)",
+    gif: "analyzer.gif",
   },
   {
     key: "earnings",
@@ -42,6 +44,7 @@ const scenes: Scene[] = [
     ],
     tint: "oklch(0.855 0.1058 235)",
     panel: "oklch(0.23 0.0926 235)",
+    gif: "earnings.gif",
   },
   {
     key: "ntt",
@@ -56,6 +59,7 @@ const scenes: Scene[] = [
     ],
     tint: "oklch(0.8 0.1323 235)",
     panel: "oklch(0.2 0.1058 235)",
+    gif: "ntt-scanner.gif",
   },
   {
     key: "0dte",
@@ -70,6 +74,7 @@ const scenes: Scene[] = [
     ],
     tint: "oklch(0.745 0.1587 235)",
     panel: "oklch(0.17 0.119 235)",
+    gif: "0dte.gif",
   },
 ];
 
@@ -205,22 +210,14 @@ export function ProductShowcase() {
               />
               <div
                 key={`p-${scene.key}`}
-                className="animate-pop-down relative mx-8 mb-0 w-full max-w-[560px] overflow-hidden rounded-t-[20px] border border-white/15 bg-white shadow-elegant"
+                className="animate-pop-down relative mx-8 mb-0 w-full max-w-[560px] overflow-hidden rounded-t-[20px] border border-white/15 shadow-elegant"
                 style={{ height: "82%" }}
               >
-                <div className="flex h-full flex-col p-6">
-                  <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-secondary/60 px-3 py-2 text-xs font-semibold text-forest-deep">
-                    <scene.icon className="h-4 w-4" /> {scene.tab}
-                  </div>
-                  <div className="mt-5 grid flex-1 grid-cols-2 gap-3">
-                    {scene.bullets.map((b) => (
-                      <div key={b.text} className="flex flex-col justify-center rounded-xl border border-border/60 bg-white p-4">
-                        <b.icon className="h-4 w-4 text-forest" />
-                        <p className="mt-2 text-[11px] leading-snug text-ink">{b.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <img
+                  src={`${import.meta.env.BASE_URL}${scene.gif}`}
+                  alt={scene.tab}
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
             </div>
           </div>
