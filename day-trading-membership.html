@@ -507,6 +507,34 @@
       box-shadow: 0 16px 38px rgba(200, 66, 10, 0.40);
     }
 
+    /* CTA card below the hero image — matches free-membership's button card */
+    .dt-hero-cta-card {
+      background: #152d4a;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      box-shadow: 0 40px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
+      padding: 20px 24px 24px;
+      width: 100%;
+      max-width: 340px;
+      margin-top: 24px;
+    }
+    .dt-hero-cta-card .btn-primary {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--orange);
+    }
+    .dt-hero-cta-card .btn-primary:hover {
+      background: var(--orange-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(200,66,10,.32);
+    }
+
     /* ── STATS BAR (below hero) ── */
     .stats-bar {
       background: var(--teal-900);
@@ -4391,7 +4419,9 @@
         <div class="dt-hero-video-wrap" style="aspect-ratio: 1145/1374; max-width: 340px;">
           <img src="images/daytradinglandingpage.png" alt="Day Trading Membership course list" style="object-fit: contain;">
         </div>
-        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntday/" class="btn-primary" data-config="whopLink" style="margin-top:24px;">Join the Live Trading Room — $129/month →</a>
+        <div class="dt-hero-cta-card">
+          <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntday/" class="btn-primary" data-config="whopLink">Join the Live Trading Room — $129/month →</a>
+        </div>
       </div>
     </div>
   </section>
