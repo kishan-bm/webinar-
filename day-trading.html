@@ -151,6 +151,18 @@
       color: #fff
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+      flex-shrink: 0;
+    }
+
     .nav-cta {
       background: var(--orange);
       color: #fff;
@@ -2656,8 +2668,52 @@
         padding: 12px 24px
       }
 
+      .navbar {
+        gap: 10px;
+      }
+
+      .nav-logo img {
+        transform: scale(2.4) !important;
+      }
+
+      .nav-toggle {
+        display: block;
+        order: 3;
+      }
+
+      .nav-cta {
+        order: 2;
+        flex-shrink: 0;
+      }
+
       .nav-links {
-        display: none
+        display: none;
+        order: 4;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(13, 46, 78, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        padding: 10px 24px 18px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       /* hero */
@@ -3021,6 +3077,7 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <button class="nav-cta" onclick="scrollToForm()">Register for free</button>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
   </nav>
 
   <!-- ── HERO ── -->

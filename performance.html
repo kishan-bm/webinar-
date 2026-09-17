@@ -136,6 +136,16 @@
 
     .nav-links a:hover { color: var(--orange) !important; }
     .nav-links a.active { color: var(--orange) !important; font-weight: 700; }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
     .nav-item-dropdown { position: relative; }
     .nav-item-dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
     .nav-chevron { font-size: 9px; transition: transform 0.25s; line-height: 1; opacity: 0.7; }
@@ -1202,9 +1212,22 @@
 
     @media (max-width: 768px) {
       .monthly-layout { grid-template-columns: 1fr; }
-      .monthly-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
-      .month-btn { width: auto; border-left: none; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0; }
-      .month-btn.active { border-bottom-color: #1e6fa8; border-left-color: transparent; }
+      .monthly-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .month-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px 10px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        border-radius: 8px;
+        background: rgba(30,111,168,0.04);
+      }
+      .month-btn.active { border-bottom-color: #1e6fa8; border-left-color: transparent; background: rgba(30,111,168,0.08); }
     }
 
     /* ── CTA SECTION (LIGHT) ── */
@@ -1465,9 +1488,29 @@
     }
 
     @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
       .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(13, 46, 78, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        padding: 10px 24px 18px;
       }
+
+      .nav-links.active { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
 
       .perf-hero h1 {
         font-size: 42px;
@@ -1758,6 +1801,7 @@
       <li><a href="/contact">Contact Us</a></li>
     </ul>
     <a href="pricing.html" class="nav-cta" data-config="navCtaLink">Get Trade Alerts</a>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
   </nav>
 
   <!-- ── PERFORMANCE HERO ── -->

@@ -171,6 +171,17 @@
       font-weight: 700;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
     .nav-item-dropdown {
       position: relative;
     }
@@ -1215,9 +1226,29 @@
         padding: 16px 24px;
       }
 
+      .nav-toggle {
+        display: block;
+      }
+
       .nav-links {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(13, 46, 78, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        padding: 10px 24px 18px;
       }
+
+      .nav-links.active { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
 
       .review-card {
         flex: 0 0 100%;
@@ -1271,6 +1302,7 @@
       <li><a href="/contact">Contact Us</a></li>
     </ul>
     <a href="pricing.html" class="nav-cta" data-config="navCtaLink">Join Community</a>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
   </nav>
 
   <!-- ── PODCAST HERO ── -->

@@ -124,6 +124,17 @@
       font-weight: 700;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 6px;
+    }
+
     /* ── NAV DROPDOWN ── */
     .nav-item-dropdown { position: relative; }
     .nav-item-dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
@@ -858,6 +869,8 @@
     }
 
     @media (max-width: 640px) {
+      .approach-single { gap: 24px; }
+      .bento-pillars { gap: 20px; }
       .bento-pillars-row { flex-direction: column; align-items: center; }
       .bento-pillars-row .bento-pillar { max-width: 100%; }
     }
@@ -3260,7 +3273,25 @@
     @media (max-width: 768px) {
       .learn-grid-4 { grid-template-columns: 1fr; }
       .hero h1 { font-size: 38px; }
-      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(13, 46, 78, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        padding: 10px 28px 18px;
+      }
+      .nav-links.active { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
 
       .test-item { flex: 0 0 100%; }
 
@@ -4858,6 +4889,7 @@
         <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
         <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
     </div>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
   </nav>
 
   <!-- HERO V1 (green bg + dashboard image) — hidden, swap display to show -->

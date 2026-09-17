@@ -1535,8 +1535,25 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   
   .navbar { padding: 18px 30px; }
   .nav-links { display: none; }
+  .nav-links.active {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: rgba(13, 46, 78, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    padding: 10px 24px 18px;
+  }
+  .nav-links.active li { width: 100%; }
+  .nav-links.active a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
   .nav-toggle { display: block; }
-  
+
   /* Hero */
   .hero { padding-top: 60px; text-align: center; }
   .hero-inner { padding: 40px 20px; gap: 32px; }
@@ -2872,13 +2889,11 @@ window.addEventListener('scroll', () => {
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.querySelectorAll('.nav-links a, .nav-cta, .nav-login');
 
+const navLinksEl = document.querySelector('.nav-links');
 if (navToggle) {
   navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('active');
-    // For now index.html doesn't have a full mobile menu structure like paid-membership had,
-    // so we'll just toggle the nav-links visibility if needed or use the existing structure.
-    // However, the standard navbar just hides links. 
-    // I'll keep the toggle logic in case we add the mobile menu style back.
+    if (navLinksEl) navLinksEl.classList.toggle('active');
   });
 }
 

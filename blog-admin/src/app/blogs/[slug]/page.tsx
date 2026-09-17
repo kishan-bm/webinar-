@@ -2,7 +2,6 @@ import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import TableOfContents from '@/components/TableOfContents';
-import AISummary from '@/components/AISummary';
 
 export const revalidate = 60;
 
@@ -100,23 +99,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   if (post.status !== 'PUBLISHED') {
     notFound();
-  }
-
-  // Fetch cached AI summary if it exists
-  const cachedSummaryConfig = await prisma.siteConfig.findUnique({
-    where: {
-      pageKey_key: {
-        pageKey: `blog-summary:${post.id}`,
-        key: 'data'
-      }
-    }
-  });
-
-  let initialSummary = null;
-  if (cachedSummaryConfig) {
-    try {
-      initialSummary = JSON.parse(cachedSummaryConfig.value);
-    } catch (_) {}
   }
 
   const decodedContent = decodeHTMLBlocks(post.content);
@@ -230,11 +212,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   ))}
                 </div>
               )}
-            </div>
-
-            {/* AI Summary Block */}
-            <div style={{ padding: '0 48px' }} className="article-summary-container">
-              <AISummary postId={post.id} initialSummary={initialSummary} />
             </div>
 
             {/* Article Body */}
