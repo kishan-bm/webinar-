@@ -27,7 +27,7 @@ export default async function BlogsPage() {
   });
 
   return (
-    <div className="blog-page-container">
+    <div className="blog-page-container blog-list-page">
       <div style={{ textAlign: 'center', marginBottom: '64px' }}>
         <h1 className="blog-title">NavigationTrading Blog</h1>
         <p style={{ color: 'var(--text-dim)', fontSize: '18px' }}>Market insights, institutional strategies, and updates.</p>

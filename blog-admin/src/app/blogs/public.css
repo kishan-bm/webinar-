@@ -228,6 +228,18 @@ footer::before {
   padding-bottom: 80px;
 }
 
+/* The list page has no hero image bleeding under the navbar, unlike the
+   article detail page, so it needs its own top clearance from the fixed nav. */
+.blog-list-page {
+  padding-top: 140px;
+}
+
+@media (max-width: 768px) {
+  .blog-list-page {
+    padding-top: 96px;
+  }
+}
+
 /* Full-width cover image – starts at y=0, navbar (z-index:1000) floats on top */
 .article-cover-hero {
   position: relative;
@@ -749,7 +761,7 @@ footer::before {
 /* ── MOBILE: navbar + hero cover ── */
 @media (max-width: 768px) {
   .navbar, .navbar.scrolled {
-    padding: 12px 16px !important;
+    padding: 18px 16px !important;
     flex-wrap: nowrap;
     gap: 8px;
   }
