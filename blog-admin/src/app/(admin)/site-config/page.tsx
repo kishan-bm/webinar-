@@ -562,6 +562,8 @@ export default function SiteConfigPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [dragItem, setDragItem] = useState<{ key: string; index: number } | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [isPending, startTransition] = useTransition();
 
   // Load all configurations
@@ -658,6 +660,15 @@ export default function SiteConfigPage() {
 
   const removeListItem = (key: string, index: number) => {
     setListItems(key, getListItems(key).filter((_, i) => i !== index));
+  };
+
+  const moveListItem = (key: string, fromIndex: number, toIndex: number) => {
+    const items = getListItems(key);
+    if (toIndex < 0 || toIndex >= items.length || fromIndex === toIndex) return;
+    const updated = [...items];
+    const [moved] = updated.splice(fromIndex, 1);
+    updated.splice(toIndex, 0, moved);
+    setListItems(key, updated);
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -1023,8 +1034,62 @@ export default function SiteConfigPage() {
                                     </div>
                                   ) : field.type === 'list' ? (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                      {getListItems(field.key).map((entry, idx) => (
-                                        <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                      {getListItems(field.key).map((entry, idx, arr) => {
+                                        const isDragging = dragItem?.key === field.key && dragItem.index === idx;
+                                        const isDragOver = dragItem?.key === field.key && dragOverIndex === idx && !isDragging;
+                                        return (
+                                        <div
+                                          key={idx}
+                                          draggable
+                                          onDragStart={() => setDragItem({ key: field.key, index: idx })}
+                                          onDragEnter={() => {
+                                            if (dragItem && dragItem.key === field.key) setDragOverIndex(idx);
+                                          }}
+                                          onDragOver={e => e.preventDefault()}
+                                          onDrop={e => {
+                                            e.preventDefault();
+                                            if (dragItem && dragItem.key === field.key) {
+                                              moveListItem(field.key, dragItem.index, idx);
+                                            }
+                                            setDragItem(null);
+                                            setDragOverIndex(null);
+                                          }}
+                                          onDragEnd={() => { setDragItem(null); setDragOverIndex(null); }}
+                                          style={{
+                                            display: 'flex',
+                                            gap: '8px',
+                                            alignItems: 'center',
+                                            opacity: isDragging ? 0.4 : 1,
+                                            borderTop: isDragOver ? '2px solid var(--accent-color)' : '2px solid transparent',
+                                            transition: 'opacity 0.15s, border-color 0.15s',
+                                          }}
+                                        >
+                                          <span
+                                            title="Drag to reorder"
+                                            style={{ cursor: 'grab', color: 'var(--text-secondary)', fontSize: '14px', flexShrink: 0, padding: '0 2px', userSelect: 'none' }}
+                                          >
+                                            ⠿
+                                          </span>
+                                          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', flexShrink: 0 }}>
+                                            <button
+                                              type="button"
+                                              onClick={() => moveListItem(field.key, idx, idx - 1)}
+                                              disabled={idx === 0}
+                                              title="Move up"
+                                              style={{ background: 'none', border: '1px solid var(--border-color)', color: idx === 0 ? '#cbd5e1' : 'var(--text-secondary)', cursor: idx === 0 ? 'default' : 'pointer', width: '22px', height: '18px', fontSize: '10px', borderRadius: '4px', lineHeight: 1 }}
+                                            >
+                                              ▲
+                                            </button>
+                                            <button
+                                              type="button"
+                                              onClick={() => moveListItem(field.key, idx, idx + 1)}
+                                              disabled={idx === arr.length - 1}
+                                              title="Move down"
+                                              style={{ background: 'none', border: '1px solid var(--border-color)', color: idx === arr.length - 1 ? '#cbd5e1' : 'var(--text-secondary)', cursor: idx === arr.length - 1 ? 'default' : 'pointer', width: '22px', height: '18px', fontSize: '10px', borderRadius: '4px', lineHeight: 1 }}
+                                            >
+                                              ▼
+                                            </button>
+                                          </div>
                                           {(field.columns || []).map(col => (
                                             <input
                                               key={col.key}
@@ -1050,7 +1115,8 @@ export default function SiteConfigPage() {
                                             Remove
                                           </button>
                                         </div>
-                                      ))}
+                                        );
+                                      })}
                                       <button
                                         type="button"
                                         onClick={() => addListItem(field)}

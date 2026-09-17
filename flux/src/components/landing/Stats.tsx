@@ -1,15 +1,14 @@
 export function Stats() {
   const stats = [
-    { v: "500M+", l: "Emails delivered" },
-    { v: "18.4%", l: "Avg. reply rate" },
-    { v: "97%", l: "Inbox placement" },
-    { v: "$2.5B+", l: "Pipeline generated" },
+    { v: "41,187+", l: "Happy Students and Counting" },
+    { v: "17",      l: "Strategy Courses" },
+    { v: "20+ yrs", l: "Trading Experience" },
   ];
   const notes = [
-    { t: "Prospecting that finds real buyers.", x: "6%", y: "18%" },
-    { t: "Emails that actually sound human.", x: "72%", y: "10%" },
-    { t: "Inbox placement, not promotions.", x: "78%", y: "62%" },
-    { t: "Replies handled in one place.", x: "4%", y: "70%" },
+    { t: "Strategies that actually make sense.", x: "6%",  y: "18%" },
+    { t: "Live sessions changed how I trade.",   x: "72%", y: "10%" },
+    { t: "Real trades, not just theory.",        x: "78%", y: "62%" },
+    { t: "Options finally clicked for me.",      x: "4%",  y: "70%" },
   ];
   return (
     <section id="how" className="relative overflow-hidden py-32" style={{ background: "#0D2E4E" }}>
@@ -47,7 +46,7 @@ export function Stats() {
           <circle key={i} cx={cx} cy={cy} r="4" fill="oklch(0.55 0.1495 235)" opacity="0.5" />
         ))}
       </svg>
-      {/* Floating pain-point notes */}
+      {/* Floating quotes */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         {notes.map((n, i) => (
           <p
@@ -63,27 +62,15 @@ export function Stats() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#e87040" }}>By the numbers</p>
           <h2 className="mt-4 font-display text-4xl leading-[1.05] text-white text-balance md:text-6xl">
-            Outbound results, <span className="italic" style={{ color: "#e87040" }}>quantified.</span>
+            Trading education, <span className="italic" style={{ color: "#e87040" }}>proven.</span>
           </h2>
         </div>
-        <div className="relative mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-4">
+        <div className="relative mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-3">
           {stats.map((s) => (
             <div key={s.l} className="group relative bg-[#0D2E4E] p-8 backdrop-blur transition-colors hover:bg-white/5">
               <p className="font-display text-5xl leading-none text-white md:text-6xl">{s.v}</p>
               <p className="mt-3 text-sm text-white/60">{s.l}</p>
               <span className="absolute inset-x-8 bottom-6 h-px scale-x-0 gradient-forest transition-transform duration-500 group-hover:scale-x-100 origin-left" />
-            </div>
-          ))}
-        </div>
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
-          {[
-            { title: "70% more meetings booked", who: "Northwind · GTM Ops" },
-            { title: "4× SDR efficiency", who: "Cascade · Head of Growth" },
-            { title: "64% lower tech stack cost", who: "Fern Labs · CFO" },
-          ].map((c) => (
-            <div key={c.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <p className="font-display text-2xl leading-tight text-white">{c.title}</p>
-              <p className="mt-4 text-xs uppercase tracking-wider text-white/50">{c.who}</p>
             </div>
           ))}
         </div>

@@ -176,7 +176,7 @@
             a.href = '#';
           }
           a.innerHTML =
-            '<span class="year-badge">' + (entry.badge || 'Audited') + '</span>' +
+            '<span class="year-badge">' + (entry.badge || 'Verified') + '</span>' +
             '<div class="year-num">' + entry.year + '</div>' +
             '<div class="year-sub">' + (entry.sub || 'Full Year') + '</div>' +
             '<div class="view-report">View Report &rarr;</div>';

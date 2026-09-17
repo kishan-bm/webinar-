@@ -10,10 +10,6 @@ const faqs = [
     a: "No. FLUX is a read-only analysis tool — it models positions, tracks volatility, and surfaces signals, but every order goes through you. When you're ready to act, it hands you a pre-filled ticket or order string for ThinkorSwim, Tradier, or IBKR, and you review and submit it in your own broker.",
   },
   {
-    q: "How current is the data in FLUX?",
-    a: "Prices refresh automatically about every 30 seconds during U.S. market hours, with select feeds — like SPX in the Analyzer and 0 DTE — streaming live. Outside market hours, FLUX shows the last close and stops polling. All data is for analysis, not order routing, so always confirm live prices in your broker before trading.",
-  },
-  {
     q: "What can I actually do in the Analyzer?",
     a: "Build any options position — single legs, verticals, iron condors, calendars, and more — right-click to add structures, drag strikes to reshape a trade, and scrub time and volatility to see how it evolves. You can save, share, and import models, pull positions in directly from ThinkorSwim, and compare multiple trades side by side before ever placing an order.",
   },
