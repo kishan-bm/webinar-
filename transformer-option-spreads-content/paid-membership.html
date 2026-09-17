@@ -1554,9 +1554,10 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
   .nav-toggle { display: block; }
   .navbar { flex-wrap: nowrap; gap: 8px; }
-  .nav-login { display: none; }
-  .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+  .navbar > div[style*="display:flex"] { display: none !important; }
   .navbar .nav-logo img { transform: scale(2.4) !important; }
+  .nav-mobile-only { display: none; }
+  .nav-links.active .nav-mobile-only { display: block; }
 
   /* Hero */
   .hero { padding-top: 60px; text-align: center; }
@@ -1829,6 +1830,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <li><a href="/podcast">Podcast</a></li>
     <li><a href="/blogs">Blog</a></li>
     <li><a href="/contact">Contact Us</a></li>
+    <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
+    <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntpro/" data-config="navCtaLink" style="color: var(--orange, #c8420a); font-weight: 700;">Join Now →</a></li>
   </ul>
   <div style="display:flex; gap:16px; align-items:center;">
       <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;" class="nav-login">Login</a>
