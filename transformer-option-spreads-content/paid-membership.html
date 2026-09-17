@@ -1534,29 +1534,40 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .nav-toggle.active span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
   
   .navbar { padding: 18px 30px; }
-  .nav-links { display: none; }
-  .nav-links.active {
+  .nav-links {
     display: flex;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
-    right: 0;
+    height: 100vh;
+    width: 78%;
+    max-width: 320px;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
     background: rgba(13, 46, 78, 0.98);
     backdrop-filter: blur(20px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    padding: 10px 24px 18px;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.4);
+    padding: 90px 24px 18px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
   }
-  .nav-links.active li { width: 100%; }
-  .nav-links.active a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
-  .nav-toggle { display: block; }
-  .navbar { flex-wrap: nowrap; gap: 8px; }
-  .navbar > div[style*="display:flex"] { display: none !important; }
+  .nav-links.active { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
+  .nav-toggle { display: block; order: -1; }
+  .navbar { flex-wrap: nowrap; gap: 8px; justify-content: space-between; }
+  .navbar .nav-logo { order: 0; margin: 0 auto; }
   .navbar .nav-logo img { transform: scale(2.4) !important; }
+  .navbar > div[style*="display:flex"] { display: flex !important; order: 1; gap: 0 !important; }
+  .nav-login { display: none; }
+  .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
   .nav-mobile-only { display: none; }
+  .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+  .nav-backdrop.active { display: block; }
   .nav-links.active .nav-mobile-only { display: block; }
 
   /* Hero */
@@ -1831,7 +1842,6 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <li><a href="/blogs">Blog</a></li>
     <li><a href="/contact">Contact Us</a></li>
     <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
-    <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntpro/" data-config="navCtaLink" style="color: var(--orange, #c8420a); font-weight: 700;">Join Now →</a></li>
   </ul>
   <div style="display:flex; gap:16px; align-items:center;">
       <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;" class="nav-login">Login</a>
@@ -1842,6 +1852,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <span></span>
     <span></span>
   </div>
+  <div class="nav-backdrop" id="navBackdrop"></div>
 </nav>
 
 <!-- SECTION 1 — HERO -->
@@ -2897,10 +2908,19 @@ const navToggle = document.getElementById('navToggle');
 const navLinks = document.querySelectorAll('.nav-links a, .nav-cta, .nav-login');
 
 const navLinksEl = document.querySelector('.nav-links');
+const navBackdropEl = document.getElementById('navBackdrop');
+if (navBackdropEl) {
+  navBackdropEl.addEventListener('click', () => {
+    navToggle.classList.remove('active');
+    if (navLinksEl) navLinksEl.classList.remove('active');
+    navBackdropEl.classList.remove('active');
+  });
+}
 if (navToggle) {
   navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('active');
     if (navLinksEl) navLinksEl.classList.toggle('active');
+    if (navBackdropEl) navBackdropEl.classList.toggle('active');
   });
 }
 
