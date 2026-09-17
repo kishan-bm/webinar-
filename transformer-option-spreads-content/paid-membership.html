@@ -1760,6 +1760,26 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   grid-template-columns: 1fr 1fr;
   gap: 8px 16px;
 }
+.flux-card-features--1col {
+  grid-template-columns: 1fr;
+}
+.flux-combined-left--6 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.flux-combined-left--6 .flux-tool-block {
+  padding: 28px 28px 24px;
+  border-right: 1px solid rgba(13, 46, 78, 0.08);
+  border-bottom: 1px solid rgba(13, 46, 78, 0.08);
+}
+.flux-combined-left--6 .flux-tool-block:nth-child(3n) {
+  border-right: none;
+}
+.flux-combined-left--6 .flux-tool-block:nth-child(n+4) {
+  border-bottom: none;
+}
+.flux-combined-left--6 .flux-tool-block h3 {
+  font-size: 19px;
+}
 .flux-card-features li {
   font-size: 13.5px;
   color: #4b5563;
@@ -1821,6 +1841,16 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   }
   .flux-card-features {
     grid-template-columns: 1fr;
+  }
+  .flux-combined-left--6 {
+    grid-template-columns: 1fr;
+  }
+  .flux-combined-left--6 .flux-tool-block {
+    border-right: none;
+    border-bottom: 1px solid rgba(13, 46, 78, 0.08);
+  }
+  .flux-combined-left--6 .flux-tool-block:last-child {
+    border-bottom: none;
   }
 }
   </style>
@@ -2268,8 +2298,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         </div>
       </div>
 
-      <!-- Bottom: two tool blocks side by side -->
-      <div class="flux-combined-left">
+      <!-- Bottom: six tool blocks, 3 per row -->
+      <div class="flux-combined-left flux-combined-left--6">
 
         <div class="flux-tool-block">
           <div class="flux-tool-header">
@@ -2277,16 +2307,82 @@ footer > .footer-bottom { position: relative; z-index: 1; }
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
             </div>
             <div>
-              <span class="flux-card-eyebrow">THE RATIO TOOL</span>
-              <h3>FLUX Volatility &amp; Calendar Ratio Tracker</h3>
+              <h3>Analyzer</h3>
             </div>
           </div>
-          <p>Track the precise relationship between front-month and back-month implied volatility across SPX, QQQ, and SPY. The Ratio Tool highlights when the spread is extended and primed for mean reversion — giving you the exact signal to enter your Double Calendar trades.</p>
-          <ul class="flux-card-features">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Real-Time IV Updates</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 5-Day &amp; 20-Day Comparisons</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Optimal Expiration Strips</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Precise Entry Signals</li>
+          <p>Model any options position and know what the market is pricing in before every report.</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Model any option spread on any ticker</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Real-time P&amp;L and Greeks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> What-if scenarios for adjustments</li>
+          </ul>
+        </div>
+
+        <div class="flux-tool-block">
+          <div class="flux-tool-header">
+            <div class="flux-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <div>
+              <h3>Calendar Spread IV</h3>
+            </div>
+          </div>
+          <p>Multi-expiration IV tool</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> IV Ratio monitoring</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> IV Spread monitoring</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Expiration Pair Scanner</li>
+          </ul>
+        </div>
+
+        <div class="flux-tool-block">
+          <div class="flux-tool-header">
+            <div class="flux-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
+            <div>
+              <h3>Earnings</h3>
+            </div>
+          </div>
+          <p>Quarterly Stock Earnings Data</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Expected earnings moves</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 5 year earnings statistics</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Pre and Post earnings track record</li>
+          </ul>
+        </div>
+
+        <div class="flux-tool-block">
+          <div class="flux-tool-header">
+            <div class="flux-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
+            <div>
+              <h3>NTT Scanner</h3>
+            </div>
+          </div>
+          <p>Navigation Trend Trading system</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Scan stocks, ETFs and Futures</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Top picks each and every day</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Filter by sectors and favorites</li>
+          </ul>
+        </div>
+
+        <div class="flux-tool-block">
+          <div class="flux-tool-header">
+            <div class="flux-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div>
+              <h3>0 DTE Dashboard</h3>
+            </div>
+          </div>
+          <p>Intra-day SPX analysis</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Daily Expected Move levels</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Dynamic Expected Move levels (updated every minute)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Support &amp; Resistance levels</li>
           </ul>
         </div>
 
@@ -2296,16 +2392,14 @@ footer > .footer-bottom { position: relative; z-index: 1; }
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             </div>
             <div>
-              <span class="flux-card-eyebrow">EARNINGS &amp; TRANSFORMATION</span>
-              <h3>FLUX Earnings &amp; Live Trading Dashboard</h3>
+              <h3>News &amp; Prediction Markets</h3>
             </div>
           </div>
-          <p>Trade earnings announcements with confidence. FLUX models volatility crush and identifies mispriced premiums. Use the proprietary <strong>Transformer Order</strong> approach to roll profitable spreads into risk-free Iron Condors.</p>
-          <ul class="flux-card-features">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Volatility Crush Modeler</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Transformer Order Planner</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Risk-Free Adjustments</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Value: $200/mo — Free with Pro</li>
+          <p>Live Econ Reports</p>
+          <ul class="flux-card-features flux-card-features--1col">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Scheduled events + statistical probabilities</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Live news feed</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Top equity Gainers &amp; Losers</li>
           </ul>
         </div>
 
@@ -2313,9 +2407,10 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 
     </div>
 
-    <!-- CTA Button -->
-    <div style="margin-top: 50px; text-align: center;" class="reveal">
-      <a href="https://whop.com/navigationtrading/ntpro/" target="_blank" rel="noopener noreferrer" class="btn-hero" data-config="whopLink" style="background: var(--gold); padding: 18px 44px; font-size: 16px;">Get Pro Tools and Alerts for $179/month</a>
+    <!-- CTA Buttons -->
+    <div style="margin-top: 50px; text-align: center; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;" class="reveal">
+      <a href="https://whop.com/navigationtrading/ntpro/" target="_blank" rel="noopener noreferrer" class="btn-hero" data-config="whopLink" style="padding:18px 44px; font-size:16px;">Get Pro Tools and Alerts for $179/month</a>
+      <a href="/flux" class="btn-hero" style="background: transparent; border: 1.5px solid var(--orange); color: var(--orange); padding:18px 44px; font-size:16px; box-shadow:none;">Learn more about FLUX</a>
     </div>
 
   </div>
