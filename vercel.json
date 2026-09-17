@@ -28,15 +28,15 @@
     },
     {
       "source": "/flux",
-      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/"
+      "destination": "https://webinar-flux.vercel.app/flux/"
     },
     {
       "source": "/flux/assets/:path*",
-      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/assets/:path*"
+      "destination": "https://webinar-flux.vercel.app/assets/:path*"
     },
     {
       "source": "/flux/:path*",
-      "destination": "https://webinar-flux-kishans-projects-58fac675.vercel.app/flux/:path*"
+      "destination": "https://webinar-flux.vercel.app/flux/:path*"
     },
     {
       "source": "/transformer-option-spreads",

@@ -12,6 +12,13 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // On Vercel's build machine, Nitro auto-detects the "vercel-static" preset instead of
+  // "vercel", which breaks the SSR build (rolldownOptions.input resolves to an html file).
+  // Pin the preset explicitly so this app always builds as Vercel Functions, matching how
+  // it's actually deployed.
+  nitro: {
+    preset: "vercel",
+  },
   vite: {
     // Served from webclass.navigationtrading.com/flux via a Vercel rewrite,
     // not from this app's own domain root — every asset URL needs this prefix.
