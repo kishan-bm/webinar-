@@ -4159,6 +4159,12 @@
       .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
 
+      .navbar { flex-wrap: nowrap; gap: 8px; }
+      .navbar > div[style*="display:flex"] a[href*="whop.com/orders"] { display: none; }
+      .navbar > div[style*="display:flex"] { gap: 0 !important; }
+      .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+      .navbar .nav-logo img { transform: scale(2.4) !important; }
+
       .dt-mosaic {
         grid-template-columns: 1fr;
       }
