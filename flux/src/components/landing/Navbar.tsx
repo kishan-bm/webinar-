@@ -79,12 +79,13 @@ export function Navbar() {
           <li><a href="/performance">Performance</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li className="nav-item-dropdown">
-            <a href="#">Services <span className="nav-chevron">&#9662;</span></a>
+            <a href="#" className="active">Services <span className="nav-chevron">&#9662;</span></a>
             <div className="dropdown-menu">
               <a href="/free-membership">Free Membership</a>
               <a href="/day-trading-membership">Day Trade Membership</a>
               <a href="/paid-membership">Pro Membership</a>
               <a href="/coaching">Private Coaching</a>
+              <a href="#" className="active">Flux</a>
             </div>
           </li>
           <li><a href="/podcast">Podcast</a></li>

@@ -108,6 +108,10 @@
       list-style: none;
     }
 
+    .nav-mobile-only {
+      display: none;
+    }
+
     .nav-links a {
       color: rgba(255, 255, 255, 0.9);
       font-size: 14px;
@@ -822,6 +826,11 @@
       mix-blend-mode: multiply;
       opacity: 0.9;
       animation: pointSlide 1.5s ease-in-out infinite;
+    }
+
+    .approach-cta-spacer {
+      width: 70px;
+      visibility: hidden;
     }
 
     @keyframes pointSlide {
@@ -5067,6 +5076,7 @@
         <div class="approach-cta-row">
           <img src="pointer.jpeg" alt="Look here" class="approach-pointer">
           <a href="/performance" class="approach-cta-btn" data-config="viewResultsLink">View Results &rarr;</a>
+          <span class="approach-cta-spacer" aria-hidden="true"></span>
         </div>
       </div>
     </div>

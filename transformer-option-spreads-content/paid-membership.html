@@ -152,6 +152,8 @@ body {
   list-style: none;
 }
 
+    .nav-mobile-only { display: none; }
+
 .nav-links a {
   color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
@@ -286,7 +288,7 @@ body {
   max-width: 560px; margin-bottom: 40px;
 }
 
-.hero-cta-box { display: flex; flex-direction: column; gap: 16px; }
+.hero-cta-box { display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .btn-hero {
   background: var(--gold); color: #fff;
   padding: 20px 48px; border-radius: 10px; font-size: 18px; font-weight: 800;
@@ -300,16 +302,23 @@ body {
   text-align: center; font-size: 13px; color: rgba(255,255,255,.45);
   font-weight: 500; letter-spacing: .5px;
 }
-.hero-right { display: flex; align-items: center; justify-content: center; }
+.hero-right { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; transform: translateX(100px); }
 .hero-video-wrap {
   width: 100%; aspect-ratio: 16/9;
   border-radius: 14px; overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,0.55);
   border: 1px solid rgba(255,255,255,0.1);
   display: block;
-  transform: translateX(100px);
 }
 .hero-video-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Stats row — moved to hero-left below the paragraph */
+.hero-stats { display: flex; gap: 0; margin-top: 8px; }
+.stat-item { padding: 16px 28px 16px 0; border-right: 1px solid rgba(255,255,255,.12); margin-right: 28px; }
+.stat-item:last-child { border-right: none; margin-right: 0; }
+.stat-num { font-size: 34px; font-weight: 800; color: #fff; line-height: 1; }
+.stat-num sub { font-size: 16px; vertical-align: bottom; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
 
 /* ══════════════════════════════════════
    SECTION 2 — THE PROMISE
@@ -551,7 +560,7 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-stats { justify-content: center; }
-  .hero-video-wrap { transform: none; }
+  .hero-right { transform: none; }
   .timeline-wrap { padding-left: 40px; }
   .timeline-line { left: 45px; }
   .timeline-line-filled { left: 45px; }
@@ -1873,6 +1882,25 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <p class="hero-sub">
         Get instant access to 17+ proven options strategies, daily live trading streams, real-time trade alerts for every strategy we teach, and a custom software called "Flux" for making precise trading decisions, all in one Pro membership. This is everything NavigationTrading has built, in one place.
       </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">200<sub>+</sub></div>
+          <div class="stat-label">Active Members</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4.9</div>
+          <div class="stat-label">Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">17<sub>+</sub></div>
+          <div class="stat-label">Strategies</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-video-wrap">
+        <img src="learning02.png" alt="NavigationTrading Pro Membership live trading room">
+      </div>
       <div class="hero-cta-box">
         <a href="https://whop.com/navigationtrading/ntpro/" target="_blank" rel="noopener noreferrer" class="btn-hero" data-config="whopLink">
           Get Pro Access for $179/month
@@ -1880,11 +1908,6 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         <div class="hero-trust-bar">
           200+ Active Members  |  ★★★★★ 4.9 Rating  |  Most Popular Plan
         </div>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-video-wrap">
-        <img src="learning02.png" alt="NavigationTrading Pro Membership live trading room">
       </div>
     </div>
   </div>
