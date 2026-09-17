@@ -27,6 +27,7 @@ const NAV_CSS = `
     .navbar.scrolled { padding: 12px 16px; }
     .nav-toggle { display: block; }
     .nav-logo { order: 0; margin: 0 auto; }
+    .nav-logo img { transform: scale(2.5); }
     .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; order: 1; }
     .nav-links {
       display: flex;
