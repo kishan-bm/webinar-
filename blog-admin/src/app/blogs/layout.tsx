@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import './public.css';
 import Link from 'next/link';
 
@@ -8,13 +9,23 @@ export default function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
     <>
       <nav className="navbar" id="navbar">
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label="Menu"
+          onClick={() => setNavOpen((o) => !o)}
+        >
+          &#9776;
+        </button>
         <a href="https://webclass.navigationtrading.com/home" className="nav-logo">
           <img src="/logo.png" alt="NavigationTrading" />
         </a>
-        <ul className="nav-links">
+        <ul className={`nav-links${navOpen ? ' active' : ''}`}>
           <li className="nav-item-dropdown">
             <a href="https://webclass.navigationtrading.com/home">Home</a>
           </li>
@@ -36,6 +47,10 @@ export default function PublicLayout({
             <a href="https://whop.com/orders/products/" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 600 }}>Login</a>
             <a href="https://whop.com/navigationtrading/" className="nav-cta">Join Now</a>
         </div>
+        <div
+          className={`nav-backdrop${navOpen ? ' active' : ''}`}
+          onClick={() => setNavOpen(false)}
+        />
       </nav>
 
       {children}
