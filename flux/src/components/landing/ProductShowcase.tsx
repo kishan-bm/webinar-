@@ -83,6 +83,14 @@ export function ProductShowcase() {
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Preload all GIFs immediately on mount
+  useEffect(() => {
+    scenes.forEach(s => {
+      const img = new Image();
+      img.src = `/${s.gif}`;
+    });
+  }, []);
+
   useEffect(() => {
     const onScroll = () => {
       const el = sectionRef.current;
@@ -199,22 +207,40 @@ export function ProductShowcase() {
               </ul>
             </div>
 
+            {/* Panel: light card so dark GIFs pop, with accent glow */}
             <div
-              className="relative flex h-[440px] items-end justify-center overflow-hidden rounded-[28px] transition-[background-color] duration-[900ms] ease-out md:h-[540px]"
-              style={{ backgroundColor: scene.panel }}
+              className="relative flex h-[440px] items-end justify-center overflow-hidden rounded-[28px] transition-all duration-[900ms] ease-out md:h-[540px]"
+              style={{
+                background: "linear-gradient(160deg, #f4f6fa 0%, #eceef4 100%)",
+                boxShadow: `0 0 0 1px rgba(0,0,0,0.06), 0 8px 40px -12px rgba(0,0,0,0.18), 0 0 60px -10px ${scene.tint}55`,
+              }}
             >
-              <div className="pointer-events-none absolute inset-0 opacity-30 grid-bg" />
+              {/* Subtle dot grid */}
+              <div className="pointer-events-none absolute inset-0 opacity-40 grid-bg" />
+
+              {/* Accent colour glow at top — keyed to tab colour */}
               <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-1/2 transition-opacity duration-700"
-                style={{ background: `radial-gradient(ellipse 70% 100% at 50% 0%, ${scene.tint}22, transparent 70%)` }}
+                className="pointer-events-none absolute inset-x-0 top-0 h-[55%] transition-all duration-700"
+                style={{ background: `radial-gradient(ellipse 80% 100% at 50% -10%, ${scene.tint}60, transparent 70%)` }}
               />
+
+              {/* Decorative top bar stripe */}
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-[3px] rounded-t-[28px] transition-all duration-700"
+                style={{ background: `linear-gradient(90deg, transparent, ${scene.tint}, transparent)` }}
+              />
+
+              {/* GIF card */}
               <div
                 key={`p-${scene.key}`}
-                className="animate-pop-down relative mx-8 mb-0 w-full max-w-[560px] overflow-hidden rounded-t-[20px] border border-white/15 shadow-elegant"
-                style={{ height: "82%" }}
+                className="animate-pop-down relative mx-8 mb-0 w-full max-w-[560px] overflow-hidden rounded-t-[16px] shadow-2xl"
+                style={{
+                  height: "82%",
+                  boxShadow: "0 -4px 24px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.12)",
+                }}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${scene.gif}`}
+                  src={`/${scene.gif}`}
                   alt={scene.tab}
                   className="h-full w-full object-cover object-top"
                 />
