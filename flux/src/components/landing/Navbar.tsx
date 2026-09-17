@@ -22,13 +22,19 @@ const NAV_CSS = `
   .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 6px; order: -1; }
   .nav-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 998; }
   .nav-backdrop.active { display: block; }
+  @media (min-width: 769px) {
+    .navbar > .nav-logo { flex: 1 1 0; }
+    .navbar > .nav-links { flex: 0 0 auto; }
+    .navbar > .nav-auth-group { flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; }
+  }
   @media (max-width: 768px) {
     .navbar { padding: 14px 16px; flex-wrap: nowrap; gap: 8px; }
     .navbar.scrolled { padding: 12px 16px; }
     .nav-toggle { display: block; }
     .nav-logo { order: 0; margin: 0 auto; }
     .nav-logo img { transform: scale(2.5); }
-    .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; order: 1; }
+    .nav-auth-group { order: 1; }
+    .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
     .nav-links {
       display: flex;
       position: fixed;
@@ -92,7 +98,9 @@ export function Navbar() {
           <li><a href="/blogs">Blog</a></li>
           <li><a href="/contact">Contact Us</a></li>
         </ul>
-        <a href="/pricing" className="nav-cta">Get Trade Alerts</a>
+        <div className="nav-auth-group">
+          <a href="/pricing" className="nav-cta">Get Trade Alerts</a>
+        </div>
         <div
           className={`nav-backdrop${open ? " active" : ""}`}
           onClick={() => setOpen(false)}
