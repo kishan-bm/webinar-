@@ -901,26 +901,47 @@
       .form-card-wrap { margin-right: 0; }
     }
     @media (max-width: 768px) {
-      .navbar { padding: 15px 24px; }
-      .nav-toggle { display: block; }
-      .nav-links, .nav-cta, .nav-logo img { display: none; }
-      .nav-links.active {
+      .navbar, .navbar.scrolled {
+        flex-wrap: nowrap;
+        gap: 8px;
+        justify-content: space-between;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+      .navbar .nav-logo { order: 0; margin: 0 auto; }
+      .navbar .nav-logo img { display: inline-block !important; transform: scale(2.4) !important; }
+      .navbar .nav-auth-group { display: flex !important; order: 1; gap: 0 !important; }
+      .navbar .nav-auth-group .nav-login-link { display: none; }
+      .navbar .nav-cta { display: inline-flex !important; padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+      .nav-toggle { display: block; order: -1; }
+      .nav-links {
         display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 78%;
+        max-width: 320px;
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
         background: rgba(13, 46, 78, 0.98);
         backdrop-filter: blur(20px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        padding: 10px 24px 18px;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.4);
+        padding: 90px 24px 18px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
       }
-      .nav-links.active li { width: 100%; }
-      .nav-links.active a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
+      .nav-mobile-only { display: none; }
+      .nav-links.active .nav-mobile-only { display: block; }
+      .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+      .nav-backdrop.active { display: block; }
       .contact-hero { padding: 130px 0 70px; }
       .contact-form-section { padding: 60px 0 80px; }
       .contact-cta { padding: 0 0 60px; }
@@ -984,8 +1005,6 @@
       .action-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .navbar { padding: 15px 24px; }
-      .nav-links, .nav-cta, .nav-logo img { display: none; }
       .action-grid { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full { grid-column: auto; }
@@ -1022,12 +1041,14 @@
       <li><a href="/podcast">Podcast</a></li>
       <li><a href="/blogs">Blog</a></li>
       <li><a href="#" class="active">Contact Us</a></li>
+      <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
     </ul>
-    <div style="display:flex; gap:16px; align-items:center;">
-        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
+    <div style="display:flex; gap:16px; align-items:center;" class="nav-auth-group">
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" class="nav-login-link" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
         <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
     </div>
-    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
+    <div class="nav-backdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
   </nav>
 
   <!-- ── HERO ── -->

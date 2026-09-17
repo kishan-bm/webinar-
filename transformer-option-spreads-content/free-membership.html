@@ -1517,14 +1517,47 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 }
 
 @media (max-width: 768px) {
-  .navbar { padding: 16px 24px; }
-  .navbar.scrolled { padding: 12px 24px; }
-  .nav-toggle { display: block; }
-  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: rgba(13,46,78,0.98); backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); padding: 10px 24px 18px; }
-  .nav-links.active { display: flex; }
+  .navbar, .navbar.scrolled {
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: space-between;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .navbar .nav-logo { order: 0; margin: 0 auto; }
+  .navbar .nav-logo img { transform: scale(2.4) !important; }
+  .navbar .nav-auth-group { display: flex !important; order: 1; gap: 0 !important; }
+  .navbar .nav-auth-group .nav-login { display: none; }
+  .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+  .nav-toggle { display: block; order: -1; }
+  .nav-links {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 78%;
+    max-width: 320px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: rgba(13,46,78,0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: 10px 0 30px rgba(0,0,0,0.4);
+    padding: 90px 24px 18px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+  }
+  .nav-links.active { transform: translateX(0); }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; }
+  .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
+  .nav-mobile-only { display: none; }
+  .nav-links.active .nav-mobile-only { display: block; }
+  .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+  .nav-backdrop.active { display: block; }
   .container { padding: 0 24px; }
   .summary-trust-row { flex-direction: column; gap: 20px; }
   .outcomes-grid { grid-template-columns: 1fr; }
@@ -1862,12 +1895,14 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <li><a href="/podcast">Podcast</a></li>
     <li><a href="/blogs">Blog</a></li>
     <li><a href="/contact">Contact Us</a></li>
+    <li class="nav-mobile-only"><a href="#">Login</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:16px;">
+  <div style="display:flex;align-items:center;gap:16px;" class="nav-auth-group">
     <a href="#" class="nav-login">Login</a>
     <a href="../pricing.html" class="nav-cta" data-config="navCtaLink">Join Now</a>
   </div>
-  <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+  <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
+  <div class="nav-backdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
 </nav>
 
 <!-- ═══════════════════════════════

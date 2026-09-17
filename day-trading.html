@@ -2660,16 +2660,17 @@
     @media(max-width:900px) {
 
       /* navbar */
-      .navbar {
-        padding: 16px 24px
+      .navbar, .navbar.scrolled {
+        flex-wrap: nowrap;
+        gap: 8px;
+        justify-content: space-between;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
       }
 
-      .navbar.scrolled {
-        padding: 12px 24px
-      }
-
-      .navbar {
-        gap: 10px;
+      .navbar .nav-logo {
+        order: 0;
+        margin: 0 auto;
       }
 
       .nav-logo img {
@@ -2678,32 +2679,44 @@
 
       .nav-toggle {
         display: block;
-        order: 3;
+        order: -1;
       }
 
-      .nav-cta {
-        order: 2;
-        flex-shrink: 0;
+      .navbar .nav-auth-group {
+        display: flex !important;
+        order: 1;
+        gap: 0 !important;
+      }
+
+      .navbar .nav-cta {
+        padding: 8px 14px;
+        font-size: 13px;
+        white-space: nowrap;
       }
 
       .nav-links {
-        display: none;
-        order: 4;
-        position: absolute;
-        top: 100%;
+        display: flex;
+        position: fixed;
+        top: 0;
         left: 0;
-        right: 0;
+        height: 100vh;
+        width: 78%;
+        max-width: 320px;
         flex-direction: column;
         align-items: flex-start;
         gap: 0;
         background: rgba(13, 46, 78, 0.98);
         backdrop-filter: blur(20px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        padding: 10px 24px 18px;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.4);
+        padding: 90px 24px 18px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
       }
 
       .nav-links.active {
-        display: flex;
+        transform: translateX(0);
       }
 
       .nav-links li {
@@ -2715,6 +2728,11 @@
         padding: 12px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
+
+      .nav-mobile-only { display: none; }
+      .nav-links.active .nav-mobile-only { display: block; }
+      .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+      .nav-backdrop.active { display: block; }
 
       /* hero */
       .hero-main {
@@ -3075,9 +3093,13 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#about">Author</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
     </ul>
-    <button class="nav-cta" onclick="scrollToForm()">Register for free</button>
-    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
+    <div class="nav-auth-group">
+      <button class="nav-cta" onclick="scrollToForm()">Register for free</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
+    <div class="nav-backdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
   </nav>
 
   <!-- ── HERO ── -->
