@@ -24,7 +24,7 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <a
-          href="#features"
+          href="#product"
           className="animate-rise inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 shadow-sm backdrop-blur"
         >
           <span className="flex h-1.5 w-1.5 rounded-full bg-forest" />
@@ -53,7 +53,7 @@ export function Hero() {
           style={{ animationDelay: "240ms" }}
         >
           <a
-            href="#waitlist"
+            href="/paid-membership"
             className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-glow transition-all hover:bg-forest-deep"
           >
             Get Access to FLUX

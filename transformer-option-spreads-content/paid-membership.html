@@ -13,7 +13,7 @@
    PRO TOKENS (Slightly Darker & Gold Weighted)
    ══════════════════════════════════════ */
 :root {
-  --navy:      #050C16; /* Deep Midnight */
+  --navy:      #0D2E4E; /* NavigationTrading Blue */
   --navy-mid:  #081221;
   --navy-deep: #03080F;
   --navy-light:#0C1B30;
@@ -258,7 +258,7 @@ body {
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: 
-    linear-gradient(135deg, rgba(5,12,22,.98) 0%, rgba(5,12,22,.88) 55%, rgba(5,12,22,.96) 100%);
+    linear-gradient(135deg, rgba(13,46,78,.82) 0%, rgba(13,46,78,.65) 55%, rgba(13,46,78,.80) 100%);
 }
 .hero-glow {
   position: absolute; z-index: 2; width: 800px; height: 800px; border-radius: 50%;
@@ -546,7 +546,7 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .tool-feat-title { font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
 .tool-feat-desc { font-size: 14px; color: #666; line-height: 1.75; margin-bottom: 14px; }
 .tool-feat-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-.tool-feat-pill { font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 50px; background: rgba(5,12,22,.06); color: var(--navy); border: 1px solid rgba(5,12,22,.1); }
+.tool-feat-pill { font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 50px; background: rgba(13,46,78,.06); color: var(--navy); border: 1px solid rgba(13,46,78,.1); }
 /* Stat panel moved to bottom */
 .tools-stats-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
 .tools-stat-card {
@@ -657,25 +657,67 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .cred-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 4px; }
 
 /* RE-ADDED MISSING STYLES FOR NEW SECTIONS */
-.info-grid { display: flex; flex-direction: column; gap: 0; margin-top: 48px; border: 1px solid rgba(0,0,0,.07); border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 4px 24px rgba(13,46,78,.08); }
+.info-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; position: relative; margin-top: 70px;
+}
+.info-grid::before {
+  content: ''; position: absolute; top: -36px; left: 12.5%; right: 12.5%;
+  height: 2px; background: var(--navy); z-index: 1;
+}
 .info-card {
-  display: grid; grid-template-columns: 72px 1fr;
-  gap: 0; padding: 36px 40px; align-items: start;
-  border-bottom: 1px solid rgba(0,0,0,.06);
-  transition: background .2s ease;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(13, 46, 78, 0.08);
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(13, 46, 78, 0.02);
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 16px;
+  z-index: 2;
 }
-.info-card:last-child { border-bottom: none; }
-.info-card:hover { background: rgba(200,66,10,.03); }
-.info-card-icon {
-  width: 48px; height: 48px; border-radius: 13px;
-  background: rgba(200,66,10,.1); border: 1px solid rgba(200,66,10,.25);
+.info-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--orange);
+  box-shadow: 0 20px 40px rgba(13, 46, 78, 0.08), 0 1px 3px rgba(200, 66, 10, 0.15);
+  z-index: 3;
+}
+.info-card-num {
+  position: absolute; top: -57px; left: 50%; transform: translateX(-50%);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--navy); color: #fff;
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px; margin-bottom: 0;
+  font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 700;
+  z-index: 10; transition: all 0.3s ease;
+  box-shadow: 0 0 0 5px var(--cream);
 }
-.info-card-icon svg { width: 22px; height: 22px; color: var(--gold); }
-.info-card-body { padding-left: 8px; }
-.info-card h3 { color: var(--navy); margin-bottom: 8px; font-weight: 800; font-size: 18px; }
-.info-card p { font-size: 15px; color: #555; line-height: 1.75; margin: 0; }
+.info-card:hover .info-card-num {
+  background: var(--orange);
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 0 0 8px var(--cream), 0 4px 12px rgba(200, 66, 10, 0.2);
+}
+.info-card-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: rgba(200,66,10,.08); border: 1px solid rgba(200,66,10,.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.3s ease;
+}
+.info-card:hover .info-card-icon { background: rgba(200,66,10,.14); border-color: rgba(200,66,10,.4); }
+.info-card-icon svg { width: 24px; height: 24px; color: var(--orange); }
+.info-card-body { display: flex; flex-direction: column; gap: 8px; }
+.info-card h3 { color: var(--navy); margin: 0; font-weight: 800; font-size: 17px; }
+.info-card p { font-size: 14px; color: #5b6776; line-height: 1.65; margin: 0; }
+
+@media (max-width: 1200px) {
+  .info-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
+  .info-grid::before { display: none; }
+  .info-card-num { position: relative; top: 0; left: 0; transform: none; margin-bottom: -4px; box-shadow: none; }
+  .info-card:hover .info-card-num { transform: scale(1.1); box-shadow: 0 4px 10px rgba(200, 66, 10, 0.15); }
+}
+@media (max-width: 640px) {
+  .info-grid { grid-template-columns: 1fr; gap: 24px; }
+}
 
 /* ── WHO FOR: dark glass cards ── */
 .for-not-for { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
@@ -2045,6 +2087,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     </div>
     <div class="info-grid reveal">
       <div class="info-card">
+        <div class="info-card-num">01</div>
         <div class="info-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
@@ -2054,6 +2097,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         </div>
       </div>
       <div class="info-card">
+        <div class="info-card-num">02</div>
         <div class="info-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
         </div>
@@ -2063,6 +2107,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         </div>
       </div>
       <div class="info-card">
+        <div class="info-card-num">03</div>
         <div class="info-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         </div>
@@ -2072,6 +2117,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         </div>
       </div>
       <div class="info-card">
+        <div class="info-card-num">04</div>
         <div class="info-card-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
