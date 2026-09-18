@@ -53,7 +53,9 @@ export function Hero() {
           style={{ animationDelay: "240ms" }}
         >
           <a
-            href="/paid-membership"
+            href="https://whop.com/navigationtrading/ntpro/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-glow transition-all hover:bg-forest-deep"
           >
             Get Access to FLUX
