@@ -203,19 +203,6 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
             >
               {summary.quote}
             </p>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                fontSize: '11px',
-                fontWeight: 700,
-                color: '#94a3b8',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-              }}
-            >
-              ✦ AI-generated Summary
-            </div>
           </div>
 
           {/* Key Moments */}
@@ -298,35 +285,6 @@ export default function AISummary({ postId, initialSummary = null }: AISummaryPr
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Vertical AI-Generated Badge on the side */}
-            <div
-              style={{
-                width: '24px',
-                borderLeft: '1px solid #e2e8f0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                marginLeft: '12px',
-              }}
-            >
-              <div
-                style={{
-                  writingMode: 'vertical-rl',
-                  textTransform: 'uppercase',
-                  fontSize: '9px',
-                  fontWeight: 700,
-                  color: '#94a3b8',
-                  letterSpacing: '2px',
-                  userSelect: 'none',
-                  transform: 'rotate(180deg)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                ✦ AI-generated
               </div>
             </div>
 
