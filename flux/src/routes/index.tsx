@@ -6,7 +6,6 @@ import { IntegrationFlow } from "@/components/landing/IntegrationFlow";
 import { Stats } from "@/components/landing/Stats";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
-import { Waitlist } from "@/components/landing/Waitlist";
 import { Footer } from "@/components/landing/Footer";
 
 export const Route = createFileRoute("/")({
@@ -24,7 +23,6 @@ function Index() {
         <IntegrationFlow />
         <Testimonials />
         <Faq />
-        <Waitlist />
       </main>
       <Footer />
     </div>
