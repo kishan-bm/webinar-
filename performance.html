@@ -2063,9 +2063,17 @@
 
       <!-- Right: video embed -->
       <div class="reveal reveal-d1">
-        <div class="iframe-wrap" style="border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLW-Qe3NiPEJI" frameborder="0" allowfullscreen data-config="video1Url"></iframe>
+        <div class="iframe-wrap" style="position:relative;border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+          <span style="position:absolute;top:14px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:50px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Playlist
+          </span>
+          <iframe src="https://www.youtube.com/embed/videoseries?list=PLW-Qe3NiPEJI&listType=playlist" frameborder="0" allowfullscreen data-config="video1Url"></iframe>
         </div>
+        <a href="https://www.youtube.com/playlist?list=PLW-Qe3NiPEJI" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">
+          View the full playlist on YouTube
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
       </div>
 
     </div>
