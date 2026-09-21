@@ -28,13 +28,14 @@ const NAV_CSS = `
     .navbar > .nav-auth-group { flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; }
   }
   @media (max-width: 768px) {
-    .navbar { padding: 14px 16px; flex-wrap: nowrap; gap: 8px; }
-    .navbar.scrolled { padding: 12px 16px; }
-    .nav-toggle { display: block; }
-    .nav-logo { order: 0; margin: 0 auto; }
-    .nav-logo img { transform: scale(2.5); }
-    .nav-auth-group { order: 1; }
+    .navbar, .navbar.scrolled { display: grid !important; grid-template-columns: 1fr auto 1fr; gap: 0; padding: 12px 16px !important; background: rgba(13,46,78,0.98) !important; backdrop-filter: blur(20px); }
+    .nav-toggle { display: flex; align-items: center; grid-column: 1; justify-self: start; }
+    .nav-logo { grid-column: 2; margin: 0; }
+    .nav-logo img { transform: scale(2.5); transform-origin: center center; }
+    .nav-auth-group { grid-column: 3; justify-self: end; overflow: visible; display: flex !important; }
     .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+    .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+    .nav-close:hover { background: rgba(255,255,255,0.22); }
     .nav-links {
       display: flex;
       position: fixed;
@@ -81,6 +82,7 @@ export function Navbar() {
           <img src="/logo.png" alt="NavigationTrading" />
         </a>
         <ul className={`nav-links${open ? " active" : ""}`}>
+          <button type="button" className="nav-close" onClick={() => setOpen(false)} aria-label="Close menu">&#x2715;</button>
           <li><a href="/home">Home</a></li>
           <li><a href="/performance">Performance</a></li>
           <li><a href="/pricing">Pricing</a></li>
