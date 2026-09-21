@@ -1131,7 +1131,8 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .instructor-cred-row p { font-size: 13px; color: #666; margin: 0; line-height: 1.65; }
 @media (max-width: 960px) {
   .instructor-layout-pro { grid-template-columns: 1fr; }
-  .instructor-img-wrap-pro img { aspect-ratio: 4/3; }
+  .instructor-img-wrap-pro img { aspect-ratio: 3/4; max-height: 420px; object-fit: cover; object-position: top; }
+  .instructor-img-card { max-width: 360px; margin: 0 auto; }
   .instructor-bio-card-pro { padding: 32px; }
 }
 
@@ -1632,7 +1633,9 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .nav-login { display: none; }
   .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
   .nav-mobile-only { display: none; }
-  .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+  .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+.nav-close:hover { background: rgba(255,255,255,0.22); }
+.nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
   .nav-backdrop.active { display: block; }
   .nav-links.active .nav-mobile-only { display: block; }
 
@@ -1920,6 +1923,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     <img src="logo.png" alt="NavigationTrading">
   </a>
   <ul class="nav-links">
+  <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
     <li><a href="/home">Home</a></li>
     <li><a href="/performance">Performance</a></li>
     <li><a href="/pricing">Pricing</a></li>

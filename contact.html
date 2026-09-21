@@ -948,6 +948,8 @@
       .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
       .nav-mobile-only { display: none; }
       .nav-links.active .nav-mobile-only { display: block; }
+            .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+      .nav-close:hover { background: rgba(255,255,255,0.22); }
       .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
       .nav-backdrop.active { display: block; }
       .contact-hero { padding: 130px 0 70px; }
@@ -1020,6 +1022,10 @@
       .form-card { padding: 24px 18px; }
       .container { padding-left: 16px !important; padding-right: 16px !important; }
       h1 { font-size: clamp(28px, 8vw, 40px) !important; }
+      footer { padding: 60px 20px 32px; }
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+      .footer-brand { margin-bottom: 0; }
     }
     html, body {
       max-width: 100%;
@@ -1040,6 +1046,7 @@
       <img src="logo.png" alt="NavigationTrading">
     </a>
     <ul class="nav-links">
+      <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
       <li><a href="/home">Home</a></li>
       <li><a href="/performance">Performance</a></li>
       <li><a href="/pricing">Pricing</a></li>
@@ -1063,7 +1070,8 @@
         <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
-    <div class="nav-backdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <div class="nav-backdrop" id="navBackdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <script>document.getElementById('navClose').addEventListener('click',function(){document.querySelector('.nav-links').classList.remove('active');var bd=document.getElementById('navBackdrop');if(bd)bd.classList.remove('active');});</script>
   </nav>
 
   <!-- ── HERO ── -->

@@ -2739,6 +2739,8 @@
 
       .nav-mobile-only { display: none; }
       .nav-links.active .nav-mobile-only { display: block; }
+            .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+      .nav-close:hover { background: rgba(255,255,255,0.22); }
       .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
       .nav-backdrop.active { display: block; }
 
@@ -3116,6 +3118,7 @@
     <a href="#" class="nav-logo"><img src="logo.png" alt="NavigationTrading"
         style="height: 40px; width: auto; transform: scale(5); transform-origin: left center; vertical-align: middle;"></a>
     <ul class="nav-links">
+      <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
       <li><a href="#features">Features</a></li>
       <li><a href="#about">Author</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -3125,7 +3128,8 @@
       <button class="nav-cta" onclick="scrollToForm()">Register for free</button>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
-    <div class="nav-backdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <div class="nav-backdrop" id="navBackdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <script>document.getElementById('navClose').addEventListener('click',function(){document.querySelector('.nav-links').classList.remove('active');var bd=document.getElementById('navBackdrop');if(bd)bd.classList.remove('active');});</script>
   </nav>
 
   <!-- ── HERO ── -->
