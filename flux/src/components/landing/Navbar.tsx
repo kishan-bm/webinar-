@@ -28,7 +28,7 @@ const NAV_CSS = `
     .navbar > .nav-auth-group { flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; }
   }
   @media (max-width: 768px) {
-    .navbar, .navbar.scrolled { display: grid !important; grid-template-columns: 1fr auto 1fr; gap: 0; padding: 12px 16px !important; background: rgba(13,46,78,0.98) !important; backdrop-filter: blur(20px); }
+    .navbar, .navbar.scrolled { display: grid !important; grid-template-columns: 1fr 100px 1fr; gap: 0; padding: 12px 16px !important; background: rgba(13,46,78,0.98) !important; backdrop-filter: blur(20px); }
     .nav-toggle { display: flex; align-items: center; grid-column: 1; justify-self: start; }
     .nav-logo { grid-column: 2; margin: 0; }
     .nav-logo img { transform: scale(2.5); transform-origin: center center; }
