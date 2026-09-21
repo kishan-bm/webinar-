@@ -593,9 +593,13 @@
         padding-left: 16px !important;
         padding-right: 16px !important;
       }
+      .navbar, .navbar.scrolled { position: relative; }
       .navbar .nav-logo {
-        order: 0;
-        margin: 0 auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        order: unset;
       }
       .navbar .nav-logo img {
         transform: scale(3.4) !important;
@@ -2549,6 +2553,19 @@
         font-size: clamp(28px, 8vw, 42px) !important;
         word-break: break-word !important;
       }
+      /* Pricing comparison table — responsive columns */
+      .pdv2-matrix { overflow-x: auto; }
+      .pdv2-matrix-head,
+      .pdv2-group-label,
+      .pdv2-row,
+      .pdv2-footer {
+        grid-template-columns: 1fr 22% 22% 22%;
+      }
+      .pdv2-row-label { padding: 12px 14px; font-size: 12px; }
+      .pdv2-mh-label,
+      .pdv2-footer-label { padding: 14px; }
+      .pdv2-mh-plan .pdv2-mh-name { font-size: 11px; }
+      .pdv2-footer-btn { font-size: 10px; padding: 7px 8px; }
     }
   </style>
   <script>
