@@ -3330,12 +3330,15 @@
       .test-item { flex: 0 0 100%; }
 
       /* Stats bar mobile */
+      .stats-bar { margin-top: 0; padding-top: 28px; }
       .stats-grid { grid-template-columns: repeat(3,1fr); gap: 0; max-width: 100%; }
       .stat-item { padding: 0 6px; }
       .stat-item:not(:last-child)::after { right: 0; }
       .stat-num { font-size: clamp(14px, 4.5vw, 22px); }
       .stat-label { font-size: 9px; }
-      .stat-label { font-size: 10px; }
+      /* Hero CTA buttons narrower on mobile */
+      .hero-cta-row { padding: 0 24px; }
+      .btn-main, .btn-ghost { width: 100%; justify-content: center; }
 
       /* Ecosystem mobile */
       .ecosystem-2col { grid-template-columns: 1fr; gap: 32px; }
