@@ -2524,6 +2524,28 @@
     .eip-dismiss { font-size:12px; color:#a0aec0; cursor:pointer; margin:16px 0 0; text-align:center; text-decoration:underline; }
     .eip-dismiss:hover { color:#718096; }
     @media(max-width:640px) { .eip-card{grid-template-columns:1fr} .eip-left,.eip-right{padding:32px 28px} .eip-logo{transform:scale(4)} .eip-logo-row{margin-bottom:40px} }
+
+    /* Mobile Optimization Enhancements */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden !important;
+    }
+    @media (max-width: 768px) {
+      .pricing-hero, .hero-section, .page-header {
+        padding-top: 100px !important;
+        padding-bottom: 40px !important;
+      }
+      .container, .wrap, .pricing-wrap {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      h1, .hero-h1, .pricing-title {
+        font-size: clamp(28px, 8vw, 42px) !important;
+        word-break: break-word !important;
+      }
+    }
   </style>
   <script>
     (function() {
