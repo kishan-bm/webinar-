@@ -1531,14 +1531,16 @@ footer > .footer-bottom { position: relative; z-index: 1; }
     justify-content: space-between;
     padding-left: 24px !important;
     padding-right: 24px !important;
+        background: rgba(13, 46, 78, 0.98) !important;
+        backdrop-filter: blur(20px);
   }
-  .navbar .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; order: unset; }
-      .navbar, .navbar.scrolled { position: relative; }
+  .navbar { position: relative; }
+  .navbar .nav-logo { order: 0; margin: 0 auto; flex: 0 0 auto; }
+  .nav-toggle { flex: 0 0 44px; display: flex; align-items: center; order: -1; }
+  .navbar .nav-auth-group { flex: 0 0 44px !important; justify-content: flex-end !important; overflow: visible !important; display: flex !important; order: 1; gap: 0 !important; }
   .navbar .nav-logo img { transform: scale(3.4) !important; transform-origin: left center; }
-  .navbar .nav-auth-group { display: flex !important; order: 1; gap: 0 !important; }
   .navbar .nav-auth-group .nav-login { display: none; }
   .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
-  .nav-toggle { display: block; order: -1; }
   .nav-links {
     display: flex;
     position: fixed;

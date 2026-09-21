@@ -592,11 +592,13 @@
         justify-content: space-between;
         padding-left: 16px !important;
         padding-right: 16px !important;
+        background: rgba(13, 46, 78, 0.98) !important;
+        backdrop-filter: blur(20px);
       }
       .navbar { position: relative; }
-      .navbar .nav-logo { order: 0; margin: 0; flex: 0 0 auto; }
-      .nav-toggle { flex: 1 0 auto; }
-      .navbar .nav-auth-group { flex: 1 0 auto !important; justify-content: flex-end !important; }
+      .navbar .nav-logo { order: 0; margin: 0 auto; flex: 0 0 auto; }
+      .nav-toggle { flex: 0 0 44px; display: flex; align-items: center; }
+      .navbar .nav-auth-group { flex: 0 0 44px !important; justify-content: flex-end !important; overflow: visible !important; }
       .navbar .nav-logo img {
         transform: scale(3.4) !important;
       }
