@@ -527,6 +527,9 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .check { color: #22c55e; font-weight: 900; font-size: 18px; }
 .check-pro { color: var(--gold); font-weight: 900; font-size: 18px; }
 .dash { color: rgba(0,0,0,.15); font-size: 22px; font-weight: 300; }
+.dt-total-num { font-size: 20px; }
+.pro-total-num { font-size: 22px; }
+.dt-only-note { font-size: 12px; }
 /* Value Callout Box */
 .value-callout {
   background: linear-gradient(135deg, rgba(200,66,10,.06) 0%, rgba(255,255,255,.9) 100%);
@@ -1660,6 +1663,10 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .feat-sub { font-size: 9px; }
   .col-dt-label, .pro-col-label { font-size: 10px; }
   .col-dt-price, .pro-col-price { font-size: 8px; }
+  .check-pro { font-size: 11px; }
+  .dt-total-num { font-size: 13px !important; }
+  .pro-total-num { font-size: 13px !important; }
+  .dt-only-note { font-size: 10px !important; }
   th { padding: 10px 4px; }
   th:first-child { padding-left: 8px; }
   
@@ -2569,7 +2576,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </tr>
           <tr>
             <td><span class="feat-name">Real-Time Alerts</span><span class="feat-sub">Entry, exit, and risk plan for every call</span></td>
-            <td style="color:#999; font-size:12px; font-weight:600;">Day trades only</td>
+            <td class="dt-only-note" style="color:#999; font-weight:600;">Day trades only</td>
             <td class="pro-col check-pro">✓ All Strategies</td>
           </tr>
           <tr>
@@ -2584,8 +2591,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </tr>
           <tr>
             <td><span class="feat-name">Total Strategy Courses</span><span class="feat-sub">All strategies across all market conditions</span></td>
-            <td style="font-size:20px; font-weight:800; color:#bbb;">4+</td>
-            <td class="pro-col" style="font-size:22px; font-weight:900; color:var(--gold);">17+</td>
+            <td class="dt-total-num" style="font-weight:800; color:#bbb;">4+</td>
+            <td class="pro-col pro-total-num" style="font-weight:900; color:var(--gold);">17+</td>
           </tr>
         </tbody>
       </table>
