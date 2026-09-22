@@ -70,7 +70,21 @@ export function IntegrationFlow() {
           </p>
         </div>
 
-        <div className="relative mt-16 h-[470px] w-full">
+        {/* Mobile/tablet fallback: the absolute-positioned flow diagram below
+            only works once there's enough width for the left/right node
+            columns and the center hub to not collide, so it's desktop-only. */}
+        <div className="mt-10 grid grid-cols-2 gap-3 lg:hidden">
+          {[...sources, ...outputs].map((n) => (
+            <div key={n.label} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-white p-3 shadow-sm">
+              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl border border-border/60 text-forest/70">
+                <n.icon className="h-5 w-5" />
+              </span>
+              <span className="text-[11px] font-semibold uppercase leading-snug tracking-[0.06em] text-muted-foreground">{n.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative mt-16 hidden h-[470px] w-full lg:block">
           <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 450" preserveAspectRatio="none">
             <defs>
               <linearGradient id="lfIn" x1="0" x2="1">
