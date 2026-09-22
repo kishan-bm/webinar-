@@ -20,6 +20,7 @@ const NAV_CSS = `
   .nav-cta { background: #c8420a; color: #fff; padding: 10px 22px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; border: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s; }
   .nav-cta:hover { background: #e04d10; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,66,10,0.35); }
   .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 6px; order: -1; }
+  .nav-close { display: none; }
   .nav-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 998; }
   .nav-backdrop.active { display: block; }
   @media (min-width: 769px) {

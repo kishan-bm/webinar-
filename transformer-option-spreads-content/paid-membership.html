@@ -1506,7 +1506,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   gap: 40px; flex-wrap: wrap;
 }
 .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #fff; letter-spacing: 5px; }
-.footer-tagline { color: rgba(255,255,255,.35); font-size: 13px; margin-top: 180px; }
+.footer-tagline { color: rgba(255,255,255,.35); font-size: 13px; margin-top: 0; }
 .footer-links { display: flex; gap: 40px; align-items: center; }
 .footer-links a { color: rgba(255,255,255,.45); font-size: 13px; text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--gold); }
@@ -1550,21 +1550,6 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .faq-left { position: static; }
 }
 
-.footer-logo {
-  height: 40px;
-  width: auto;
-  transform: scale(5);
-  transform-origin: left center;
-  vertical-align: middle;
-  margin-top: -12px;
-}
-
-@media (max-width: 768px) {
-  .footer-logo {
-    transform: scale(1);
-    height: 32px;
-  }
-}
 
 /* ══════════════════════════════════════
    MOBILE RESPONSIVENESS (OVERRIDE)
@@ -1576,8 +1561,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 @media (max-width: 768px) {
   /* Reset Desktop Scale */
   .nav-logo { transform: none !important; height: 48px !important; width: auto !important; margin-top: 0 !important; }
-  .footer-logo { transform: scale(3) !important; transform-origin: center center !important; height: 40px !important; width: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; }
-  .footer-brand { display: flex; justify-content: center; width: 100%; margin-bottom: 0; text-align: center; }
+  .footer-brand img { transform: scale(3) !important; transform-origin: left center !important; height: 40px !important; width: auto !important; margin-bottom: 30px !important; }
+  .footer-brand { display: flex; justify-content: flex-start; width: 100%; margin-bottom: 0; }
 
   .container { padding: 0 20px; }
   .section-head { margin-bottom: 40px; }
@@ -1645,8 +1630,8 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .nav-links.active .nav-mobile-only { display: block; }
 
   /* Hero */
-  .hero { padding-top: 60px; text-align: center; }
-  .hero-inner { padding: 40px 20px; gap: 32px; }
+  .hero { padding-top: 0; text-align: center; }
+  .hero-inner { padding: 80px 20px 40px; gap: 32px; }
   .hero-headline { font-size: 30px; line-height: 1.2; }
   .hero-sub { font-size: 15px; margin: 0 auto 32px; line-height: 1.6; }
   .btn-hero { padding: 15px 22px !important; font-size: 15px !important; width: 100%; }
@@ -1663,18 +1648,18 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
   .footer-top > div:last-child { flex-direction: column !important; gap: 20px !important; width: 100%; align-items: center; }
   .footer-links { flex-direction: column; gap: 20px; }
-  .footer-tagline { margin-bottom: 12px; display: block; width: 100%; }
+  .footer-tagline { margin-bottom: 12px; display: block; width: 100%; margin-top: 0 !important; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
-  .footer-logo { margin: 0 auto 0 !important; }
-  .footer-brand { margin-bottom: 0 !important; }
-  .footer-tagline { margin-top: 48px !important; }
 
   /* Comparison Table Mobile */
-  .comp-table-wrap { overflow-x: visible; }
-  table { min-width: 0; width: 100%; }
-  td, th { padding: 12px 8px; font-size: 13px; }
-  .col-dt-label, .pro-col-label { font-size: 12px; }
-  .col-dt-price, .pro-col-price { font-size: 10px; }
+  .comp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 480px; width: 100%; }
+  td, th { padding: 10px 6px; font-size: 11px; }
+  td:first-child, th:first-child { padding-left: 10px; }
+  .feat-name { font-size: 12px; }
+  .feat-sub { font-size: 10px; }
+  .col-dt-label, .pro-col-label { font-size: 11px; }
+  .col-dt-price, .pro-col-price { font-size: 9px; }
   
   /* Grid Layouts Stack */
   .for-not-for, .instructor-layout-pro, .tools-premium-grid { grid-template-columns: 1fr !important; gap: 24px; }
@@ -3046,7 +3031,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-brand"><img src="logo.png" alt="NavigationTrading" class="footer-logo"></div>
+      <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"></div>
       <div class="footer-tagline">Professional Options Trading Education</div>
     </div>
     <div style="display:flex;gap:60px;flex-wrap:wrap;align-items:flex-start;">
