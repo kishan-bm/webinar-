@@ -117,17 +117,17 @@ export function IntegrationFlow() {
           {/* Hub */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative">
-              <span className="absolute inset-0 -m-4 rounded-full bg-mint/45 blur-2xl sm:-m-8 sm:blur-3xl md:-m-12" />
+              <span className="absolute inset-0 -m-6 rounded-full bg-mint/45 blur-2xl sm:-m-8 sm:blur-3xl md:-m-12" />
               <span className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/25" />
               <span
                 className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/20"
                 style={{ animationDelay: "1.1s" }}
               />
               <div
-                className="relative flex h-16 w-16 items-center justify-center rounded-2xl shadow-elegant sm:h-24 sm:w-24 sm:rounded-3xl md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
+                className="relative flex h-20 w-20 items-center justify-center rounded-3xl shadow-elegant sm:h-28 sm:w-28 md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
                 style={{ background: "#0D2E4E" }}
               >
-                <img src="/logo.png" alt="NavigationTrading" className="h-10 w-auto object-contain sm:h-16 md:h-24 lg:h-28" />
+                <img src="/logo.png" alt="NavigationTrading" className="h-[52px] w-auto object-contain sm:h-[72px] md:h-24 lg:h-28" />
               </div>
             </div>
           </div>
@@ -149,17 +149,17 @@ function Node({
   active?: boolean;
 }) {
   return (
-    <div className={`flex max-w-[78px] flex-col gap-1 sm:max-w-[100px] sm:gap-1.5 md:max-w-[140px] ${align === "right" ? "items-end text-right" : "items-start"}`}>
+    <div className={`flex max-w-[104px] flex-col gap-1.5 sm:max-w-[120px] md:max-w-[140px] ${align === "right" ? "items-end text-right" : "items-start"}`}>
       <span
-        className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-all duration-500 sm:h-10 sm:w-10 sm:rounded-2xl md:h-12 md:w-12 lg:h-14 lg:w-14 ${
+        className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-500 sm:h-12 sm:w-12 md:h-14 md:w-14 ${
           active
             ? "border-transparent gradient-forest text-white shadow-glow scale-105"
             : "border-border/60 bg-white text-forest/70 shadow-sm"
         }`}
       >
-        <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
+        <Icon className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6" />
       </span>
-      <span className="text-[7.5px] font-semibold uppercase leading-snug tracking-[0.04em] text-muted-foreground sm:text-[9px] md:text-[10px] md:tracking-[0.08em]">{label}</span>
+      <span className="text-[9.5px] font-semibold uppercase leading-snug tracking-[0.06em] text-muted-foreground md:text-[10px] md:tracking-[0.08em]">{label}</span>
     </div>
   );
 }
