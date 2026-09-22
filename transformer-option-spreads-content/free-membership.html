@@ -1209,12 +1209,16 @@ body {
 
 @media (max-width: 768px) {
   .manifest-row {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 24px 20px;
   }
-  .mr-index { margin-bottom: 0px; font-size: 60px; }
-  .mr-right-block { margin-left: 0; margin-top: 20px; align-items: flex-start; text-align: left; width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+  .mr-index { order: 1; margin-bottom: 0; margin-right: 16px; font-size: 44px; flex-shrink: 0; }
+  .mr-right-block { order: 2; margin-left: auto; margin-top: 0; align-items: center; text-align: center; width: auto; border-top: none; padding-top: 0; }
+  .mr-icon { width: 48px; height: 48px; margin-bottom: 0; }
+  .mr-icon svg { width: 22px; height: 22px; }
+  .mr-content { order: 3; flex: 1 1 100%; margin-top: 16px; }
   .manifest-footer { flex-direction: column; gap: 20px; text-align: center; padding: 30px 20px; }
 }
 .bonus-list-card:hover .cc-icon-small { transform: scale(1.05) rotate(-5deg); }

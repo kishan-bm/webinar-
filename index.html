@@ -3318,8 +3318,8 @@
       .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
 
-      .navbar, .navbar.scrolled { display: grid !important; grid-template-columns: 1fr 100px 1fr; gap: 0; padding-left: 16px !important; padding-right: 16px !important; background: rgba(13, 46, 78, 0.98) !important; backdrop-filter: blur(20px); }
-      .navbar { position: relative; }
+      .navbar, .navbar.scrolled { display: grid !important; grid-template-columns: 1fr 100px 1fr; gap: 0; padding-left: 16px !important; padding-right: 16px !important; padding-top: 14px !important; padding-bottom: 14px !important; background: rgba(13, 46, 78, 0.98) !important; backdrop-filter: blur(20px); }
+      .navbar { position: fixed; top: 0; left: 0; right: 0; }
             .nav-toggle { grid-column: 1; justify-self: start; display: flex; align-items: center; }
       .navbar .nav-logo { grid-column: 2; margin: 0; order: unset; }
       .navbar .nav-auth-group { grid-column: 3; justify-self: end; overflow: visible !important; display: flex !important; }
