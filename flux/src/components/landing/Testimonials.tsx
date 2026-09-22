@@ -4,7 +4,14 @@ const quotes = [
   { q: "The live trade calls changed everything for me. Seeing the reasoning behind every entry — that's the part you can't get from a recorded course. Worth every penny.", author: "James K.", role: "Day Trading Member" },
 ];
 
-const track = [...quotes, ...quotes];
+// Duplicated 5x so the track always has enough buffer content ahead of the
+// visible viewport on wide screens, even mid-loop, preventing the scroller
+// from running out of cards and visibly stalling before it resets.
+const track = [...quotes, ...quotes, ...quotes, ...quotes, ...quotes];
+// One full cycle = one set of cards: 3 cards * (420px width + 20px gap) = 1320px.
+// Using an exact pixel distance (instead of -50%) keeps the loop seamless
+// regardless of how many copies are rendered.
+const CARD_PITCH = quotes.length * 440;
 
 const TESTIMONIALS_CSS = `
   .flux-testimonials { padding: 100px 0; background: #0D2E4E; position: relative; overflow: hidden; }
@@ -15,9 +22,9 @@ const TESTIMONIALS_CSS = `
   .flux-test-header h2 { font-size: clamp(32px, 4vw, 48px); color: #fff; letter-spacing: -1.5px; margin: 0 auto; font-weight: 800; line-height: 1.1; }
   .flux-test-header h2 span { background: linear-gradient(135deg, #fff 0%, #c8420a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .flux-marquee-container { position: relative; z-index: 10; width: 100%; overflow: hidden; margin-top: 20px; -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
-  .flux-marquee-track { display: flex; gap: 20px; width: max-content; animation: flux-marquee-scroll 45s linear infinite; }
+  .flux-marquee-track { display: flex; gap: 20px; width: max-content; animation: flux-marquee-scroll 22.5s linear infinite; }
   .flux-marquee-track:hover { animation-play-state: paused; }
-  @keyframes flux-marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
+  @keyframes flux-marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-${CARD_PITCH}px); } }
   .flux-test-card { width: 420px; flex-shrink: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; transition: all 0.3s ease; }
   .flux-test-card:hover { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); transform: translateY(-5px); }
   .flux-test-stars { display: flex; gap: 3px; color: #c8420a; margin-bottom: 20px; }
