@@ -1643,13 +1643,13 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .sticky-price-row { display: flex; flex-direction: column; gap: 8px; width: 100%; }
   .btn-sticky { padding: 14px 20px !important; font-size: 15px !important; width: 100%; }
   
-  /* Footer Mobile */
-  footer { padding: 48px 20px 80px; text-align: center; }
-  .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
-  .footer-top > div:last-child { flex-direction: column !important; gap: 20px !important; width: 100%; align-items: center; }
+  /* Footer Mobile — match home page (left-aligned, natural wrap) */
+  footer { padding: 48px 20px 80px; }
+  .footer-top { flex-direction: column; align-items: flex-start; text-align: left; gap: 32px; }
+  .footer-top > div:last-child { flex-direction: column !important; gap: 20px !important; width: 100%; align-items: flex-start; }
   .footer-links { flex-direction: column; gap: 20px; }
-  .footer-tagline { margin-bottom: 12px; display: block; width: 100%; margin-top: 0 !important; }
-  .footer-bottom { flex-direction: column; text-align: center; gap: 16px; }
+  .footer-tagline { margin-bottom: 0; display: block; width: 100%; margin-top: 0 !important; }
+  .footer-bottom { flex-direction: column; text-align: left; align-items: flex-start; gap: 16px; }
 
   /* Comparison Table Mobile — no scroll */
   .comp-table-wrap { overflow-x: visible; border-radius: 12px; }
