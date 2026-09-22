@@ -4229,6 +4229,7 @@
             .nav-toggle { grid-column: 1; justify-self: start; display: flex; align-items: center; }
       .navbar .nav-logo { grid-column: 2; margin: 0; order: unset; }
       .navbar .nav-auth-group { grid-column: 3; justify-self: end; overflow: visible !important; display: flex !important; }
+      .navbar .nav-auth-group .nav-login-link { display: none; }
       .navbar .nav-logo img { transform: scale(2.5) !important; transform-origin: center center !important; }
       .navbar > div[style*="display:flex"] { display: flex !important; order: 1; gap: 0 !important; }
       .navbar > div[style*="display:flex"] a[href*="whop.com/orders"] { display: none; }
@@ -4434,9 +4435,8 @@
       <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
     </ul>
     <div style="display:flex; gap:16px; align-items:center;" class="nav-auth-group">
-      <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/"
-        style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
-      <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntday/" class="nav-cta" data-config="navCtaLink">Join Now</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" class="nav-login-link" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/ntday/" class="nav-cta" data-config="navCtaLink">Join Now</a>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
     <div class="nav-backdrop" id="navBackdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
