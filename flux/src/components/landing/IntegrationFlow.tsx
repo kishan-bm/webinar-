@@ -70,21 +70,7 @@ export function IntegrationFlow() {
           </p>
         </div>
 
-        {/* Mobile/tablet fallback: the absolute-positioned flow diagram below
-            only works once there's enough width for the left/right node
-            columns and the center hub to not collide, so it's desktop-only. */}
-        <div className="mt-10 grid grid-cols-2 gap-3 lg:hidden">
-          {[...sources, ...outputs].map((n) => (
-            <div key={n.label} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-white p-3 shadow-sm">
-              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl border border-border/60 text-forest/70">
-                <n.icon className="h-5 w-5" />
-              </span>
-              <span className="text-[11px] font-semibold uppercase leading-snug tracking-[0.06em] text-muted-foreground">{n.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="relative mt-16 hidden h-[470px] w-full lg:block">
+        <div className="relative mt-10 h-[560px] w-full sm:h-[500px] md:mt-16 md:h-[470px]">
           <svg aria-hidden className="absolute inset-0 h-full w-full" viewBox="0 0 1000 450" preserveAspectRatio="none">
             <defs>
               <linearGradient id="lfIn" x1="0" x2="1">
@@ -131,17 +117,17 @@ export function IntegrationFlow() {
           {/* Hub */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative">
-              <span className="absolute inset-0 -m-12 rounded-full bg-mint/45 blur-3xl" />
+              <span className="absolute inset-0 -m-4 rounded-full bg-mint/45 blur-2xl sm:-m-8 sm:blur-3xl md:-m-12" />
               <span className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/25" />
               <span
                 className="absolute inset-0 animate-hub-ring rounded-[2rem] border border-forest/20"
                 style={{ animationDelay: "1.1s" }}
               />
               <div
-                className="relative flex h-36 w-36 items-center justify-center rounded-[2rem] shadow-elegant md:h-40 md:w-40"
+                className="relative flex h-16 w-16 items-center justify-center rounded-2xl shadow-elegant sm:h-24 sm:w-24 sm:rounded-3xl md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
                 style={{ background: "#0D2E4E" }}
               >
-                <img src="/logo.png" alt="NavigationTrading" className="h-24 w-auto object-contain md:h-28" />
+                <img src="/logo.png" alt="NavigationTrading" className="h-10 w-auto object-contain sm:h-16 md:h-24 lg:h-28" />
               </div>
             </div>
           </div>
@@ -163,17 +149,17 @@ function Node({
   active?: boolean;
 }) {
   return (
-    <div className={`flex max-w-[140px] flex-col gap-1.5 ${align === "right" ? "items-end text-right" : "items-start"}`}>
+    <div className={`flex max-w-[78px] flex-col gap-1 sm:max-w-[100px] sm:gap-1.5 md:max-w-[140px] ${align === "right" ? "items-end text-right" : "items-start"}`}>
       <span
-        className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all duration-500 md:h-14 md:w-14 ${
+        className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-all duration-500 sm:h-10 sm:w-10 sm:rounded-2xl md:h-12 md:w-12 lg:h-14 lg:w-14 ${
           active
             ? "border-transparent gradient-forest text-white shadow-glow scale-105"
             : "border-border/60 bg-white text-forest/70 shadow-sm"
         }`}
       >
-        <Icon className="h-5 w-5 md:h-6 md:w-6" />
+        <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
       </span>
-      <span className="text-[10px] font-semibold uppercase leading-snug tracking-[0.08em] text-muted-foreground">{label}</span>
+      <span className="text-[7.5px] font-semibold uppercase leading-snug tracking-[0.04em] text-muted-foreground sm:text-[9px] md:text-[10px] md:tracking-[0.08em]">{label}</span>
     </div>
   );
 }
