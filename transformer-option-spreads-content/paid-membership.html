@@ -3124,13 +3124,15 @@ const stickyBar = document.getElementById('stickyBar');
 const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
-  stickyBar.classList.toggle('visible', scrolled > 800);
-  backToTop.classList.toggle('visible', scrolled > 500);
+  if (stickyBar) stickyBar.classList.toggle('visible', scrolled > 800);
+  if (backToTop) backToTop.classList.toggle('visible', scrolled > 500);
 });
 
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 /* ── Reveal animation ── */
 const observer = new IntersectionObserver(entries => {
