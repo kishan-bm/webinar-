@@ -1571,6 +1571,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
    ══════════════════════════════════════ */
 /* Nav Toggle hidden by default on desktop */
 @media (min-width: 769px) { .nav-toggle { display: none !important; } }
+.nav-close { display: none; }
 
 @media (max-width: 768px) {
   /* Reset Desktop Scale */
@@ -1669,8 +1670,11 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   .footer-tagline { margin-top: 48px !important; }
 
   /* Comparison Table Mobile */
-  .comp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { min-width: 600px; }
+  .comp-table-wrap { overflow-x: visible; }
+  table { min-width: 0; width: 100%; }
+  td, th { padding: 12px 8px; font-size: 13px; }
+  .col-dt-label, .pro-col-label { font-size: 12px; }
+  .col-dt-price, .pro-col-price { font-size: 10px; }
   
   /* Grid Layouts Stack */
   .for-not-for, .instructor-layout-pro, .tools-premium-grid { grid-template-columns: 1fr !important; gap: 24px; }
@@ -1875,6 +1879,12 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   object-position: top left;
   border-radius: 8px 8px 0 0;
   display: block;
+}
+@media (max-width: 768px) {
+  .flux-mock-browser--tall img {
+    height: auto;
+    object-fit: initial;
+  }
 }
 .flux-tool-block {
   padding: 36px 40px 28px;
