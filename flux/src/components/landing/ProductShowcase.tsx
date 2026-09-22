@@ -125,7 +125,7 @@ export function ProductShowcase() {
       className="relative"
       style={{ height: `${scenes.length * 110 + 70}vh` }}
     >
-      <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-white pt-24 pb-6 lg:justify-center lg:py-12">
+      <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-white pt-20 pb-2 lg:justify-center lg:py-12">
         <div className="absolute inset-0 grid-bg opacity-70 pointer-events-none" />
 
         <div className="relative mx-auto w-full max-w-6xl px-6">
@@ -143,7 +143,7 @@ export function ProductShowcase() {
                     const target = el.offsetTop + (total * (i + 0.5)) / scenes.length;
                     window.scrollTo({ top: target, behavior: "smooth" });
                   }}
-                  className="relative overflow-hidden rounded-full px-4 py-3 text-center transition-all duration-700 ease-out"
+                  className="relative overflow-hidden rounded-full px-4 py-2 text-center transition-all duration-700 ease-out lg:py-3"
                   style={{ background: isActive ? "#ffffff" : "oklch(0.955 0.0132 235 / 0.75)" }}
                 >
                   <span
@@ -163,18 +163,18 @@ export function ProductShowcase() {
           </div>
 
           {/* Content: text left, popping panel right */}
-          <div className="mt-16 grid items-start gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-20">
-            <div className="flex min-h-[420px] flex-col pt-2">
+          <div className="mt-4 grid items-start gap-4 lg:mt-16 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-20">
+            <div className="flex flex-col pt-2 lg:min-h-[420px]">
               <div>
                 <div className="overflow-hidden">
                   <h2
                     key={`t-${scene.key}`}
-                    className="animate-line-up font-display text-[2.1rem] leading-[1.02] text-ink text-balance md:text-[3.4rem]"
+                    className="animate-line-up font-display text-[1.7rem] leading-[1.05] text-ink text-balance sm:text-[2.1rem] md:text-[3.4rem]"
                   >
                     {scene.title}
                   </h2>
                 </div>
-                <div key={`c-${scene.key}`} className="animate-blur-in mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "160ms" }}>
+                <div key={`c-${scene.key}`} className="animate-blur-in mt-4 flex flex-wrap items-center gap-3 lg:mt-9" style={{ animationDelay: "160ms" }}>
                   <a
                     href="https://whop.com/navigationtrading/ntpro/"
                     target="_blank"
@@ -193,7 +193,7 @@ export function ProductShowcase() {
                 </div>
               </div>
 
-              <ul key={`b-${scene.key}`} className="mt-auto space-y-4 pt-16">
+              <ul key={`b-${scene.key}`} className="mt-4 space-y-2 pt-2 lg:mt-auto lg:space-y-4 lg:pt-16">
                 {scene.bullets.map((b, bi) => (
                   <li
                     key={b.text}
@@ -211,7 +211,7 @@ export function ProductShowcase() {
 
             {/* Panel: light card so dark GIFs pop, with accent glow */}
             <div
-              className="relative flex h-[440px] items-end justify-center overflow-hidden rounded-[28px] transition-all duration-[900ms] ease-out md:h-[540px]"
+              className="relative flex h-[190px] items-end justify-center overflow-hidden rounded-[28px] transition-all duration-[900ms] ease-out sm:h-[320px] md:h-[440px] lg:h-[540px]"
               style={{
                 background: "linear-gradient(160deg, #f4f6fa 0%, #eceef4 100%)",
                 boxShadow: `0 0 0 1px rgba(0,0,0,0.06), 0 8px 40px -12px rgba(0,0,0,0.18), 0 0 60px -10px ${scene.tint}55`,
