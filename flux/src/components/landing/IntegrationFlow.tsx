@@ -124,10 +124,10 @@ export function IntegrationFlow() {
                 style={{ animationDelay: "1.1s" }}
               />
               <div
-                className="relative flex h-20 w-20 items-center justify-center rounded-3xl shadow-elegant sm:h-28 sm:w-28 md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
+                className="relative flex h-16 w-16 items-center justify-center rounded-2xl shadow-elegant max-[380px]:h-16 max-[380px]:w-16 min-[381px]:h-20 min-[381px]:w-20 min-[381px]:rounded-3xl sm:h-28 sm:w-28 md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
                 style={{ background: "#0D2E4E" }}
               >
-                <img src="/logo.png" alt="NavigationTrading" className="h-[52px] w-auto object-contain sm:h-[72px] md:h-24 lg:h-28" />
+                <img src="/logo.png" alt="NavigationTrading" className="h-11 w-auto object-contain min-[381px]:h-[52px] sm:h-[72px] md:h-24 lg:h-28" />
               </div>
             </div>
           </div>
@@ -149,17 +149,17 @@ function Node({
   active?: boolean;
 }) {
   return (
-    <div className={`flex max-w-[104px] flex-col gap-1.5 sm:max-w-[120px] md:max-w-[140px] ${align === "right" ? "items-end text-right" : "items-start"}`}>
+    <div className={`flex max-w-[100px] flex-col gap-1 min-[381px]:max-w-[104px] min-[381px]:gap-1.5 sm:max-w-[120px] md:max-w-[140px] ${align === "right" ? "items-end text-right" : "items-start"}`}>
       <span
-        className={`flex h-11 w-11 items-center justify-center rounded-2xl border transition-all duration-500 sm:h-12 sm:w-12 md:h-14 md:w-14 ${
+        className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-500 min-[381px]:h-11 min-[381px]:w-11 min-[381px]:rounded-2xl sm:h-12 sm:w-12 md:h-14 md:w-14 ${
           active
             ? "border-transparent gradient-forest text-white shadow-glow scale-105"
             : "border-border/60 bg-white text-forest/70 shadow-sm"
         }`}
       >
-        <Icon className="h-5 w-5 sm:h-5 sm:w-5 md:h-6 md:w-6" />
+        <Icon className="h-4 w-4 min-[381px]:h-5 min-[381px]:w-5 md:h-6 md:w-6" />
       </span>
-      <span className="text-[9.5px] font-semibold uppercase leading-snug tracking-[0.06em] text-muted-foreground md:text-[10px] md:tracking-[0.08em]">{label}</span>
+      <span className="text-[8.5px] font-semibold uppercase leading-snug tracking-[0.04em] text-muted-foreground min-[381px]:text-[9.5px] min-[381px]:tracking-[0.06em] md:text-[10px] md:tracking-[0.08em]">{label}</span>
     </div>
   );
 }

@@ -61,6 +61,7 @@ const NAV_CSS = `
     .nav-links li { width: 100%; }
     .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
+    .nav-item-dropdown:hover .dropdown-menu, .nav-item-dropdown.is-open .dropdown-menu, .nav-item-dropdown:focus-within .dropdown-menu { position: static !important; transform: none !important; left: auto !important; top: auto !important; }
   }
 `;
 
