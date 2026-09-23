@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const TO_ADDRESS = 'contact@navigationtrading.com, support@navigationtrading.com';
+const TO_ADDRESS = 'contact@navigationtrading.com, support@navigationtrading.com, kishan@qodet.com';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Strip CR/LF so user input can't inject extra SMTP headers.
