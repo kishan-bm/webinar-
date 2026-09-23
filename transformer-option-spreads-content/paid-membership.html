@@ -1190,6 +1190,10 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .review-after p { font-size: 13.5px; line-height: 1.65; color: rgba(255, 255, 255, 0.82); font-style: italic; margin: 0; }
 
 .reviews-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 40px; }
+@media (min-width: 1024px) {
+  /* All 3 reviews are visible at once on desktop, so navigation is redundant */
+  .reviews-nav { display: none; }
+}
 .reviews-nav-btn {
   width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(0, 0, 0, 0.15);
   background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -1511,7 +1515,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 }
 .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #fff; letter-spacing: 5px; }
 .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
-.footer-tagline { color: rgba(255,255,255,.35); font-size: 13px; margin-top: 0; }
+.footer-tagline { color: rgba(255,255,255,.35); font-size: 13px; margin-top: 100px; }
 .footer-links { display: flex; gap: 40px; align-items: center; }
 .footer-links a { color: rgba(255,255,255,.45); font-size: 13px; text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--gold); }
@@ -2499,11 +2503,11 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </li>
           <li class="fnf-item">
             <strong>You want real-time alerts you can act on immediately.</strong>
-            <span>You don't just want to learn strategies — you want to see them in action and get notified when setups appear. Pro alerts cover every strategy, every day.</span>
+            <span>You don't just want to learn strategies. You want to see them in action and get notified when setups appear. Pro alerts cover every strategy, every day.</span>
           </li>
           <li class="fnf-item">
             <strong>You're serious about making trading a consistent part of your life.</strong>
-            <span>You're committing to showing up — watching the live streams, studying the courses, engaging in the community. You want real results from real effort.</span>
+            <span>You're committing to showing up: watching the live streams, studying the courses, engaging in the community. You want real results from real effort.</span>
           </li>
         </ul>
       </div>
@@ -2651,7 +2655,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="oi-item-pro oi-item-1 reveal">
         <span class="oi-verb-pro">Trade</span>
         <h4>Multiple Strategies</h4>
-        <p>Trade multiple strategies based on what the market gives you each day — bullish, bearish, sideways, or volatile, you always have the right play.</p>
+        <p>Trade multiple strategies based on what the market gives you each day: bullish, bearish, sideways, or volatile, you always have the right play.</p>
       </div>
       <div class="oi-item-pro oi-item-2 reveal">
         <span class="oi-verb-pro">Receive</span>
@@ -2727,11 +2731,11 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="instructor-bio-card-pro reveal">
         <p class="instructor-bio-lead">"We don't teach what we don't trade. Every strategy in the Pro library is proven live, with real capital and real execution."</p>
         <div class="instructor-bio-body">
-          <p>I've been trading for more than 27 years — and I still show up every single market morning.</p>
-          <p>That's the part most people in this industry skip. Plenty of educators sell you a course, cash the check, and disappear. I sit in the same live trading room as my members, call my trades in real time, explain the reasoning as it's happening, and take the wins and the losses in front of everyone. No screenshots of cherry-picked winners with the losers quietly deleted. If a trade goes against me, you see it — and you see how I handle it.</p>
-          <p>I built NavigationTrading because I got tired of watching traders get sold hype: "secret indicators," gut-feel setups, and promises that fall apart the moment real money is on the line. My approach is the opposite. It's built on statistics, probabilities, and repeatable rules I've refined over nearly three decades in the market. Every entry and exit has a reason behind it. Every strategy I teach is one I actively trade myself — because I don't believe in teaching anything I'm not willing to put my own capital behind.</p>
+          <p>I've been trading for more than 27 years, and I still show up every single market morning.</p>
+          <p>That's the part most people in this industry skip. Plenty of educators sell you a course, cash the check, and disappear. I sit in the same live trading room as my members, call my trades in real time, explain the reasoning as it's happening, and take the wins and the losses in front of everyone. No screenshots of cherry-picked winners with the losers quietly deleted. If a trade goes against me, you see it, and you see how I handle it.</p>
+          <p>I built NavigationTrading because I got tired of watching traders get sold hype: "secret indicators," gut-feel setups, and promises that fall apart the moment real money is on the line. My approach is the opposite. It's built on statistics, probabilities, and repeatable rules I've refined over nearly three decades in the market. Every entry and exit has a reason behind it. Every strategy I teach is one I actively trade myself, because I don't believe in teaching anything I'm not willing to put my own capital behind.</p>
           <p>Over the years, that philosophy has grown into a community of more than 3,400 members, a 4.9-star track record, and a library of strategies proven where it actually counts: in the live market, with real capital, every day.</p>
-          <p>If you want theory, there are cheaper places to find it. If you want to watch someone actually trade — and learn to think in probabilities instead of predictions — you're in the right place.</p>
+          <p>If you want theory, there are cheaper places to find it. If you want to watch someone actually trade, and learn to think in probabilities instead of predictions, you're in the right place.</p>
         </div>
         <ul class="instructor-creds-list">
           <li class="instructor-cred-row">
@@ -2791,7 +2795,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </div>
           <div class="faq-a" style="max-height: 500px;">
             <div class="faq-a-inner">
-              The Day Trading membership ($129/month) includes 10 day trading strategy courses, daily live streams, and trade alerts for day trading setups. Pro ($179/month) includes everything in Day Trading plus 7 additional advanced strategy courses covering income spreads, trend trading, and portfolio strategies. Pro members also get trade alerts for every strategy we teach — not just day trading — plus the full suite of custom chart indicators and watch lists. For $50 more per month, you get the complete NavigationTrading system.
+              The Day Trading membership ($129/month) includes 9 day trading strategy courses, daily live streams, and trade alerts for day trading setups. Pro ($179/month) includes everything in Day Trading plus 7 additional advanced strategy courses covering income spreads, trend trading, and portfolio strategies. Pro members also get trade alerts for every strategy we teach (not just day trading) plus the full suite of custom chart indicators and watch lists. For $50 more per month, you get the complete NavigationTrading system.
             </div>
           </div>
         </div>
@@ -2815,7 +2819,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </div>
           <div class="faq-a">
             <div class="faq-a-inner">
-              If you've never traded options before, we recommend starting with our Free Membership to learn the fundamentals. The free courses cover options basics, how contracts work, and beginner strategies. Once you're comfortable with the foundations, Pro is where you take it to the next level. That said, if you're motivated and ready to commit, Pro gives you everything from day one — including the foundational knowledge.
+              If you've never traded options before, we recommend starting with our Free Membership to learn the fundamentals. The free courses cover options basics, how contracts work, and beginner strategies. Once you're comfortable with the foundations, Pro is where you take it to the next level. That said, if you're motivated and ready to commit, Pro gives you everything from day one, including the foundational knowledge.
             </div>
           </div>
         </div>
@@ -2851,7 +2855,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           </div>
           <div class="faq-a">
             <div class="faq-a-inner">
-              No. Many of our strategies — especially the day trading and 0 DTE setups, can be traded with accounts of $5,000 or less. The courses cover how to match strategies to your account size. Some of the advanced strategies like portfolio margin are designed for larger accounts, but you don't need to trade every strategy to get value from Pro. Start with what fits your account and expand as you grow.
+              No. Many of our strategies (especially the day trading and 0 DTE setups) can be traded with accounts of $5,000 or less. The courses cover how to match strategies to your account size. Some of the advanced strategies like portfolio margin are designed for larger accounts, but you don't need to trade every strategy to get value from Pro. Start with what fits your account and expand as you grow.
             </div>
           </div>
         </div>
@@ -3304,8 +3308,8 @@ document.querySelectorAll('.faq-item').forEach(item => {
     updateTrack();
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => slide(-1));
-  if (nextBtn) nextBtn.addEventListener('click', () => slide(1));
+  if (prevBtn) prevBtn.addEventListener('click', () => { slide(-1); resetAutoLoop(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { slide(1); resetAutoLoop(); });
 
   if (dotsContainer) {
     dotsContainer.querySelectorAll('.reviews-dot').forEach(dot => {
@@ -3314,12 +3318,34 @@ document.querySelectorAll('.faq-item').forEach(item => {
         const maxIdx = Math.max(0, cards.length - visibleCount());
         currentIdx = Math.min(currentIdx, maxIdx);
         updateTrack();
+        resetAutoLoop();
       });
     });
   }
 
-  window.addEventListener('resize', updateTrack);
+  window.addEventListener('resize', () => { updateTrack(); resetAutoLoop(); });
   updateTrack();
+
+  // Auto-loop when not every card fits on screen at once (mobile/tablet)
+  let autoLoopId = null;
+  function startAutoLoop() {
+    if (autoLoopId || visibleCount() >= cards.length) return;
+    autoLoopId = setInterval(() => {
+      const maxIdx = Math.max(0, cards.length - visibleCount());
+      currentIdx = currentIdx >= maxIdx ? 0 : currentIdx + 1;
+      updateTrack();
+    }, 3500);
+  }
+  function stopAutoLoop() {
+    if (autoLoopId) { clearInterval(autoLoopId); autoLoopId = null; }
+  }
+  function resetAutoLoop() {
+    stopAutoLoop();
+    startAutoLoop();
+  }
+  startAutoLoop();
+  track.addEventListener('mouseenter', stopAutoLoop);
+  track.addEventListener('mouseleave', startAutoLoop);
 })();
 </script>
 
