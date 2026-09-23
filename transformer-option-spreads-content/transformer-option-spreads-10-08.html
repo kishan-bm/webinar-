@@ -2834,11 +2834,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
     }
 
     .social-icon:hover {
       background: rgba(200, 66, 10, 0.3);
+      color: #fff;
     }
 
     .footer-link {
@@ -2948,6 +2951,14 @@
       .hero-form-wrap {
         display: flex;
         grid-column: 1/-1;
+      }
+
+      .hero-form-col {
+        top: 0;
+        right: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
       }
 
       .countdown-strip {
@@ -5624,7 +5635,7 @@
           <li>&#10003;&nbsp; Learn the Double Calendar setup</li>
           <li>&#10003;&nbsp; Get the $200/mo FLUX tool free</li>
         </ul>
-        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Tuesday, August 18 &nbsp;|&nbsp; 3:30 PM CST</div>
+        <div class="eip-date" data-config="exitPopupDate">&#128197;&nbsp; Thursday, October 8 &nbsp;|&nbsp; 3:30 PM CST</div>
       </div>
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>
@@ -5662,7 +5673,7 @@
     }
     #exit-popup.eip-open { display: flex; }
     .eip-overlay { position: absolute; inset: 0; background: rgba(5,12,28,0.87); backdrop-filter: blur(6px); }
-    .eip-wrap { position: relative; z-index: 1; max-width: 900px; width: 100%; }
+    .eip-wrap { position: relative; z-index: 1; max-width: 900px; width: 100%; max-height: 100%; }
 
     .eip-close {
       position: absolute; top: 14px; right: 14px; z-index: 10;
@@ -5679,7 +5690,9 @@
       position: relative;
       display: grid; grid-template-columns: 1fr 1fr;
       width: 100%;
-      border-radius: 20px; overflow: hidden;
+      max-height: 100%;
+      overflow-y: auto;
+      border-radius: 20px;
       box-shadow: 0 48px 120px rgba(0,0,0,0.6);
       animation: eip-in 0.38s cubic-bezier(.22,.68,0,1.2) both;
     }
@@ -5785,11 +5798,24 @@
     .eip-dismiss:hover { color: #718096; }
 
     @media (max-width: 640px) {
-      .eip-card { grid-template-columns: 1fr; }
-      .eip-left { padding: 32px 28px 28px; }
-      .eip-right { padding: 32px 28px; }
-      .eip-logo { transform: scale(4); }
-      .eip-logo-row { margin-bottom: 40px; }
+      #exit-popup { padding: 10px; }
+      .eip-card { grid-template-columns: 1fr; max-height: 96vh; }
+      .eip-left { padding: 22px 20px 18px; }
+      .eip-right { padding: 22px 20px 20px; }
+      .eip-logo { transform: scale(3); }
+      .eip-logo-row { margin-bottom: 22px; }
+      .eip-badge { margin-bottom: 12px; }
+      .eip-headline { font-size: 18px; margin-bottom: 8px; }
+      .eip-tagline { font-size: 12.5px; margin-bottom: 14px; }
+      .eip-bullets { margin-bottom: 16px; }
+      .eip-bullets li { font-size: 12.5px; margin-bottom: 6px; }
+      .eip-form-title { font-size: 18px; }
+      .eip-form-sub { font-size: 12.5px; margin-bottom: 16px; }
+      .eip-field { margin-bottom: 10px; }
+      .eip-input { padding: 11px 14px; font-size: 14px; }
+      .eip-consent-label { margin-bottom: 10px; }
+      .eip-submit { padding: 13px; }
+      .eip-dismiss { margin: 10px 0 0; }
     }
   </style>
 
