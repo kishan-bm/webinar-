@@ -127,7 +127,7 @@ export function IntegrationFlow() {
                 className="relative flex h-16 w-16 items-center justify-center rounded-2xl shadow-elegant max-[380px]:h-16 max-[380px]:w-16 min-[381px]:h-20 min-[381px]:w-20 min-[381px]:rounded-3xl sm:h-28 sm:w-28 md:h-36 md:w-36 md:rounded-[2rem] lg:h-40 lg:w-40"
                 style={{ background: "#0D2E4E" }}
               >
-                <img src="/logo.png" alt="NavigationTrading" className="h-11 w-auto object-contain min-[381px]:h-[52px] sm:h-[72px] md:h-24 lg:h-28" />
+                <img src="/compass-icon.png" alt="NavigationTrading" className="h-9 w-auto object-contain min-[381px]:h-11 sm:h-16 md:h-20 lg:h-24" />
               </div>
             </div>
           </div>
