@@ -710,7 +710,7 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .info-card-icon svg { width: 24px; height: 24px; color: var(--orange); }
 .info-card-body { display: flex; flex-direction: column; gap: 8px; }
 .info-card h3 { color: var(--navy); margin: 0; font-weight: 800; font-size: 17px; }
-.info-card p { font-size: 14px; color: #5b6776; line-height: 1.65; margin: 0; }
+.info-card p { font-size: 14px; color: #5b6776; line-height: 1.65; margin: 0; text-align: justify; }
 
 @media (max-width: 1200px) {
   .info-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
@@ -1190,10 +1190,6 @@ tr:last-child td.pro-col { border-radius: 0 0 4px 4px; }
 .review-after p { font-size: 13.5px; line-height: 1.65; color: rgba(255, 255, 255, 0.82); font-style: italic; margin: 0; }
 
 .reviews-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 40px; }
-@media (min-width: 1024px) {
-  /* All 3 reviews are visible at once on desktop, so navigation is redundant */
-  .reviews-nav { display: none; }
-}
 .reviews-nav-btn {
   width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(0, 0, 0, 0.15);
   background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -1533,6 +1529,10 @@ footer > .footer-bottom { position: relative; z-index: 1; }
   gap: 16px;
   margin-top: 40px;
   width: 100%;
+}
+@media (min-width: 1024px) {
+  /* All 3 reviews are visible at once on desktop, so navigation is redundant */
+  .reviews-controls { display: none; }
 }
 .reviews-nav-btn {
   width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.12);
