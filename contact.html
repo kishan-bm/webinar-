@@ -992,8 +992,8 @@
       justify-content: space-between;
       align-items: flex-start;
     }
-    .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; filter: brightness(0) invert(1); margin-bottom: 20px; }
-    .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.5); }
+    .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; filter: brightness(0) invert(1); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
     
     .social-icon {
       width: 32px; height: 32px; border-radius: 6px;
@@ -1036,6 +1036,7 @@
       .footer-top { flex-direction: column; gap: 36px; }
       .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
       .footer-brand { margin-bottom: 0; }
+      .footer-tagline { margin-top: 0; }
     }
     html, body {
       max-width: 100%;
@@ -1318,7 +1319,7 @@
         <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"></div>
         <div class="footer-tagline">Institutional Grade Trading Education</div>
       </div>
-      <div style="display:flex;gap:60px;flex-wrap:wrap;align-items:flex-start;">
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
         <div>
           <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Contact</div>
           <a href="mailto:support@navigationtrading.com" data-config="contactEmail" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">support@navigationtrading.com</a>
@@ -1351,10 +1352,17 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="https://navigationtrading.com/legal-disclaimers/#privacy" target="_blank" class="footer-link">Privacy Policy</a>
+          <a href="https://navigationtrading.com/legal-disclaimers#terms" target="_blank" class="footer-link">Terms of Use</a>
+          <a href="https://navigationtrading.com/legal-disclaimers/#refund" target="_blank" class="footer-link">Refund Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+      </div>
       <div class="footer-copy">
         The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.
       </div>
-      <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
     </div>
   </footer>
 
