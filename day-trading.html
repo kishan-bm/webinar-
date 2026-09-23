@@ -2547,6 +2547,13 @@
       letter-spacing: 5px;
     }
 
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+      transform: scale(5);
+      transform-origin: left center;
+    }
+
     .footer-tagline {
       color: rgba(255, 255, 255, 0.35);
       font-size: 13px;
@@ -2885,15 +2892,11 @@
       }
 
       /* footer */
-      footer {
-        padding: 40px 24px 28px;
-      }
-
-      .footer-top {
-        flex-direction: column;
-        gap: 20px;
-        padding-bottom: 24px;
-      }
+      footer { padding: 60px 20px 32px; }
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+      .footer-brand { margin-bottom: 0; }
+      .footer-tagline { margin-top: 0; }
 
       .footer-links {
         gap: 16px;
@@ -4219,12 +4222,10 @@
   <footer>
     <div class="footer-top">
       <div>
-        <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"
-            style="height: 40px; width: auto; transform: scale(5); transform-origin: left center; vertical-align: middle;">
-        </div>
+        <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"></div>
         <div class="footer-tagline">Institutional Grade Trading Education</div>
       </div>
-      <div style="display:flex;gap:60px;flex-wrap:wrap;align-items:flex-start;">
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
         <div>
           <div
             style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">
@@ -4238,28 +4239,28 @@
             Follow</div>
           <div style="display:flex;gap:8px;align-items:center;">
             <a href="https://www.facebook.com/navigationtrading" target="_blank" class="social-icon"><svg width="14"
-                height="14" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)">
+                height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
               </svg></a>
             <a href="https://x.com/navtrading1?s=21" target="_blank" class="social-icon"><svg width="13" height="13"
-                viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)">
+                viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg></a>
             <a href="https://www.instagram.com/navigationtrading" target="_blank" class="social-icon"><svg width="14"
-                height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2">
+                height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="2" width="20" height="20" rx="5" />
                 <circle cx="12" cy="12" r="5" />
-                <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.6)" stroke="none" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
               </svg></a>
             <a href="https://www.youtube.com/@navigationtrading" target="_blank" class="social-icon"><svg width="15"
-                height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)">
+                height="15" viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
                 <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828" />
               </svg></a>
             <a href="https://www.linkedin.com/company/navigationtrading" target="_blank" class="social-icon"><svg
-                width="13" height="13" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)">
+                width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                 <circle cx="4" cy="4" r="2" />
               </svg></a>
@@ -4280,6 +4281,14 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="https://navigationtrading.com/legal-disclaimers/#privacy" target="_blank" class="footer-link">Privacy Policy</a>
+          <a href="https://navigationtrading.com/legal-disclaimers#terms" target="_blank" class="footer-link">Terms of Use</a>
+          <a href="https://navigationtrading.com/legal-disclaimers/#refund" target="_blank" class="footer-link">Refund Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+      </div>
       <div class="footer-copy" style="line-height:1.75;font-size:11.5px;color:rgba(255,255,255,0.3)">
         The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities
         involve risk and are not suitable for all investors. Consider all relevant risk factors, including their
@@ -4292,7 +4301,6 @@
         to potentially rapid and substantial losses. Please read Characteristics and Risks of Standardized Options
         before investing in options.
       </div>
-      <div class="footer-copy">&copy; Navigation Financial, LLC</div>
     </div>
   </footer>
 

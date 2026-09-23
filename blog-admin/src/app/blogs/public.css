@@ -216,7 +216,9 @@ footer::before {
 .social-icon:hover { background: var(--orange); }
 
 @media (max-width: 768px) {
-  .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 12px; }
+  footer { padding: 60px 20px 32px; }
+  .footer-top { flex-direction: column; gap: 36px; }
+  .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
   .footer-tagline { margin-top: 0; }
 }
 
