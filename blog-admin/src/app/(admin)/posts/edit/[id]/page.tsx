@@ -35,7 +35,8 @@ export default function EditPost({ params }: EditPostProps) {
     coverImage: '',
     coverImageAlt: '',
     categoryName: '',
-    tagNames: ''
+    tagNames: '',
+    publishedAt: ''
   });
 
   // Fetch authors and post data
@@ -67,7 +68,8 @@ export default function EditPost({ params }: EditPostProps) {
             coverImage: post.coverImage || '',
             coverImageAlt: post.coverImageAlt || '',
             categoryName: post.category?.name || '',
-            tagNames: post.tags?.map((t: any) => t.name).join(', ') || ''
+            tagNames: post.tags?.map((t: any) => t.name).join(', ') || '',
+            publishedAt: (post.publishedAt || post.createdAt) ? new Date(post.publishedAt || post.createdAt).toISOString().slice(0, 10) : ''
           };
           setFormData(loaded);
           lastSavedDataRef.current = JSON.stringify(loaded);
@@ -351,6 +353,17 @@ export default function EditPost({ params }: EditPostProps) {
                   <option value="DRAFT">Draft</option>
                   <option value="PUBLISHED">Published</option>
                 </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Published date</label>
+                <input
+                  type="date"
+                  className="form-input"
+                  value={formData.publishedAt}
+                  onChange={e => setFormData({...formData, publishedAt: e.target.value})}
+                />
+                <p className="form-hint">Controls where this post sorts in the blog list.</p>
               </div>
 
               <div className="form-group" style={{ marginBottom: 0 }}>

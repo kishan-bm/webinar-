@@ -110,7 +110,9 @@ export async function POST(request: Request) {
             author: { connect: { id: body.authorId } },
             category: categoryData,
             tags: tagsData,
-            publishedAt: body.publishedAt ? new Date(body.publishedAt) : null,
+            publishedAt: body.publishedAt
+              ? new Date(body.publishedAt)
+              : (body.status === 'PUBLISHED' ? new Date() : null),
           },
         });
         break; // success

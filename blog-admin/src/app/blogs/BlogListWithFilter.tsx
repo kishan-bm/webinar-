@@ -10,6 +10,7 @@ interface PostWithRelations {
   excerpt: string | null;
   coverImage: string | null;
   createdAt: Date | string;
+  publishedAt: Date | string | null;
   category: { id: string; name: string } | null;
   author: { name: string; avatarUrl: string | null };
   tags?: { id: string; name: string }[] | null;
@@ -261,7 +262,7 @@ export default function BlogListWithFilter({ posts }: BlogListWithFilterProps) {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
                     <div style={{ fontSize: '13px', color: 'var(--text-dim)' }}>
-                      {new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                     </div>
                     <div className="read-more">
                       Read Post &rarr;

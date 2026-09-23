@@ -70,6 +70,15 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     }
     // If body.slug is empty/missing, slugToSet remains undefined → Prisma won't touch the slug field
 
+    // Auto-stamp publishedAt the first time a post goes live, if the admin didn't set one explicitly.
+    let publishedAtToSet: Date | undefined = body.publishedAt ? new Date(body.publishedAt) : undefined;
+    if (!body.publishedAt && body.status === 'PUBLISHED') {
+      const existing = await prisma.post.findUnique({ where: { id }, select: { publishedAt: true } });
+      if (existing && !existing.publishedAt) {
+        publishedAtToSet = new Date();
+      }
+    }
+
     const post = await prisma.post.update({
       where: { id },
       data: {
@@ -87,7 +96,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         } : undefined,
         category: categoryUpdate,
         tags: tagsUpdate,
-        publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
+        publishedAt: publishedAtToSet,
       },
     });
 

@@ -30,7 +30,8 @@ export default function NewPost() {
     coverImage: '',
     coverImageAlt: '',
     categoryName: '',
-    tagNames: ''
+    tagNames: '',
+    publishedAt: ''
   });
 
   // Fetch authors for the dropdown
@@ -243,6 +244,17 @@ export default function NewPost() {
                   <option value="DRAFT">Draft</option>
                   <option value="PUBLISHED">Published</option>
                 </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Published date</label>
+                <input
+                  type="date"
+                  className="form-input"
+                  value={formData.publishedAt}
+                  onChange={e => setFormData({...formData, publishedAt: e.target.value})}
+                />
+                <p className="form-hint">Leave blank to use today&apos;s date when published.</p>
               </div>
 
               <div className="form-group" style={{ marginBottom: 0 }}>

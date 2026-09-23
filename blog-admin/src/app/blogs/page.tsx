@@ -12,7 +12,10 @@ export const revalidate = 60;
 export default async function BlogsPage() {
   const posts = await prisma.post.findMany({
     where: { status: 'PUBLISHED' },
-    orderBy: { createdAt: 'desc' },
+    orderBy: [
+      { publishedAt: { sort: 'desc', nulls: 'last' } },
+      { createdAt: 'desc' },
+    ],
     select: {
       id: true,
       title: true,
@@ -20,6 +23,7 @@ export default async function BlogsPage() {
       excerpt: true,
       coverImage: true,
       createdAt: true,
+      publishedAt: true,
       author: { select: { name: true, avatarUrl: true } },
       category: { select: { id: true, name: true } },
       tags: { select: { id: true, name: true } },
