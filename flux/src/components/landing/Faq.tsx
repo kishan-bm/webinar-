@@ -3,19 +3,19 @@ import { useState } from "react";
 const faqs = [
   {
     q: "Is FLUX included with my membership?",
-    a: "FLUX is available exclusively to Pro Members. If you're on a different plan, upgrading to Pro unlocks the full toolkit — Analyzer, Calendar IV, Earnings, NTT Scanner, 0 DTE, News, and Prediction Markets.",
+    a: "FLUX is available exclusively to Pro Members. If you're on a different plan, upgrading to Pro unlocks the full toolkit: Analyzer, Calendar IV, Earnings, NTT Scanner, 0 DTE, News, and Prediction Markets.",
   },
   {
     q: "Does FLUX place trades for me?",
-    a: "No. FLUX is a read-only analysis tool — it models positions, tracks volatility, and surfaces signals, but every order goes through you. When you're ready to act, it hands you a pre-filled ticket or order string for ThinkorSwim, Tradier, or IBKR, and you review and submit it in your own broker.",
+    a: "No. FLUX is a read-only analysis tool. It models positions, tracks volatility, and surfaces signals, but every order goes through you. When you're ready to act, it hands you a pre-filled ticket or order string for ThinkorSwim, Tradier, or IBKR, and you review and submit it in your own broker.",
   },
   {
     q: "What can I actually do in the Analyzer?",
-    a: "Build any options position — single legs, verticals, iron condors, calendars, and more — right-click to add structures, drag strikes to reshape a trade, and scrub time and volatility to see how it evolves. You can save, share, and import models, pull positions in directly from ThinkorSwim, and compare multiple trades side by side before ever placing an order.",
+    a: "Build any options position: single legs, verticals, iron condors, calendars, and more. Right-click to add structures, drag strikes to reshape a trade, and scrub time and volatility to see how it evolves. You can save, share, and import models, pull positions in directly from ThinkorSwim, and compare multiple trades side by side before ever placing an order.",
   },
   {
     q: "Will FLUX tell me exactly when to enter a trade?",
-    a: "FLUX gives you the signals and analysis to make that call yourself — like IV ratios in Calendar IV, trend states in the NTT Scanner, and expected-move data in Earnings and 0 DTE — but it doesn't issue trade recommendations or place trades. Every tool is built to inform your decision, not make it for you.",
+    a: "FLUX gives you the signals and analysis to make that call yourself, like IV ratios in Calendar IV, trend states in the NTT Scanner, and expected-move data in Earnings and 0 DTE, but it doesn't issue trade recommendations or place trades. Every tool is built to inform your decision, not make it for you.",
   },
 ];
 

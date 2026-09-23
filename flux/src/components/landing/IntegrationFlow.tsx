@@ -66,7 +66,7 @@ export function IntegrationFlow() {
           </h2>
           <p className="mt-5 text-base text-muted-foreground md:text-lg">
             FLUX pulls together volatility, earnings, trend, and market-wide data, then models and surfaces it
-            all in one live dashboard — no switching between tools mid-trade.
+            all in one live dashboard. No switching between tools mid-trade.
           </p>
         </div>
 

@@ -1,19 +1,20 @@
 const FOOTER_CSS = `
-  footer.nt-footer { background: #0D2E4E; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  footer.nt-footer { background: #0D2E4E; padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
   footer.nt-footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
   footer.nt-footer > .footer-top, footer.nt-footer > .footer-bottom { position: relative; z-index: 1; }
-  .footer-top { padding: 50px 60px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
-  .footer-brand img { height: 24px; opacity: 0.6; transform: scale(4.5); transform-origin: left center; }
-  .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-top: 20px; }
+  .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+  .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
   .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; text-decoration: none; }
   .social-icon:hover { background: #c8420a; color: #fff; }
   .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
   .footer-link:hover { color: rgba(255,255,255,0.9); }
-  .footer-bottom { padding: 24px 60px; border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; max-width: 900px; margin: 0 auto 8px; text-align: center; }
+  .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
+  .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
   @media (max-width: 768px) {
-    .footer-top { padding: 40px 24px; }
-    .footer-bottom { padding: 20px 24px; }
+    footer.nt-footer { padding: 48px 24px 80px; }
+    .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 12px; }
+    .footer-tagline { margin-top: 0; }
   }
 `;
 
@@ -27,7 +28,7 @@ export function Footer() {
             <div className="footer-brand"><img src="/logo.png" alt="NavigationTrading" /></div>
             <div className="footer-tagline">Institutional Grade Trading Education</div>
           </div>
-          <div style={{ display: "flex", gap: 60, flexWrap: "wrap", alignItems: "flex-start" }}>
+          <div style={{ display: "flex", gap: 32, flexWrap: "wrap", alignItems: "flex-start" }}>
             <div>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: 12 }}>Contact</div>
               <a href="mailto:support@navigationtrading.com" style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, textDecoration: "none" }}>support@navigationtrading.com</a>
@@ -45,7 +46,7 @@ export function Footer() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
                 </a>
                 <a href="https://www.youtube.com/@navigationtrading" target="_blank" rel="noreferrer" className="social-icon">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,0.6)"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
                 </a>
               </div>
             </div>
@@ -60,8 +61,15 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", flexWrap: "wrap", gap: 12 }}>
+            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+              <a href="https://navigationtrading.com/legal-disclaimers/#privacy" target="_blank" rel="noreferrer" className="footer-link">Privacy Policy</a>
+              <a href="https://navigationtrading.com/legal-disclaimers#terms" target="_blank" rel="noreferrer" className="footer-link">Terms of Use</a>
+              <a href="https://navigationtrading.com/legal-disclaimers/#refund" target="_blank" rel="noreferrer" className="footer-link">Refund Policy</a>
+            </div>
+            <div className="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+          </div>
           <div className="footer-copy">The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.</div>
-          <div className="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
         </div>
       </footer>
     </>

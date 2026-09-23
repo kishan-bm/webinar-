@@ -1,7 +1,7 @@
 const quotes = [
   { q: "Just joined a couple of weeks ago and love it. Winner on my first trade. This trading method is in line with my philosophy on making money in the market with smaller controlled positions.", author: "Michael R.", role: "Verified Member" },
   { q: "After years of trading, I feel that I am not on the bullish side or bearish side of the market, but finally on the profitable side. The strategies taught here are the best. Thank you.", author: "Suresh N.", role: "Pro Member" },
-  { q: "The live trade calls changed everything for me. Seeing the reasoning behind every entry — that's the part you can't get from a recorded course. Worth every penny.", author: "James K.", role: "Day Trading Member" },
+  { q: "The live trade calls changed everything for me. Seeing the reasoning behind every entry, that's the part you can't get from a recorded course. Worth every penny.", author: "James K.", role: "Day Trading Member" },
 ];
 
 // Duplicated 5x so the track always has enough buffer content ahead of the

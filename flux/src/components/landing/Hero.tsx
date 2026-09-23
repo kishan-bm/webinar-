@@ -28,7 +28,7 @@ export function Hero() {
           className="animate-rise inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium text-white/80 shadow-sm backdrop-blur"
         >
           <span className="flex h-1.5 w-1.5 rounded-full bg-forest" />
-          Introducing FLUX — Our Exclusive Trading Tool
+          Introducing FLUX: Our Exclusive Trading Tool
           <ArrowRight className="h-3.5 w-3.5" />
         </a>
 
