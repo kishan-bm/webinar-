@@ -267,11 +267,11 @@ footer::before {
   }
 }
 
-/* Full-width cover image – starts at y=0, navbar (z-index:1000) floats on top */
+/* Full-width cover image, starts right below the fixed navbar */
 .article-cover-hero {
   position: relative;
   width: 100%;
-  margin-top: 0;   /* starts at the very top, behind the fixed navbar */
+  margin-top: 88px;
   margin-bottom: 0;
   line-height: 0;  /* removes the default inline gap below img */
   overflow: hidden;
@@ -291,10 +291,10 @@ footer::before {
   display: none;
 }
 
-/* Back button overlaid on the cover image, just below the navbar */
+/* Back button overlaid on the cover image */
 .cover-back-link {
   position: absolute;
-  top: 70px;
+  top: 20px;
   left: 20px;
   z-index: 10;
   color: #c8420a;
@@ -317,8 +317,11 @@ footer::before {
 }
 
 @media (max-width: 768px) {
+  .article-cover-hero {
+    margin-top: 76px;
+  }
   .cover-back-link {
-    top: 56px;
+    top: 14px;
     left: 12px;
     font-size: 12px;
     padding: 8px 14px;
