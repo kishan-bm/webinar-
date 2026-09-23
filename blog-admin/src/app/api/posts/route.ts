@@ -34,7 +34,10 @@ export async function GET(request: Request) {
             category: true,
             tags: true,
           },
-          orderBy: { createdAt: 'desc' },
+          orderBy: [
+            { publishedAt: { sort: 'desc', nulls: 'last' } },
+            { createdAt: 'desc' },
+          ],
         });
 
     return NextResponse.json({ success: true, data: posts });

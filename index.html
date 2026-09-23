@@ -6018,7 +6018,8 @@
               if (data.success && data.data && data.data.length > 0) {
                 const posts = data.data.slice(0, 3);
                 grid.innerHTML = posts.map(post => {
-                  const dateStr = post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US', {
+                  const publishDate = post.publishedAt || post.createdAt;
+                  const dateStr = publishDate ? new Date(publishDate).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric'
