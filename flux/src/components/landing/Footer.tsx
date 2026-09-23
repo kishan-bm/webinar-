@@ -12,8 +12,9 @@ const FOOTER_CSS = `
   .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
   .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
   @media (max-width: 768px) {
-    footer.nt-footer { padding: 48px 24px 80px; }
-    .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 12px; }
+    footer.nt-footer { padding: 60px 20px 32px; }
+    .footer-top { flex-direction: column; gap: 36px; }
+    .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
     .footer-tagline { margin-top: 0; }
   }
 `;
