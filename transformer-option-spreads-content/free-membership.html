@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Membership — NavigationTrading | Start Your Options Education</title>
+<title>Free Membership | NavigationTrading | Start Your Options Education</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -286,8 +286,8 @@ body {
   margin-right: 28px;
 }
 .stat-item:last-child { border-right: none; margin-right: 0; }
-.stat-num { font-size: 34px; font-weight: 800; color: #fff; line-height: 1; }
-.stat-num sub { font-size: 16px; vertical-align: middle; bottom: auto; }
+.stat-num { font-size: 34px; font-weight: 800; color: #fff; line-height: 1; display: inline-flex; align-items: center; }
+.stat-num sub { font-size: 16px; vertical-align: baseline; }
 .stat-label { font-size: 11px; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
 
 /* Trust pills below stats */
@@ -961,6 +961,10 @@ body {
   justify-content: center;
   gap: 16px;
   margin-top: 40px;
+}
+@media (min-width: 1024px) {
+  /* All 3 reviews are visible at once on desktop, so navigation is redundant */
+  .reviews-nav { display: none; }
 }
 
 .reviews-nav-btn {
@@ -1970,7 +1974,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       </h1>
 
       <p class="hero-sub">
-        Stop guessing. Start trading with a real plan. Get 5 structured strategy courses, access to our 3,400+ member trading community, and the foundation you need to trade options with confidence — completely free.
+        Stop guessing. Start trading with a real plan. Get 5 structured strategy courses, access to our 3,400+ member trading community, and the foundation you need to trade options with confidence. Completely free.
       </p>
 
       <!-- Stats -->
@@ -2034,7 +2038,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       </div>
       <div class="summary-divider"></div>
       <div class="summary-right">
-        <p>The NavigationTrading Free Membership is a fully structured options trading education built for people who are serious about learning the right way. You'll get 5 complete strategy courses that cover everything from how options work to placing your first real trade — plus access to the TradeHacker Discord, where thousands of traders learn and grow together every single day.</p>
+        <p>The NavigationTrading Free Membership is a fully structured options trading education built for people who are serious about learning the right way. You'll get 5 complete strategy courses that cover everything from how options work to placing your first real trade, plus access to the TradeHacker Discord, where thousands of traders learn and grow together every single day.</p>
         <p>No credit card. No trial period. No hidden catches. Just real education from a team that's been teaching traders since day one.</p>
       </div>
     </div>
@@ -2124,7 +2128,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="oi-item left oi-item-1 reveal">
         <div class="oi-verb">Understand</div>
         <h4>Options Mechanics</h4>
-        <p>Understand the mechanics of options contracts, pricing, and how they actually work — no more confusion about calls, puts, or expiration.</p>
+        <p>Understand the mechanics of options contracts, pricing, and how they actually work. No more confusion about calls, puts, or expiration.</p>
       </div>
       <div class="oi-item left oi-item-2 reveal">
         <div class="oi-verb">Read</div>
@@ -2134,24 +2138,24 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="oi-item left oi-item-3 reveal">
         <div class="oi-verb">Identify</div>
         <h4>Right Strategies</h4>
-        <p>Identify which options strategies match your account size, risk tolerance, and lifestyle — because not every strategy is right for every trader.</p>
+        <p>Identify which options strategies match your account size, risk tolerance, and lifestyle, because not every strategy is right for every trader.</p>
       </div>
 
       <!-- RIGHT items -->
       <div class="oi-item right oi-item-4 reveal">
         <div class="oi-verb">Build</div>
         <h4>Trader Confidence</h4>
-        <p>Build the confidence to place your first real strategic trade — not a gamble, not a tip from Reddit, but a trade you actually understand.</p>
+        <p>Build the confidence to place your first real strategic trade. Not a gamble, not a tip from Reddit, but a trade you actually understand.</p>
       </div>
       <div class="oi-item right oi-item-5 reveal">
         <div class="oi-verb">Learn</div>
         <h4>Probability-Based Thinking</h4>
-        <p>Learn how probabilities and statistics drive consistent trading — this is what separates educated traders from gamblers.</p>
+        <p>Learn how probabilities and statistics drive consistent trading. This is what separates educated traders from gamblers.</p>
       </div>
       <div class="oi-item right oi-item-6 reveal">
         <div class="oi-verb">Join</div>
         <h4>A Community of 3,400+</h4>
-        <p>Join a community of 3,400+ traders who are learning alongside you — so you never have to figure this out alone.</p>
+        <p>Join a community of 3,400+ traders who are learning alongside you, so you never have to figure this out alone.</p>
       </div>
 
     </div><!-- /orbital-scene -->
@@ -2167,9 +2171,9 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="track-sticky-head">
         <span class="eyebrow">YOUR LEARNING PATH</span>
         <h2>8 Courses. One Clear Path. <span style="color: var(--orange);">Zero Cost.</span></h2>
-        <p>Each course builds on the last. By the end, you won't just know what options are — you'll know how to trade them.</p>
+        <p>Each course builds on the last. By the end, you won't just know what options are. You'll know how to trade them.</p>
         <a href="https://whop.com/navigationtrading/ntfree/" class="track-cta-inline" target="_blank">
-          Start Your Learning Path — Join Free
+          Start Your Learning Path, Join Free
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
@@ -2228,7 +2232,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
           <div class="ts-left"><div class="ts-num-circle">7</div><div class="ts-connector"></div></div>
           <div class="ts-right">
             <div class="ts-phase">Course 7</div>
-            <h3>NTT — The Ultimate Trend Trading Strategy</h3>
+            <h3>NTT: The Ultimate Trend Trading Strategy</h3>
           </div>
         </div>
 
@@ -2261,7 +2265,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         <p>Courses teach you the strategies. Community shows you how real traders apply them every single day.</p>
       </div>
       <div class="c-strip"><span class="c-strip-n">01</span><div class="c-strip-body"><h3>Live Market Discussion</h3><p>Chat with other traders while the market is open. See how people are reading the market, what setups they're watching, and how they're thinking through their trades in real time.</p></div></div>
-      <div class="c-strip"><span class="c-strip-n">02</span><div class="c-strip-body"><h3>Beginner-Friendly Environment</h3><p>There are no stupid questions here. Experienced members help newcomers every day. This isn't a flex culture — it's a learning culture. Ask anything.</p></div></div>
+      <div class="c-strip"><span class="c-strip-n">02</span><div class="c-strip-body"><h3>Beginner-Friendly Environment</h3><p>There are no stupid questions here. Experienced members help newcomers every day. This isn't a flex culture. It's a learning culture. Ask anything.</p></div></div>
       <div class="c-strip"><span class="c-strip-n">03</span><div class="c-strip-body"><h3>Beyond the Courses</h3><p>The courses give you the playbook. The community gives you the reps. See how other members are applying what they've learned, get feedback on your own ideas, and build the habits that make traders consistent.</p></div></div>
     </div>
   </div>
@@ -2421,7 +2425,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
         <div class="mr-index">02</div>
         <div class="mr-content">
           <h3>Taught by Active Traders</h3>
-          <p>Built by the NavigationTrading Team — traders who execute these strategies with real money, every single day. Learn from real traders, not theorists.</p>
+          <p>Built by the NavigationTrading Team, traders who execute these strategies with real money, every single day. Learn from real traders, not theorists.</p>
         </div>
         <div class="mr-right-block">
           <div class="mr-icon">
@@ -2493,7 +2497,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       <div class="faq-left">
         <div class="faq-eyebrow">FAQ</div>
         <h2>Common Questions</h2>
-        <p>Everything you need to know before joining. Still have questions? Reach out — we're real people.</p>
+        <p>Everything you need to know before joining. Still have questions? Reach out. We're real people.</p>
         <div class="faq-contact">
           <div class="faq-contact-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -2532,7 +2536,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <div class="faq-a-inner">We don't recommend it — and here's why. Copying trades without understanding the strategy behind them means you won't know when to adjust, when to exit early, or when the setup doesn't apply. Our entire approach is education-first, so you can make your own informed decisions. The free courses are designed to give you that foundation.</div>
+            <div class="faq-a-inner">We don't recommend it, and here's why. Copying trades without understanding the strategy behind them means you won't know when to adjust, when to exit early, or when the setup doesn't apply. Our entire approach is education-first, so you can make your own informed decisions. The free courses are designed to give you that foundation.</div>
           </div>
         </div>
 
@@ -2542,7 +2546,7 @@ footer > .footer-bottom { position: relative; z-index: 1; }
             <div class="faq-icon">+</div>
           </div>
           <div class="faq-a">
-            <div class="faq-a-inner">You can start learning with zero dollars — that's what the free membership is for. When you're ready to trade live, many of the beginner strategies can be executed with accounts as small as $2,000-$5,000, depending on your broker and the strategies you choose. The courses cover how to match strategies to your account size.</div>
+            <div class="faq-a-inner">You can start learning with zero dollars. That's what the free membership is for. When you're ready to trade live, many of the beginner strategies can be executed with accounts as small as $2,000-$5,000, depending on your broker and the strategies you choose. The courses cover how to match strategies to your account size.</div>
           </div>
         </div>
       </div>
@@ -2769,9 +2773,9 @@ revealEls.forEach(el => observer.observe(el));
     updateDots();
   }
 
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-  
+  prevBtn.addEventListener('click', () => { goTo(current - 1); resetAutoLoop(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); resetAutoLoop(); });
+
   // Re-build dots on resize if visible count changes
   let lastVC = visibleCount();
   window.addEventListener('resize', () => {
@@ -2781,13 +2785,34 @@ revealEls.forEach(el => observer.observe(el));
       for (let i = 0; i <= total - vc; i++) {
         const d = document.createElement('button');
         d.className = 'reviews-dot' + (i === current ? ' active' : '');
-        d.addEventListener('click', () => goTo(i));
+        d.addEventListener('click', () => { goTo(i); resetAutoLoop(); });
         dotsWrap.appendChild(d);
       }
       lastVC = vc;
     }
     goTo(current);
+    resetAutoLoop();
   });
+
+  // Auto-loop when not every card fits on screen at once (mobile/tablet)
+  let autoLoopId = null;
+  function startAutoLoop() {
+    if (autoLoopId || visibleCount() >= total) return;
+    autoLoopId = setInterval(() => {
+      const maxIdx = Math.max(0, total - visibleCount());
+      goTo(current >= maxIdx ? 0 : current + 1);
+    }, 3500);
+  }
+  function stopAutoLoop() {
+    if (autoLoopId) { clearInterval(autoLoopId); autoLoopId = null; }
+  }
+  function resetAutoLoop() {
+    stopAutoLoop();
+    startAutoLoop();
+  }
+  startAutoLoop();
+  track.addEventListener('mouseenter', stopAutoLoop);
+  track.addEventListener('mouseleave', startAutoLoop);
 })();
 
 
@@ -2802,7 +2827,7 @@ revealEls.forEach(el => observer.observe(el));
         <div class="eip-logo-row"><img src="logo.png" alt="NavigationTrading" class="eip-logo"></div>
         <div class="eip-badge">Free Live Webinar</div>
         <h2 class="eip-headline" data-config="exitPopupHeadline">Turn Any Options Trade Into a Risk-Free Position</h2>
-        <p class="eip-tagline" data-config="exitPopupTagline">Using the DC TimeMachine strategy — live, with real trades.</p>
+        <p class="eip-tagline" data-config="exitPopupTagline">Using the DC TimeMachine strategy, live, with real trades.</p>
         <ul class="eip-bullets">
           <li>&#10003; See FLUX signal a real entry live</li>
           <li>&#10003; Learn the Double Calendar setup</li>
@@ -2813,7 +2838,7 @@ revealEls.forEach(el => observer.observe(el));
       <div class="eip-right">
         <button class="eip-close" id="eip-close" aria-label="Close">&#x2715;</button>
         <p class="eip-form-title">Your Free Spot Is Still Open</p>
-        <p class="eip-form-sub">Register in seconds — no credit card required.</p>
+        <p class="eip-form-sub">Register in seconds. No credit card required.</p>
         <form method="POST" action="https://navigationtrading.activehosted.com/proc.php" id="eip-form" novalidate>
           <input type="hidden" name="u" value="132">
           <input type="hidden" name="f" value="132">
