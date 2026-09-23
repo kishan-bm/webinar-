@@ -126,29 +126,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <div className="blog-page-container">
 
-      {/* ── FULL-WIDTH COVER IMAGE (navbar floats on top, zero gap) ── */}
-      {post.coverImage ? (
-        <div className="article-cover-hero">
-          {/* Real img tag: fills full width, shows full image, no clipping */}
-          <img
-            src={post.coverImage}
-            alt={post.title}
-            className="article-cover-img"
-            loading="eager"
-          />
-          {/* Back button lives ON the image, below the navbar */}
-          <Link href="/blogs" className="cover-back-link">
-            ← Back
-          </Link>
-        </div>
-      ) : (
-        /* Back button below navbar when no cover image */
-        <div className="article-back-bar">
-          <Link href="/blogs" className="article-back-link">
-            ← Back
-          </Link>
-        </div>
-      )}
+      {/* ── Back button below navbar (article hero cover image intentionally not shown) ── */}
+      <div className="article-back-bar">
+        <Link href="/blogs" className="article-back-link">
+          ← Back
+        </Link>
+      </div>
 
       {/* ── THREE-COLUMN LAYOUT ── */}
       <div className="article-outer">
