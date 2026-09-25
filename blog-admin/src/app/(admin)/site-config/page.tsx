@@ -35,7 +35,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading',
     title: 'Day Trading Live Webinar',
     path: '/day-trading',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading',
     description: 'Main landing/registration page for the live day trading webinar.',
     fields: [
       { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', description: 'When the webinar countdown timer expires', group: 'Countdown & Date Settings' },
@@ -57,7 +57,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading-offer',
     title: 'Day Trading Offer Page',
     path: '/day-trading-offer',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-offer',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading-offer',
     description: '48-hour offer deadline page giving 30% discount.',
     fields: [
       { key: 'countdownTarget', label: 'Offer Expiry Date & Time', type: 'datetime-local', description: 'When the 48-hour discount window expires', group: 'Countdown & Date Settings' },
@@ -70,7 +70,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'dtt-6',
     title: 'Variant Webinar (dtt-6)',
     path: '/dtt-6/16',
-    deployedUrl: 'https://webclass.navigationtrading.com/dtt-6/16',
+    deployedUrl: 'https://www.navigationtrading.com/dtt-6/16',
     description: 'Variant registration page for the June 16 webinar edition.',
     fields: [
       { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
@@ -91,7 +91,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'transformer-option-spreads',
     title: 'Option Spreads Webinar',
     path: '/transformer-option-spreads',
-    deployedUrl: 'https://webclass.navigationtrading.com/transformer-option-spreads',
+    deployedUrl: 'https://www.navigationtrading.com/transformer-option-spreads',
     description: 'Option Spreads registration page and exit intent settings.',
     fields: [
       { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
@@ -113,7 +113,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'home',
     title: 'Homepage',
     path: '/home',
-    deployedUrl: 'https://webclass.navigationtrading.com/home',
+    deployedUrl: 'https://www.navigationtrading.com/home',
     description: 'Navigation Trading Homepage, containing free signups and join links.',
     fields: [
       { key: 'whopLink', label: 'Hero Join Room Whop URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Whop checkout link when clicking hero Get Free Access button', group: 'URLs & Links' },
@@ -140,7 +140,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'pricing',
     title: 'Pricing & Plans',
     path: '/pricing',
-    deployedUrl: 'https://webclass.navigationtrading.com/pricing',
+    deployedUrl: 'https://www.navigationtrading.com/pricing',
     description: 'Pricing grid displaying Free, Day Trading, and Pro memberships.',
     fields: [
       { key: 'whopFree', label: 'Free Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
@@ -158,7 +158,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'free-membership',
     title: 'Free Membership Welcome',
     path: '/free-membership',
-    deployedUrl: 'https://webclass.navigationtrading.com/free-membership',
+    deployedUrl: 'https://www.navigationtrading.com/free-membership',
     description: 'Welcome and overview page for Free members.',
     fields: [
       { key: 'freeJoinLink', label: 'Start Learning Free Button Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the main Start Learning Free button', group: 'URLs & Links' },
@@ -178,7 +178,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'paid-membership',
     title: 'Paid Membership Welcome',
     path: '/paid-membership',
-    deployedUrl: 'https://webclass.navigationtrading.com/paid-membership',
+    deployedUrl: 'https://www.navigationtrading.com/paid-membership',
     description: 'Welcome and details page for Paid/Pro members.',
     fields: [
       { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for main Get Pro Access and Join Pro buttons', group: 'URLs & Links' },
@@ -196,7 +196,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading-replay-noshow',
     title: 'Replay NoShow Page',
     path: '/day-trading-replay-noshow',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-noshow',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading-replay-noshow',
     description: 'Replay page for registered users who missed the live webinar.',
     fields: [
       { key: 'whopLink', label: 'Main CTA Offer Link', type: 'url', placeholder: 'e.g. day-trading-offer.html', description: 'Redirect URL for Claim Offer and Claim Discount buttons', group: 'URLs & Links' },
@@ -211,7 +211,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading-replay-v2',
     title: 'Day Trading Replay V2',
     path: '/day-trading-replay-v2',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay-v2',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading-replay-v2',
     description: 'Variant replay page showing different CTAs.',
     fields: [
       { key: 'whopReplayUrl', label: 'Main Replay Join Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
@@ -226,7 +226,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading-replay',
     title: 'Day Trading Replay',
     path: '/day-trading-replay',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-replay',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading-replay',
     description: 'Standard day trading replay page.',
     fields: [
       { key: 'whopLink', label: 'Join Room Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Links' },
@@ -239,7 +239,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'tos-replay-noshow',
     title: 'TOS Replay NoShow Page',
     path: '/tos-replay-noshow',
-    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay-noshow',
+    deployedUrl: 'https://www.navigationtrading.com/tos-replay-noshow',
     description: 'Transformer Option Spreads replay page for registered users who missed the live webinar.',
     fields: [
       { key: 'whopLink', label: 'Main CTA Offer Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'Redirect URL for Claim Offer and Claim Discount buttons', group: 'URLs & Links' },
@@ -254,7 +254,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'tos-replay-v2',
     title: 'TOS Replay V2',
     path: '/tos-replay-v2',
-    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay-v2',
+    deployedUrl: 'https://www.navigationtrading.com/tos-replay-v2',
     description: 'Variant Transformer Option Spreads replay page showing different CTAs.',
     fields: [
       { key: 'whopReplayUrl', label: 'Main Replay Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
@@ -268,7 +268,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'tos-replay',
     title: 'TOS Replay',
     path: '/tos-replay',
-    deployedUrl: 'https://webclass.navigationtrading.com/tos-replay',
+    deployedUrl: 'https://www.navigationtrading.com/tos-replay',
     description: 'Standard Transformer Option Spreads replay page.',
     fields: [
       { key: 'whopLink', label: 'Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', group: 'URLs & Links' },
@@ -280,7 +280,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'day-trading-membership',
     title: 'Day Trading Membership Welcome',
     path: '/day-trading-membership',
-    deployedUrl: 'https://webclass.navigationtrading.com/day-trading-membership',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading-membership',
     description: 'Overview and detail page for Day Trading members.',
     fields: [
       { key: 'whopLink', label: 'Day Trading Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for main Join Day Trading buttons', group: 'URLs & Links' },
@@ -293,7 +293,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'contact',
     title: 'Contact Us',
     path: '/contact',
-    deployedUrl: 'https://webclass.navigationtrading.com/contact',
+    deployedUrl: 'https://www.navigationtrading.com/contact',
     description: 'Contact us form page with support channels and FAQ.',
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
@@ -310,7 +310,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'brokers',
     title: 'Preferred Brokers',
     path: '/brokers',
-    deployedUrl: 'https://webclass.navigationtrading.com/brokers',
+    deployedUrl: 'https://www.navigationtrading.com/brokers',
     description: 'Broker recommendations with referral links and comparison sheet.',
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
@@ -324,7 +324,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'podcast',
     title: 'Podcast',
     path: '/podcast',
-    deployedUrl: 'https://webclass.navigationtrading.com/podcast',
+    deployedUrl: 'https://www.navigationtrading.com/podcast',
     description: 'Listen to the Tradehacker Mindset podcast and subscribe to various platforms.',
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
@@ -343,7 +343,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'performance',
     title: 'Performance & Track Record',
     path: '/performance',
-    deployedUrl: 'https://webclass.navigationtrading.com/performance',
+    deployedUrl: 'https://www.navigationtrading.com/performance',
     description: 'Documented performance history and annual trade reports.',
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
@@ -399,7 +399,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'thank-you-dtt',
     title: 'Webinar Thank You Page',
     path: '/thank-you-dtt',
-    deployedUrl: 'https://webclass.navigationtrading.com/thank-you-dtt',
+    deployedUrl: 'https://www.navigationtrading.com/thank-you-dtt',
     description: 'Registration confirmation page showing webinar meeting access details.',
     fields: [
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/day-trading', description: 'URL for the Navbar CTA button', group: 'URLs & Links' },
@@ -416,7 +416,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'options-basics',
     title: 'Options Basics — Free Course',
     path: '/options-basics',
-    deployedUrl: 'https://webclass.navigationtrading.com/options-basics',
+    deployedUrl: 'https://www.navigationtrading.com/options-basics',
     description: 'Beginner free video course landing page: how options work, from zero.',
     fields: [
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
@@ -432,7 +432,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'iron-condors',
     title: 'Iron Condors for Income — Free Course',
     path: '/iron-condors',
-    deployedUrl: 'https://webclass.navigationtrading.com/iron-condors',
+    deployedUrl: 'https://www.navigationtrading.com/iron-condors',
     description: 'Beginner-softened free video course landing page on trading Iron Condors for income.',
     fields: [
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
@@ -448,7 +448,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'calendar-spreads',
     title: 'Calendar Spreads for Income — Free Course',
     path: '/calendar-spreads',
-    deployedUrl: 'https://webclass.navigationtrading.com/calendar-spreads',
+    deployedUrl: 'https://www.navigationtrading.com/calendar-spreads',
     description: 'Beginner-softened free video course landing page on trading Calendar Spreads for income.',
     fields: [
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
@@ -464,7 +464,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'butterfly-spreads',
     title: 'Butterfly Spreads for Income — Free Course',
     path: '/butterfly-spreads',
-    deployedUrl: 'https://webclass.navigationtrading.com/butterfly-spreads',
+    deployedUrl: 'https://www.navigationtrading.com/butterfly-spreads',
     description: 'Beginner-softened free video course landing page on trading Butterfly Spreads for income.',
     fields: [
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },
@@ -480,7 +480,7 @@ const PAGES_CONFIG: PageConfig[] = [
     key: 'vertical-spreads',
     title: 'Verticals & Directional Strategies — Free Course',
     path: '/vertical-spreads',
-    deployedUrl: 'https://webclass.navigationtrading.com/vertical-spreads',
+    deployedUrl: 'https://www.navigationtrading.com/vertical-spreads',
     description: 'Beginner-appropriate free video course landing page on trading Vertical Spreads directionally.',
     fields: [
       { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'The registration form identifier for this course', group: 'Form Settings' },

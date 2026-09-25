@@ -22,28 +22,28 @@ export default function PublicLayout({
         >
           &#9776;
         </button>
-        <a href="https://webclass.navigationtrading.com/home" className="nav-logo">
+        <a href="/home" className="nav-logo">
           <img src="/logo.png" alt="NavigationTrading" />
         </a>
         <ul className={`nav-links${navOpen ? ' active' : ''}`}>
           <li className="nav-item-dropdown">
-            <a href="https://webclass.navigationtrading.com/home">Home</a>
+            <a href="/home">Home</a>
           </li>
-          <li><a href="https://webclass.navigationtrading.com/performance">Performance</a></li>
-          <li><a href="https://webclass.navigationtrading.com/pricing">Pricing</a></li>
+          <li><a href="/performance">Performance</a></li>
+          <li><a href="/pricing">Pricing</a></li>
           <li className="nav-item-dropdown">
             <a href="#">Services <span className="nav-chevron">▾</span></a>
             <div className="dropdown-menu">
-              <a href="https://webclass.navigationtrading.com/free-membership">Free Membership</a>
-              <a href="https://webclass.navigationtrading.com/day-trading-membership">Day Trade Membership</a>
-              <a href="https://webclass.navigationtrading.com/paid-membership">Pro Membership</a>
-              <a href="https://webclass.navigationtrading.com/coaching">Private Coaching</a>
-              <a href="https://webclass.navigationtrading.com/flux">Flux</a>
+              <a href="/free-membership">Free Membership</a>
+              <a href="/day-trading-membership">Day Trade Membership</a>
+              <a href="/paid-membership">Pro Membership</a>
+              <a href="/coaching">Private Coaching</a>
+              <a href="/flux">Flux</a>
             </div>
           </li>
-          <li><a href="https://webclass.navigationtrading.com/podcast">Podcast</a></li>
+          <li><a href="/podcast">Podcast</a></li>
           <li><a href="/blogs" className="active">Blog</a></li>
-          <li><a href="https://webclass.navigationtrading.com/contact">Contact Us</a></li>
+          <li><a href="/contact">Contact Us</a></li>
         </ul>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }} className="nav-auth-group">
             <a href="https://whop.com/orders/products/" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 600 }}>Login</a>

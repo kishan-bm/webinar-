@@ -20,7 +20,7 @@ type Post = {
 };
 
 const PAGE_SIZE = 10;
-const BASE_URL = 'https://webclass.navigationtrading.com';
+const BASE_URL = 'https://www.navigationtrading.com';
 
 function decodeHTMLBlocks(htmlString: string) {
   return htmlString.replace(
