@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { verifyPassword } from '@/lib/password';
 import { encryptSession } from '@/lib/session';
+import { getSessionCookieDomain } from '@/lib/cookieDomain';
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,6 +48,7 @@ export async function POST(request: NextRequest) {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
+      domain: getSessionCookieDomain(request),
       expires: expiresAt,
     });
 

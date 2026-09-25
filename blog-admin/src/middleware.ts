@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { decryptSession } from './lib/session';
+import { getSessionCookieDomain } from './lib/cookieDomain';
 
 function getRedirectUrl(request: NextRequest, path: string): string {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
@@ -19,6 +20,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/replay') ||
     pathname.startsWith('/posts') ||
     pathname.startsWith('/exit-intent') ||
+    pathname.startsWith('/redirects') ||
     pathname === '/';
 
   if (isAdminRoute) {
@@ -35,6 +37,7 @@ export async function middleware(request: NextRequest) {
       response.cookies.set('admin_session', '', {
         httpOnly: true,
         path: '/',
+        domain: getSessionCookieDomain(request),
         expires: new Date(0),
       });
       return response;
