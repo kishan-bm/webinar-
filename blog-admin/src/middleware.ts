@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { decryptSession } from './lib/session';
-import { getSessionCookieDomain } from './lib/cookieDomain';
+import { clearSessionCookie } from './lib/cookieDomain';
 
 function getRedirectUrl(request: NextRequest, path: string): string {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
   const proto = request.headers.get('x-forwarded-proto') || 'https';
   return host ? `${proto}://${host}${path}` : new URL(path, request.url).toString();
 }
+
+const ADMIN_HOSTS = new Set(['navigationtrading.com', 'www.navigationtrading.com']);
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -23,6 +25,17 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/redirects') ||
     pathname === '/';
 
+  // The admin panel should only be reachable through the main domain now
+  // (not the old webclass. subdomain, previews, etc.)
+  if (isAdminRoute || pathname === '/login') {
+    const host = (request.headers.get('x-forwarded-host') || request.headers.get('host') || '').split(':')[0];
+    if (host && !ADMIN_HOSTS.has(host)) {
+      // "/" is the internal path the site's /admin-blog rewrite proxies to
+      const publicPath = pathname === '/' ? '/admin-blog' : pathname;
+      return NextResponse.redirect(`https://www.navigationtrading.com${publicPath}${request.nextUrl.search}`);
+    }
+  }
+
   if (isAdminRoute) {
     const sessionCookie = request.cookies.get('admin_session')?.value;
 
@@ -34,12 +47,7 @@ export async function middleware(request: NextRequest) {
 
     if (!decrypted || decrypted.expiresAt < Date.now()) {
       const response = NextResponse.redirect(getRedirectUrl(request, '/login'));
-      response.cookies.set('admin_session', '', {
-        httpOnly: true,
-        path: '/',
-        domain: getSessionCookieDomain(request),
-        expires: new Date(0),
-      });
+      clearSessionCookie(response, request);
       return response;
     }
   }
