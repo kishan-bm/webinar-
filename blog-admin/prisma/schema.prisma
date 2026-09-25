@@ -95,3 +95,11 @@ model SiteConfig {
 }
 
 
+
+model Redirect {
+  id          String   @id @default(uuid())
+  slug        String   @unique // e.g. "pro" -> matches /pro
+  targetUrl   String   // Full destination URL to redirect to
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

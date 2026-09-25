@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Compass, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, LayoutPanelLeft, Video } from 'lucide-react';
+import { Compass, FileText, Settings, LogOut, Plus, Image, ChevronLeft, ChevronRight, LayoutPanelLeft, Video, ArrowRightLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function RootLayout({
@@ -56,6 +56,7 @@ export default function RootLayout({
   const marketingItems = [
     { href: '/site-config', icon: <LayoutPanelLeft size={20} />, label: 'Pages' },
     { href: '/replay', icon: <Video size={20} />, label: 'Replay Video' },
+    { href: '/redirects', icon: <ArrowRightLeft size={20} />, label: 'Redirects' },
   ];
 
   const settingsItems = [
