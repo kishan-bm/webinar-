@@ -262,7 +262,7 @@ export default function BlogListWithFilter({ posts }: BlogListWithFilterProps) {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '16px' }}>
                     <div style={{ fontSize: '13px', color: 'var(--text-dim)' }}>
-                      {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      {new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                     </div>
                     <div className="read-more">
                       Read Post &rarr;

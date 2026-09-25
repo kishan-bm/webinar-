@@ -183,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, color: 'var(--text-main)' }}>{post.author.name}</div>
-                    <div style={{ fontSize: '13px' }}>{new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                    <div style={{ fontSize: '13px' }}>{new Date(post.publishedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</div>
                   </div>
                 </div>
               </div>

@@ -6022,7 +6022,8 @@
                   const dateStr = publishDate ? new Date(publishDate).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
-                    year: 'numeric'
+                    year: 'numeric',
+                    timeZone: 'UTC'
                   }) : '';
                   const categoryName = post.category ? post.category.name : 'Trading';
                   const coverImg = post.coverImage || '/images/posts/best-options-trading-platform-for-beginners/image1.png';
