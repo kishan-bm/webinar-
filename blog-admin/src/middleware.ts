@@ -58,7 +58,8 @@ export async function middleware(request: NextRequest) {
       (request.method === 'GET' &&
        (pathname.startsWith('/api/config') || pathname.startsWith('/api/posts') || pathname.startsWith('/api/banners'))) ||
       pathname.endsWith('/ai-summary') ||
-      pathname.startsWith('/api/collect');
+      pathname.startsWith('/api/collect') ||
+      (request.method === 'GET' && pathname.startsWith('/api/redirects/lookup/'));
       
     const isAuthApi = pathname.startsWith('/api/auth');
 
