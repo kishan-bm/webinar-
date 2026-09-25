@@ -231,6 +231,22 @@
       "destination": "https://webinar-neon-one.vercel.app/replay/:path*"
     },
     {
+      "source": "/redirects",
+      "destination": "https://webinar-neon-one.vercel.app/redirects"
+    },
+    {
+      "source": "/redirects/:path*",
+      "destination": "https://webinar-neon-one.vercel.app/redirects/:path*"
+    },
+    {
+      "source": "/api/redirects",
+      "destination": "https://webinar-neon-one.vercel.app/api/redirects"
+    },
+    {
+      "source": "/api/redirects/:path*",
+      "destination": "https://webinar-neon-one.vercel.app/api/redirects/:path*"
+    },
+    {
       "source": "/api/banners",
       "destination": "https://webinar-neon-one.vercel.app/api/banners"
     },
