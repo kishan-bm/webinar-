@@ -1,19 +1,26 @@
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { cache } from 'react';
 import TableOfContents from '@/components/TableOfContents';
 import AISummary from '@/components/AISummary';
 
 export const revalidate = 60;
 
+// Cached so generateMetadata and the page component share one DB round trip
+// instead of each fetching the post separately.
+const getPost = cache((slug: string) =>
+  prisma.post.findUnique({
+    where: { slug },
+    include: { author: true, category: true, tags: true },
+  })
+);
+
 // Dynamically generate SEO tags for this specific post
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await prisma.post.findUnique({ 
-    where: { slug },
-    include: { tags: true }
-  });
-  
+  const post = await getPost(slug);
+
   if (!post) {
     return { title: 'Post Not Found | Navigation Trading' };
   }
@@ -80,19 +87,7 @@ function parseHeadings(html: string) {
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const [post, categories, banners] = await Promise.all([
-    prisma.post.findUnique({
-      where: { slug },
-      include: { author: true, category: true, tags: true },
-    }),
-    prisma.category.findMany({
-      include: {
-        _count: { select: { posts: { where: { status: 'PUBLISHED' } } } },
-      },
-      orderBy: { name: 'asc' },
-    }),
-    prisma.banner.findMany({ orderBy: { order: 'asc' } }),
-  ]);
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -102,15 +97,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  // Fetch cached AI summary if it exists
-  const cachedSummaryConfig = await prisma.siteConfig.findUnique({
-    where: {
-      pageKey_key: {
-        pageKey: `blog-summary:${post.id}`,
-        key: 'data'
+  const [categories, banners, cachedSummaryConfig] = await Promise.all([
+    prisma.category.findMany({
+      include: {
+        _count: { select: { posts: { where: { status: 'PUBLISHED' } } } },
+      },
+      orderBy: { name: 'asc' },
+    }),
+    prisma.banner.findMany({ orderBy: { order: 'asc' } }),
+    // Cached AI summary, if one exists
+    prisma.siteConfig.findUnique({
+      where: {
+        pageKey_key: {
+          pageKey: `blog-summary:${post.id}`,
+          key: 'data'
+        }
       }
-    }
-  });
+    }),
+  ]);
 
   let initialSummary = null;
   if (cachedSummaryConfig) {
