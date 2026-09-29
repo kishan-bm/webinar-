@@ -6,7 +6,7 @@
         (function () {
             try {
                 var variant = sessionStorage.getItem('_tosVariant');
-                var variantRoutes = { '8-20': '/tos-thank-you-8-20', '10-08': '/tos-thankyou-10-08' };
+                var variantRoutes = { '8-20': '/tos-thank-you-8-20', '10-15': '/tos-thankyou-10-15' };
                 if (variant && variantRoutes[variant]) {
                     sessionStorage.removeItem('_tosVariant');
                     window.location.replace(variantRoutes[variant] + window.location.search);

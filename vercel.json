@@ -9,7 +9,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-08|tos-thankyou-10-08|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-15|tos-thankyou-10-15|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -20,6 +20,26 @@
       "source": "/",
       "destination": "/home",
       "permanent": true
+    },
+    {
+      "source": "/transformer-option-spreads-10-08",
+      "destination": "/transformer-option-spreads-10-15",
+      "permanent": false
+    },
+    {
+      "source": "/tos-thankyou-10-08",
+      "destination": "/tos-thankyou-10-15",
+      "permanent": false
+    },
+    {
+      "source": "/tos-thank-you-10-15",
+      "destination": "/tos-thankyou-10-15",
+      "permanent": false
+    },
+    {
+      "source": "/tos-thank-you-10-08",
+      "destination": "/tos-thankyou-10-15",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -64,12 +84,12 @@
       "destination": "/transformer-option-spreads-content/tos-thankyou-8-20"
     },
     {
-      "source": "/transformer-option-spreads-10-08",
-      "destination": "/transformer-option-spreads-content/transformer-option-spreads-10-08"
+      "source": "/transformer-option-spreads-10-15",
+      "destination": "/transformer-option-spreads-content/transformer-option-spreads-10-15"
     },
     {
-      "source": "/tos-thankyou-10-08",
-      "destination": "/transformer-option-spreads-content/tos-thankyou-10-08"
+      "source": "/tos-thankyou-10-15",
+      "destination": "/transformer-option-spreads-content/tos-thankyou-10-15"
     },
     {
       "source": "/performance",
