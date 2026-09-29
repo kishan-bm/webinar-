@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] || (w[l] = []), w[l].push({
+        'gtm.start': (new Date).getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = "dataLayer" != l ? "&l=" + l : "";
+      j.async = !0, j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl, f.parentNode.insertBefore(j, f)
+    })(window, document, "script", "dataLayer", "GTM-PM36KHB");</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet Eliot Sagor | Navigation Trading</title>
+  <meta name="description" content="Meet Eliot Sagor, NavigationTrading's private coaching instructor. Read his trading journey, strategies, and philosophy, then apply for 1-on-1 coaching.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #c8420a;
+      --orange-bright: #e04d10;
+      --gold: #d4a040;
+      --teal-900: #0D2E4E;
+      --bg-dark: #0D2E4E;
+      --bg-darker: #07182c;
+      --emerald-500: #10b981;
+      --text-dim: #64748b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; overflow-x: hidden; line-height: 1.5; font-size: 16px; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 10px; }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, box-shadow 0.4s, padding 0.3s; }
+    .navbar.scrolled { background: rgba(13,46,78,0.98); backdrop-filter: blur(20px); padding: 12px 60px; box-shadow: 0 4px 30px rgba(0,0,0,0.2); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+
+    .nav-mobile-only { display: none; }
+
+    @media (min-width: 769px) {
+      .navbar > .nav-logo { flex: 1 1 0; }
+      .navbar > .nav-links { flex: 0 0 auto; }
+      .navbar > .nav-auth-group { flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; }
+    }
+    .nav-links a { color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange) !important; font-weight: 700; }
+    .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 6px; }
+    .nav-close { display: none; }
+    .nav-item-dropdown { position: relative; }
+    .nav-item-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-chevron { font-size: 9px; transition: transform 0.25s; opacity: 0.7; }
+    .nav-item-dropdown:hover .nav-chevron { transform: rotate(180deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(7,24,44,0.97); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--orange); border-radius: 12px; min-width: 215px; padding: 6px; opacity: 0; visibility: hidden; transition: all 0.22s ease; z-index: 200; box-shadow: 0 20px 50px rgba(0,0,0,0.45); pointer-events: none; }
+    .dropdown-menu::before { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all; }
+    .dropdown-menu a { display: block; padding: 10px 14px; color: rgba(255,255,255,0.8) !important; font-size: 13.5px; font-weight: 500; border-radius: 8px; transition: background 0.18s, color 0.18s; white-space: nowrap; text-decoration: none; }
+    .dropdown-menu a:hover { background: rgba(200,66,10,0.18) !important; color: #e86428 !important; }
+    .nav-cta { background: var(--orange); color: #fff; padding: 10px 22px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; border: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--orange-bright); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,66,10,0.35); }
+
+    /* HERO */
+    .coaching-hero { padding: 0; background: var(--bg-dark); position: relative; overflow: hidden; }
+    .hero-bg-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.45; }
+    .hero-bg-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(13,46,78,0.88) 0%, rgba(13,46,78,0.72) 50%, rgba(13,46,78,0.88) 100%); pointer-events: none; }
+    .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 65%); top: -200px; right: -100px; pointer-events: none; z-index: 2; animation: pulseglow 6s ease-in-out infinite; }
+    .hero-glow-2 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(30,100,200,0.22) 0%, transparent 65%); bottom: -100px; left: -50px; pointer-events: none; z-index: 2; }
+    @keyframes pulseglow { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+    .dot-grid { position: absolute; z-index: 3; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 22px 22px; }
+    .hero-content { position: relative; z-index: 5; max-width: 1200px; margin: 0 auto; padding: 150px 48px 100px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; text-align: left; }
+    .hero-eyebrow-row { grid-column: 1 / -1; text-align: center; margin-bottom: 8px; }
+    .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
+    .hero-right { display: flex; align-items: center; justify-content: flex-end; }
+    .hero-image-wrap { width: 100%; max-width: 560px; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.1); }
+    .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-label { display: inline-block; padding: 6px 16px; background: rgba(200,66,10,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(200,66,10,0.35); border-radius: 50px; color: #e87040; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+    .coaching-hero h1 { font-size: clamp(38px, 5vw, 58px); color: #fff; line-height: 1.05; margin-bottom: 20px; letter-spacing: -1.5px; font-weight: 800; }
+    .coaching-hero h1 em { font-style: normal; color: var(--orange-bright); }
+    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.80); max-width: 500px; margin: 0 0 40px; line-height: 1.65; }
+    .hero-format-pills { display: flex; justify-content: flex-start; gap: 16px; flex-wrap: wrap; }
+    .format-pill { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.35); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.13); border-radius: 14px; padding: 16px 28px; color: #fff; }
+    .format-pill-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--orange-bright); }
+    .format-pill-body { display: flex; flex-direction: column; align-items: flex-start; }
+    .format-pill-value { font-size: 16px; font-weight: 700; line-height: 1.1; }
+    .format-pill-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.18s; }
+    .reveal-d3 { transition-delay: 0.28s; }
+
+    /* UTILS */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header h2 { font-size: clamp(32px, 4vw, 50px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; margin: 10px 0 16px; }
+    .section-header p { font-size: 16.5px; color: var(--text-dim); max-width: 620px; margin: 0 auto; line-height: 1.7; }
+    .s-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 18px; border-radius: 50px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .s-eyebrow.light { color: #5ba8d6; background: rgba(91,168,214,0.1); border: 1px solid rgba(91,168,214,0.22); }
+    .s-eyebrow.orange { color: #e86428; background: rgba(200,66,10,0.1); border: 1px solid rgba(200,66,10,0.22); }
+    .s-eyebrow.dark { color: #1e6fa8; background: rgba(30,111,168,0.08); border: 1px solid rgba(30,111,168,0.16); }
+    .hl { color: var(--orange); }
+
+    /* FORMAT CARDS */
+    .format-section { padding: 40px 0 80px; background: #f8fafc; }
+    .format-section .section-header h2 { color: var(--teal-900); }
+    .format-cards { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(13,46,78,0.1); border-bottom: 1px solid rgba(13,46,78,0.1); }
+    .format-card { padding: 44px 18px; text-align: center; border-right: 1px solid rgba(13,46,78,0.1); }
+    .format-card:last-child { border-right: none; }
+    .format-card-tag { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
+    .format-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--teal-900); margin-bottom: 18px; letter-spacing: -0.3px; white-space: nowrap; }
+    .format-card p { font-size: 15px; color: #546272; line-height: 1.7; max-width: 300px; margin: 0 auto; text-align: justify; }
+
+    /* PROGRAM */
+    .program-section { padding: 88px 0; background: var(--bg-dark); position: relative; overflow: hidden; }
+    .program-section::before { content: ''; position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+    .program-section .container { position: relative; z-index: 1; }
+    .program-section .section-header h2 { color: #fff; }
+    .program-section .section-header p { color: rgba(255,255,255,0.60); }
+    .program-list { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; }
+    .program-row { display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.09); padding: 40px 20px; transition: background 0.3s; }
+    .program-row:first-child { border-top: 1px solid rgba(255,255,255,0.09); }
+    .program-row:hover { background: rgba(255,255,255,0.02); }
+    .program-row-num { font-size: 80px; font-weight: 900; line-height: 0.8; background: linear-gradient(180deg, var(--orange) 0%, rgba(200,66,10,0.1) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-right: 40px; flex-shrink: 0; }
+    .program-row-heading { flex: 1; }
+    .program-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+    .program-row-heading h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; text-transform: uppercase; }
+    .program-row p { font-size: 16px; color: rgba(255,255,255,0.65); margin: 0; max-width: 800px; }
+    .program-card-icon { width: 70px; height: 70px; flex-shrink: 0; margin-left: 40px; background: linear-gradient(135deg, rgba(200,66,10,0.15) 0%, rgba(0,0,0,0.4) 100%); border: 1px solid rgba(200,66,10,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--orange); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .program-card-icon svg { width: 30px; height: 30px; }
+
+    /* INSTRUCTOR */
+    .instructor-section { padding: 100px 0; background: #f0f4f8; }
+    .instructor-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .instructor-left h2 { font-size: clamp(32px, 3.5vw, 46px); font-weight: 800; color: var(--teal-900); letter-spacing: -1.2px; line-height: 1.1; margin-bottom: 20px; }
+    .instructor-left p { font-size: 16px; color: #546272; line-height: 1.75; margin-bottom: 32px; }
+    .instructor-link { display: inline-flex; align-items: center; gap: 10px; background: var(--orange); color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; padding: 12px 22px; border-radius: 8px; transition: gap 0.2s, background 0.2s; }
+    .instructor-link:hover { gap: 14px; background: var(--orange-bright); }
+    .instructor-right { display: flex; flex-direction: column; gap: 20px; }
+    .stat-block { background: #fff; border: 1px solid rgba(13,46,78,0.09); border-radius: 16px; padding: 28px 32px; box-shadow: 0 4px 24px rgba(13,46,78,0.06); position: relative; overflow: hidden; }
+    .stat-block.featured { background: var(--teal-900); }
+    .stat-block-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+    .stat-block.featured .stat-block-label { color: rgba(255,255,255,0.55); }
+    .stat-block-value { font-size: 38px; font-weight: 900; color: var(--teal-900); letter-spacing: -2px; line-height: 1; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+    .stat-block.featured .stat-block-value { color: var(--orange-bright); }
+    .stat-block-sub { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+    .stat-block.featured .stat-block-sub { color: rgba(255,255,255,0.65); }
+    .stat-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stat-mini { background: #fff; border: 1px solid rgba(13,46,78,0.09); border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 12px rgba(13,46,78,0.05); }
+    .stat-mini-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+    .stat-mini-value { font-size: 20px; font-weight: 800; color: var(--teal-900); letter-spacing: -0.5px; }
+    .stat-mini-value.win { color: #059669; }
+    .stat-mini-value.loss { color: #dc2626; }
+
+    /* PRICING */
+    .pricing-section { padding: 100px 0; background: var(--bg-darker); position: relative; overflow: hidden; }
+    .pricing-section::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+    .pricing-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(200,66,10,0.15) 0%, transparent 65%); top: -100px; right: -100px; pointer-events: none; }
+    .pricing-inner { position: relative; z-index: 5; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .pricing-left h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 800; color: #fff; letter-spacing: -1.2px; line-height: 1.1; margin-bottom: 18px; }
+    .pricing-left p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 8px; }
+    .pricing-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 44px 44px 40px; position: relative; overflow: hidden; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-bright)); }
+    .pricing-card-badge { display: inline-block; padding: 6px 14px; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.35); border-radius: 50px; color: #e87040; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+    .pricing-card h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .pricing-price { display: flex; align-items: baseline; gap: 4px; margin: 20px 0 4px; }
+    .pricing-price .cur { font-size: 24px; color: rgba(255,255,255,0.7); font-weight: 700; }
+    .pricing-price .val { font-size: 60px; font-weight: 900; color: #fff; letter-spacing: -3px; line-height: 1; font-family: 'DM Mono', monospace; }
+    .pricing-per-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 32px; }
+    .pricing-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .pricing-feature { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: rgba(255,255,255,0.82); line-height: 1.5; }
+    .pricing-feature svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--emerald-500); margin-top: 2px; }
+    .pricing-cta-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px 32px; background: linear-gradient(135deg, var(--orange), #e05a1a); color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.3px; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: all 0.3s; box-shadow: 0 8px 32px rgba(200,66,10,0.4); }
+    .pricing-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(200,66,10,0.5); }
+
+    /* FINAL CTA */
+    .pm-final-cta { padding: 80px 0; background: #f8fafc; }
+    .dt-terminal-cta { background: #fff; border: 1px solid rgba(13,46,78,0.09); border-radius: 24px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; box-shadow: 0 4px 30px rgba(13,46,78,0.06); }
+    .dt-term-left { padding: 50px 48px; }
+    .dt-term-right { padding: 50px 48px; border-left: 1px solid rgba(13,46,78,0.08); }
+    .dt-live-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); border-radius: 50px; padding: 6px 16px; font-size: 11.5px; font-weight: 700; color: #10b981; letter-spacing: 0.5px; margin-bottom: 24px; }
+    .dt-live-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: live-blink 1.5s ease-in-out infinite; }
+    @keyframes live-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .dt-term-left h2 { font-size: clamp(26px, 3vw, 36px); font-weight: 800; color: var(--teal-900); letter-spacing: -1px; line-height: 1.15; margin-bottom: 14px; }
+    .dt-term-left h2 em { font-style: normal; color: var(--orange-bright); }
+    .dt-term-left p { font-size: 15px; color: #546272; line-height: 1.7; max-width: 400px; }
+    .dt-term-price-lbl { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; }
+    .dt-term-features { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; margin-bottom: 32px; }
+    .dt-term-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #3d4a58; line-height: 1.5; }
+    .dt-term-feature svg { width: 16px; height: 16px; flex-shrink: 0; color: #10b981; margin-top: 2px; }
+    .dt-term-action { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; background: linear-gradient(135deg, var(--orange), #e05a1a); color: #fff; font-size: 14px; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s; box-shadow: 0 6px 24px rgba(200,66,10,0.4); }
+    .dt-term-action:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(200,66,10,0.5); }
+
+    /* FOOTER */
+    footer { background: var(--teal-900); padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
+    footer > .footer-top, footer > .footer-bottom { position: relative; z-index: 1; }
+    .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+    .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
+    .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; }
+    .social-icon:hover { background: var(--orange); color: #fff; }
+    .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
+    .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
+    @media (max-width: 768px) {
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+      .footer-tagline { margin-top: 0; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; padding: 100px 24px 50px; gap: 40px; text-align: center; }
+      .hero-left { align-items: center; }
+      .hero-sub { max-width: 600px; margin: 0 auto 40px; }
+      .hero-format-pills { justify-content: center; }
+      .hero-right { justify-content: center; }
+      .instructor-inner, .pricing-inner { grid-template-columns: 1fr; gap: 40px; }
+      .format-card { padding: 40px 12px; }
+      .format-card h3 { font-size: 23px; }
+    }
+    @media (max-width: 768px) {
+      .program-row { display: grid; grid-template-columns: 44px 1fr 60px; align-items: center; gap: 12px; padding: 28px 4px; }
+      .program-row-num { font-size: 36px; margin-right: 0; }
+      .program-card-icon { margin-left: 0; width: 56px; height: 56px; }
+      .navbar, .navbar.scrolled {
+        display: grid !important; grid-template-columns: 1fr 100px 1fr; gap: 0;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        padding-top: 14px !important;
+        padding-bottom: 14px !important;
+        background: rgba(13, 46, 78, 0.98) !important;
+        backdrop-filter: blur(20px);
+      }
+      .navbar { position: fixed; top: 0; left: 0; right: 0; }
+            .nav-toggle { grid-column: 1; justify-self: start; display: flex; align-items: center; }
+      .navbar .nav-logo { grid-column: 2; margin: 0; order: unset; }
+      .navbar .nav-auth-group { grid-column: 3; justify-self: end; overflow: visible !important; display: flex !important; }
+      .navbar .nav-auth-group .nav-login-link { display: none; }
+      .navbar .nav-logo img { transform: scale(2.5) !important; transform-origin: center center !important; }
+      .navbar .nav-auth-group {
+        display: flex !important;
+        order: 1;
+        gap: 0 !important;
+      }
+      .navbar .nav-cta {
+        padding: 8px 14px;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .nav-toggle { display: block; order: -1; }
+      .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 78%;
+        max-width: 320px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        background: rgba(13,46,78,0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.4);
+        padding: 90px 24px 18px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+      }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; } .nav-item-dropdown:hover .dropdown-menu, .nav-item-dropdown.is-open .dropdown-menu, .nav-item-dropdown:focus-within .dropdown-menu { position: static !important; transform: none !important; left: auto !important; top: auto !important; }
+      .nav-mobile-only { display: none; }
+      .nav-links.active .nav-mobile-only { display: block; }
+            .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+      .nav-close:hover { background: rgba(255,255,255,0.22); }
+      .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+      .nav-backdrop.active { display: block; }
+      .container { padding: 0 24px; }
+      .format-cards { grid-template-columns: 1fr; }
+      .format-card { border-right: none; border-bottom: 1px solid rgba(13,46,78,0.1); padding: 32px 20px; }
+      .format-card:last-child { border-bottom: none; }
+      .dt-terminal-cta { grid-template-columns: 1fr; }
+      .dt-term-right { border-left: none; border-top: 1px solid rgba(13,46,78,0.08); }
+      footer { padding: 60px 20px 32px; }
+      .format-section, .program-section, .instructor-section, .pricing-section { padding: 60px 0; }
+      .pricing-cta-btn { padding: 14px 20px; font-size: 14px; }
+      .hero-format-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .format-pill { padding: 12px 16px; }
+      .format-pill-value { font-size: 14px; }
+      .format-pill-label { font-size: 9px; }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PM36KHB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="/home" class="nav-logo">
+      <img src="logo.png" alt="NavigationTrading">
+    </a>
+    <ul class="nav-links">
+      <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/performance">Performance</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#">Services <span class="nav-chevron">&#9662;</span></a>
+        <div class="dropdown-menu">
+          <a href="/free-membership">Free Membership</a>
+          <a href="/day-trading-membership">Day Trade Membership</a>
+          <a href="/paid-membership">Pro Membership</a>
+          <a href="/coaching">Private Coaching</a>
+          <a href="/flux">Flux</a>
+        </div>
+      </li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/blogs">Blog</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
+    </ul>
+    <div style="display:flex; gap:16px; align-items:center;" class="nav-auth-group">
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" class="nav-login-link" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
+    <div class="nav-backdrop" id="navBackdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <script>document.getElementById('navClose').addEventListener('click',function(){document.querySelector('.nav-links').classList.remove('active');var bd=document.getElementById('navBackdrop');if(bd)bd.classList.remove('active');});</script>
+  </nav>
+
+<!-- ============================================================
+     NavigationTrading · Meet Eliot Sagor — Q&A / About
+     Self-contained. Scales to any container width.
+     ============================================================ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+  .nt-meet-wrap { container-type: inline-size; width: 100%; }
+  .nt-meet-wrap--fullbleed {
+    width: 100vw; max-width: 100vw;
+    margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  }
+  .nt-meet-wrap *, .nt-meet-wrap *::before, .nt-meet-wrap *::after { box-sizing: border-box; }
+
+  /* ---------- HEADER ---------- */
+  .nt-meet-header {
+    background: #0a2c4c; color: #fff;
+    font-family: 'Open Sans', system-ui, sans-serif;
+    padding: 150px max(5vw, 32px) 56px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .nt-meet-header::before {
+    content: ''; position: absolute; top: 28px; left: 50%;
+    transform: translateX(-50%); width: 48px; height: 2px; background: #ff5600;
+  }
+  .nt-meet-header__inner { max-width: 920px; margin: 0 auto; }
+  .nt-meet-header__eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.32em;
+    color: #ff5600; text-transform: uppercase; margin: 0 0 16px;
+  }
+  .nt-meet-header__title {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 84px;
+    letter-spacing: 0.05em; color: #ff5600; line-height: 1.02;
+    margin: 0 0 20px; font-weight: 400;
+  }
+  .nt-meet-header__dek {
+    font-size: 19px; line-height: 1.55; color: #fff; margin: 0 auto; max-width: 720px;
+  }
+
+  /* ---------- BIO ---------- */
+  .nt-meet-bio {
+    background: #fafbfc; color: #1c1f25;
+    font-family: 'Open Sans', system-ui, sans-serif;
+    padding: 72px max(5vw, 32px);
+  }
+  .nt-meet-bio__inner {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 72px; align-items: center;
+  }
+  .nt-meet-bio__photo {
+    width: 100%; aspect-ratio: 4 / 5; border-radius: 14px;
+    background:
+      linear-gradient(160deg, rgba(255,86,0,0.12), rgba(10,44,76,0)),
+      #0a2c4c;
+    background-size: cover; background-position: center;
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 70px rgba(10,44,76,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nt-meet-bio__monogram {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 120px;
+    color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  }
+  .nt-meet-bio__photo-tag {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 22px 26px;
+    background: linear-gradient(to top, rgba(5,25,41,0.92), rgba(5,25,41,0));
+    color: #fff; text-align: left;
+  }
+  .nt-meet-bio__photo-name {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 28px; letter-spacing: 0.04em;
+  }
+  .nt-meet-bio__photo-role {
+    font-size: 13px; color: #9bb6d2; letter-spacing: 0.10em; margin-top: 4px; text-transform: uppercase;
+  }
+  .nt-meet-bio__eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.30em;
+    color: #ff5600; text-transform: uppercase; margin: 0 0 16px;
+  }
+  .nt-meet-bio__title {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: clamp(34px, 4.2cqi, 48px);
+    letter-spacing: 0.03em; color: #0a2c4c; line-height: 1.08; margin: 0 0 22px; font-weight: 400;
+    overflow-wrap: break-word;
+  }
+  .nt-meet-bio__lead { font-size: 18px; line-height: 1.6; color: #3a3f49; margin: 0 0 28px; }
+  .nt-meet-bio__lead b { color: #0a2c4c; }
+  .nt-meet-bio__stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid #e6e9ee; border-bottom: 1px solid #e6e9ee;
+  }
+  .nt-meet-stat { padding: 22px 18px 22px 0; border-right: 1px solid #e6e9ee; }
+  .nt-meet-stat:last-child { border-right: none; padding-right: 0; padding-left: 24px; }
+  .nt-meet-stat:nth-child(2) { padding-left: 24px; }
+  .nt-meet-stat__num {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 42px; color: #0a2c4c; line-height: 1;
+  }
+  .nt-meet-stat__lbl { font-size: 12px; color: #6c7280; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 8px; }
+
+  /* ---------- Q&A ---------- */
+  .nt-meet-qa {
+    background: #ffffff; color: #1c1f25;
+    font-family: 'Open Sans', system-ui, sans-serif;
+    padding: 80px max(5vw, 32px) 88px;
+  }
+  .nt-meet-qa__inner { max-width: 1000px; margin: 0 auto; }
+  .nt-meet-qa__head { text-align: center; margin-bottom: 56px; }
+  .nt-meet-qa__title {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 56px;
+    letter-spacing: 0.04em; color: #0a2c4c; line-height: 1.05; margin: 0; font-weight: 400;
+  }
+  .nt-meet-qa__list { display: flex; flex-direction: column; gap: 0; }
+  .nt-meet-q {
+    padding: 36px 0; border-top: 1px solid #e6e9ee;
+  }
+  .nt-meet-q:last-child { border-bottom: 1px solid #e6e9ee; }
+  .nt-meet-q__question {
+    font-size: 22px; font-weight: 800; letter-spacing: 0.01em;
+    color: #0a2c4c; line-height: 1.4; margin: 0 0 16px;
+  }
+  .nt-meet-q__answer { font-size: 17px; line-height: 1.65; color: #000000; margin: 0; }
+  .nt-meet-q__answer p { margin: 0 0 14px; }
+  .nt-meet-q__answer p:last-child { margin-bottom: 0; }
+  .nt-meet-q__answer b { color: #0a2c4c; font-weight: 700; }
+  .nt-meet-q__answer i { color: #6c7280; }
+  .nt-meet-q__sublist { list-style: none; padding: 0; margin: 4px 0 0; }
+  .nt-meet-q__sublist li {
+    font-size: 16.5px; line-height: 1.55; color: #000000;
+    padding-left: 26px; position: relative; margin-bottom: 12px;
+  }
+  .nt-meet-q__sublist li:last-child { margin-bottom: 0; }
+  .nt-meet-q__sublist li::before {
+    content: ''; position: absolute; left: 0; top: 12px;
+    width: 14px; height: 2px; background: #ff5600;
+  }
+  .nt-meet-q__sublist li b { color: #0a2c4c; font-weight: 700; }
+
+  /* ---------- CTA + PRICING (reused from results page) ---------- */
+  .nt-meet-cta {
+    background: #0a2c4c; color: #fff;
+    font-family: 'Open Sans', system-ui, sans-serif;
+    padding: 72px max(5vw, 32px) 88px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .nt-meet-cta::before {
+    content: ''; position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%); width: 64px; height: 3px; background: #ff5600;
+  }
+  .nt-meet-cta__inner { max-width: 760px; margin: 0 auto; }
+  .nt-meet-cta__eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.28em;
+    color: #ff5600; text-transform: uppercase; margin: 0 0 18px;
+  }
+  .nt-meet-cta__title {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 52px;
+    letter-spacing: 0.03em; color: #fff; line-height: 1.05; margin: 0 0 22px; font-weight: 400;
+  }
+  .nt-meet-cta__body { font-size: 18px; line-height: 1.55; color: #cfdcec; margin: 0 auto 24px; max-width: 620px; }
+  .nt-meet-cta__btn {
+    display: inline-block; background: #ff5600; color: #fff; padding: 18px 36px;
+    font-size: 14px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none; border-radius: 6px; box-shadow: 0 12px 28px rgba(255,86,0,0.34);
+    transition: background 120ms ease, box-shadow 120ms ease;
+  }
+  .nt-meet-cta__btn:hover { background: #d94800; color: #fff; box-shadow: 0 14px 32px rgba(255,86,0,0.40); }
+  .nt-meet-cta__btn:active { background: #ad3a00; }
+  .nt-meet-cta__btn--block { display: block; width: 100%; box-sizing: border-box; text-align: center; margin-bottom: 18px; }
+
+  .nt-meet-pricing { margin-top: 28px; display: flex; justify-content: center; }
+  .nt-meet-pricing__card {
+    background: #fff; color: #1c1f25; border-radius: 12px; padding: 44px 48px 36px;
+    width: 100%; max-width: 520px; box-shadow: 0 24px 64px rgba(0,0,0,0.34);
+    text-align: left; position: relative;
+  }
+  .nt-meet-pricing__label {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.28em; color: #ff5600;
+    text-transform: uppercase; margin: 0 0 14px;
+  }
+  .nt-meet-pricing__price {
+    font-family: 'Capitals', 'Trajan Pro', serif; font-size: 76px; line-height: 1;
+    color: #0a2c4c; display: flex; align-items: flex-start; gap: 4px; margin: 0 0 6px;
+  }
+  .nt-meet-pricing__dollar { font-size: 38px; margin-top: 12px; color: #ff5600; }
+  .nt-meet-pricing__amount { letter-spacing: 0.02em; }
+  .nt-meet-pricing__perpack { font-size: 13px; color: #6c7280; letter-spacing: 0.04em; margin: 0 0 22px; }
+  .nt-meet-pricing__rule { height: 1px; background: #e6e9ee; margin: 0 0 22px; }
+  .nt-meet-pricing__list { list-style: none; padding: 0; margin: 0 0 28px; }
+  .nt-meet-pricing__list li {
+    font-size: 15px; line-height: 1.45; color: #3a3f49; padding-left: 24px;
+    position: relative; margin-bottom: 10px;
+  }
+  .nt-meet-pricing__list li::before {
+    content: ''; position: absolute; left: 0; top: 9px; width: 12px; height: 2px; background: #ff5600;
+  }
+  .nt-meet-pricing__fine { font-size: 11.5px; color: #6c7280; line-height: 1.4; text-align: center; letter-spacing: 0.02em; }
+
+  /* ---------- TABLET: stack bio earlier to avoid mid-width overflow ---------- */
+  @container (max-width: 900px) {
+    .nt-meet-bio__inner { grid-template-columns: 1fr; gap: 36px; }
+    .nt-meet-bio__photo { max-width: 360px; margin: 0 auto; }
+  }
+
+  /* ---------- MOBILE ---------- */
+  @container (max-width: 720px) {
+    .nt-meet-header { padding: 100px 24px 36px; }
+    .nt-meet-header::before { top: 20px; width: 36px; }
+    .nt-meet-header__eyebrow { font-size: 11px; letter-spacing: 0.22em; margin-bottom: 14px; }
+    .nt-meet-header__title { font-size: 40px; letter-spacing: 0.03em; margin-bottom: 16px; }
+    .nt-meet-header__dek { font-size: 15px; }
+
+    .nt-meet-bio { padding: 48px 24px; }
+    .nt-meet-bio__inner { gap: 32px; }
+    .nt-meet-bio__photo { max-width: 340px; }
+    .nt-meet-bio__title { font-size: 30px; }
+    .nt-meet-bio__lead { font-size: 15.5px; margin-bottom: 22px; }
+    .nt-meet-stat__num { font-size: 32px; }
+    .nt-meet-stat { padding: 18px 12px 18px 0; }
+    .nt-meet-stat:nth-child(2) { padding-left: 16px; }
+    .nt-meet-stat:last-child { padding-left: 16px; }
+
+    .nt-meet-qa { padding: 48px 24px 56px; }
+    .nt-meet-qa__head { margin-bottom: 36px; }
+    .nt-meet-qa__title { font-size: 32px; }
+    .nt-meet-q { padding: 26px 0; }
+    .nt-meet-q__question { font-size: 19px; margin-bottom: 12px; line-height: 1.4; }
+    .nt-meet-q__answer { font-size: 15px; line-height: 1.6; }
+    .nt-meet-q__answer p { margin-bottom: 12px; }
+    .nt-meet-q__sublist li { font-size: 14.5px; padding-left: 22px; margin-bottom: 10px; }
+    .nt-meet-q__sublist li::before { width: 11px; top: 11px; }
+
+    .nt-meet-cta { padding: 48px 24px 56px; }
+    .nt-meet-cta__eyebrow { font-size: 11px; letter-spacing: 0.22em; margin-bottom: 14px; }
+    .nt-meet-cta__title { font-size: 30px; margin-bottom: 16px; }
+    .nt-meet-cta__body { font-size: 14.5px; margin-bottom: 22px; }
+    .nt-meet-pricing { margin-top: 20px; }
+    .nt-meet-pricing__card { padding: 28px 22px 24px; border-radius: 10px; }
+    .nt-meet-pricing__label { font-size: 10px; letter-spacing: 0.20em; margin-bottom: 10px; }
+    .nt-meet-pricing__price { font-size: 48px; margin-bottom: 4px; }
+    .nt-meet-pricing__dollar { font-size: 24px; margin-top: 6px; }
+    .nt-meet-pricing__perpack { font-size: 11.5px; margin-bottom: 16px; }
+    .nt-meet-pricing__rule { margin-bottom: 16px; }
+    .nt-meet-pricing__list { margin-bottom: 22px; }
+    .nt-meet-pricing__list li { font-size: 13.5px; padding-left: 20px; margin-bottom: 8px; }
+    .nt-meet-pricing__list li::before { width: 10px; top: 8px; }
+    .nt-meet-cta__btn { padding: 14px 24px; font-size: 12px; letter-spacing: 0.18em; }
+    .nt-meet-pricing__fine { font-size: 10.5px; }
+  }
+</style>
+
+<div class="nt-meet-wrap">
+
+  <section class="nt-meet-header">
+    <div class="nt-meet-header__inner">
+      <div class="nt-meet-header__eyebrow">NavigationTrading · Private Coaching</div>
+      <div class="nt-meet-header__title">Meet Eliot</div>
+      <div class="nt-meet-header__dek">
+        Eliot has spent 7+ years trading options through every kind of
+        market &mdash; calm, chaotic, and everything between.
+      </div>
+    </div>
+  </section>
+
+  <section class="nt-meet-qa">
+    <div class="nt-meet-qa__inner">
+      <div class="nt-meet-qa__head">
+        <div class="nt-meet-qa__title">A few questions for Eliot</div>
+      </div>
+      <div class="nt-meet-qa__list">
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">What was your professional background before becoming a full-time trader?</div>
+          <div class="nt-meet-q__answer">
+            <p>I've always been technically minded. My first obsession was audio engineering and using technology to create music. I worked in the industry for several years, though it never paid well. I enrolled in a university audio engineering course to take things to the next level&mdash;only to realize the course content was far below what I had already learned on the job. After scoring 100% on every exam, I left and switched to an IT and Finance program.</p>
+            <p>It was there that I first studied options strategies, along with other finance and economics courses, and learned programming. The options module covered spreads, profit and loss graphs, the Greeks, binomial models, and Black-Scholes pricing. I was fascinated by how you could combine strategies to create almost any desired risk/reward profile.</p>
+            <p>At the time, options seemed exotic, institutional, and far too risky for retail traders. I never imagined I knew enough to trade them seriously. The few times I did trade options, I stuck to simple long calls and lost most or all of the premium. Like most people, I thought options were too complicated and best left to professionals and hedgers.</p>
+            <p>I took a job at a new media firm writing internet-based systems, all the while telling myself I was really a sound engineer and would eventually return to that. About ten years later, I finally admitted I was a programmer, not a sound engineer.</p>
+            <p>My IT career spanned new media companies during the dotcom boom, investment banks, and three brokerages&mdash;where I gained valuable exposure to markets and trading from a back-office perspective.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">I see a lot of software developers gravitating toward trading. Why do you think that is?</div>
+          <div class="nt-meet-q__answer">
+            <p>Many technically minded people (mostly men) entered software engineering as a default career because they didn't have any clear alternative passion. After the dotcom hype faded, IT became a somewhat boring and thankless office job &mdash; a means to an end rather than a true calling. Many of us constantly discussed our &ldquo;exit strategies.&rdquo;</p>
+            <p>Trading is an obvious choice because of the strong overlap in mathematical, analytical, and systems-thinking skills. It also offers the dream of location independence &mdash; the ability to work from anywhere and choose your hours. Developers tend to be fast learners who enjoy problem-solving, debugging, testing, and optimization. I also saw many move into property development and investing for similar reasons.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">Tell me about your trading journey. How did you first get into trading?</div>
+          <div class="nt-meet-q__answer">
+            <p>I started trading during the dotcom boom while working at a new media firm called iXL. When the company went public on Nasdaq, we each received $10,000 worth of stock options. As the value rose quickly, I began watching iXL and its competitors closely. It felt like a one-way bet, so I started buying shares in other new media and tech companies &mdash; chasing the biggest movers on the Nasdaq.</p>
+            <p>One day I bought a company I had never heard of simply because it was the largest one-day mover. The next day that position was up $13,000. I even delayed buying a house because I thought my deposit would perform better in the market.</p>
+            <p>I turned $40,000 into $160,000, but then gave most of it back on the way down. I finally sold everything for a small overall loss. Shortly after I exited, the market continued to plummet, so at least I preserved most of my capital.</p>
+            <p>That experience gave me the trading bug &mdash; but it also taught me I needed to be much smarter. I realized I needed the ability to short as well as go long, and I needed a proper, testable system.</p>
+            <p>That led me into spot forex. I built Expert Advisors in MetaTrader, backtested strategies, and chased the &ldquo;perfect&rdquo; system using every indicator under the sun. I spent countless hours in forums and courses, waking up early for the London open and staying up late for the Asia session. I invested in commercial bots and even got work colleagues involved in after-hours bot writing and testing projects.</p>
+            <p>Eventually, repeated account blow-ups and frustration with retail trading realities left me cynical.</p>
+            <p>A turning point came when I connected with a trader named Chris (Trading Naked). He introduced me to his strategy of selling 45 DTE strangles on futures and rolling the untested side. That led me to his mentor, and eventually to Navigation Trading.</p>
+            <p>I tried calendars for a while but left to trade stocks again on the strong rebound after COVID. After making another small fortune and giving most of it back again, I returned to Navigation Trading more seriously as a pro member around the time daily expirations were introduced.</p>
+            <p>I moved my remaining capital (around $88k) into Tastytrade and achieved a 330% return in my first full year of 0DTE trading &mdash; finally keeping the profits. No overnight risk and the ability to be directionally neutral were game-changers. For the first time, I truly believed in the edge and had found a style that suited my temperament. <i>(Note: 330% return was likely achieved because 0DTE options were still relatively new and significantly overpriced at the time. I was trading with high leverage, which is manageable on a smaller account but not something that should be maintained as the account scales.)</i></p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">What strategies do you currently trade?</div>
+          <div class="nt-meet-q__answer">
+            <p>My core strategies revolve around Iron Condors with various stop-management approaches:</p>
+            <ul class="nt-meet-q__sublist">
+              <li><b>BICs</b> with fixed dollar stops or points ITM/touch stops.</li>
+              <li><b>ELMOs</b> &mdash; various premium collection and stop routines. I often start small and chain them.</li>
+              <li><b>0DTE verticals</b> for directional exposure and delta hedging.</li>
+              <li><b>No-stop trades</b> &mdash; wide umbrella Iron Condors, lunchtime volatility crush setups, multi-tranche flies later in the day, and very short-term ICs entered in the final minutes.</li>
+              <li><b>Calendars</b> entered on Mondays.</li>
+              <li><b>FOMC diagonals.</b></li>
+              <li><b>Box trades</b> for cash returns.</li>
+              <li><b>7 DTE long calls</b> &mdash; held and rolled daily.</li>
+              <li><b>DCTMs</b> (Double Calendar Time Machines) and other calendar-based strategies &mdash; currently experimenting.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">What does your typical trading day look like?</div>
+          <div class="nt-meet-q__answer">
+            <p>The US market opens at 2:30 pm my time, so mornings are dedicated to gym training, life admin, writing apps, backtesting, and other business tasks.</p>
+            <p>I'm usually at my desk 30 minutes before the open to review Discord, check overnight positions, futures, key levels, and expected moves. Lately, I've been using Spot Gamma heavily &mdash; reading the founder's notes and analyzing the gamma picture to gauge daily conditions.</p>
+            <p>I listen to the Navigation Trading morning livestream and an ICT (Inner Circle Trader) group stream to build a market narrative. If the setup is compelling, I'll take directional trades on SPX, NDX, or /MNQ and individual stocks.</p>
+            <p>The rest of the day involves monitoring TradeSteward bots, checking Spot Gamma and 0DTE SPX flow for ELMO entries and directional hedges. I take screen breaks but always return for power hour to monitor market-on-close (MOC) numbers and manage positions into the close.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">How has this changed now that you're a full-time trader compared to when you had a job?</div>
+          <div class="nt-meet-q__answer">
+            <p>I'm actually busier now. There's constant pressure to learn, test, monitor, and improve. In some ways, it can be healthier to have a regular job and trade in the gaps. It's harder to manage the obsession when trading is your full-time focus &mdash; more screen time doesn't always equal more profit and can sometimes reduce decision quality.</p>
+            <p>That said, I don't regret the move. I went from being bored most days to never being bored. I'm also fortunate to have a strong community of talented, like-minded traders around me.</p>
+            <p>Trading can be lonely, but I feel like I have a great team of people I talk to on a daily basis.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">What are your thoughts on the mental side of trading? What role does psychology play?</div>
+          <div class="nt-meet-q__answer">
+            <p>Psychology is the biggest factor in long-term trading success &mdash; along with position sizing, which itself stems from good psychology. Trading is a battle against yourself more than it is against the market.</p>
+            <p>The same setups that work for one person can fail for another due to fear, FOMO, overconfidence, or tying self-worth to P&L. Success requires detaching your ego, treating trading like a business, and accepting randomness and sequence risk. You must follow your process even when it feels painful. Good trades can still lose money, and you have to become comfortable being a good loser. Discipline, patience, and process-over-outcome thinking are essential.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">When it comes to being a profitable trader, do you think anyone can learn how, or are some people just &ldquo;born with it&rdquo;?</div>
+          <div class="nt-meet-q__answer">
+            <p>Trading is a skill that can absolutely be learned. The famous Turtle Traders experiment proved that complete novices could be taught to trade profitably. I've seen it happen first hand many times in our community.</p>
+            <p>While some people may have a more naturally suited emotional temperament, trading is highly counter-intuitive. Our brains are wired to avoid losses and seek certainty, which works against us. Most of us also carry limiting beliefs and biases that need to be unlearned.</p>
+            <p>Long-term profitability isn't just about winning &mdash; it's about surviving drawdowns both financially and mentally.</p>
+            <p>One of the issues with trading is there are no barriers to entry. To become a doctor or a lawyer, you need years of training and qualifications. To be a trader, you just need an account. The process therefore consists of learning the hard way &mdash; getting burned enough times to develop genuine respect for the market and do the deep psychological work. Maybe some people never got burned, but I have never met one of those people.</p>
+            <p>Technical skill helps, but emotional control and consistency matter more. Stay process-focused and enjoy the journey. For me, shifting from limiting beliefs (&ldquo;I'm unlucky with money,&rdquo; &ldquo;Trading is too hard&rdquo;) to empowering ones had a profound impact.</p>
+          </div>
+        </div>
+
+        <div class="nt-meet-q">
+          <div class="nt-meet-q__question">When someone signs up for the 3-session coaching package, what does that look like?</div>
+          <div class="nt-meet-q__answer">
+            <p><b>What this coaching is:</b> I'm not a &ldquo;professional coach&rdquo; &mdash; I'm a professional trader who has enjoyed some success after many hard lessons and loves talking about trading and teaching others.</p>
+            <p>Having traded 0DTE since 2022, I can share real-world experiences: what has worked for me, what hasn't, and the lessons learned along the way. Our sessions are discussions about pros/cons of different approaches, trade-offs, position sizing, risk management, and psychology.</p>
+            <p>We can build a plan tailored to your account size and risk tolerance. We'll explore where you might be getting stuck psychologically and discuss practical topics like backtesting, trade types, stops, profit-taking, and mechanical vs. discretionary decision-making. I can share current strategies, Spot Gamma insights, and help you determine what might suit your style.</p>
+            <p><b>What this coaching is NOT:</b> I won't give you magic entries, tell you exactly what to trade each day, or promise you'll never lose. This isn't a &ldquo;copy my trades&rdquo; service or pure chart-reading course. It's about building your own realistic edge with proper expectations.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="nt-meet-cta">
+    <div class="nt-meet-cta__inner">
+      <div class="nt-meet-cta__eyebrow">Apply to the program</div>
+      <div class="nt-meet-cta__title">Ready to trade with Eliot?</div>
+      <div class="nt-meet-cta__body">
+        We work with a small number of traders at a time. If you're serious
+        about a probability-based, defined-risk methodology &mdash; apply below
+        and we'll be in touch.
+      </div>
+
+      <div class="nt-meet-pricing">
+        <div class="nt-meet-pricing__card">
+          <div class="nt-meet-pricing__label">3-Session Package</div>
+          <div class="nt-meet-pricing__price">
+            <span class="nt-meet-pricing__dollar">$</span><span class="nt-meet-pricing__amount">1,500</span>
+          </div>
+          <div class="nt-meet-pricing__perpack">Per package &middot; one-time</div>
+          <div class="nt-meet-pricing__rule"></div>
+          <ul class="nt-meet-pricing__list">
+            <li>Three 1-on-1 sessions with Eliot</li>
+            <li>A custom trading plan, built around how you trade</li>
+            <li>Strategy walkthroughs &mdash; BICs, ELMOs, Umbrellas</li>
+            <li>Backtesting fundamentals & automation guidance</li>
+            <li>Mindset and accountability check-ins</li>
+          </ul>
+          <a class="nt-meet-cta__btn nt-meet-cta__btn--block"
+             href="https://navtrading.wufoo.com/forms/navigationcoaching-questionnaire/"
+             target="_blank" rel="noopener">
+            Complete Application &#8594;
+          </a>
+          <div class="nt-meet-pricing__fine">
+            Limited availability. Applications reviewed in the order received.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"></div>
+        <div class="footer-tagline">Institutional Grade Trading Education</div>
+      </div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Contact</div>
+          <a href="mailto:support@navigationtrading.com" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">support@navigationtrading.com</a>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Follow</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <a href="https://www.facebook.com/navigationtrading" target="_blank" class="social-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://x.com/navtrading1?s=21" target="_blank" class="social-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/navigationtrading" target="_blank" class="social-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@navigationtrading" target="_blank" class="social-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Legal</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://navigationtrading.com/legal-disclaimers/" target="_blank" class="footer-link">Risk Disclosure</a>
+            <a href="https://navigationtrading.com/legal-disclaimers/" target="_blank" class="footer-link">Privacy Policy</a>
+            <a href="https://navigationtrading.com/legal-disclaimers/" target="_blank" class="footer-link">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="https://navigationtrading.com/legal-disclaimers/#privacy" target="_blank" class="footer-link">Privacy Policy</a>
+          <a href="https://navigationtrading.com/legal-disclaimers#terms" target="_blank" class="footer-link">Terms of Use</a>
+          <a href="https://navigationtrading.com/legal-disclaimers/#refund" target="_blank" class="footer-link">Refund Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+      </div>
+      <div class="footer-copy">The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+  <script src="site-config.js" data-page="meet-eliot"></script>
+</body>
+</html>
