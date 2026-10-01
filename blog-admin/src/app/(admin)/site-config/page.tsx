@@ -110,6 +110,28 @@ const PAGES_CONFIG: PageConfig[] = [
     ]
   },
   {
+    key: 'transformer-option-spreads-10-15',
+    title: 'Option Spreads Webinar — Oct 15',
+    path: '/transformer-option-spreads-10-15',
+    deployedUrl: 'https://www.navigationtrading.com/transformer-option-spreads-10-15',
+    description: 'Option Spreads registration page for the October 15 webinar, and its exit intent settings.',
+    fields: [
+      { key: 'countdownTarget', label: 'Countdown Target Date & Time', type: 'datetime-local', group: 'Countdown & Date Settings' },
+      { key: 'dateLabel', label: 'Date Badge Text', type: 'text', placeholder: 'e.g. October 15', group: 'Countdown & Date Settings' },
+      { key: 'timeLabel', label: 'Time Badge Text', type: 'text', placeholder: 'e.g. 3:30 PM CST', group: 'Countdown & Date Settings' },
+      { key: 'liveSessionLabel', label: 'Live Session Card Subtitle', type: 'text', placeholder: 'e.g. Live session · October 15th', group: 'Countdown & Date Settings' },
+      { key: 'overviewDateLabel', label: 'Overview Date Badge', type: 'text', placeholder: 'e.g. October 15, 2026', group: 'Countdown & Date Settings' },
+      { key: 'fullDateSubtext', label: 'Register Button Subtext', type: 'text', placeholder: 'e.g. Thursday, October 15 · 3:30 PM CST · Free & Live', description: 'Extended subtext under the register button', group: 'Countdown & Date Settings' },
+      { key: 'formId', label: 'ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 140', description: 'Inline registration form ID', group: 'Form Settings' },
+      { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', description: 'Whether to show the exit intent popup when visitors leave', group: 'Exit Intent Popup' },
+      { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', placeholder: 'Turn Any Options Trade Into a Risk-Free Position', group: 'Exit Intent Popup' },
+      { key: 'exitPopupTagline', label: 'Exit Popup Tagline', type: 'text', placeholder: 'Using the DC TimeMachine strategy — live, with real trades.', group: 'Exit Intent Popup' },
+      { key: 'exitPopupBullets', label: 'Exit Popup Bullets (Semicolon-separated)', type: 'textarea', placeholder: 'Reposition winning trades and remove risk; Maximize capital efficiency; Trade multiple transformer strategies', description: 'Semicolon (;) separated bullet points', group: 'Exit Intent Popup' },
+      { key: 'exitPopupDate', label: 'Exit Popup Webinar Date Text', type: 'text', placeholder: 'Thursday, October 15 | 3:30 PM CST', group: 'Exit Intent Popup' },
+      { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 138', group: 'Exit Intent Popup' },
+    ]
+  },
+  {
     key: 'home',
     title: 'Homepage',
     path: '/home',
