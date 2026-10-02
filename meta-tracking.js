@@ -1,9 +1,11 @@
 (function () {
   // ── META PIXEL ID ──
   // Pixel IDs are public (they appear in every page's source on any site that
-  // uses Meta ads), so it's safe to hardcode here. Replace this placeholder
-  // with the real Pixel ID from Meta Events Manager.
-  var META_PIXEL_ID = '365657453766875';
+  // uses Meta ads), so it's safe to hardcode here. This must match the Pixel
+  // ID the live ad campaigns are actually attached to in Meta Ads Manager --
+  // a prior mismatched ID here meant tracking was firing successfully but
+  // against a pixel the ads never looked at.
+  var META_PIXEL_ID = '263136327422214';
 
   // ── META PIXEL BASE CODE (standard snippet from Meta Events Manager) ──
   !function (f, b, e, v, n, t, s) {
