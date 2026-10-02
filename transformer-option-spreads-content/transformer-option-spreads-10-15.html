@@ -4107,6 +4107,28 @@ window._load_script = function(url, callback, isSubmit) {
             var submitButton = e.target.querySelector('#_form_140_submit');
             submitButton.disabled = true;
             submitButton.classList.add('processing');
+
+            // Fire Meta tracking here, at submit time -- ActiveCampaign's form
+            // is configured with a native "redirect to URL" action, so the
+            // proc.php response does a direct window.top.location.href
+            // navigation and NEVER calls window._show_thank_you. Firing from
+            // inside _show_thank_you (as the exit-popup form's handler does)
+            // silently never ran for this form; this is the actual fix for
+            // the "leads come in but ads don't trigger" bug.
+            if (window.metaTrackLeadDual) {
+                var hfNameField = document.getElementById('fullname');
+                var hfEmailField = document.getElementById('email');
+                var hfPhoneField = document.getElementById('phone');
+                var hfFirstName = hfNameField && hfNameField.value ? hfNameField.value.trim().split(/\s+/)[0] : '';
+                window.metaTrackLeadDual({
+                    eventName: 'w4-tos',
+                    email: hfEmailField ? hfEmailField.value : '',
+                    phone: hfPhoneField ? hfPhoneField.value : '',
+                    firstName: hfFirstName,
+                });
+            }
+            try { sessionStorage.setItem('_tosVariant', '10-15'); } catch (e) {}
+
                     var serialized = _form_serialize(document.getElementById('_form_140_')).replace(/%0A/g, '\\n');
             var err = form_to_submit.querySelector('._form_error');
             err ? err.parentNode.removeChild(err) : false;
