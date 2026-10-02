@@ -46,7 +46,7 @@
   window.metaTrackLead = function (opts) {
     opts = opts || {};
     var eventName = opts.eventName || 'Lead';
-    var eventId = generateEventId();
+    var eventId = opts.eventId || generateEventId();
 
     // 1. Browser Pixel
     if (window.fbq) {
@@ -96,12 +96,14 @@
     })();
   };
 
-  // ── STORE-THEN-FIRE ON THANK-YOU PAGE ──
-  // Firing the conversion at form-submit time (before the redirect) is racy —
-  // the page can navigate away mid-request. Instead, the form page stores the
-  // lead's details in sessionStorage right before redirecting, and the
-  // thank-you page (the page you only reach after a real successful
-  // submission) reads it back and fires the actual event once there.
+  // ── STORE-THEN-FIRE ON THANK-YOU PAGE (fallback path) ──
+  // The form page stores the lead's details in sessionStorage right before
+  // redirecting, and the thank-you page reads it back and fires the event
+  // once there. This exists as a BACKUP ONLY -- relying on it as the only
+  // firing point under-counted real conversions, because sessionStorage
+  // does not reliably survive a full page navigation inside the in-app
+  // browsers Facebook/Instagram open ad clicks in (a very common path for
+  // this exact traffic). See metaTrackLeadDual below for the primary path.
   var PENDING_KEY = '_metaPendingLead';
 
   window.metaStoreLeadForThankYou = function (opts) {
@@ -122,4 +124,23 @@
   // Auto-fire on every page load — a no-op unless the previous page actually
   // stored a pending lead, and it self-clears so a refresh can't re-fire it.
   window.metaFireStoredLead();
+
+  // ── PRIMARY PATH: fire immediately, with a thank-you-page backup ──
+  // Call this instead of metaStoreLeadForThankYou directly from a form's
+  // success handler, right before redirecting to the thank-you page.
+  //
+  // It fires the real event NOW (via metaTrackLead's keepalive fetch, which
+  // is specifically designed to complete even though the page is about to
+  // navigate away -- unlike sessionStorage, which several in-app/mobile
+  // browsers do not reliably carry across a full-page navigation) AND also
+  // stores the same event_id for the thank-you page to re-fire as a backup.
+  // Both paths share one event_id, so if both succeed Meta deduplicates them
+  // into a single conversion instead of double-counting.
+  window.metaTrackLeadDual = function (opts) {
+    opts = opts || {};
+    var eventId = generateEventId();
+    var withId = Object.assign({}, opts, { eventId: eventId });
+    window.metaTrackLead(withId);
+    window.metaStoreLeadForThankYou(withId);
+  };
 })();

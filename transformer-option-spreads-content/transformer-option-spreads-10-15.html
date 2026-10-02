@@ -5549,11 +5549,11 @@ window._load_script = function(url, callback, isSubmit) {
           utm_campaign: sessionStorage.getItem('utm_campaign') || '(none)'
         });
       }
-      if (window.metaStoreLeadForThankYou) {
+      if (window.metaTrackLeadDual) {
         var phoneField = document.getElementById('phone');
         var nameField = document.getElementById('fullname');
         var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
-        window.metaStoreLeadForThankYou({
+        window.metaTrackLeadDual({
           eventName: 'w4-tos',
           email: email,
           phone: phoneField ? phoneField.value : '',
@@ -5998,9 +5998,9 @@ window._load_script = function(url, callback, isSubmit) {
         submitBtn.disabled = true;
         submitBtn.classList.add('processing');
 
-        if (window.metaStoreLeadForThankYou) {
+        if (window.metaTrackLeadDual) {
           var firstName = fullname.value.trim().split(/\s+/)[0];
-          window.metaStoreLeadForThankYou({
+          window.metaTrackLeadDual({
             eventName: 'w4-tos',
             email: email.value,
             phone: phone.value,
