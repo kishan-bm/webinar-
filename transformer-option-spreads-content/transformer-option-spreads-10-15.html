@@ -3512,6 +3512,10 @@ margin-bottom:10px;
   <input type="hidden" name="act" value="sub" />
   <input type="hidden" name="v" value="2" />
   <input type="hidden" name="or" value="eae655dd-0bb3-4e99-a774-b65c26fcd73b" />
+  <input type="hidden" name="field[5]" id="utm_source" value="" />
+  <input type="hidden" name="field[6]" id="utm_medium" value="" />
+  <input type="hidden" name="field[7]" id="utm_campaign" value="" />
+  <input type="hidden" name="field[8]" id="utm_content" value="" />
   <div class="_form-content">
     <div class="_form_element _x07089279 _full_width " >
       <label for="fullname" class="_form-label">
@@ -3689,6 +3693,27 @@ window._load_script = function(url, callback, isSubmit) {
 (function() {
     var iti;
     if (window.location.search.search("excludeform") !== -1) return false;
+
+    // Capture UTM parameters and populate hidden fields
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        utmFields.forEach(function(key) {
+            var val = params.get(key);
+            if (val) {
+                sessionStorage.setItem(key, val);
+            }
+            var el = document.getElementById(key);
+            if (el) {
+                el.value = sessionStorage.getItem(key) || '';
+            }
+            var eipEl = document.getElementById('eip_' + key);
+            if (eipEl) {
+                eipEl.value = sessionStorage.getItem(key) || '';
+            }
+        });
+    })();
+
     var getCookie = function(name) {
         var match = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]+)'));
         return match ? match[2] : localStorage.getItem(name);
@@ -5762,6 +5787,10 @@ window._load_script = function(url, callback, isSubmit) {
           <input type="hidden" name="act" value="sub">
           <input type="hidden" name="v" value="2">
           <input type="hidden" name="or" value="77cfbca2-fea9-4e89-8e70-573a1ec276d9">
+          <input type="hidden" name="field[5]" id="eip_utm_source" value="" />
+          <input type="hidden" name="field[6]" id="eip_utm_medium" value="" />
+          <input type="hidden" name="field[7]" id="eip_utm_campaign" value="" />
+          <input type="hidden" name="field[8]" id="eip_utm_content" value="" />
           <div class="eip-field"><input type="text" id="eip_fullname" name="fullname" placeholder="Your Full Name *" required class="eip-input"></div>
           <div class="eip-field"><input type="email" id="eip_email" name="email" placeholder="Your Email Address *" required class="eip-input"></div>
           <div class="eip-field"><input type="text" id="eip_phone" name="phone" placeholder="Your Phone Number *" required class="eip-input"></div>
