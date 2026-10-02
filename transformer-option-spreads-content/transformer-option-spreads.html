@@ -4050,13 +4050,18 @@
                     var submitButton = e.target.querySelector('#_form_136_submit');
                     submitButton.disabled = true;
                     submitButton.classList.add('processing');
-                    if (window.metaStoreLeadForThankYou) {
+                    // Fire tracking here at submit time, not via sessionStorage handoff
+                    // to the thank-you page -- that relay is a fallback only, since
+                    // sessionStorage doesn't reliably survive a full page navigation
+                    // inside Facebook/Instagram's in-app browser (a common path for
+                    // exactly this ad traffic), which under-counted real conversions.
+                    if (window.metaTrackLeadDual) {
                         var emailField = document.getElementById('email');
                         var phoneField = document.getElementById('phone');
                         var nameField = document.getElementById('fullname');
                         var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
-                        window.metaStoreLeadForThankYou({
-                            eventName: 'w4-tos',
+                        window.metaTrackLeadDual({
+                            eventName: 'W5TY',
                             email: emailField ? emailField.value : '',
                             phone: phoneField ? phoneField.value : '',
                             firstName: firstName,
@@ -5421,7 +5426,7 @@
         var nameField = document.getElementById('fullname');
         var firstName = nameField && nameField.value ? nameField.value.trim().split(/\s+/)[0] : '';
         window.metaStoreLeadForThankYou({
-          eventName: 'w4-tos',
+          eventName: 'W5TY',
           email: email,
           phone: phoneField ? phoneField.value : '',
           firstName: firstName,
@@ -5850,10 +5855,10 @@
         submitBtn.disabled = true;
         submitBtn.classList.add('processing');
 
-        if (window.metaStoreLeadForThankYou) {
+        if (window.metaTrackLeadDual) {
           var firstName = fullname.value.trim().split(/\s+/)[0];
-          window.metaStoreLeadForThankYou({
-            eventName: 'w4-tos',
+          window.metaTrackLeadDual({
+            eventName: 'W5TY',
             email: email.value,
             phone: phone.value,
             firstName: firstName,
