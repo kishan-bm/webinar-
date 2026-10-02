@@ -67,6 +67,10 @@
     // may not have finished setting the cookie yet. Wait briefly for it
     // (capped) before reading, so server-side events carry the same browser
     // identifiers as the Pixel call and match quality doesn't suffer.
+    function getUtm(key) {
+      try { return sessionStorage.getItem(key) || ''; } catch (e) { return ''; }
+    }
+
     function sendCapi() {
       try {
         fetch('/api/collect', {
@@ -81,6 +85,11 @@
             first_name: opts.firstName || '',
             fbp: getCookie('_fbp'),
             fbc: getCookie('_fbc'),
+            utm_source: getUtm('utm_source'),
+            utm_medium: getUtm('utm_medium'),
+            utm_campaign: getUtm('utm_campaign'),
+            utm_content: getUtm('utm_content'),
+            utm_term: getUtm('utm_term'),
           }),
           keepalive: true,
         }).catch(function () {});

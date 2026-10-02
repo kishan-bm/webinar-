@@ -20,7 +20,10 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { event_name, event_id, event_source_url, email, phone, first_name, fbp, fbc } = body || {};
+    const {
+      event_name, event_id, event_source_url, email, phone, first_name, fbp, fbc,
+      utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+    } = body || {};
 
     if (!event_name || !event_id) {
       return NextResponse.json({ success: false, error: 'event_name and event_id are required' }, { status: 400 });
@@ -37,6 +40,13 @@ export async function POST(request: NextRequest) {
     if (fbp) userData.fbp = fbp;
     if (fbc) userData.fbc = fbc;
 
+    const customData: Record<string, unknown> = {};
+    if (utm_source) customData.utm_source = utm_source;
+    if (utm_medium) customData.utm_medium = utm_medium;
+    if (utm_campaign) customData.utm_campaign = utm_campaign;
+    if (utm_content) customData.utm_content = utm_content;
+    if (utm_term) customData.utm_term = utm_term;
+
     const eventPayload = {
       data: [
         {
@@ -46,6 +56,7 @@ export async function POST(request: NextRequest) {
           event_source_url,
           action_source: 'website',
           user_data: userData,
+          ...(Object.keys(customData).length ? { custom_data: customData } : {}),
         },
       ],
     };
