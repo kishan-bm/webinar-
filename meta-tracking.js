@@ -29,6 +29,17 @@
     } catch (e) {}
   })();
 
+  // ── TEST MODE (for Events Manager → Test events only) ──
+  // Visit any page with ?test_event_code=TESTxxxx to tag THIS browser's
+  // server events for the session. Real visitors never have the param, so
+  // live conversions are never diverted into the Test events tab.
+  (function captureTestCode() {
+    try {
+      var code = new URLSearchParams(window.location.search).get('test_event_code');
+      if (code && /^TEST[A-Z0-9]{1,20}$/i.test(code)) sessionStorage.setItem('_metaTestCode', code);
+    } catch (e) {}
+  })();
+
   // ── META PIXEL BASE CODE (standard snippet from Meta Events Manager) ──
   !function (f, b, e, v, n, t, s) {
     if (f.fbq) return;
@@ -112,6 +123,7 @@
             utm_campaign: getUtm('utm_campaign'),
             utm_content: getUtm('utm_content'),
             utm_term: getUtm('utm_term'),
+            test_event_code: getUtm('_metaTestCode'),
           }),
           keepalive: true,
         }).catch(function () {});

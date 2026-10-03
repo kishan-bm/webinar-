@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const {
       event_name, event_id, event_source_url, email, phone, first_name, fbp, fbc,
-      utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+      utm_source, utm_medium, utm_campaign, utm_content, utm_term, test_event_code,
     } = body || {};
 
     if (!event_name || !event_id) {
@@ -30,7 +30,14 @@ export async function POST(request: NextRequest) {
     }
 
     const userData: Record<string, unknown> = {};
-    const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    // The site sits behind Cloudflare, then a Vercel rewrite to this project,
+    // so x-forwarded-for's first hop can be a Cloudflare/Vercel IP rather
+    // than the visitor's. Prefer the headers that carry the real client IP.
+    const clientIp =
+      request.headers.get('cf-connecting-ip')?.trim() ||
+      request.headers.get('true-client-ip')?.trim() ||
+      request.headers.get('x-real-ip')?.trim() ||
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
     if (clientIp) userData.client_ip_address = clientIp;
     const userAgent = request.headers.get('user-agent');
     if (userAgent) userData.client_user_agent = userAgent;
@@ -47,6 +54,19 @@ export async function POST(request: NextRequest) {
     if (utm_content) customData.utm_content = utm_content;
     if (utm_term) customData.utm_term = utm_term;
 
+    // Never auto-apply a test_event_code from env: doing so silently routes
+    // every real production event into Meta's Test Events tab instead of the
+    // actual Events Manager / ad reporting, which is exactly the bug that
+    // made server-side events look like they weren't counting at all.
+    //
+    // Per-request test code only (sent by meta-tracking.js when the visitor
+    // opened the page with ?test_event_code=TEST...). Never read from env --
+    // see the note above -- so real traffic always counts normally.
+    const testCode =
+      typeof test_event_code === 'string' && /^TEST[A-Z0-9]{1,20}$/i.test(test_event_code)
+        ? test_event_code
+        : undefined;
+
     const eventPayload = {
       data: [
         {
@@ -59,12 +79,11 @@ export async function POST(request: NextRequest) {
           ...(Object.keys(customData).length ? { custom_data: customData } : {}),
         },
       ],
+      // test_event_code is a top-level field alongside `data`, not nested
+      // inside the event object itself -- that's how Meta's Graph API expects it.
+      ...(testCode ? { test_event_code: testCode } : {}),
     };
 
-    // Never auto-apply a test_event_code from env: doing so silently routes
-    // every real production event into Meta's Test Events tab instead of the
-    // actual Events Manager / ad reporting, which is exactly the bug that
-    // made server-side events look like they weren't counting at all.
     const params = new URLSearchParams({ access_token: accessToken });
 
     const metaRes = await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events?${params.toString()}`, {
