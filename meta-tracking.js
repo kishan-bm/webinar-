@@ -138,10 +138,18 @@
   // browsers Facebook/Instagram open ad clicks in (a very common path for
   // this exact traffic). See metaTrackLeadDual below for the primary path.
   var PENDING_KEY = '_metaPendingLead';
+  var LEAD_USER_KEY = '_metaLeadUser';
 
   window.metaStoreLeadForThankYou = function (opts) {
+    opts = opts || {};
     try {
-      sessionStorage.setItem(PENDING_KEY, JSON.stringify(opts || {}));
+      sessionStorage.setItem(PENDING_KEY, JSON.stringify(opts));
+    } catch (e) {}
+    // Contact details for the confirmed-Lead event on the thank-you page.
+    try {
+      localStorage.setItem(LEAD_USER_KEY, JSON.stringify({
+        email: opts.email || '', phone: opts.phone || '', firstName: opts.firstName || '', t: Date.now(),
+      }));
     } catch (e) {}
   };
 
@@ -150,13 +158,55 @@
       var raw = sessionStorage.getItem(PENDING_KEY);
       if (!raw) return;
       sessionStorage.removeItem(PENDING_KEY);
-      window.metaTrackLead(JSON.parse(raw));
+      var pending = JSON.parse(raw) || {};
+      window.metaTrackLead(pending);
+      // Remember which event this page load already fired, so the
+      // thank-you-page Lead below doesn't count the same person twice.
+      window.__metaStoredFired = pending.eventName || 'Lead';
     } catch (e) {}
   };
 
   // Auto-fire on every page load — a no-op unless the previous page actually
   // stored a pending lead, and it self-clears so a refresh can't re-fire it.
   window.metaFireStoredLead();
+
+  // ── CONFIRMED LEAD: fires only when our own thank-you page actually loads ──
+  // Standard 'Lead' event (browser Pixel + CAPI, shared event_id), fired on
+  // the funnel's thank-you page so any Custom Conversion rule keyed to a
+  // thank-you URL has a matching event to see, independent of W5TY.
+  // Scoped to tos-thankyou* specifically (not a site-wide "thank-you" match)
+  // so this doesn't affect the separate DTT funnel's thank-you page.
+  // Requires real contact details stored within the last hour, so a bare
+  // direct visit / crawler / link-preview fetch with no real submission
+  // behind it does not get counted as a Lead.
+  (function fireThankYouLead() {
+    try {
+      var path = window.location.pathname.toLowerCase();
+      if (path.indexOf('tos-thankyou') === -1) return;
+
+      var user = {};
+      try {
+        user = JSON.parse(localStorage.getItem(LEAD_USER_KEY) || '{}') || {};
+      } catch (e) { user = {}; }
+      if (!user.t || Date.now() - user.t > 3600000 || !user.email) return;
+
+      // Refresh / back-button guard: one Lead per thank-you page per 24h.
+      var guard = '_tyLead_' + path.replace(/[^a-z0-9]/g, '');
+      if (document.cookie.indexOf(guard + '=1') !== -1) return;
+      document.cookie = guard + '=1; path=/; max-age=86400; SameSite=Lax';
+
+      // If metaFireStoredLead already fired a 'Lead'-named event above for
+      // this same visit, don't send a second one.
+      if (window.__metaStoredFired === 'Lead') return;
+
+      window.metaTrackLead({
+        eventName: 'Lead',
+        email: user.email || '',
+        phone: user.phone || '',
+        firstName: user.firstName || '',
+      });
+    } catch (e) {}
+  })();
 
   // ── PRIMARY PATH: fire immediately, with a thank-you-page backup ──
   // Call this instead of metaStoreLeadForThankYou directly from a form's
