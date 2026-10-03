@@ -55,7 +55,6 @@ export async function middleware(request: NextRequest) {
     const isPublicApi =
       (request.method === 'GET' &&
        (pathname.startsWith('/api/config') || pathname.startsWith('/api/posts') || pathname.startsWith('/api/banners'))) ||
-      pathname.endsWith('/ai-summary') ||
       pathname.startsWith('/api/collect') ||
       (request.method === 'GET' && pathname.startsWith('/api/redirects/lookup/'));
       

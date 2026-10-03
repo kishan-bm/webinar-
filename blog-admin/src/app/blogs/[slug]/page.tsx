@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { cache } from 'react';
 import TableOfContents from '@/components/TableOfContents';
-import AISummary from '@/components/AISummary';
 
 export const revalidate = 60;
 
@@ -97,7 +96,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const [categories, banners, cachedSummaryConfig] = await Promise.all([
+  const [categories, banners] = await Promise.all([
     prisma.category.findMany({
       include: {
         _count: { select: { posts: { where: { status: 'PUBLISHED' } } } },
@@ -105,23 +104,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       orderBy: { name: 'asc' },
     }),
     prisma.banner.findMany({ orderBy: { order: 'asc' } }),
-    // Cached AI summary, if one exists
-    prisma.siteConfig.findUnique({
-      where: {
-        pageKey_key: {
-          pageKey: `blog-summary:${post.id}`,
-          key: 'data'
-        }
-      }
-    }),
   ]);
-
-  let initialSummary = null;
-  if (cachedSummaryConfig) {
-    try {
-      initialSummary = JSON.parse(cachedSummaryConfig.value);
-    } catch (_) {}
-  }
 
   const decodedContent = decodeHTMLBlocks(post.content);
   const headings = parseHeadings(decodedContent);
@@ -217,11 +200,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   ))}
                 </div>
               )}
-            </div>
-
-            {/* AI Summary Block */}
-            <div style={{ padding: '0 48px' }} className="article-summary-container">
-              <AISummary postId={post.id} initialSummary={initialSummary} />
             </div>
 
             {/* Article Body */}
