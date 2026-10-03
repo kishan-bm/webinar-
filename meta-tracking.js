@@ -7,6 +7,28 @@
   // briefly led this to get changed to the wrong value.
   var META_PIXEL_ID = '365657453766875';
 
+  // ── CLICK-ID CAPTURE (fbclid -> _fbc) ──
+  // Meta attributes a conversion to an ad click through the _fbc cookie,
+  // which is built from the ?fbclid= on the landing URL. fbevents.js normally
+  // sets it, but only if it loads (ad blockers, slow in-app browsers and
+  // early redirects all stop that) -- and then the CAPI event reaches Meta
+  // with no click ID, so it shows in Events Manager but never in Ads Manager.
+  // Set it ourselves, synchronously, before anything else can lose the param.
+  (function captureFbclid() {
+    try {
+      var fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (!fbclid) return;
+      var existing = document.cookie.match(/(?:^|;\s*)_fbc=([^;]*)/);
+      if (existing && decodeURIComponent(existing[1]).slice(-fbclid.length) === fbclid) return;
+      var fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+      var host = window.location.hostname;
+      var parts = host.split('.');
+      var domain = parts.length > 2 ? '; domain=.' + parts.slice(-2).join('.') : '';
+      document.cookie = '_fbc=' + fbc + '; path=/; max-age=7776000; SameSite=Lax' + domain;
+      try { localStorage.setItem('_fbc', fbc); } catch (e) {}
+    } catch (e) {}
+  })();
+
   // ── META PIXEL BASE CODE (standard snippet from Meta Events Manager) ──
   !function (f, b, e, v, n, t, s) {
     if (f.fbq) return;
@@ -84,7 +106,7 @@
             phone: opts.phone || '',
             first_name: opts.firstName || '',
             fbp: getCookie('_fbp'),
-            fbc: getCookie('_fbc'),
+            fbc: getCookie('_fbc') || (function () { try { return localStorage.getItem('_fbc') || ''; } catch (e) { return ''; } })(),
             utm_source: getUtm('utm_source'),
             utm_medium: getUtm('utm_medium'),
             utm_campaign: getUtm('utm_campaign'),
