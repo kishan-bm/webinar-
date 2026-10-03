@@ -211,12 +211,19 @@
       // this same visit, don't send a second one.
       if (window.__metaStoredFired === 'Lead') return;
 
-      window.metaTrackLead({
-        eventName: 'Lead',
+      var userOpts = {
         email: user.email || '',
         phone: user.phone || '',
         firstName: user.firstName || '',
-      });
+      };
+      window.metaTrackLead(Object.assign({ eventName: 'Lead' }, userOpts));
+
+      // Page-specific confirmed event, e.g. TY_tos_thankyou_10_15.
+      // Meta strips URL paths for this pixel, so a custom conversion can't use
+      // "URL contains tos-thankyou-10-15" -- but it CAN use the event name.
+      // One custom conversion per webinar: Event = TY_<page>.
+      var pageEvent = 'TY_' + path.replace(/^\/+|\/+$/g, '').replace(/[^a-z0-9]+/g, '_');
+      window.metaTrackLead(Object.assign({ eventName: pageEvent }, userOpts));
     } catch (e) {}
   })();
 
