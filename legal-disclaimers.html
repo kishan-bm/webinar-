@@ -65,7 +65,10 @@
     .nav-cta:hover { background: var(--orange-bright); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,66,10,0.35); }
 
     /* LEGAL CONTENT */
-    .legal-hero { background: var(--bg-dark); padding: 150px 24px 56px; text-align: center; }
+    .legal-hero { background: var(--bg-dark); padding: 150px 24px 56px; text-align: center; position: relative; overflow: hidden; }
+    .legal-hero .hero-bg-img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.32; }
+    .legal-hero .hero-bg-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(13,46,78,0.92) 0%, rgba(13,46,78,0.7) 60%, #0D2E4E 100%); pointer-events: none; }
+    .legal-hero > * { position: relative; z-index: 5; }
     .legal-hero h1 { color: #fff; font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
     .legal-hero p { color: rgba(255,255,255,0.65); font-size: 15px; }
     .legal-wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 100px; }
@@ -79,6 +82,7 @@
 
     /* FOOTER */
     footer { background: var(--teal-900); padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+    footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
     footer > .footer-top, footer > .footer-bottom { position: relative; z-index: 1; }
     .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
     .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
@@ -171,6 +175,8 @@
   </nav>
 
   <section class="legal-hero">
+    <img class="hero-bg-img" src="WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg" alt="">
+    <div class="hero-bg-overlay"></div>
     <h1>Legal Disclaimers</h1>
     <p>Privacy Policy &middot; Terms of Use &middot; Legal Disclaimer &middot; Refund Policy</p>
   </section>
