@@ -168,6 +168,10 @@
       "destination": "/coaching"
     },
     {
+      "source": "/legal-disclaimers",
+      "destination": "/legal-disclaimers"
+    },
+    {
       "source": "/dtt-6/16",
       "destination": "/may-16.html/dtt-6"
     },

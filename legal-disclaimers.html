@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] || (w[l] = []), w[l].push({
+        'gtm.start': (new Date).getTime(),
+        event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = "dataLayer" != l ? "&l=" + l : "";
+      j.async = !0, j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl, f.parentNode.insertBefore(j, f)
+    })(window, document, "script", "dataLayer", "GTM-PM36KHB");</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Disclaimers | NavigationTrading</title>
+  <meta name="description" content="NavigationTrading's Privacy Policy, Terms of Use, Legal Disclaimer, and Refund Policy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #c8420a;
+      --orange-bright: #e04d10;
+      --teal-900: #0D2E4E;
+      --bg-dark: #0D2E4E;
+      --text-dim: #64748b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #111; overflow-x: hidden; line-height: 1.5; font-size: 16px; }
+
+    /* NAVBAR */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, box-shadow 0.4s, padding 0.3s; background: rgba(13,46,78,0.98); backdrop-filter: blur(20px); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-mobile-only { display: none; }
+    @media (min-width: 769px) {
+      .navbar > .nav-logo { flex: 1 1 0; }
+      .navbar > .nav-links { flex: 0 0 auto; }
+      .navbar > .nav-auth-group { flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; }
+    }
+    .nav-links a { color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange) !important; font-weight: 700; }
+    .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 6px; }
+    .nav-close { display: none; }
+    .nav-item-dropdown { position: relative; }
+    .nav-item-dropdown > a { display: flex; align-items: center; gap: 4px; }
+    .nav-chevron { font-size: 9px; transition: transform 0.25s; opacity: 0.7; }
+    .nav-item-dropdown:hover .nav-chevron { transform: rotate(180deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-6px); background: rgba(7,24,44,0.97); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-top: 2px solid var(--orange); border-radius: 12px; min-width: 215px; padding: 6px; opacity: 0; visibility: hidden; transition: all 0.22s ease; z-index: 200; box-shadow: 0 20px 50px rgba(0,0,0,0.45); pointer-events: none; }
+    .dropdown-menu::before { content: ''; position: absolute; top: -20px; left: 0; right: 0; height: 20px; }
+    .nav-item-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: all; }
+    .dropdown-menu a { display: block; padding: 10px 14px; color: rgba(255,255,255,0.8) !important; font-size: 13.5px; font-weight: 500; border-radius: 8px; transition: background 0.18s, color 0.18s; white-space: nowrap; text-decoration: none; }
+    .dropdown-menu a:hover { background: rgba(200,66,10,0.18) !important; color: #e86428 !important; }
+    .nav-cta { background: var(--orange); color: #fff; padding: 10px 22px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; border: none; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--orange-bright); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,66,10,0.35); }
+
+    /* LEGAL CONTENT */
+    .legal-hero { background: var(--bg-dark); padding: 150px 24px 56px; text-align: center; }
+    .legal-hero h1 { color: #fff; font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .legal-hero p { color: rgba(255,255,255,0.65); font-size: 15px; }
+    .legal-wrap { max-width: 860px; margin: 0 auto; padding: 56px 24px 100px; }
+    .legal-toc { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+    .legal-toc a { color: var(--orange); background: rgba(200,66,10,0.08); border: 1px solid rgba(200,66,10,0.2); padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; text-decoration: none; }
+    .legal-toc a:hover { background: rgba(200,66,10,0.15); }
+    .legal-section { margin-bottom: 56px; scroll-margin-top: 90px; }
+    .legal-section h3 { font-size: 22px; font-weight: 800; color: var(--teal-900); letter-spacing: -0.3px; margin-bottom: 18px; }
+    .legal-section p { font-size: 15px; color: #3d4a58; line-height: 1.75; margin-bottom: 16px; }
+    .legal-section b { color: var(--teal-900); }
+
+    /* FOOTER */
+    footer { background: var(--teal-900); padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+    footer > .footer-top, footer > .footer-bottom { position: relative; z-index: 1; }
+    .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+    .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
+    .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; }
+    .social-icon:hover { background: var(--orange); color: #fff; }
+    .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
+    .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
+    @media (max-width: 768px) {
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+      .footer-tagline { margin-top: 0; }
+    }
+
+    /* RESPONSIVE NAVBAR */
+    @media (max-width: 768px) {
+      .navbar {
+        display: grid !important; grid-template-columns: 1fr 100px 1fr; gap: 0;
+        padding: 14px 24px !important;
+        background: rgba(13, 46, 78, 0.98) !important;
+        backdrop-filter: blur(20px);
+      }
+      .nav-toggle { grid-column: 1; justify-self: start; display: flex; align-items: center; order: -1; }
+      .navbar .nav-logo { grid-column: 2; margin: 0; }
+      .navbar .nav-auth-group { grid-column: 3; justify-self: end; overflow: visible !important; display: flex !important; order: 1; gap: 0 !important; }
+      .navbar .nav-auth-group .nav-login-link { display: none; }
+      .navbar .nav-logo img { transform: scale(2.5) !important; transform-origin: center center !important; }
+      .navbar .nav-cta { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+      .nav-links {
+        display: flex; position: fixed; top: 0; left: 0; height: 100vh; width: 78%; max-width: 320px;
+        flex-direction: column; align-items: flex-start; gap: 0;
+        background: rgba(13,46,78,0.98); backdrop-filter: blur(20px);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.4); padding: 90px 24px 18px;
+        transform: translateX(-100%); transition: transform 0.3s ease; z-index: 999; overflow-y: auto;
+      }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-item-dropdown .dropdown-menu { position: static; box-shadow: none; padding-left: 12px; opacity: 1; visibility: visible; pointer-events: auto; transform: none; background: transparent; backdrop-filter: none; border: none; }
+      .nav-item-dropdown:hover .dropdown-menu, .nav-item-dropdown.is-open .dropdown-menu, .nav-item-dropdown:focus-within .dropdown-menu { position: static !important; transform: none !important; left: auto !important; top: auto !important; }
+      .nav-mobile-only { display: none; }
+      .nav-links.active .nav-mobile-only { display: block; }
+      .nav-close { display: flex; align-items: center; justify-content: center; position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: none; border-radius: 50%; background: rgba(255,255,255,0.12); color: #fff; font-size: 18px; cursor: pointer; line-height: 1; z-index: 10; }
+      .nav-close:hover { background: rgba(255,255,255,0.22); }
+      .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+      .nav-backdrop.active { display: block; }
+      footer { padding: 60px 20px 32px; }
+      .legal-hero { padding: 100px 24px 36px; }
+    }
+  </style>
+</head>
+
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PM36KHB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="/home" class="nav-logo">
+      <img src="logo.png" alt="NavigationTrading">
+    </a>
+    <ul class="nav-links">
+      <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/performance">Performance</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+      <li class="nav-item-dropdown">
+        <a href="#">Services <span class="nav-chevron">&#9662;</span></a>
+        <div class="dropdown-menu">
+          <a href="/free-membership">Free Membership</a>
+          <a href="/day-trading-membership">Day Trade Membership</a>
+          <a href="/paid-membership">Pro Membership</a>
+          <a href="/coaching">Private Coaching</a>
+          <a href="/flux">Flux</a>
+        </div>
+      </li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/blogs">Blog</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li class="nav-mobile-only"><a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/">Login</a></li>
+    </ul>
+    <div style="display:flex; gap:16px; align-items:center;" class="nav-auth-group">
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/orders/products/" class="nav-login-link" style="color:#fff; text-decoration:none; font-size:14px; font-weight:600;">Login</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/" class="nav-cta" data-config="navCtaLink">Join Now</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" onclick="document.querySelector('.nav-links').classList.toggle('active'); document.querySelector('.nav-backdrop').classList.toggle('active');" aria-label="Menu">☰</button>
+    <div class="nav-backdrop" id="navBackdrop" onclick="document.querySelector('.nav-links').classList.remove('active'); this.classList.remove('active');"></div>
+    <script>document.getElementById('navClose').addEventListener('click',function(){document.querySelector('.nav-links').classList.remove('active');var bd=document.getElementById('navBackdrop');if(bd)bd.classList.remove('active');});</script>
+  </nav>
+
+  <section class="legal-hero">
+    <h1>Legal Disclaimers</h1>
+    <p>Privacy Policy &middot; Terms of Use &middot; Legal Disclaimer &middot; Refund Policy</p>
+  </section>
+
+  <div class="legal-wrap">
+    <div class="legal-toc">
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Use</a>
+      <a href="#legal">Legal Disclaimer</a>
+      <a href="#refund">Refund Policy</a>
+    </div>
+
+    <div id="privacy" class="legal-section">
+      <h3>PRIVACY POLICY</h3>
+      <p>No information you provide to NavigationTrading will be sold, disclosed, or given to any other party at any time. Contents of the mailing list or any client information will never be sold or provided to anyone else at any time.</p>
+      <p>NavigationTrading collects a certain amount of information from clients in order to process client orders. Information is also collected for market research purposes, to assist in product development and enhancement of our services. This information is never sold to anyone for the purposes of mass marketing or mass e-mailing lists. A certain amount of information is collected by the website host servers when the website is utilized. Examples include, which website the user comes from, what the IP address of the user is, what browser the user is accessing the website with, time of visit, duration of visit, pages viewed during visit, etc.</p>
+      <p>This information is provided to NavigationTrading in the form of impersonal website statistics. No personally identifiable information will be shared outside of the conditions listed above. Please note that any and all e-mail, standard mail, or other correspondence sent to NavigationTrading will become the property of NavigationTrading immediately and is available for distribution as part of our services. This correspondence may be posted on the website or Discord Server (testimonials, questions, concerns, etc), used in articles, or posted in or on any other venue, without the need for specific permission for NavigationTrading to do so.</p>
+      <p>The NavigationTrading website uses website and browser cookies to collect information about its websites users in order to enhance the value and usefulness of the website. These cookies are not sent to a third party or shared. Any specific information collected relating to a given individual is not retained. Should you click on any link to an outside company and/or affiliate and provide information to them in any way, shape or form; NavigationTrading cannot be responsible for how they collect, store, or use your information, and you must view and agree to their privacy policies before clicking the outside link.</p>
+      <p>The sending and/or using of any form of correspondence, communication, payment to NavigationTrading will be considered an acknowledgment, a complete and full understanding, and acceptance of, as well as a full agreement to, the disclaimers, terms &amp; conditions, and policies of NavigationTrading (Navigation Financial, LLC) owners, employees, company and website.</p>
+      <p>This Privacy Policy is subject to changes and alterations at any time.</p>
+    </div>
+
+    <div id="terms" class="legal-section">
+      <h3>TERMS OF USE</h3>
+      <p>Navigation Financial, LLC dba NavigationTrading (The company)</p>
+      <p>The TradeHacker Community by NavigationTrading (Discord Server)</p>
+      <p>By using this website and Discord Server you completely and fully agree to the following terms of service:</p>
+      <p>This site, the Discord Server, and the services therein may be updated at any time without prior notice. Additionally, these Terms of Use may be changed at any time, without notice to the user. Any changes to the Terms of Service will be made applicable immediately after any changes are made. Please check back often for changes in policy and content.<br>These services are provided on an as-is basis; the Company accepts no liability for the loss of any user information or for the failure of any feature or service to operate properly. The Company reserves the right to remove any content or service at any time and to terminate any account or refuse service to any user determined by the Company to have violated this agreement or any applicable international, national, state or local law.</p>
+      <p>The user takes responsibility for obtaining and utilizing any necessary computer equipment and internet services used in accessing this site. Cost of operation of these devices and services is entirely the responsibility of the user. All content posted on this site by a registered user or third party is the responsibility of that user and not of the Company. The Company is merely the carrier/distributor of this content and assumes no responsibility for objectionable content nor makes any claim as to the quality, accuracy or usefulness of the content or services made available within this site. If you do see objectionable content and would like to suggest its removal, please contact us by email by sending a message to us.</p>
+      <p>The sole and exclusive maximum liability to the Company for any damages or losses shall soley be dissatisfaction to the user. The content presented is for informational purposes only. The Company will not be held liable for losses resulting from information or advice presented in this website by a third party; the use of such information is entirely at the risk of the user. The views and opinions expressed by third party presenters or users are not those of the Company.</p>
+      <p>No content available on this site should be considered a recommendation that any financial transaction or investment is suitable for any specific person. Any investment advice is to be considered general and not necessarily appropriate for every user. The Company and its employees, affiliates, and advertisers, owners, managers, shareholders disclaim all express, implied or statutory warranties of title, non-infringement, merchantability and fitness for a particular purpose with regards to any information or service provided.</p>
+      <p>Recognizing the global nature of the Internet, you agree to comply with all local laws regarding online conduct and, to the extent applicable, laws relating to the transmission of securities-related data. Your correspondence or business dealings with, or participation in promotions of, advertisers found on or through this website, including payment and delivery or related goods or services, and any other terms, conditions, warranties or representations associated with such dealings, are solely between you and such advertiser. You agree that the Company shall not be responsible or liable for any loss or damage of any sort incurred as the result of any such dealings or as the result of the presence of such advertisers on this website.</p>
+      <p>YOU EXPRESSLY UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE IS AT YOUR SOLE RISK. THE SERVICE IS PROVIDED ON AN &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; BASIS. THE COMPANY EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. THE COMPANY MAKES NO WARRANTY THAT (I) THE SERVICE WILL MEET YOUR REQUIREMENTS, (II) THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, (III) THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE SERVICE WILL BE ACCURATE OR RELIABLE, (IV) THE QUALITY OF ANY PRODUCTS, SERVICES, INFORMATION, OR OTHER MATERIAL PURCHASED OR OBTAINED BY YOU THROUGH THE SERVICE WILL MEET YOUR EXPECTATIONS, AND (V) ANY ERRORS IN THE SOFTWARE WILL BE CORRECTED. ANY MATERIAL DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE SERVICE IS DONE AT YOUR OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE DOWNLOAD OF ANY SUCH MATERIAL.</p>
+      <p>NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM THE COMPANY OR THROUGH OR FROM THE SERVICE SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THESE TERMS OF SERVICE. A SMALL PERCENTAGE OF USERS MAY EXPERIENCE EPILEPTIC SEIZURES WHEN EXPOSED TO CERTAIN LIGHT PATTERNS OR BACKGROUNDS ON A COMPUTER SCREEN OR WHILE USING THE SERVICE. CERTAIN CONDITIONS MAY INDUCE PREVIOUSLY UNDETECTED EPILEPTIC SYMPTOMS EVEN IN USERS WHO HAVE NO HISTORY OF PRIOR SEIZURES OR EPILEPSY. IF YOU, OR ANYONE IN YOUR FAMILY, HAVE AN EPILEPTIC CONDITION, CONSULT YOUR PHYSICIAN PRIOR TO USING THE SERVICE. IMMEDIATELY DISCONTINUE USE OF THE SERVICE AND CONSULT YOUR PHYSICIAN IF YOU EXPERIENCE ANY OF THE FOLLOWING SYMPTOMS WHILE USING THE SERVICE &mdash; DIZZINESS, ALTERED VISION, EYE OR MUSCLE TWITCHES, LOSS OF AWARENESS, DISORIENTATION, ANY INVOLUNTARY MOVEMENT, OR CONVULSIONS.</p>
+      <p>YOU EXPRESSLY UNDERSTAND AND AGREE THAT THE COMPANY SHALL NOT BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA OR OTHER INTANGIBLE LOSSES (EVEN IF THE COMPANY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), RESULTING FROM: (I) THE USE OR THE INABILITY TO USE THE SERVICE; (II) THE COST OF PROCUREMENT OF SUBSTITUTE GOODS AND SERVICES RESULTING FROM ANY GOODS, DATA, INFORMATION OR SERVICES PURCHASED OR OBTAINED OR MESSAGES RECEIVED OR TRANSACTIONS ENTERED INTO THROUGH OR FROM THE SERVICE; (III) UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR TRANSMISSIONS OR DATA; (IV) STATEMENTS OR CONDUCT OF ANY THIRD PARTY ON THE SERVICE; OR (V) ANY OTHER MATTER RELATING TO THE SERVICE. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU.</p>
+      <p>If you intend to utilize Information from this website concerning companies, stock quotes, investments or securities as a basis for making investment or trading decisions, the disclaimer in the capitalized sentences appearing above are particularly applicable to you and should be carefully considered. In addition, for this type of information particularly, the phrase &ldquo;Let the investor beware&rdquo; is apt. The Service is provided for informational purposes only, and no Content included is intended for trading or investing purposes. The Company and its licensors shall not be responsible or liable for the accuracy, usefulness or availability of any information transmitted or made available via the Service, and shall not be responsible or liable for any trading or investment decisions made based on such information.</p>
+    </div>
+
+    <div id="legal" class="legal-section">
+      <h3>LEGAL DISCLAIMER</h3>
+      <p>Navigation Financial, LLC is the copyright and trademark holder of all branded properties for NavigationTrading.com and the Discord Server. Neither the Company or any of its affiliates, owners, managers, employees, shareholders, officers, directors, other personnel, representatives, agents or independent contractors (herein referred to as the &ldquo;Company&rdquo;) is, in such capacities, a licensed financial advisor, registered investment advisor, registered broker-dealer or FINRA | SIPC | NFA- member firm. Reproduction and distribution of this document, or any form of its content herein via email, social media, download, hard-copy, etc. is strictly prohibited without advanced and express written consent by the Company. Any individual, company, and/or entity found in breach of this agreement will be subject to prosecution.</p>
+      <p>Examples presented on Company&rsquo;s website and Discord Server including video tutorials, indicators, strategies, columns, articles, emails, reports, downloads, and all other content of Company&rsquo;s products (collectively, the &ldquo;Information&rdquo;) are provided for informational and educational purposes only. Such set-ups are not solicitations of any kind or order to buy or sell a financial security and should not be construed as investment advice under any circumstances. The Company will not be held liable for losses resulting from information or advice presented in this information (or third party); the use of such information is entirely at the risk of the user.</p>
+      <p>Company assumes no responsibility or liability for your trading and investment results whatsoever and under any circumstances. The sole and exclusive maximum liability to the Company for any damages or losses shall solely be dissatisfaction to the user. The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Company are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses &ndash; trading and/or investing in the stock and options market is risky due to the leverage involved and may not be suitable for all investors.</p>
+      <p>Back-testing provides a hypothetical calculation of how a security or portfolio of securities, subject to a trading strategy, would have performed over a historical time period. You should not assume that back-testing of a trading strategy will provide any indication of how your portfolio of securities, or a new portfolio of securities, might perform over time. You should choose your own trading strategies based on your particular objectives and risk tolerances. Be sure to review your investment risk tolerance periodically to make sure they are still consistent with your goals.</p>
+      <p><b>Affiliates</b></p>
+      <p>NavigationTrading may derive fees or other compensation as a result of purchases from service providers or vendors referenced in this material. Note that material connections may not be made known at every single advertisement or affiliate link. Thus, to be safe, you should assume there is a material connection and that we receive compensation for anything you purchase as a result of visiting this website, and that we may be paid merely by you clicking any link.</p>
+      <p>Although NavigationTrading may recommend various tools, products, or services, we accept no responsibility for these recommendations. All information should be independently verified and confirmed. NavigationTrading and affiliated service providers do not accept any liability for any loss or damage whatsoever caused in reliance upon such information. There are no warranties expressed or implied. The reader bears responsibility for his/her own investment research and decisions, should seek the advice of a qualified securities professional before making any investment, and investigate and fully understand any and all risks before investing.</p>
+      <p>While we strive to provide only quality links to useful and ethical external websites, we have no control over the content and nature of these sites. These links to other websites do not imply a recommendation for all the content found on these sites. Site owners and content may change without notice and may occur before we have the opportunity to remove a link which may no longer function properly.</p>
+      <p>Please be also aware that when you leave our website, other sites may have different privacy policies and terms which are beyond our control. Please be sure to check the Privacy Policies of these sites as well as their &ldquo;Terms of Service&rdquo; before engaging in any business or uploading any information.</p>
+      <p>U.S. Government Required Disclaimer &ndash; Commodity Futures Trading Commission. Futures and options trading has large potential rewards, but also large potential risk. You must be aware of the risks and be willing to accept them in order to invest in the futures and options markets. Don&rsquo;t trade with money you can&rsquo;t afford to lose. This course and website is neither a solicitation nor an offer to Buy/Sell futures or options. No representation is being made that any account will or is likely to achieve profits or losses similar to those discussed on this website. The past performance of any trading system or methodology is not necessarily indicative of future results. CFTC RULE 4.41 &ndash; HYPOTHETICAL OR SIMULATED PERFORMANCE RESULTS HAVE CERTAIN LIMITATIONS. UNLIKE AN ACTUAL PERFORMANCE RECORD, SIMULATED RESULTS DO NOT REPRESENT ACTUAL TRADING. ALSO, SINCE THE TRADES HAVE NOT BEEN EXECUTED, THE RESULTS MAY HAVE UNDER-OR-OVER COMPENSATED FOR THE IMPACT, IF ANY, OF CERTAIN MARKET FACTORS, SUCH AS LACK OF LIQUIDITY, SIMULATED TRADING PROGRAMS IN GENERAL ARE ALSO SUBJECT TO THE FACT THAT THEY ARE DESIGNED WITH THE BENEFIT OF HINDSIGHT. NO REPRESENTATION IS BEING MADE THAT ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PROFIT OR LOSSES SIMILAR TO THOSE SHOWN.</p>
+      <p>Options are not suitable for all investors as the special risks inherent to options trading my expose investors to potentially rapid and substantial losses. Please read Characteristics and Risks of Standardized Options before investing in options.</p>
+    </div>
+
+    <div id="refund" class="legal-section">
+      <h3>REFUND POLICY</h3>
+      <p>Regarding any product, course, download, software, indicator, free trial or trial subscription, we will refund your payment if so long as we are contacted via email within the appropriate time frame of the trial. If product does not offer a trial period, then all sales are final, and the Company is not required under any circumstances to refund payments to the user unless the Company so chooses. We would appreciate it if you included a brief note on why it wasn&rsquo;t a good match this time around. If you are deemed to have used the free trial in a manner unfit with the Terms and Conditions of this website, the Company is not required under any circumstances to refund payments to it&rsquo;s users unless the Company so chooses.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand"><img src="logo.png" alt="NavigationTrading"></div>
+        <div class="footer-tagline">Institutional Grade Trading Education</div>
+      </div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Contact</div>
+          <a href="mailto:support@navigationtrading.com" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">support@navigationtrading.com</a>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Follow</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <a href="https://www.facebook.com/navigationtrading" target="_blank" class="social-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://x.com/navtrading1?s=21" target="_blank" class="social-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/navigationtrading" target="_blank" class="social-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@navigationtrading" target="_blank" class="social-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Legal</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="/legal-disclaimers" class="footer-link">Risk Disclosure</a>
+            <a href="/legal-disclaimers#privacy" class="footer-link">Privacy Policy</a>
+            <a href="/legal-disclaimers#terms" class="footer-link">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="/legal-disclaimers#privacy" class="footer-link">Privacy Policy</a>
+          <a href="/legal-disclaimers#terms" class="footer-link">Terms of Use</a>
+          <a href="/legal-disclaimers#refund" class="footer-link">Refund Policy</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+      </div>
+      <div class="footer-copy">The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.nav-links a[href^="/"]').forEach(a => {
+      if (a.getAttribute('href') === window.location.pathname) a.classList.add('active');
+    });
+  </script>
+</body>
+
+</html>
