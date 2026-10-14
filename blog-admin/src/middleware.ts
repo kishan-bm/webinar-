@@ -3,10 +3,17 @@ import type { NextRequest } from 'next/server';
 import { decryptSession } from './lib/session';
 import { clearSessionCookie } from './lib/cookieDomain';
 
-function getRedirectUrl(request: NextRequest, path: string): string {
-  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
-  const proto = request.headers.get('x-forwarded-proto') || 'https';
-  return host ? `${proto}://${host}${path}` : new URL(path, request.url).toString();
+// A relative Location header, rather than an absolute URL built from
+// x-forwarded-host/host. This site is reached through a Cloudflare Worker
+// that proxies by fetching a different internal hostname (webclass...), so
+// those headers reflect that internal hop, not the domain the visitor is
+// actually on -- an absolute redirect built from them sends people to the
+// wrong host. A relative Location resolves against the browser's own
+// current URL instead, sidestepping the problem entirely.
+function redirectRelative(path: string, status = 307): NextResponse {
+  const res = new NextResponse(null, { status });
+  res.headers.set('Location', path);
+  return res;
 }
 
 export async function middleware(request: NextRequest) {
@@ -27,13 +34,13 @@ export async function middleware(request: NextRequest) {
     const sessionCookie = request.cookies.get('admin_session')?.value;
 
     if (!sessionCookie) {
-      return NextResponse.redirect(getRedirectUrl(request, '/login'));
+      return redirectRelative('/login');
     }
 
     const decrypted = await decryptSession(sessionCookie);
 
     if (!decrypted || decrypted.expiresAt < Date.now()) {
-      const response = NextResponse.redirect(getRedirectUrl(request, '/login'));
+      const response = redirectRelative('/login');
       clearSessionCookie(response, request);
       return response;
     }
@@ -45,7 +52,7 @@ export async function middleware(request: NextRequest) {
     if (sessionCookie) {
       const decrypted = await decryptSession(sessionCookie);
       if (decrypted && decrypted.expiresAt > Date.now()) {
-        return NextResponse.redirect(getRedirectUrl(request, '/admin-blog'));
+        return redirectRelative('/admin-blog');
       }
     }
   }
