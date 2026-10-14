@@ -172,6 +172,10 @@
       "destination": "/legal-disclaimers"
     },
     {
+      "source": "/trade-options-institutional-edge",
+      "destination": "/trade-options-institutional-edge"
+    },
+    {
       "source": "/dtt-6/16",
       "destination": "/may-16.html/dtt-6"
     },
