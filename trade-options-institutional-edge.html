@@ -4987,7 +4987,7 @@
 
     /* ── CURRICULUM ── */
     .curriculum-section { padding: 56px 0; background: #fff; }
-    .curriculum-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start; }
+    .curriculum-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: start; }
     .curriculum-list { display: flex; flex-direction: column; border: 1px solid var(--border-light); border-radius: 14px; overflow: hidden; }
     .curriculum-item { display: flex; align-items: center; gap: 14px; padding: 13px 18px; border-bottom: 1px solid var(--border-light); transition: background 0.2s; }
     .curriculum-item:last-child { border-bottom: none; }
@@ -5020,10 +5020,13 @@
     }
     .curriculum-video-time { font-family: var(--ff-mono); font-size: 12.5px; color: rgba(255,255,255,0.8); }
     .curriculum-right { margin-top: 56px; }
-    .curriculum-checklist { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
-    @media (max-width: 640px) { .curriculum-checklist { grid-template-columns: 1fr; } }
+    .curriculum-checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
     .curriculum-checklist li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #334155; font-weight: 500; }
-    .curriculum-checklist li svg { color: #2563eb; flex-shrink: 0; }
+    .curriculum-checklist li .check-circle {
+      width: 20px; height: 20px; border-radius: 50%; background: #2563eb;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .curriculum-checklist li .check-circle svg { color: #fff; }
 
     /* ── APPROACH CARDS ── */
     .approach-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
@@ -5307,10 +5310,10 @@
             </div>
           </div>
           <ul class="curriculum-checklist">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Step-by-step video lessons</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Real trading examples and case studies</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Strategy frameworks and checklists</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Learn at your own pace</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Step-by-step video lessons</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Real trading examples and case studies</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Strategy frameworks and checklists</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Learn at your own pace</li>
           </ul>
         </div>
       </div>
@@ -5486,10 +5489,10 @@
           <h2 class="approach-style-h2">Expand Your Skills With <em>Bonus Courses</em></h2>
           <p class="curriculum-sub">Get access to additional courses at no extra cost to help you deepen your knowledge and explore more strategies.</p>
           <ul class="curriculum-checklist">
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Learn additional options strategies</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Explore real market examples and case studies</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Build a more complete trading skill set</li>
-            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg> Get ongoing access as new bonus courses are added</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Learn additional options strategies</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Explore real market examples and case studies</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Build a more complete trading skill set</li>
+            <li><span class="check-circle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 13 10 19 20 6"/></svg></span> Get ongoing access as new bonus courses are added</li>
           </ul>
         </div>
         <div class="bonus-cards-grid">
