@@ -3,23 +3,21 @@ import type { NextRequest } from 'next/server';
 import { decryptSession } from './lib/session';
 import { clearSessionCookie } from './lib/cookieDomain';
 
-// A relative Location header, rather than an absolute URL built from
-// x-forwarded-host/host. This site is reached through a Cloudflare Worker
-// that proxies by fetching a different internal hostname (webclass...), so
-// those headers reflect that internal hop, not the domain the visitor is
-// actually on -- an absolute redirect built from them sends people to the
-// wrong host. A relative Location resolves against the browser's own
-// current URL instead, sidestepping the problem entirely.
-//
-// NextResponse.redirect() requires an absolute URL, so we build one from
-// request.url (same-origin as far as this middleware invocation is
-// concerned) and then rewrite the Location header to the relative path
-// afterward -- avoids constructing a raw Response by hand, which crashed
-// the Edge Runtime here (MIDDLEWARE_INVOCATION_FAILED).
-function redirectRelative(request: NextRequest, path: string, status = 307): NextResponse {
-  const res = NextResponse.redirect(new URL(path, request.url), status);
-  res.headers.set('Location', path);
-  return res;
+// NOTE: this used to build the absolute redirect URL from
+// x-forwarded-host/host, which (because this site is reached through a
+// Cloudflare Worker that proxies by fetching a different internal hostname,
+// webclass...) sends people to that internal host instead of the domain
+// they actually visited. Two attempted fixes for that (a hand-built
+// Response, then NextResponse.redirect() with a rewritten Location header)
+// both crashed the Edge Runtime in production (MIDDLEWARE_INVOCATION_FAILED,
+// taking down the whole admin panel). Reverted to the simple, previously-
+// stable version below. The wrong-host redirect is a real but low-severity
+// cosmetic issue; it needs a safer fix (e.g. a header the Worker sets
+// explicitly) investigated outside of an active-outage fix.
+function getRedirectUrl(request: NextRequest, path: string): string {
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  const proto = request.headers.get('x-forwarded-proto') || 'https';
+  return host ? `${proto}://${host}${path}` : new URL(path, request.url).toString();
 }
 
 export async function middleware(request: NextRequest) {
@@ -40,13 +38,13 @@ export async function middleware(request: NextRequest) {
     const sessionCookie = request.cookies.get('admin_session')?.value;
 
     if (!sessionCookie) {
-      return redirectRelative(request, '/login');
+      return NextResponse.redirect(getRedirectUrl(request, '/login'));
     }
 
     const decrypted = await decryptSession(sessionCookie);
 
     if (!decrypted || decrypted.expiresAt < Date.now()) {
-      const response = redirectRelative(request, '/login');
+      const response = NextResponse.redirect(getRedirectUrl(request, '/login'));
       clearSessionCookie(response, request);
       return response;
     }
@@ -58,7 +56,7 @@ export async function middleware(request: NextRequest) {
     if (sessionCookie) {
       const decrypted = await decryptSession(sessionCookie);
       if (decrypted && decrypted.expiresAt > Date.now()) {
-        return redirectRelative(request, '/admin-blog');
+        return NextResponse.redirect(getRedirectUrl(request, '/admin-blog'));
       }
     }
   }
