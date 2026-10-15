@@ -1885,6 +1885,195 @@ footer > .footer-bottom { position: relative; z-index: 1; }
       .dt-term-price { justify-content: center; }
       .pm-final-cta { padding: 50px 0; }
     }
+
+    /* ── TESTIMONIALS MARQUEE (shared component) ── */
+    .bento-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(200, 66, 10, 0.15);
+      border: 1px solid rgba(200, 66, 10, 0.32);
+      border-radius: 50px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .testimonials-marquee {
+      padding: 100px 0;
+      background: #0D2E4E;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials-marquee::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg') top center / cover no-repeat;
+      opacity: 0.8;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .testimonials-marquee::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 32, 64, .96) 0%, rgba(13, 32, 64, .82) 55%, rgba(13, 32, 64, .92) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .testimonials-marquee .container,
+    .testimonials-marquee .marquee-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    .test-header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .test-header h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      color: #fff;
+      letter-spacing: -1.5px;
+      margin: 0 auto;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .test-header h2 span {
+      background: linear-gradient(135deg, #fff 0%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .marquee-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      width: max-content;
+    }
+
+    .marquee-track.left {
+      animation: marquee-scroll-left 50s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee-scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(calc(-50% - 10px));
+      }
+    }
+
+    .test-card {
+      width: 340px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .test-card:hover {
+      background: rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-5px);
+    }
+
+    .test-stars {
+      display: flex;
+      gap: 3px;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .test-stars svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .test-card p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .test-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .test-author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .test-author-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 2px 0;
+    }
+
+    .test-author-info span {
+      font-size: 11px;
+      color: var(--orange);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 </style>
   <script src="/site-config.js" data-page="free-membership" defer></script>
 </head>
@@ -2478,6 +2667,297 @@ footer > .footer-bottom { position: relative; z-index: 1; }
 <!-- ═══════════════════════════════
      SECTION 8 — FAQ
 ═══════════════════════════════ -->
+  <section class="testimonials-marquee" id="reviews"
+    style="background:#0D2E4E;padding:100px 0;position:relative;overflow:hidden;">
+    <div class="container">
+      <div class="test-header">
+        <div class="bento-eyebrow">Member Reviews</div>
+        <h2>What Traders Are <span>Saying</span></h2>
+      </div>
+    </div>
+
+    <div class="marquee-container">
+      <div class="marquee-track left">
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I've been with NT for over 4 years and is by far the best community I belong to. Learned from not knowing what a Put or Call is to apparently trading complex options!"</p>
+          <div class="test-author">
+            <div class="test-avatar">J</div>
+            <div class="test-author-info">
+              <h4>Joseph</h4><span>4+ Year Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I first joined Navigation Trading over four years ago, took a break, and recently came back. What brought me back was Steve's transparency, he explains not just how strategies work, but why they do (and when they don't). The daily live sessions are a big plus, and the support team is excellent."</p>
+          <div class="test-author">
+            <div class="test-avatar">G</div>
+            <div class="test-author-info">
+              <h4>Golden</h4><span>4+ Year Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"Great source for options trading education, strategies, and experiencing live trading sessions multiple times per week. Every year new effective strategies are introduced. The NT team shares actual trades and results with the community. Highly recommend."</p>
+          <div class="test-author">
+            <div class="test-avatar">T</div>
+            <div class="test-author-info">
+              <h4>Tony</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I’ve been a member of Navigation Trading since 2017, and I can honestly say it’s been an incredible experience from the start. The education, support, and sense of community they provide are truly top-notch."</p>
+          <div class="test-author">
+            <div class="test-avatar">A</div>
+            <div class="test-author-info">
+              <h4>Action A</h4><span>Member since 2017</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"It’s really great how well the strategies are explained. Everyone is very responsive and the environment is fun."</p>
+          <div class="test-author">
+            <div class="test-avatar">A</div>
+            <div class="test-author-info">
+              <h4>Alex</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I've been trading options for over 30 years and purchased a lot of education along the way. Much of that education was good explaining theory, but didn't offer a repeatable process for successfully implementing the strategies. Steve teaches strategies that provide an edge in the market, coupled with rules to get in/out/adjust trades. Further, Steve works incredibly hard for the benefit of his community. Highly recommended."</p>
+          <div class="test-author">
+            <div class="test-avatar">R</div>
+            <div class="test-author-info">
+              <h4>Robert</h4><span>30+ Years Trading</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"The community, the education, and the constant innovation are just a few of the things that I think set NavigationTrading apart. Steve and the team don’t rest on past accomplishments or old material, they try to stay ahead of and shift with the markets."</p>
+          <div class="test-author">
+            <div class="test-avatar">J</div>
+            <div class="test-author-info">
+              <h4>Joey R</h4><span>4 years after purchase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I love his day trading and option strategies..."</p>
+          <div class="test-author">
+            <div class="test-avatar">J</div>
+            <div class="test-author-info">
+              <h4>Johnny</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I joined Navigation Trading to lean about trading options. Steve's teachings and strategies are great and it allows me to learn at my own pace. I inspire to be at his level one day."</p>
+          <div class="test-author">
+            <div class="test-avatar">W</div>
+            <div class="test-author-info">
+              <h4>William</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"Abrading has been great demystifying options trading. You can follow along and learn for yourself. The community is a great way to feel supported and up to date."</p>
+          <div class="test-author">
+            <div class="test-avatar">J</div>
+            <div class="test-author-info">
+              <h4>jeffe7</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLONES FOR SEAMLESS LOOP -->
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I've been with NT for over 4 years and is by far the best community I belong to. Learned from not knowing what a Put or Call is to apparently trading complex options!"</p>
+          <div class="test-author">
+            <div class="test-avatar">J</div>
+            <div class="test-author-info">
+              <h4>Joseph</h4><span>4+ Year Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"I first joined Navigation Trading over four years ago, took a break, and recently came back. What brought me back was Steve's transparency, he explains not just how strategies work, but why they do (and when they don't). The daily live sessions are a big plus, and the support team is excellent."</p>
+          <div class="test-author">
+            <div class="test-avatar">G</div>
+            <div class="test-author-info">
+              <h4>Golden</h4><span>4+ Year Member</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="test-stars"><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg><svg viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg></div>
+          <p>"Great source for options trading education, strategies, and experiencing live trading sessions multiple times per week. Every year new effective strategies are introduced. The NT team shares actual trades and results with the community. Highly recommend."</p>
+          <div class="test-author">
+            <div class="test-avatar">T</div>
+            <div class="test-author-info">
+              <h4>Tony</h4><span>NavigationTrading Member</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
 <section class="faq" id="faq">
   <div class="container">
     <div class="faq-layout">
