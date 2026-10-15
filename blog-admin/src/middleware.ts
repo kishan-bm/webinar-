@@ -10,8 +10,14 @@ import { clearSessionCookie } from './lib/cookieDomain';
 // actually on -- an absolute redirect built from them sends people to the
 // wrong host. A relative Location resolves against the browser's own
 // current URL instead, sidestepping the problem entirely.
-function redirectRelative(path: string, status = 307): NextResponse {
-  const res = new NextResponse(null, { status });
+//
+// NextResponse.redirect() requires an absolute URL, so we build one from
+// request.url (same-origin as far as this middleware invocation is
+// concerned) and then rewrite the Location header to the relative path
+// afterward -- avoids constructing a raw Response by hand, which crashed
+// the Edge Runtime here (MIDDLEWARE_INVOCATION_FAILED).
+function redirectRelative(request: NextRequest, path: string, status = 307): NextResponse {
+  const res = NextResponse.redirect(new URL(path, request.url), status);
   res.headers.set('Location', path);
   return res;
 }
@@ -34,13 +40,13 @@ export async function middleware(request: NextRequest) {
     const sessionCookie = request.cookies.get('admin_session')?.value;
 
     if (!sessionCookie) {
-      return redirectRelative('/login');
+      return redirectRelative(request, '/login');
     }
 
     const decrypted = await decryptSession(sessionCookie);
 
     if (!decrypted || decrypted.expiresAt < Date.now()) {
-      const response = redirectRelative('/login');
+      const response = redirectRelative(request, '/login');
       clearSessionCookie(response, request);
       return response;
     }
@@ -52,7 +58,7 @@ export async function middleware(request: NextRequest) {
     if (sessionCookie) {
       const decrypted = await decryptSession(sessionCookie);
       if (decrypted && decrypted.expiresAt > Date.now()) {
-        return redirectRelative('/admin-blog');
+        return redirectRelative(request, '/admin-blog');
       }
     }
   }
