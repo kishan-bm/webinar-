@@ -3,11 +3,18 @@
 import { useState, useEffect } from 'react';
 import { Eye, Key, Save, ExternalLink, RefreshCw, CheckCircle, XCircle, Copy, Check, Video } from 'lucide-react';
 
+const TOS_FIELDS = [
+  { key: 'tos_replay_url', label: '/tos-replay' },
+  { key: 'tos_replay_v2_url', label: '/tos-replay-v2' },
+  { key: 'tos_replay_noshow_url', label: '/tos-replay-noshow' },
+] as const;
+
 export default function ReplayAdminPage() {
   const ADMIN_PASSWORD = 'ntreplay2026';
   const GITHUB_OWNER = 'kishan-bm';
   const GITHUB_REPO = 'webinar-';
   const CONFIG_PATH = 'replay-config.json';
+  const TOS_CONFIG_PATH = 'tos-replay-config.json';
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNCq_1GGFDQDM1ZHFY5ZOiT0byuu3DqTGcxHP3_NJlAZU9XoLMYrEsmgdaWQxUEyPZTmDgU79nLJN-/pub?gid=0&single=true&output=csv';
 
   const [password, setPassword] = useState('');
@@ -19,7 +26,7 @@ export default function ReplayAdminPage() {
 
   const [activeTab, setActiveTab] = useState<'github' | 'sheet'>('github');
 
-  useEffect(() => { loadCurrentConfig(); }, []);
+  useEffect(() => { loadCurrentConfig(); loadTosConfig(); }, []);
 
   // GitHub Method State
   const [githubToken, setGithubToken] = useState('');
@@ -29,6 +36,77 @@ export default function ReplayAdminPage() {
 
   // Google Sheet Method State
   const [sheetStatus, setSheetStatus] = useState<{ type: 'success' | 'error' | 'loading' | null; msg: string }>({ type: null, msg: '' });
+
+  // TOS Replay Videos State (3 independent pages, 1 config file)
+  const [tosCurrent, setTosCurrent] = useState<Record<string, string>>({});
+  const [tosHasVideo, setTosHasVideo] = useState<Record<string, boolean>>({});
+  const [tosInputs, setTosInputs] = useState<Record<string, string>>({});
+  const [tosStatus, setTosStatus] = useState<Record<string, { type: 'success' | 'error' | 'loading' | null; msg: string }>>({});
+  const [tosSubmitting, setTosSubmitting] = useState<Record<string, boolean>>({});
+
+  const loadTosConfig = async () => {
+    try {
+      const res = await fetch('/tos-replay-config.json?t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        const current: Record<string, string> = {};
+        const hasVideo: Record<string, boolean> = {};
+        TOS_FIELDS.forEach(f => {
+          const val = data[f.key] || data.vimeo_url;
+          current[f.key] = val || 'Nothing set yet.';
+          hasVideo[f.key] = !!val;
+        });
+        setTosCurrent(current);
+        setTosHasVideo(hasVideo);
+      }
+    } catch (e) {
+      // leave as "Checking..." placeholders
+    }
+  };
+
+  const saveTosField = async (key: string) => {
+    const url = (tosInputs[key] || '').trim();
+    if (!githubToken) {
+      setTosStatus(s => ({ ...s, [key]: { type: 'error', msg: 'Please enter your GitHub token above.' } }));
+      return;
+    }
+    if (!url) {
+      setTosStatus(s => ({ ...s, [key]: { type: 'error', msg: 'Please enter a Vimeo URL.' } }));
+      return;
+    }
+
+    setTosStatus(s => ({ ...s, [key]: { type: 'loading', msg: '⏳ Pushing to GitHub — Vercel will deploy in ~60 seconds...' } }));
+    setTosSubmitting(s => ({ ...s, [key]: true }));
+
+    try {
+      const shaRes = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TOS_CONFIG_PATH}`, {
+        headers: { 'Authorization': 'token ' + githubToken, 'Accept': 'application/vnd.github.v3+json' }
+      });
+      const shaData = await shaRes.json();
+      const sha = shaData.sha;
+      const existing = shaData.content ? JSON.parse(atob(shaData.content.replace(/\n/g, ''))) : {};
+      existing[key] = url;
+      const content = btoa(JSON.stringify(existing, null, 2));
+
+      const pushRes = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TOS_CONFIG_PATH}`, {
+        method: 'PUT',
+        headers: { 'Authorization': 'token ' + githubToken, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Set ' + key, content, sha })
+      });
+
+      if (pushRes.ok) {
+        setTosStatus(s => ({ ...s, [key]: { type: 'success', msg: '✅ Saved! This page will show the new video in ~60 seconds.' } }));
+        setTosCurrent(c => ({ ...c, [key]: url }));
+        setTosHasVideo(h => ({ ...h, [key]: true }));
+      } else {
+        const err = await pushRes.json();
+        setTosStatus(s => ({ ...s, [key]: { type: 'error', msg: 'GitHub error: ' + (err.message || pushRes.status) } }));
+      }
+    } catch (e: any) {
+      setTosStatus(s => ({ ...s, [key]: { type: 'error', msg: 'Network error: ' + e.message } }));
+    }
+    setTosSubmitting(s => ({ ...s, [key]: false }));
+  };
 
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
@@ -391,6 +469,70 @@ export default function ReplayAdminPage() {
       <p style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '16px' }}>
         <Video size={14} /> Both /replay and /day-trading-replay-noshow read from this single value.
       </p>
+
+      {/* TOS Replay Videos — 3 independent pages */}
+      <div className="page-header" style={{ marginTop: '40px' }}>
+        <div className="page-header-heading">
+          <h1 className="page-title">TOS Replay Videos</h1>
+          <p className="page-description">
+            /tos-replay, /tos-replay-v2, and /tos-replay-noshow each have their own video — set them independently below. Uses the same GitHub token entered above.
+          </p>
+        </div>
+      </div>
+
+      {TOS_FIELDS.map(f => (
+        <div key={f.key} className="card" style={{ marginBottom: '20px' }}>
+          <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+            {f.label}
+          </h3>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '14px 0 18px' }}>
+            <span className={`replay-status-icon ${tosHasVideo[f.key] ? 'is-active' : ''}`}>
+              {tosHasVideo[f.key] ? <CheckCircle size={18} /> : <XCircle size={18} />}
+            </span>
+            <div style={{ fontSize: '13.5px', fontWeight: 600, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
+              {tosCurrent[f.key] || 'Checking...'}
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Vimeo Video URL</label>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="https://vimeo.com/123456789"
+              value={tosInputs[f.key] || ''}
+              onChange={e => setTosInputs(s => ({ ...s, [f.key]: e.target.value }))}
+            />
+          </div>
+
+          <button
+            className="btn-primary"
+            onClick={() => saveTosField(f.key)}
+            disabled={!!tosSubmitting[f.key]}
+            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', gap: '8px' }}
+          >
+            <Save size={18} />
+            Save &amp; Deploy
+          </button>
+
+          {tosStatus[f.key]?.type && (
+            <div style={{
+              marginTop: '16px',
+              padding: '12px 16px',
+              borderRadius: '6px',
+              fontSize: '13.5px',
+              fontWeight: 600,
+              border: '1px solid',
+              backgroundColor: tosStatus[f.key]!.type === 'success' ? 'rgba(34,197,94,0.08)' : tosStatus[f.key]!.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
+              borderColor: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--border-color)',
+              color: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
+            }}>
+              {tosStatus[f.key]!.msg}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
