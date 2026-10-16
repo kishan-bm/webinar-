@@ -266,273 +266,276 @@ export default function ReplayAdminPage() {
   }
 
   return (
-    <div style={{ maxWidth: '680px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '1280px' }}>
       <div className="page-header">
         <div className="page-header-heading">
           <h1 className="page-title">Replay Video</h1>
           <p className="page-description">
-            After the webinar ends, paste the Vimeo URL below to make it live on both replay pages.
+            After the webinar ends, paste the Vimeo URL below to make it live on the relevant replay pages.
           </p>
         </div>
       </div>
 
-      {/* Current video display */}
-      <div className="table-container" style={{ marginBottom: '24px', padding: '20px 24px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <span className={`replay-status-icon ${hasVideoClass ? 'is-active' : ''}`}>
-            {hasVideoClass ? <CheckCircle size={20} /> : <XCircle size={20} />}
-          </span>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div className="section-heading" style={{ margin: '0 0 4px' }}>Current active video</div>
-            <div style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
-              {currentVideo}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '28px', alignItems: 'start' }}>
+
+        {/* ── LEFT COLUMN: main replay video ── */}
+        <div>
+          {/* Current video display */}
+          <div className="table-container" style={{ marginBottom: '24px', padding: '20px 24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <span className={`replay-status-icon ${hasVideoClass ? 'is-active' : ''}`}>
+                {hasVideoClass ? <CheckCircle size={20} /> : <XCircle size={20} />}
+              </span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div className="section-heading" style={{ margin: '0 0 4px' }}>Current active video</div>
+                <div style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
+                  {currentVideo}
+                </div>
+              </div>
+              <button type="button" className="btn-secondary" onClick={handleCopy} disabled={!hasVideoClass} style={{ flexShrink: 0 }}>
+                {copied ? <Check size={14} /> : <Copy size={14} />}
+                {copied ? 'Copied' : 'Copy'}
+              </button>
             </div>
           </div>
-          <button type="button" className="btn-secondary" onClick={handleCopy} disabled={!hasVideoClass} style={{ flexShrink: 0 }}>
-            {copied ? <Check size={14} /> : <Copy size={14} />}
-            {copied ? 'Copied' : 'Copy'}
-          </button>
-        </div>
-      </div>
 
-      {/* Method tabs */}
-      <div className="card">
-        <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
-          Set New Video URL
-        </h3>
+          {/* Method tabs */}
+          <div className="card">
+            <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
+              Set New Video URL
+            </h3>
 
-        <div className="form-group">
-          <label className="form-label">Deploy method</label>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button
-              onClick={() => setActiveTab('github')}
-              style={{
-                flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
-                borderColor: activeTab === 'github' ? 'var(--accent-color)' : 'var(--border-color)',
-                background: activeTab === 'github' ? 'rgba(200,66,10,0.08)' : 'transparent',
-                color: activeTab === 'github' ? 'var(--accent-color)' : 'var(--text-secondary)'
-              }}
-            >
-              GitHub deploy
-            </button>
-            <button
-              onClick={() => setActiveTab('sheet')}
-              style={{
-                flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
-                borderColor: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--border-color)',
-                background: activeTab === 'sheet' ? 'rgba(200,66,10,0.08)' : 'transparent',
-                color: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--text-secondary)'
-              }}
-            >
-              Google Sheet
-            </button>
-          </div>
-        </div>
-
-        {/* Tab 1: GitHub */}
-        {activeTab === 'github' && (
-          <div>
             <div className="form-group">
-              <label className="form-label">
-                GitHub Personal Access Token <span style={{ color: 'var(--text-secondary)', fontWeight: 400, textTransform: 'none' }}>(repo scope — never stored)</span>
-              </label>
-              <input
-                type="password"
-                className="form-input"
-                placeholder="ghp_xxxxxxxxxxxx"
-                value={githubToken}
-                onChange={e => setGithubToken(e.target.value)}
-              />
+              <label className="form-label">Deploy method</label>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  onClick={() => setActiveTab('github')}
+                  style={{
+                    flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
+                    borderColor: activeTab === 'github' ? 'var(--accent-color)' : 'var(--border-color)',
+                    background: activeTab === 'github' ? 'rgba(200,66,10,0.08)' : 'transparent',
+                    color: activeTab === 'github' ? 'var(--accent-color)' : 'var(--text-secondary)'
+                  }}
+                >
+                  GitHub deploy
+                </button>
+                <button
+                  onClick={() => setActiveTab('sheet')}
+                  style={{
+                    flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13.5px', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s', border: '1.5px solid',
+                    borderColor: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--border-color)',
+                    background: activeTab === 'sheet' ? 'rgba(200,66,10,0.08)' : 'transparent',
+                    color: activeTab === 'sheet' ? 'var(--accent-color)' : 'var(--text-secondary)'
+                  }}
+                >
+                  Google Sheet
+                </button>
+              </div>
             </div>
-            <div className="form-group">
-              <label className="form-label">Vimeo Video URL</label>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="https://vimeo.com/123456789"
-                value={vimeoUrl}
-                onChange={e => setVimeoUrl(e.target.value)}
-              />
-              <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '6px', margin: '6px 0 0 0' }}>
-                Full Vimeo URL — embed code is generated automatically. Vercel redeploys in ~60 seconds.
-              </p>
-            </div>
-            <button 
-              className="btn-primary" 
-              onClick={saveViaGitHub} 
-              disabled={isSubmitting}
-              style={{ width: '100%', justifyContent: 'center', marginTop: '16px', gap: '8px' }}
-            >
-              <Save size={18} />
-              Save &amp; Deploy via GitHub
-            </button>
 
-            {githubStatus.type && (
-              <div style={{
-                marginTop: '16px',
-                padding: '12px 16px',
-                borderRadius: '6px',
-                fontSize: '13.5px',
-                fontWeight: 600,
-                border: '1px solid',
-                backgroundColor: githubStatus.type === 'success' ? 'rgba(34,197,94,0.08)' : githubStatus.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
-                borderColor: githubStatus.type === 'success' ? '#22c55e' : githubStatus.type === 'error' ? '#ef4444' : 'var(--border-color)',
-                color: githubStatus.type === 'success' ? '#22c55e' : githubStatus.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
-              }}>
-                {githubStatus.msg}
+            {/* Tab 1: GitHub */}
+            {activeTab === 'github' && (
+              <div>
+                <div className="form-group">
+                  <label className="form-label">
+                    GitHub Personal Access Token <span style={{ color: 'var(--text-secondary)', fontWeight: 400, textTransform: 'none' }}>(repo scope — never stored)</span>
+                  </label>
+                  <input
+                    type="password"
+                    className="form-input"
+                    placeholder="ghp_xxxxxxxxxxxx"
+                    value={githubToken}
+                    onChange={e => setGithubToken(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Vimeo Video URL</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="https://vimeo.com/123456789"
+                    value={vimeoUrl}
+                    onChange={e => setVimeoUrl(e.target.value)}
+                  />
+                  <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '6px', margin: '6px 0 0 0' }}>
+                    Full Vimeo URL — embed code is generated automatically. Vercel redeploys in ~60 seconds.
+                  </p>
+                </div>
+                <button
+                  className="btn-primary"
+                  onClick={saveViaGitHub}
+                  disabled={isSubmitting}
+                  style={{ width: '100%', justifyContent: 'center', marginTop: '16px', gap: '8px' }}
+                >
+                  <Save size={18} />
+                  Save &amp; Deploy via GitHub
+                </button>
+
+                {githubStatus.type && (
+                  <div style={{
+                    marginTop: '16px',
+                    padding: '12px 16px',
+                    borderRadius: '6px',
+                    fontSize: '13.5px',
+                    fontWeight: 600,
+                    border: '1px solid',
+                    backgroundColor: githubStatus.type === 'success' ? 'rgba(34,197,94,0.08)' : githubStatus.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
+                    borderColor: githubStatus.type === 'success' ? '#22c55e' : githubStatus.type === 'error' ? '#ef4444' : 'var(--border-color)',
+                    color: githubStatus.type === 'success' ? '#22c55e' : githubStatus.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
+                  }}>
+                    {githubStatus.msg}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Tab 2: Sheet */}
+            {activeTab === 'sheet' && (
+              <div>
+                <div style={{
+                  background: 'rgba(34,197,94,0.05)',
+                  border: '1px solid rgba(34,197,94,0.2)',
+                  borderRadius: '8px',
+                  padding: '14px 16px',
+                  fontSize: '14px',
+                  color: '#16a34a',
+                  marginBottom: '20px',
+                  lineHeight: '1.6'
+                }}>
+                  <strong>Instant — no deployment needed.</strong><br />
+                  Open the Google Sheet and paste the Vimeo video URL in cell <strong>A1</strong>. Replay pages pick it up immediately on next reload.
+                </div>
+
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1fTv4KP0IQtbssIjpxm17ecH20w-ymRrF7_IRexJU5d0/edit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    width: '100%',
+                    padding: '12px',
+                    background: 'rgba(34,197,94,0.08)',
+                    border: '1.5px solid rgba(34,197,94,0.3)',
+                    borderRadius: '8px',
+                    color: '#16a34a',
+                    fontWeight: 700,
+                    fontSize: '14px',
+                    textDecoration: 'none',
+                    marginBottom: '12px',
+                    transition: 'all 0.2s',
+                    cursor: 'pointer'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.background = 'rgba(34,197,94,0.15)'}
+                  onMouseOut={e => e.currentTarget.style.background = 'rgba(34,197,94,0.08)'}
+                >
+                  <ExternalLink size={18} />
+                  Open Google Sheet
+                </a>
+
+                <button
+                  onClick={testSheetFetch}
+                  className="btn-primary"
+                  style={{
+                    width: '100%',
+                    justifyContent: 'center',
+                    background: 'transparent',
+                    color: 'var(--text-secondary)',
+                    border: '1.5px solid var(--border-color)',
+                    gap: '8px'
+                  }}
+                >
+                  <RefreshCw size={16} />
+                  Test — Check What Sheet Contains
+                </button>
+
+                {sheetStatus.type && (
+                  <div style={{
+                    marginTop: '16px',
+                    padding: '12px 16px',
+                    borderRadius: '6px',
+                    fontSize: '13.5px',
+                    fontWeight: 600,
+                    border: '1px solid',
+                    backgroundColor: sheetStatus.type === 'success' ? 'rgba(34,197,94,0.08)' : sheetStatus.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
+                    borderColor: sheetStatus.type === 'success' ? '#22c55e' : sheetStatus.type === 'error' ? '#ef4444' : 'var(--border-color)',
+                    color: sheetStatus.type === 'success' ? '#22c55e' : sheetStatus.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
+                  }}>
+                    {sheetStatus.msg}
+                  </div>
+                )}
               </div>
             )}
           </div>
-        )}
 
-        {/* Tab 2: Sheet */}
-        {activeTab === 'sheet' && (
-          <div>
-            <div style={{
-              background: 'rgba(34,197,94,0.05)',
-              border: '1px solid rgba(34,197,94,0.2)',
-              borderRadius: '8px',
-              padding: '14px 16px',
-              fontSize: '14px',
-              color: '#16a34a',
-              marginBottom: '20px',
-              lineHeight: '1.6'
-            }}>
-              <strong>Instant — no deployment needed.</strong><br />
-              Open the Google Sheet and paste the Vimeo video URL in cell <strong>A1</strong>. Replay pages pick it up immediately on next reload.
-            </div>
-
-            <a
-              href="https://docs.google.com/spreadsheets/d/1fTv4KP0IQtbssIjpxm17ecH20w-ymRrF7_IRexJU5d0/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                width: '100%',
-                padding: '12px',
-                background: 'rgba(34,197,94,0.08)',
-                border: '1.5px solid rgba(34,197,94,0.3)',
-                borderRadius: '8px',
-                color: '#16a34a',
-                fontWeight: 700,
-                fontSize: '14px',
-                textDecoration: 'none',
-                marginBottom: '12px',
-                transition: 'all 0.2s',
-                cursor: 'pointer'
-              }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(34,197,94,0.15)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(34,197,94,0.08)'}
-            >
-              <ExternalLink size={18} />
-              Open Google Sheet
-            </a>
-
-            <button
-              onClick={testSheetFetch}
-              className="btn-primary"
-              style={{
-                width: '100%',
-                justifyContent: 'center',
-                background: 'transparent',
-                color: 'var(--text-secondary)',
-                border: '1.5px solid var(--border-color)',
-                gap: '8px'
-              }}
-            >
-              <RefreshCw size={16} />
-              Test — Check What Sheet Contains
-            </button>
-
-            {sheetStatus.type && (
-              <div style={{
-                marginTop: '16px',
-                padding: '12px 16px',
-                borderRadius: '6px',
-                fontSize: '13.5px',
-                fontWeight: 600,
-                border: '1px solid',
-                backgroundColor: sheetStatus.type === 'success' ? 'rgba(34,197,94,0.08)' : sheetStatus.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
-                borderColor: sheetStatus.type === 'success' ? '#22c55e' : sheetStatus.type === 'error' ? '#ef4444' : 'var(--border-color)',
-                color: sheetStatus.type === 'success' ? '#22c55e' : sheetStatus.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
-              }}>
-                {sheetStatus.msg}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      <p style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '16px' }}>
-        <Video size={14} /> Both /replay and /day-trading-replay-noshow read from this single value.
-      </p>
-
-      {/* TOS Replay Videos — 3 independent pages */}
-      <div className="page-header" style={{ marginTop: '40px' }}>
-        <div className="page-header-heading">
-          <h1 className="page-title">TOS Replay Videos</h1>
-          <p className="page-description">
-            /tos-replay, /tos-replay-v2, and /tos-replay-noshow each have their own video — set them independently below. Uses the same GitHub token entered above.
+          <p style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: 'var(--text-secondary)', marginTop: '16px' }}>
+            <Video size={14} /> Both /replay and /day-trading-replay-noshow read from this single value.
           </p>
         </div>
-      </div>
 
-      {TOS_FIELDS.map(f => (
-        <div key={f.key} className="card" style={{ marginBottom: '20px' }}>
-          <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px' }}>
-            {f.label}
+        {/* ── RIGHT COLUMN: TOS replay videos — one card, 3 pages ── */}
+        <div className="card">
+          <h3 className="section-heading" style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '10px', marginBottom: '4px' }}>
+            TOS Replay Videos
           </h3>
+          <p style={{ fontSize: '12.5px', color: 'var(--text-secondary)', margin: '6px 0 20px' }}>
+            /tos-replay, /tos-replay-v2 and /tos-replay-noshow each have their own video. Uses the GitHub token entered on the left.
+          </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', margin: '14px 0 18px' }}>
-            <span className={`replay-status-icon ${tosHasVideo[f.key] ? 'is-active' : ''}`}>
-              {tosHasVideo[f.key] ? <CheckCircle size={18} /> : <XCircle size={18} />}
-            </span>
-            <div style={{ fontSize: '13.5px', fontWeight: 600, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
-              {tosCurrent[f.key] || 'Checking...'}
+          {TOS_FIELDS.map((f, i) => (
+            <div key={f.key} style={{ paddingTop: i === 0 ? 0 : '20px', marginTop: i === 0 ? 0 : '20px', borderTop: i === 0 ? 'none' : '1px solid var(--border-color)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', gap: '12px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>{f.label}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 600, color: tosHasVideo[f.key] ? '#22c55e' : 'var(--text-secondary)', minWidth: 0 }}>
+                  {tosHasVideo[f.key] ? <CheckCircle size={14} style={{ flexShrink: 0 }} /> : <XCircle size={14} style={{ flexShrink: 0 }} />}
+                  <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '220px' }} title={tosCurrent[f.key]}>
+                    {tosCurrent[f.key] || 'Checking...'}
+                  </span>
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="https://vimeo.com/123456789"
+                  value={tosInputs[f.key] || ''}
+                  onChange={e => setTosInputs(s => ({ ...s, [f.key]: e.target.value }))}
+                  style={{ flex: 1 }}
+                />
+                <button
+                  className="btn-primary"
+                  onClick={() => saveTosField(f.key)}
+                  disabled={!!tosSubmitting[f.key]}
+                  style={{ flexShrink: 0, gap: '6px' }}
+                >
+                  <Save size={16} />
+                  Update
+                </button>
+              </div>
+
+              {tosStatus[f.key]?.type && (
+                <div style={{
+                  marginTop: '10px',
+                  padding: '10px 14px',
+                  borderRadius: '6px',
+                  fontSize: '12.5px',
+                  fontWeight: 600,
+                  border: '1px solid',
+                  backgroundColor: tosStatus[f.key]!.type === 'success' ? 'rgba(34,197,94,0.08)' : tosStatus[f.key]!.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
+                  borderColor: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--border-color)',
+                  color: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
+                }}>
+                  {tosStatus[f.key]!.msg}
+                </div>
+              )}
             </div>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Vimeo Video URL</label>
-            <input
-              type="text"
-              className="form-input"
-              placeholder="https://vimeo.com/123456789"
-              value={tosInputs[f.key] || ''}
-              onChange={e => setTosInputs(s => ({ ...s, [f.key]: e.target.value }))}
-            />
-          </div>
-
-          <button
-            className="btn-primary"
-            onClick={() => saveTosField(f.key)}
-            disabled={!!tosSubmitting[f.key]}
-            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', gap: '8px' }}
-          >
-            <Save size={18} />
-            Save &amp; Deploy
-          </button>
-
-          {tosStatus[f.key]?.type && (
-            <div style={{
-              marginTop: '16px',
-              padding: '12px 16px',
-              borderRadius: '6px',
-              fontSize: '13.5px',
-              fontWeight: 600,
-              border: '1px solid',
-              backgroundColor: tosStatus[f.key]!.type === 'success' ? 'rgba(34,197,94,0.08)' : tosStatus[f.key]!.type === 'error' ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
-              borderColor: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--border-color)',
-              color: tosStatus[f.key]!.type === 'success' ? '#22c55e' : tosStatus[f.key]!.type === 'error' ? '#ef4444' : 'var(--text-secondary)',
-            }}>
-              {tosStatus[f.key]!.msg}
-            </div>
-          )}
+          ))}
         </div>
-      ))}
+
+      </div>
     </div>
   );
 }
