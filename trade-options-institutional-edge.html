@@ -3741,18 +3741,20 @@
       animation: live-pulse 2s ease-in-out infinite;
     }
     .hv2-h1 {
-      font-size: clamp(42px, 5.5vw, 80px);
+      font-size: clamp(34px, 4vw, 56px);
       font-weight: 800; color: #fff;
-      line-height: .95; letter-spacing: -3px;
+      line-height: .95; letter-spacing: -2.5px;
       margin-bottom: 24px;
     }
     .hv2-h1 em {
       font-style: normal;
-      display: block;
-      margin-top: 8px;
+      display: inline;
       background: linear-gradient(135deg, #ff6b2c 0%, #ff7b00 50%, #ffb347 100%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+    @media (min-width: 1000px) {
+      .hv2-h1 { white-space: nowrap; }
     }
     .hv2-sub {
       font-size: 19px; color: rgba(255,255,255,0.58);
