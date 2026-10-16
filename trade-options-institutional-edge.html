@@ -3774,25 +3774,26 @@
     .hv2-trust-item svg { color: var(--orange); flex-shrink: 0; }
 
     /* ─────────────────────────────────── */
-    /* COURSE HERO VISUAL (right column, this page only) */
+    /* CENTERED COURSE HERO — no side image (this page only) */
     /* ─────────────────────────────────── */
-    .hero-course-frame {
-      width: 86%;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      padding: 12px 12px 0;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    .hv2-inner.hv2-inner-centered {
+      flex-direction: column;
+      align-items: center;
+      padding: 170px 40px 110px;
+      min-height: auto;
     }
-    .hero-course-frame-dots { display: flex; gap: 6px; margin-bottom: 10px; padding-left: 4px; }
-    .hero-course-frame-dots span { width: 9px; height: 9px; border-radius: 50%; }
-    .hero-course-frame-dots span:nth-child(1) { background: #ff5f56; }
-    .hero-course-frame-dots span:nth-child(2) { background: #ffbd2e; }
-    .hero-course-frame-dots span:nth-child(3) { background: #27c93f; }
-    .hero-course-frame img {
-      width: 100%; display: block; border-radius: 10px 10px 0 0;
-      filter: brightness(0.96) contrast(1.03);
+    .hv2-inner.hv2-inner-centered .hv2-left.hv2-center {
+      max-width: 760px;
+      text-align: center;
+      padding: 0;
+      align-items: center;
+    }
+    .hv2-inner-centered .hv2-badge { margin-left: auto; margin-right: auto; }
+    .hv2-inner-centered .hv2-sub { margin-left: auto; margin-right: auto; }
+    .hv2-inner-centered .hv2-ctas { justify-content: center; }
+    .hv2-inner-centered .hv2-trust { justify-content: center; }
+    @media (max-width: 768px) {
+      .hv2-inner.hv2-inner-centered { padding: 110px 20px 70px; }
     }
 
     /* ─────────────────────────────────── */
@@ -5013,8 +5014,7 @@
     .curriculum-list {
       display: flex; flex-direction: column;
       border: 1px solid var(--border-light); border-radius: 14px;
-      overflow-y: auto; overscroll-behavior: contain;
-      height: 560px;
+      overflow: hidden;
     }
     .curriculum-item { display: flex; align-items: center; gap: 14px; padding: 22px 20px; border-bottom: 1px solid var(--border-light); transition: background 0.2s; flex-shrink: 0; }
     .curriculum-item:last-child { border-bottom: none; }
@@ -5040,7 +5040,7 @@
       background: #fbfcfe;
       transition: max-height 0.4s ease;
     }
-    .curriculum-module-lessons.is-open { max-height: 2000px; }
+    .curriculum-module-lessons.is-open { max-height: 360px; overflow-y: auto; overscroll-behavior: contain; }
     .curriculum-module-lessons:last-child { border-bottom: none; }
     .curriculum-lesson {
       display: flex; align-items: center; gap: 12px;
@@ -5192,7 +5192,6 @@
 
     @media (max-width: 900px) {
       .curriculum-grid, .bonus-grid { grid-template-columns: 1fr; gap: 40px; }
-      .curriculum-list { height: 460px; }
       .audience-grid { grid-template-columns: 1fr; }
       .bonus-cards-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -5252,10 +5251,9 @@
     <div class="hv2-glow-r"></div>
     <div class="hv2-rules"></div>
 
-    <div class="hv2-inner">
+    <div class="hv2-inner hv2-inner-centered">
 
-      <!-- LEFT: text content -->
-      <div class="hv2-left">
+      <div class="hv2-left hv2-center">
         <div class="hv2-badge">
           <span class="hv2-badge-dot"></span>
           Live Trading Room Open Now
@@ -5284,14 +5282,6 @@
         </div>
       </div>
 
-    </div>
-
-    <!-- Course curriculum visual — right side -->
-    <div class="hero-mountain">
-      <div class="hero-course-frame">
-        <div class="hero-course-frame-dots"><span></span><span></span><span></span></div>
-        <img src="learning01.png" alt="NavigationTrading options course curriculum">
-      </div>
     </div>
 
   </section>
