@@ -3774,6 +3774,51 @@
     .hv2-trust-item svg { color: var(--orange); flex-shrink: 0; }
 
     /* ─────────────────────────────────── */
+    /* CENTERED COURSE HERO (this page only) */
+    /* ─────────────────────────────────── */
+    .hv2-inner.hv2-inner-centered {
+      flex-direction: column;
+      align-items: center;
+      padding: 150px 40px 70px;
+      min-height: auto;
+    }
+    .hv2-inner.hv2-inner-centered .hv2-left.hv2-center {
+      max-width: 740px;
+      text-align: center;
+      padding: 0;
+      align-items: center;
+    }
+    .hv2-inner-centered .hv2-badge { margin-left: auto; margin-right: auto; }
+    .hv2-inner-centered .hv2-sub { margin-left: auto; margin-right: auto; }
+    .hv2-inner-centered .hv2-ctas { justify-content: center; }
+    .hv2-inner-centered .hv2-trust { justify-content: center; }
+    .hv2-course-visual {
+      width: 100%;
+      max-width: 980px;
+      margin-top: 56px;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation-delay: 0.6s;
+    }
+    .hv2-course-browser {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 14px 14px 0;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    }
+    .hv2-course-browser-dots { display: flex; gap: 6px; margin-bottom: 12px; padding-left: 4px; }
+    .hv2-course-browser-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .hv2-course-browser-dots span:nth-child(1) { background: #ff5f56; }
+    .hv2-course-browser-dots span:nth-child(2) { background: #ffbd2e; }
+    .hv2-course-browser-dots span:nth-child(3) { background: #27c93f; }
+    .hv2-course-browser img { width: 100%; display: block; border-radius: 10px 10px 0 0; }
+    @media (max-width: 768px) {
+      .hv2-inner.hv2-inner-centered { padding: 110px 20px 50px; }
+      .hv2-course-visual { margin-top: 36px; }
+    }
+
+    /* ─────────────────────────────────── */
     /* PREMIUM SAAS PLATFORM VISUAL (right side) */
     /* ─────────────────────────────────── */
     .hero-mountain {
@@ -5001,7 +5046,31 @@
     .curriculum-item-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
     .curriculum-item-text strong { font-size: 14.5px; font-weight: 700; color: #0d2e4e; }
     .curriculum-item-text span { font-size: 12.5px; color: var(--text-dim); line-height: 1.35; }
-    .curriculum-chevron { color: #cbd5e1; font-size: 22px; flex-shrink: 0; }
+    .curriculum-chevron { color: #cbd5e1; font-size: 22px; flex-shrink: 0; transition: transform 0.25s ease; }
+
+    /* ── CURRICULUM MODULE ACCORDION ── */
+    .curriculum-item.module-toggle { cursor: pointer; user-select: none; }
+    .curriculum-item.module-toggle.is-open .curriculum-chevron { transform: rotate(90deg); color: var(--orange); }
+    .curriculum-item.module-toggle.is-open { background: #f8fafc; }
+    .curriculum-module-lessons {
+      max-height: 0; overflow: hidden;
+      border-bottom: 1px solid var(--border-light);
+      background: #fbfcfe;
+      transition: max-height 0.35s ease;
+    }
+    .curriculum-module-lessons.is-open { max-height: 1400px; }
+    .curriculum-module-lessons:last-child { border-bottom: none; }
+    .curriculum-lesson {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 18px 11px 52px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .curriculum-lesson:last-child { border-bottom: none; }
+    .curriculum-lesson-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--orange); display: flex; align-items: center; justify-content: center; }
+    .curriculum-lesson-icon svg { width: 14px; height: 14px; }
+    .curriculum-lesson-text { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .curriculum-lesson-text strong { font-size: 13.5px; font-weight: 600; color: #0d2e4e; }
+    .curriculum-lesson-text span { font-size: 11.5px; color: var(--text-dim); }
 
     .curriculum-video { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; background: #0d2e4e; margin-bottom: 20px; }
     .curriculum-video-thumb { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.92; }
@@ -5199,10 +5268,9 @@
     <div class="hv2-glow-r"></div>
     <div class="hv2-rules"></div>
 
-    <div class="hv2-inner">
+    <div class="hv2-inner hv2-inner-centered">
 
-      <!-- LEFT: text content -->
-      <div class="hv2-left">
+      <div class="hv2-left hv2-center">
         <div class="hv2-badge">
           <span class="hv2-badge-dot"></span>
           Live Trading Room Open Now
@@ -5210,7 +5278,7 @@
 
         <h1 class="hv2-h1">Trade Options With <em>Institutional Edge.</em></h1>
 
-        <p class="hv2-sub">Real-time live streams, proven strategies, and the tools to execute confidently, with a probability-based approach and fully documented trades.</p>
+        <p class="hv2-sub">A complete, structured options course — from the fundamentals to advanced strategies — taught with a probability-based approach and fully documented trades.</p>
 
         <div class="hv2-ctas">
           <a target="_blank" rel="noopener noreferrer" href="https://whop.com/navigationtrading/?pass=prod_e5WDpPBDes6p7" class="btn-main" data-config="whopLink">
@@ -5231,20 +5299,14 @@
         </div>
       </div>
 
-    </div>
+      <!-- Course curriculum visual — centered below content -->
+      <div class="hv2-course-visual">
+        <div class="hv2-course-browser">
+          <div class="hv2-course-browser-dots"><span></span><span></span><span></span></div>
+          <img src="learning01.png" alt="NavigationTrading options course curriculum">
+        </div>
+      </div>
 
-    <!-- Platform visual — right side -->
-    <div class="hero-mountain">
-      <div class="hero-caption hero-caption-left">Real trades.<br>Real insights.
-        <svg class="hero-caption-arrow" width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 2c20 2 36 14 44 30" stroke-dasharray="3 4"/><path d="M38 28l8 4-2-9" /></svg>
-      </div>
-      <div class="hero-caption hero-caption-right">A clearer way<br>to trade options.
-        <svg class="hero-caption-arrow right" width="60" height="40" viewBox="0 0 60 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M58 2c-20 2-36 14-44 30" stroke-dasharray="3 4"/><path d="M22 28l-8 4 2-9" /></svg>
-      </div>
-      <div class="hero-visual-stack">
-        <img src="homepage.png" alt="NavigationTrading multi-chart view" class="hero-img-back">
-        <img src="homepage2.png" alt="NavigationTrading FLUX tool" class="hero-img-front">
-      </div>
     </div>
 
   </section>
@@ -5292,65 +5354,232 @@
           <p class="curriculum-sub">Go from the fundamentals to advanced strategies with a structured, step-by-step curriculum designed for real traders.</p>
 
           <div class="curriculum-list">
-            <div class="curriculum-item">
+            <div class="curriculum-item module-toggle" data-module="1" onclick="toggleCurriculumModule(1)">
               <div class="curriculum-icon">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
               </div>
               <div class="curriculum-item-text">
-                <strong>Options Foundations</strong>
-                <span>Core concepts, calls &amp; puts, how options work</span>
+                <strong>Options Basics</strong>
+                <span>23 lessons · Foundations through live Q&amp;A</span>
               </div>
               <span class="curriculum-chevron">&rsaquo;</span>
             </div>
-            <div class="curriculum-item">
-              <div class="curriculum-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+            <div class="curriculum-module-lessons" id="curriculum-module-1">
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Introduction</strong>
+                  <span>Multimedia &bull; 3:04</span>
+                </div>
               </div>
-              <div class="curriculum-item-text">
-                <strong>Strategy Fundamentals</strong>
-                <span>Spreads, premium selling, volatility and more</span>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Additional Resources</strong>
+                  <span>Multimedia &bull; 1:54</span>
+                </div>
               </div>
-              <span class="curriculum-chevron">&rsaquo;</span>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Legal Disclosures</strong>
+                  <span>Multimedia &bull; 0:37</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Trade Performance</strong>
+                  <span>Multimedia &bull; 3:24</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Why Options?</strong>
+                  <span>Multimedia &bull; 2:43</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Options Basics</strong>
+                  <span>Multimedia &bull; 6:07</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Options vs. Stocks</strong>
+                  <span>Multimedia &bull; 6:47</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>What Affects the Value of an Option?</strong>
+                  <span>Multimedia &bull; 2:00</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Implied Volatility</strong>
+                  <span>Multimedia &bull; 5:52</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Selling Options to Open a Position</strong>
+                  <span>Multimedia &bull; 3:33</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Theta</strong>
+                  <span>Multimedia &bull; 5:24</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>How to Start Trading Options</strong>
+                  <span>Multimedia &bull; 3:08</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>What Type of Account Should I Apply For?</strong>
+                  <span>Multimedia &bull; 4:49</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Setting up your Trading Platform</strong>
+                  <span>Multimedia &bull; 2:02</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>thinkorswim Demo</strong>
+                  <span>Multimedia &bull; 14:34</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>How to Load the NT Implied Volatility Indicator</strong>
+                  <span>Multimedia &bull; 6:10</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Orion Demo</strong>
+                  <span>Multimedia &bull; 2:12</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Strategies We Trade</strong>
+                  <span>Multimedia &bull; 2:31</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Monitoring Your Position</strong>
+                  <span>Multimedia &bull; 3:35</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Position Sizing</strong>
+                  <span>Multimedia &bull; 3:27</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Course Recap</strong>
+                  <span>Multimedia &bull; 2:05</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Free Resources</strong>
+                  <span>Multimedia &bull; 6:46</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Questions from Live Webclass 7/29/21</strong>
+                  <span>Multimedia &bull; 5:13</span>
+                </div>
+              </div>
             </div>
-            <div class="curriculum-item">
-              <div class="curriculum-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 4-8"/></svg>
-              </div>
-              <div class="curriculum-item-text">
-                <strong>Options Pricing &amp; Greeks</strong>
-                <span>Delta, theta, gamma, vega and implied volatility</span>
-              </div>
-              <span class="curriculum-chevron">&rsaquo;</span>
-            </div>
-            <div class="curriculum-item">
+            <div class="curriculum-item module-toggle" data-module="2" onclick="toggleCurriculumModule(2)">
               <div class="curriculum-icon">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/></svg>
               </div>
               <div class="curriculum-item-text">
-                <strong>Spread Strategies</strong>
-                <span>Iron condors, butterflies, calendars, and other strategies</span>
+                <strong>Options Assignment Mini Course</strong>
+                <span>6 lessons · Assignment risk &amp; mechanics</span>
               </div>
               <span class="curriculum-chevron">&rsaquo;</span>
             </div>
-            <div class="curriculum-item">
-              <div class="curriculum-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="curriculum-module-lessons" id="curriculum-module-2">
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Introduction</strong>
+                  <span>Multimedia &bull; 1:54</span>
+                </div>
               </div>
-              <div class="curriculum-item-text">
-                <strong>Risk Management</strong>
-                <span>Position sizing, adjustments, and portfolio risk</span>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Long Options</strong>
+                  <span>Multimedia &bull; 2:51</span>
+                </div>
               </div>
-              <span class="curriculum-chevron">&rsaquo;</span>
-            </div>
-            <div class="curriculum-item">
-              <div class="curriculum-icon">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Long Vertical Spreads</strong>
+                  <span>Multimedia &bull; 2:53</span>
+                </div>
               </div>
-              <div class="curriculum-item-text">
-                <strong>Advanced Strategies</strong>
-                <span>0DTE, trend trading, multi-leg strategies and beyond</span>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Short Options</strong>
+                  <span>Multimedia &bull; 3:18</span>
+                </div>
               </div>
-              <span class="curriculum-chevron">&rsaquo;</span>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Short Vertical Spreads</strong>
+                  <span>Multimedia &bull; 2:26</span>
+                </div>
+              </div>
+              <div class="curriculum-lesson">
+                <span class="curriculum-lesson-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+                <div class="curriculum-lesson-text">
+                  <strong>Dividend Risk</strong>
+                  <span>Multimedia &bull; 4:28</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -5411,96 +5640,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="institutional-section">
-    <div class="institutional-bg-grid"></div>
-    <div class="institutional-glow"></div>
-
-    <div class="container institutional-container">
-
-      <!-- LEFT -->
-      <div class="institutional-left">
-
-        <div class="institutional-badge">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          Institutional Integrity
-        </div>
-
-        <h2>
-          Every Trade. Every Month.<br>
-          <span>On the Record.</span>
-        </h2>
-
-        <p>
-          We don't make promises. We show proof. Real trades.
-          Real results. Month after month, members get clear,
-          actionable signals, in-depth analysis, and full insight
-          into our strategy, performance, and risk management
-          in every trade.
-        </p>
-
-        <a href="/performance" class="institutional-btn" data-config="viewResultsLink">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
-          See Our Performance
-        </a>
-
-      </div>
-
-      <!-- RIGHT -->
-      <div class="institutional-right">
-
-        <div class="institutional-card">
-          <div class="institutional-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <div class="institutional-card-content">
-            <h4>Monthly Cadence</h4>
-            <p>New insights, every month.</p>
-          </div>
-          <div class="institutional-arrow">›</div>
-        </div>
-
-        <div class="institutional-card">
-          <div class="institutional-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
-          </div>
-          <div class="institutional-card-content">
-            <h4>Every Trade Documented</h4>
-            <p>We log every trade with full breakdowns.</p>
-          </div>
-          <div class="institutional-arrow">›</div>
-        </div>
-
-        <div class="institutional-card">
-          <div class="institutional-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="institutional-card-content">
-            <h4>Public &amp; Permanent</h4>
-            <p>No edits. No filters. Just the truth.</p>
-          </div>
-          <div class="institutional-arrow">›</div>
-        </div>
-
-        <div class="institutional-card">
-          <div class="institutional-icon">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <div class="institutional-card-content">
-            <h4>Documented &amp; Independent</h4>
-            <p>Every trade posted live with full transparency.</p>
-          </div>
-          <div class="institutional-arrow">›</div>
-        </div>
-
-      </div>
-
     </div>
   </section>
 
@@ -6348,6 +6487,21 @@
       }
     }
   </style>
+
+  <script>
+    function toggleCurriculumModule(idx) {
+      var toggle = document.querySelector('.module-toggle[data-module="' + idx + '"]');
+      var panel = document.getElementById('curriculum-module-' + idx);
+      if (!toggle || !panel) return;
+      var isOpen = panel.classList.contains('is-open');
+      document.querySelectorAll('.curriculum-module-lessons.is-open').forEach(function (p) { p.classList.remove('is-open'); });
+      document.querySelectorAll('.module-toggle.is-open').forEach(function (t) { t.classList.remove('is-open'); });
+      if (!isOpen) {
+        panel.classList.add('is-open');
+        toggle.classList.add('is-open');
+      }
+    }
+  </script>
 
   <script>
     document.querySelectorAll('.faq-q').forEach(btn => {
