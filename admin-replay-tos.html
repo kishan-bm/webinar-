@@ -214,8 +214,8 @@
 
       <div class="page-header">
         <div class="page-eyebrow">Replay Management — Transformer Option Spreads</div>
-        <h1>Set Replay Video</h1>
-        <p>After the webinar ends, paste the Vimeo URL below to make it live on the tos-replay, tos-replay-v2, and tos-replay-noshow pages.</p>
+        <h1>Set Replay Videos</h1>
+        <p>Each of the 3 TOS replay pages now has its own Vimeo URL. Paste a link into any field below and save — only that page updates.</p>
       </div>
 
       <!-- LOGIN -->
@@ -235,31 +235,51 @@
       <!-- ADMIN PANEL -->
       <div id="admin-section">
 
-        <!-- Current video status -->
+        <!-- GitHub Token -->
         <div class="card">
-          <div class="card-title">Current Video Status</div>
-          <div class="current-box" id="current-display">
-            <span id="current-url">Checking...</span>
-          </div>
+          <div class="card-title">Authentication</div>
+          <label>GitHub Token <span>(repo scope — not stored)</span></label>
+          <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx">
+          <p class="hint">Enter once — used for whichever page(s) you save below.</p>
         </div>
 
-        <!-- Set video -->
+        <!-- /tos-replay -->
         <div class="card">
-          <div class="card-title">Set New Video</div>
+          <div class="card-title">/tos-replay</div>
+          <div class="current-box" id="current-display-1"><span id="current-url-1">Checking...</span></div>
+          <label>Vimeo Video URL</label>
+          <input type="text" id="vimeo-url-1" placeholder="https://vimeo.com/123456789">
+          <button class="btn" onclick="saveViaGitHub('tos_replay_url', 'vimeo-url-1', 'status-1', 'current-url-1', 'current-display-1')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            Save &amp; Deploy
+          </button>
+          <div class="status" id="status-1"></div>
+        </div>
 
-          <div class="tab-content active" id="tab-github">
-            <label>GitHub Token <span>(repo scope — not stored)</span></label>
-            <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx">
-            <label>Vimeo Video URL</label>
-            <input type="text" id="vimeo-url-github" placeholder="https://vimeo.com/123456789">
-            <p class="hint">Full Vimeo URL — embed code is generated automatically. Vercel will redeploy in ~60 seconds.</p>
-            <button class="btn" onclick="saveViaGitHub()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
-              Save &amp; Deploy via GitHub
-            </button>
-            <div class="status" id="github-status"></div>
-          </div>
+        <!-- /tos-replay-v2 -->
+        <div class="card">
+          <div class="card-title">/tos-replay-v2</div>
+          <div class="current-box" id="current-display-2"><span id="current-url-2">Checking...</span></div>
+          <label>Vimeo Video URL</label>
+          <input type="text" id="vimeo-url-2" placeholder="https://vimeo.com/123456789">
+          <button class="btn" onclick="saveViaGitHub('tos_replay_v2_url', 'vimeo-url-2', 'status-2', 'current-url-2', 'current-display-2')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            Save &amp; Deploy
+          </button>
+          <div class="status" id="status-2"></div>
+        </div>
 
+        <!-- /tos-replay-noshow -->
+        <div class="card">
+          <div class="card-title">/tos-replay-noshow</div>
+          <div class="current-box" id="current-display-3"><span id="current-url-3">Checking...</span></div>
+          <label>Vimeo Video URL</label>
+          <input type="text" id="vimeo-url-3" placeholder="https://vimeo.com/123456789">
+          <button class="btn" onclick="saveViaGitHub('tos_replay_noshow_url', 'vimeo-url-3', 'status-3', 'current-url-3', 'current-display-3')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            Save &amp; Deploy
+          </button>
+          <div class="status" id="status-3"></div>
         </div>
 
       </div>
@@ -309,33 +329,45 @@
     }
   }
 
+  const FIELDS = [
+    { key: 'tos_replay_url',         urlInput: 'current-url-1' },
+    { key: 'tos_replay_v2_url',      urlInput: 'current-url-2' },
+    { key: 'tos_replay_noshow_url',  urlInput: 'current-url-3' }
+  ];
+
   async function loadCurrentConfig() {
-    const el  = document.getElementById('current-url');
-    const box = document.getElementById('current-display');
     try {
       const res  = await fetch('/tos-replay-config.json?t=' + Date.now());
       const data = await res.json();
-      if (data.vimeo_url) {
-        el.textContent = '✅ ' + data.vimeo_url;
-        box.classList.add('has-video');
-      } else {
-        el.textContent = 'Nothing set yet.';
-      }
+      FIELDS.forEach(function(f){
+        const el  = document.getElementById(f.urlInput);
+        const box = el.closest('.current-box');
+        const val = data[f.key] || data.vimeo_url;
+        if (val) {
+          el.textContent = '✅ ' + val;
+          box.classList.add('has-video');
+        } else {
+          el.textContent = 'Nothing set yet.';
+        }
+      });
     } catch(e) {
-      el.textContent = 'Could not load config.';
+      FIELDS.forEach(function(f){
+        document.getElementById(f.urlInput).textContent = 'Could not load config.';
+      });
     }
   }
 
-  async function saveViaGitHub() {
-    const url = document.getElementById('vimeo-url-github').value.trim();
+  async function saveViaGitHub(configKey, inputId, statusId, urlDisplayId, boxId) {
+    const url = document.getElementById(inputId).value.trim();
     const tok = document.getElementById('token-input').value.trim();
-    const st  = document.getElementById('github-status');
+    const st  = document.getElementById(statusId);
     if (!tok) { showStatus(st, 'error', 'Please enter your GitHub token.'); return; }
     if (!url) { showStatus(st, 'error', 'Please enter a Vimeo URL.'); return; }
     GITHUB_TOKEN = tok;
 
     showStatus(st, 'loading', '⏳ Pushing to GitHub — Vercel will deploy in ~60 seconds...');
-    document.querySelector('#tab-github .btn').disabled = true;
+    const btn = document.getElementById(inputId).closest('.card').querySelector('.btn');
+    btn.disabled = true;
 
     try {
       const shaRes  = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${CONFIG_PATH}`, {
@@ -343,19 +375,20 @@
       });
       const shaData = await shaRes.json();
       const sha     = shaData.sha;
-      const content = btoa(JSON.stringify({ vimeo_url: url }, null, 2));
+      const current = JSON.parse(atob(shaData.content.replace(/\n/g, '')));
+      current[configKey] = url;
+      const content = btoa(JSON.stringify(current, null, 2));
 
       const pushRes = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${CONFIG_PATH}`, {
         method: 'PUT',
         headers: { 'Authorization': 'token ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: 'Set replay video URL', content, sha })
+        body: JSON.stringify({ message: 'Set ' + configKey, content, sha })
       });
 
       if (pushRes.ok) {
-        showStatus(st, 'success', '✅ Saved! Replay pages will show the new video in ~60 seconds after Vercel deploys.');
-        const el = document.getElementById('current-url');
-        el.textContent = '✅ ' + url;
-        document.getElementById('current-display').classList.add('has-video');
+        showStatus(st, 'success', '✅ Saved! This page will show the new video in ~60 seconds after Vercel deploys.');
+        document.getElementById(urlDisplayId).textContent = '✅ ' + url;
+        document.getElementById(boxId).classList.add('has-video');
       } else {
         const err = await pushRes.json();
         showStatus(st, 'error', 'GitHub error: ' + (err.message || pushRes.status));
@@ -363,7 +396,7 @@
     } catch(e) {
       showStatus(st, 'error', 'Network error: ' + e.message);
     }
-    document.querySelector('#tab-github .btn').disabled = false;
+    btn.disabled = false;
   }
 
   function showStatus(el, type, msg) {

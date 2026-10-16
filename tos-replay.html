@@ -798,7 +798,7 @@
     }
     fetch('/tos-replay-config.json?t=' + Date.now())
       .then(function(r){ return r.json(); })
-      .then(function(d){ embedVideo(d.vimeo_url || FALLBACK); })
+      .then(function(d){ embedVideo(d.tos_replay_url || d.vimeo_url || FALLBACK); })
       .catch(function(){ embedVideo(FALLBACK); });
   })();
   </script>
