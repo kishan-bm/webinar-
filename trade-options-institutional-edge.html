@@ -3774,48 +3774,25 @@
     .hv2-trust-item svg { color: var(--orange); flex-shrink: 0; }
 
     /* ─────────────────────────────────── */
-    /* CENTERED COURSE HERO (this page only) */
+    /* COURSE HERO VISUAL (right column, this page only) */
     /* ─────────────────────────────────── */
-    .hv2-inner.hv2-inner-centered {
-      flex-direction: column;
-      align-items: center;
-      padding: 150px 40px 70px;
-      min-height: auto;
-    }
-    .hv2-inner.hv2-inner-centered .hv2-left.hv2-center {
-      max-width: 740px;
-      text-align: center;
-      padding: 0;
-      align-items: center;
-    }
-    .hv2-inner-centered .hv2-badge { margin-left: auto; margin-right: auto; }
-    .hv2-inner-centered .hv2-sub { margin-left: auto; margin-right: auto; }
-    .hv2-inner-centered .hv2-ctas { justify-content: center; }
-    .hv2-inner-centered .hv2-trust { justify-content: center; }
-    .hv2-course-visual {
-      width: 100%;
-      max-width: 980px;
-      margin-top: 56px;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-      animation-delay: 0.6s;
-    }
-    .hv2-course-browser {
+    .hero-course-frame {
+      width: 86%;
+      margin: 0 auto;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 14px 14px 0;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+      border-radius: 14px;
+      padding: 12px 12px 0;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
     }
-    .hv2-course-browser-dots { display: flex; gap: 6px; margin-bottom: 12px; padding-left: 4px; }
-    .hv2-course-browser-dots span { width: 10px; height: 10px; border-radius: 50%; }
-    .hv2-course-browser-dots span:nth-child(1) { background: #ff5f56; }
-    .hv2-course-browser-dots span:nth-child(2) { background: #ffbd2e; }
-    .hv2-course-browser-dots span:nth-child(3) { background: #27c93f; }
-    .hv2-course-browser img { width: 100%; display: block; border-radius: 10px 10px 0 0; }
-    @media (max-width: 768px) {
-      .hv2-inner.hv2-inner-centered { padding: 110px 20px 50px; }
-      .hv2-course-visual { margin-top: 36px; }
+    .hero-course-frame-dots { display: flex; gap: 6px; margin-bottom: 10px; padding-left: 4px; }
+    .hero-course-frame-dots span { width: 9px; height: 9px; border-radius: 50%; }
+    .hero-course-frame-dots span:nth-child(1) { background: #ff5f56; }
+    .hero-course-frame-dots span:nth-child(2) { background: #ffbd2e; }
+    .hero-course-frame-dots span:nth-child(3) { background: #27c93f; }
+    .hero-course-frame img {
+      width: 100%; display: block; border-radius: 10px 10px 0 0;
+      filter: brightness(0.96) contrast(1.03);
     }
 
     /* ─────────────────────────────────── */
@@ -5033,18 +5010,23 @@
     /* ── CURRICULUM ── */
     .curriculum-section { padding: 56px 0; background: #fff; }
     .curriculum-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: start; }
-    .curriculum-list { display: flex; flex-direction: column; border: 1px solid var(--border-light); border-radius: 14px; overflow: hidden; }
-    .curriculum-item { display: flex; align-items: center; gap: 14px; padding: 13px 18px; border-bottom: 1px solid var(--border-light); transition: background 0.2s; }
+    .curriculum-list {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--border-light); border-radius: 14px;
+      overflow-y: auto; overscroll-behavior: contain;
+      height: 560px;
+    }
+    .curriculum-item { display: flex; align-items: center; gap: 14px; padding: 22px 20px; border-bottom: 1px solid var(--border-light); transition: background 0.2s; flex-shrink: 0; }
     .curriculum-item:last-child { border-bottom: none; }
     .curriculum-item:hover { background: #f8fafc; }
     .curriculum-icon {
-      width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
       background: linear-gradient(135deg, #e8f0fb 0%, #dbe8f8 100%);
       display: flex; align-items: center; justify-content: center; color: #1e4d8c;
     }
-    .curriculum-icon svg { width: 16px; height: 16px; }
+    .curriculum-icon svg { width: 19px; height: 19px; }
     .curriculum-item-text { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-    .curriculum-item-text strong { font-size: 14.5px; font-weight: 700; color: #0d2e4e; }
+    .curriculum-item-text strong { font-size: 15.5px; font-weight: 700; color: #0d2e4e; }
     .curriculum-item-text span { font-size: 12.5px; color: var(--text-dim); line-height: 1.35; }
     .curriculum-chevron { color: #cbd5e1; font-size: 22px; flex-shrink: 0; transition: transform 0.25s ease; }
 
@@ -5053,16 +5035,16 @@
     .curriculum-item.module-toggle.is-open .curriculum-chevron { transform: rotate(90deg); color: var(--orange); }
     .curriculum-item.module-toggle.is-open { background: #f8fafc; }
     .curriculum-module-lessons {
-      max-height: 0; overflow: hidden;
+      max-height: 0; overflow: hidden; flex-shrink: 0;
       border-bottom: 1px solid var(--border-light);
       background: #fbfcfe;
-      transition: max-height 0.35s ease;
+      transition: max-height 0.4s ease;
     }
-    .curriculum-module-lessons.is-open { max-height: 1400px; }
+    .curriculum-module-lessons.is-open { max-height: 2000px; }
     .curriculum-module-lessons:last-child { border-bottom: none; }
     .curriculum-lesson {
       display: flex; align-items: center; gap: 12px;
-      padding: 11px 18px 11px 52px;
+      padding: 11px 18px 11px 56px;
       border-bottom: 1px solid var(--border-light);
     }
     .curriculum-lesson:last-child { border-bottom: none; }
@@ -5119,7 +5101,7 @@
     /* ── AUDIENCE ── */
     .audience-section {
       padding: 56px 0;
-      background: linear-gradient(180deg, #fff 0%, #fbf6f2 50%, #fff 100%);
+      background: #0D2E4E;
       position: relative;
       overflow: hidden;
     }
@@ -5134,29 +5116,30 @@
     .audience-section::before {
       width: 420px; height: 420px;
       top: -180px; right: -100px;
-      background: radial-gradient(circle, rgba(200,66,10,0.10) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 70%);
     }
     .audience-section::after {
       width: 480px; height: 480px;
       bottom: -220px; left: -140px;
-      background: radial-gradient(circle, rgba(30,111,168,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,188,255,0.1) 0%, transparent 70%);
     }
     .audience-section .container { position: relative; z-index: 1; }
+    .audience-section .approach-style-h2 { color: #fff; }
     .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .audience-card {
-      background: rgba(255,255,255,0.8); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(13,46,78,0.08); border-radius: 12px;
-      padding: 24px 20px; text-align: center; transition: transform 0.2s, box-shadow 0.2s;
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+      padding: 24px 20px; text-align: center; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
-    .audience-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,46,78,0.08); }
+    .audience-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
     .audience-icon {
       width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 12px;
-      background: linear-gradient(135deg, #e8f0fb 0%, #dbe8f8 100%);
-      display: flex; align-items: center; justify-content: center; color: #1e4d8c;
+      background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.3);
+      display: flex; align-items: center; justify-content: center; color: #ff9060;
     }
     .audience-icon svg { width: 18px; height: 18px; }
-    .audience-card h3 { font-size: 15.5px; font-weight: 800; color: #0d2e4e; margin-bottom: 6px; }
-    .audience-card p { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+    .audience-card h3 { font-size: 15.5px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .audience-card p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55; }
 
     /* ── BONUS COURSES ── */
     .bonus-section { padding: 56px 0; background: #fff; }
@@ -5209,6 +5192,7 @@
 
     @media (max-width: 900px) {
       .curriculum-grid, .bonus-grid { grid-template-columns: 1fr; gap: 40px; }
+      .curriculum-list { height: 460px; }
       .audience-grid { grid-template-columns: 1fr; }
       .bonus-cards-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -5268,9 +5252,10 @@
     <div class="hv2-glow-r"></div>
     <div class="hv2-rules"></div>
 
-    <div class="hv2-inner hv2-inner-centered">
+    <div class="hv2-inner">
 
-      <div class="hv2-left hv2-center">
+      <!-- LEFT: text content -->
+      <div class="hv2-left">
         <div class="hv2-badge">
           <span class="hv2-badge-dot"></span>
           Live Trading Room Open Now
@@ -5299,14 +5284,14 @@
         </div>
       </div>
 
-      <!-- Course curriculum visual — centered below content -->
-      <div class="hv2-course-visual">
-        <div class="hv2-course-browser">
-          <div class="hv2-course-browser-dots"><span></span><span></span><span></span></div>
-          <img src="learning01.png" alt="NavigationTrading options course curriculum">
-        </div>
-      </div>
+    </div>
 
+    <!-- Course curriculum visual — right side -->
+    <div class="hero-mountain">
+      <div class="hero-course-frame">
+        <div class="hero-course-frame-dots"><span></span><span></span><span></span></div>
+        <img src="learning01.png" alt="NavigationTrading options course curriculum">
+      </div>
     </div>
 
   </section>
