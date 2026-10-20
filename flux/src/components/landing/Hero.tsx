@@ -53,7 +53,7 @@ export function Hero() {
           style={{ animationDelay: "240ms" }}
         >
           <a
-            href="https://whop.com/navigationtrading/ntpro/"
+            href="https://member.navigationtrading.com/join/pro"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-glow transition-all hover:bg-forest-deep"

@@ -176,7 +176,7 @@ export function ProductShowcase() {
                 </div>
                 <div key={`c-${scene.key}`} className="animate-blur-in mt-4 flex flex-wrap items-center gap-3 lg:mt-9" style={{ animationDelay: "160ms" }}>
                   <a
-                    href="https://whop.com/navigationtrading/ntpro/"
+                    href="https://member.navigationtrading.com/join/pro"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-forest-deep hover:shadow-glow"
