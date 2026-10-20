@@ -3,6 +3,7 @@ import {
   ArrowRight, SlidersHorizontal, CalendarClock, Radar, Timer,
   LineChart, History, ListFilter, Gauge, Repeat, TrendingUp, Send,
 } from "lucide-react";
+import { useCheckoutLink } from "@/hooks/useCheckoutLink";
 
 type Scene = {
   key: string;
@@ -82,6 +83,7 @@ export function ProductShowcase() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const checkoutUrl = useCheckoutLink();
 
   // Preload all GIFs immediately on mount
   useEffect(() => {
@@ -176,7 +178,7 @@ export function ProductShowcase() {
                 </div>
                 <div key={`c-${scene.key}`} className="animate-blur-in mt-4 flex flex-wrap items-center gap-3 lg:mt-9" style={{ animationDelay: "160ms" }}>
                   <a
-                    href="https://member.navigationtrading.com/join/pro"
+                    href={checkoutUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white transition-all duration-300 hover:bg-forest-deep hover:shadow-glow"

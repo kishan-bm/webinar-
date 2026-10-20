@@ -1,6 +1,9 @@
 import { ArrowRight, Play } from "lucide-react";
+import { useCheckoutLink } from "@/hooks/useCheckoutLink";
 
 export function Hero() {
+  const checkoutUrl = useCheckoutLink();
+
   return (
     <section className="relative overflow-hidden pt-32 pb-24" style={{ background: "#0D2E4E" }}>
       <img
@@ -53,7 +56,7 @@ export function Hero() {
           style={{ animationDelay: "240ms" }}
         >
           <a
-            href="https://member.navigationtrading.com/join/pro"
+            href={checkoutUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-white shadow-glow transition-all hover:bg-forest-deep"

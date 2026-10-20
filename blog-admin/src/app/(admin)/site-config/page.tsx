@@ -513,6 +513,16 @@ const PAGES_CONFIG: PageConfig[] = [
       { key: 'exitPopupDate', label: 'Exit Popup Reassurance Line', type: 'text', description: 'Small reassurance line shown under the bullets (e.g. 100% Free | No Credit Card Required)', group: 'Exit Intent Popup' },
       { key: 'exitPopupFormId', label: 'Exit Popup ActiveCampaign Form ID', type: 'number', placeholder: 'e.g. 126', description: 'Separate form ID for the exit-intent popup opt-in', group: 'Exit Intent Popup' },
     ]
+  },
+  {
+    key: 'flux',
+    title: 'FLUX Tool Page',
+    path: '/flux',
+    deployedUrl: 'https://www.navigationtrading.com/flux',
+    description: 'Standalone FLUX product page (separate app) — controls where its "Get Access to FLUX" buttons link to.',
+    fields: [
+      { key: 'proCheckoutLink', label: 'Get Access to FLUX — Checkout URL', type: 'url', placeholder: 'https://member.navigationtrading.com/join/pro', description: 'Applied to both "Get Access to FLUX" buttons on the page', group: 'URLs & Links' },
+    ]
   }
 ];
 
