@@ -138,6 +138,7 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/home',
     description: 'Navigation Trading Homepage, containing free signups and join links.',
     fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
       { key: 'whopLink', label: 'Hero Join Room Whop URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Whop checkout link when clicking hero Get Free Access button', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/...', description: 'Checkout URL for Navbar Join Now button', group: 'URLs & Links' },
       { key: 'viewResultsLink', label: 'See Our Performance / View Results URL', type: 'url', placeholder: 'e.g. /performance', description: 'Redirect path/URL for See Our Performance / View Track Record / View Results buttons', group: 'URLs & Links' },
@@ -165,6 +166,8 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/pricing',
     description: 'Pricing grid displaying Free, Day Trading, and Pro memberships.',
     fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Redirects' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Redirects' },
       { key: 'whopFree', label: 'Free Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
       { key: 'whopDay', label: 'Day Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
       { key: 'whopPro', label: 'Pro Trading Plan Whop Link', type: 'url', placeholder: 'https://whop.com/...', group: 'URLs & Redirects' },
@@ -183,8 +186,9 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/free-membership',
     description: 'Welcome and overview page for Free members.',
     fields: [
-      { key: 'freeJoinLink', label: 'Start Learning Free Button Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the main Start Learning Free button', group: 'URLs & Links' },
-      { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: '../pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'freeJoinLink', label: 'Join Free / Start Learning Free Button Link', type: 'url', placeholder: 'https://member.navigationtrading.com/login?mode=join', description: 'URL for the sticky Join Free button plus the other free-join CTAs on this page', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
 
       { key: 'exitPopupShow', label: 'Enable Exit Intent Popup', type: 'boolean', group: 'Exit Intent Popup' },
       { key: 'exitPopupHeadline', label: 'Exit Popup Headline', type: 'text', group: 'Exit Intent Popup' },
@@ -203,6 +207,7 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/paid-membership',
     description: 'Welcome and details page for Paid/Pro members.',
     fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
       { key: 'whopLink', label: 'Pro Join Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for main Get Pro Access and Join Pro buttons', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/...', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'heroVideoUrl', label: 'Hero Section Video — YouTube Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/...', description: 'YouTube embed URL for the video shown on the right side of the hero section', group: 'Hero Section' },
@@ -305,6 +310,7 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/day-trading-membership',
     description: 'Overview and detail page for Day Trading members.',
     fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
       { key: 'whopLink', label: 'Day Trading Join Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for main Join Day Trading buttons', group: 'URLs & Links' },
       { key: 'navCtaLink', label: 'Navbar Join Now Link', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntday/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'whopProLink', label: 'Pro Membership Text Link (In comparison & FAQ)', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntpro/', description: 'URL for the textual links pointing to Pro Membership (located in the Comparison box and FAQ answers)', group: 'URLs & Links' },
@@ -318,8 +324,9 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/contact',
     description: 'Contact us form page with support channels and FAQ.',
     fields: [
-      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
-      { key: 'freeJoinLink', label: 'Get Started Now Bottom CTA URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/ntfree/', description: 'URL for the bottom Get Started Now button', group: 'URLs & Links' },
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'freeJoinLink', label: 'Get Started Now Bottom CTA URL', type: 'url', placeholder: '/free-membership', description: 'URL for the bottom Get Started Now button', group: 'URLs & Links' },
       { key: 'discordLink', label: 'Discord Community Link', type: 'url', placeholder: '/pricing', description: 'URL pointing to the Whop/Discord community pricing or room link', group: 'Other Support Links' },
       { key: 'calendlyLink', label: 'Schedule Calendly Call URL', type: 'url', placeholder: 'https://calendly.com/navigationtrading', description: 'URL for the Coaching Call Calendly booking page', group: 'Other Support Links' },
       { key: 'blogLink', label: 'Read Blog URL', type: 'url', placeholder: 'https://navigationtrading.com/blog/', description: 'URL for the Blog link', group: 'Other Support Links' },
@@ -335,7 +342,8 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/brokers',
     description: 'Broker recommendations with referral links and comparison sheet.',
     fields: [
-      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'https://whop.com/navigationtrading/', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'ibReferralUrl', label: 'Interactive Brokers Referral URL', type: 'url', placeholder: 'https://www.interactivebrokers.com/referral/navigationtrading', description: 'Referral link for Interactive Brokers account opening', group: 'Broker Links' },
       { key: 'tradierReferralUrl', label: 'Tradier Referral URL', type: 'url', placeholder: 'https://tradier.com/individuals/options-trading', description: 'Referral link for Tradier account opening', group: 'Broker Links' },
       { key: 'schwabReferralUrl', label: 'Charles Schwab Referral URL', type: 'url', placeholder: 'https://www.schwab.com/', description: 'Referral link for Charles Schwab account opening', group: 'Broker Links' },
@@ -349,7 +357,8 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/podcast',
     description: 'Listen to the Tradehacker Mindset podcast and subscribe to various platforms.',
     fields: [
-      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'spotifyPodcastEmbedUrl', label: 'Spotify Podcast Embed URL', type: 'url', placeholder: 'https://open.spotify.com/embed/...', description: 'Spotify embedded player URL', group: 'Embed Settings' },
       { key: 'spotifyLink', label: 'Spotify Subscribe Link', type: 'url', placeholder: 'https://open.spotify.com/...', description: 'Listen on Spotify link', group: 'Platform Links' },
       { key: 'applePodcastsLink', label: 'Apple Podcasts Subscribe Link', type: 'url', placeholder: 'https://podcasts.apple.com/...', description: 'Listen on Apple Podcasts link', group: 'Platform Links' },
@@ -368,7 +377,8 @@ const PAGES_CONFIG: PageConfig[] = [
     deployedUrl: 'https://www.navigationtrading.com/performance',
     description: 'Documented performance history and annual trade reports.',
     fields: [
-      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: 'pricing.html', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
       { key: 'pricingLink', label: 'Explore Memberships URL', type: 'url', placeholder: 'pricing.html', description: 'Explore Memberships bottom CTA button', group: 'URLs & Links' },
       { key: 'video1Url', label: 'Live Stream — Latest Replay Embed URL', type: 'url', placeholder: 'https://www.youtube.com/embed/VIDEO_ID', description: 'YouTube embed URL for the Day Trading Live Stream latest replay (single video card)', group: 'Live Execution Videos' },
       {
@@ -522,6 +532,85 @@ const PAGES_CONFIG: PageConfig[] = [
     description: 'Standalone FLUX product page (separate app) — controls where its "Get Access to FLUX" buttons link to.',
     fields: [
       { key: 'proCheckoutLink', label: 'Get Access to FLUX — Checkout URL', type: 'url', placeholder: 'https://member.navigationtrading.com/join/pro', description: 'Applied to both "Get Access to FLUX" buttons on the page', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'coaching',
+    title: 'Private Coaching',
+    path: '/coaching',
+    deployedUrl: 'https://www.navigationtrading.com/coaching',
+    description: '1:1 coaching services overview page.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'day-trading',
+    title: 'Day Trading Live Registration',
+    path: '/day-trading',
+    deployedUrl: 'https://www.navigationtrading.com/day-trading',
+    description: 'Live day trading webinar registration page.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'legal-disclaimers',
+    title: 'Legal Disclaimers',
+    path: '/legal-disclaimers',
+    deployedUrl: 'https://www.navigationtrading.com/legal-disclaimers',
+    description: 'Privacy Policy, Terms of Use, Legal Disclaimer, and Refund Policy page.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'meet-eliot',
+    title: 'Meet Eliot',
+    path: '/meet-eliot',
+    deployedUrl: 'https://www.navigationtrading.com/meet-eliot',
+    description: 'Instructor bio page for Eliot.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'trade-options-institutional-edge',
+    title: 'Trade Options With Institutional Edge',
+    path: '/trade-options-institutional-edge',
+    deployedUrl: 'https://www.navigationtrading.com/trade-options-institutional-edge',
+    description: 'Options course landing page with curriculum and bonus courses.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'whopLink', label: 'Hero Get Free Access URL', type: 'url', placeholder: '/free-membership', description: 'URL for the hero "Get Free Access" button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'indexV3',
+    title: 'Homepage Variant V3',
+    path: '/indexV3',
+    deployedUrl: 'https://www.navigationtrading.com/indexV3',
+    description: 'Alternate homepage design variant.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'whopLink', label: 'Hero/Community Get Free Access URL', type: 'url', placeholder: '/free-membership', description: 'URL applied to the hero Get Free Access and Join the Room buttons', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'indexV4',
+    title: 'Homepage Variant V4',
+    path: '/indexV4',
+    deployedUrl: 'https://www.navigationtrading.com/indexV4',
+    description: 'Alternate homepage design variant.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+      { key: 'whopLink', label: 'Hero/Community Get Free Access URL', type: 'url', placeholder: '/free-membership', description: 'URL applied to the hero Get Free Access and Join the Room buttons', group: 'URLs & Links' },
     ]
   }
 ];
