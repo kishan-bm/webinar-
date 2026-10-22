@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FinancialJuice | NavigationTrading</title><style>html{background:#0A2440}body{margin:0;background:#F2F7FB}</style><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FinancialJuice | NavigationTrading</title><style>html{background:#0D2E4E}body{margin:0;background:#F2F7FB}</style><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ── SITE NAVBAR (copied from pricing.html) ── */
 .navbar { --orange: #c8420a; --orange-bright: #e04d10; --orange-glow: rgba(200, 66, 10, 0.35); font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
@@ -96,6 +96,86 @@
 body { overflow-x: hidden; }
 </style>
 <script src="/site-config.js" data-page="financialjuice" defer></script>
+<style>
+/* ── SITE FOOTER (copied from the FLUX page, flux/src/components/landing/Footer.tsx) ── */
+footer.nt-footer { font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; line-height: 1.5; color: #fff; -webkit-font-smoothing: antialiased; box-sizing: border-box; }
+footer.nt-footer *, footer.nt-footer *::before, footer.nt-footer *::after { box-sizing: border-box; }
+footer.nt-footer { background: #0D2E4E; padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+footer.nt-footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
+footer.nt-footer > .footer-top, footer.nt-footer > .footer-bottom { position: relative; z-index: 1; }
+footer.nt-footer .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+footer.nt-footer .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+footer.nt-footer .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
+footer.nt-footer .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; text-decoration: none; }
+footer.nt-footer .social-icon:hover { background: #c8420a; color: #fff; }
+footer.nt-footer .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+footer.nt-footer .footer-link:hover { color: rgba(255,255,255,0.9); }
+footer.nt-footer .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
+footer.nt-footer .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
+footer.nt-footer .footer-copy a { color: rgba(255,255,255,0.45); }
+@media (max-width: 768px) {
+  footer.nt-footer { padding: 60px 20px 32px; }
+  footer.nt-footer .footer-top { flex-direction: column; gap: 36px; }
+  footer.nt-footer .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+  footer.nt-footer .footer-tagline { margin-top: 0; }
+}
+</style>
+<style>
+/* ── HERO (same design as the FLUX page hero, flux/src/components/landing/Hero.tsx) ── */
+/* Satoshi under a private name so only the hero uses it, not the rest of the page */
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+.fx-hero { position: relative; overflow: hidden; padding: 128px 0 96px; background: #0D2E4E; color: #fff; font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; font-feature-settings: "ss01", "cv11"; }
+.fx-hero *, .fx-hero *::before, .fx-hero *::after { box-sizing: border-box; }
+.fx-hero .fx-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; pointer-events: none; }
+.fx-hero .fx-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(13,46,78,0.88) 0%, rgba(13,46,78,0.72) 50%, rgba(13,46,78,0.88) 100%); }
+.fx-hero .fx-glow-orange { position: absolute; pointer-events: none; width: 700px; height: 700px; top: -200px; right: -100px; border-radius: 50%; background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 65%); }
+.fx-hero .fx-glow-blue { position: absolute; pointer-events: none; width: 500px; height: 500px; bottom: -100px; left: -50px; border-radius: 50%; background: radial-gradient(circle, rgba(30,100,200,0.22) 0%, transparent 65%); }
+.fx-hero .fx-inner { position: relative; max-width: 1152px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.fx-hero .fx-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.1); padding: 6px 16px; font-size: 12px; line-height: 16px; font-weight: 500; color: rgba(255,255,255,0.8); box-shadow: 0 1px 2px rgba(0,0,0,0.05); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); text-decoration: none; }
+.fx-hero .fx-pill-dot { display: flex; width: 6px; height: 6px; border-radius: 999px; background: oklch(0.5 0.19 40); }
+.fx-hero .fx-title { margin: 32px auto 0; max-width: 1024px; font-family: inherit; font-size: 48px; line-height: 1.02; font-weight: 700; letter-spacing: -0.03em; font-feature-settings: "ss01"; color: #fff; text-wrap: balance; }
+.fx-hero .fx-accent { color: #e04d10; }
+.fx-hero .fx-lead { margin: 24px auto 0; max-width: 672px; font-family: inherit; font-size: 16px; line-height: 1.625; color: rgba(255,255,255,0.65); }
+.fx-hero .fx-ctas { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.fx-hero .fx-btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 14px 24px; font-family: inherit; font-size: 14px; line-height: 20px; font-weight: 500; color: #fff; text-decoration: none; transition: background 0.2s, box-shadow 0.2s; }
+.fx-hero .fx-btn svg { transition: transform 0.2s; }
+.fx-hero .fx-btn:hover svg { transform: translateX(2px); }
+.fx-hero .fx-btn-primary { background: oklch(0.5 0.19 40); box-shadow: 0 0 0 1px oklch(0.85 0.092 235 / 0.4), 0 20px 60px -20px oklch(0.42 0.138 235 / 0.35); }
+.fx-hero .fx-btn-primary:hover { background: oklch(0.38 0.17 35); }
+.fx-hero .fx-btn-ghost { border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.fx-hero .fx-btn-ghost:hover { background: rgba(255,255,255,0.2); }
+.fx-hero .fx-note { margin: 14px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: rgba(255,255,255,0.6); }
+.fx-hero .fx-media { position: relative; margin: 80px auto 0; max-width: 1152px; }
+.fx-hero .fx-media-label { margin-bottom: 16px; font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #F7A07A; }
+.fx-hero .fx-frame { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); background: #0B1726; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+.fx-hero .fx-frame img { display: block; width: 100%; height: auto; }
+@keyframes fx-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.fx-hero .fx-rise { animation: fx-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (min-width: 768px) { .fx-hero .fx-title { font-size: 72px; } .fx-hero .fx-lead { font-size: 18px; } }
+@media (min-width: 1024px) { .fx-hero .fx-title { font-size: 88px; } }
+@media (prefers-reduced-motion: reduce) { .fx-hero .fx-rise { animation: none; } }
+</style>
+<style>
+/* ── FEATURE BAND (same design as the FLUX "What Members Say" section, flux/src/components/landing/Testimonials.tsx) ── */
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/NHPGVFYUXYXE33DZ75OIT4JFGHITX5PE/PSUTMASCDJTVPERDYJZPN23BVUFUCQIF/J64QX5IPOHK56I2KYUNBQ5M2XWZEYKYX.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+.fx-band { padding: 100px 0; background: #0D2E4E; position: relative; overflow: hidden; color: #fff; font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.fx-band *, .fx-band *::before, .fx-band *::after { box-sizing: border-box; }
+.fx-band::before { content: ''; position: absolute; inset: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') top center / cover no-repeat; opacity: 0.8; z-index: 1; pointer-events: none; }
+.fx-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,32,64,.96) 0%, rgba(13,32,64,.82) 55%, rgba(13,32,64,.92) 100%); z-index: 2; pointer-events: none; }
+.fx-band .fx-band-header { position: relative; z-index: 10; text-align: center; margin-bottom: 40px; padding: 0 24px; }
+.fx-band .fx-band-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.32); border-radius: 50px; color: #e87040; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.fx-band .fx-band-title { font-family: inherit; font-size: clamp(32px, 4vw, 48px); color: #fff; letter-spacing: -1.5px; margin: 0 auto; font-weight: 800; line-height: 1.1; }
+.fx-band .fx-band-title span { background: linear-gradient(135deg, #fff 0%, #c8420a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.fx-band .fx-band-grid { position: relative; z-index: 10; max-width: 1180px; margin: 20px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.fx-band .fx-card { background: rgba(0,0,0,0.4); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; text-align: left; transition: all 0.3s ease; }
+.fx-band .fx-card:hover { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); transform: translateY(-5px); }
+.fx-band .fx-card-mark { display: flex; align-items: center; min-height: 32px; margin-bottom: 20px; color: #c8420a; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.fx-band .fx-card-mark svg { width: 28px; height: 28px; stroke: #c8420a; }
+.fx-band .fx-card-title { margin: 0; font-family: inherit; font-size: 18px; font-weight: 700; color: #fff; line-height: 1.3; }
+.fx-band .fx-card-text { margin: 10px 0 0; font-family: inherit; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.8); }
+</style>
 </head><body>
 <!-- ── NAVBAR (site-wide, copied from pricing.html) ── -->
 <nav class="navbar" id="navbar">
@@ -143,27 +223,25 @@ body { overflow-x: hidden; }
 </style>
 <div class="nt-fj" style="background: #F2F7FB; color: #0B1A2A; font-family: Satoshi, 'General Sans', 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
 
-<!-- HERO -->
-<section style="background: radial-gradient(ellipse 80% 70% at 50% 0%, #17426E 0%, #0D2E4E 55%, #0A2440 100%); color: #FFFFFF">
-<div style="max-width: 1240px; margin: 0 auto; padding: 168px 24px 80px; text-align: center">
-<a href="#features" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 500; text-decoration: none">
-<span style="width: 6px; height: 6px; border-radius: 50%; background: #F06A2A"></span>Including Market-on-Close Imbalance Data
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-<h1 style="margin: 28px auto 0; max-width: 960px; font-size: clamp(44px, 6.4vw, 88px); line-height: 1.02; font-weight: 700; letter-spacing: -0.03em">Stay ahead of the <span style="color: #F06A2A">market news.</span></h1>
-<p style="margin: 24px auto 0; max-width: 620px; color: rgba(255,255,255,0.72); font-size: 18px">FinancialJuice keeps you up to date with market news and events in real time, in audio and text, plus Market-on-Close imbalance data posted every day.</p>
-
-<div style="margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
-<a class="ntv-btn" href="https://rl110.isrefer.com/go/SETH/NavigationTrading/" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 26px; border-radius: 999px; background: #C8420A; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none">Get FinancialJuice
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
-<a class="ntv-btn" href="#features" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.16); color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none">See the features</a>
-</div>
-
-<!-- product image frame -->
-<div style="margin: 64px auto 0; max-width: 980px; background: #0B1726; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; box-shadow: 0 24px 60px rgba(0,0,0,0.4); overflow: hidden">
-<a href="https://rl110.isrefer.com/go/SETH/NavigationTrading/" style="display: block"><img src="/financialjuice-page-package/financialjuice/images/financialjuice-news-feed.jpg" alt="FinancialJuice live news feed showing Early MOC imbalance alerts, FX option expiries and market headlines" style="display: block; width: 100%; height: auto"></a>
-</div>
-</div>
+<section class="fx-hero">
+  <img class="fx-bg" src="/WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg" alt="">
+  <div class="fx-overlay"></div>
+  <div class="fx-glow-orange"></div>
+  <div class="fx-glow-blue"></div>
+  <div class="fx-inner">
+    <a class="fx-pill fx-rise" href="#features"><span class="fx-pill-dot"></span>Including Market-on-Close Imbalance Data <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <h1 class="fx-title fx-rise" style="animation-delay:80ms">Stay ahead of the <span class="fx-accent">market news.</span></h1>
+    <p class="fx-lead fx-rise" style="animation-delay:160ms">FinancialJuice keeps you up to date with market news and events in real time, in audio and text, plus Market-on-Close imbalance data posted every day.</p>
+    <div class="fx-ctas fx-rise" style="animation-delay:240ms">
+      <a class="fx-btn fx-btn-primary" href="https://rl110.isrefer.com/go/SETH/NavigationTrading/">Get FinancialJuice <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="fx-btn fx-btn-ghost" href="#features">See the features</a>
+    </div>
+    <div class="fx-media fx-rise" style="animation-delay:420ms">
+      <div class="fx-frame"><a href="https://rl110.isrefer.com/go/SETH/NavigationTrading/" style="display: block"><img src="/financialjuice-page-package/financialjuice/images/financialjuice-news-feed.jpg" alt="FinancialJuice live news feed showing Early MOC imbalance alerts, FX option expiries and market headlines"></a></div>
+    </div>
+  </div>
 </section>
+
 
 <!-- FEATURES SPLIT -->
 <section id="features" style="background-color: #F2F7FB; background-image: linear-gradient(#E4EDF5 1px, transparent 1px), linear-gradient(90deg, #E4EDF5 1px, transparent 1px); background-size: 56px 56px; border-top: 1px solid #CBDCE9">
@@ -208,36 +286,33 @@ body { overflow-x: hidden; }
 </div>
 </section>
 
-<!-- DARK BAND: FEATURE CARDS -->
-<section style="background: radial-gradient(ellipse 70% 80% at 50% 100%, #17426E 0%, #0D2E4E 60%, #0A2440 100%); color: #FFFFFF">
-<div style="max-width: 1040px; margin: 0 auto; padding: 104px 24px">
-<div style="text-align: center">
-<div style="color: #F7A07A; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">Built for active traders</div>
-<h2 style="margin: 14px 0 0; font-size: clamp(36px, 4.4vw, 60px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em">Hear the news as it breaks.</h2>
-</div>
-<div style="margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
-<div style="padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1)">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F06A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M6 16V9M10 16V5M14 16v-6M18 16V7"></path></svg>
-<h3 style="margin: 18px 0 0; font-size: 20px; font-weight: 700">MOC imbalances</h3>
-<p style="margin: 8px 0 0; color: rgba(255,255,255,0.68); font-size: 15px">Market-on-Close imbalance data posted every trading day.</p>
-</div>
-<div style="padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1)">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F06A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"></path></svg>
-<h3 style="margin: 18px 0 0; font-size: 20px; font-weight: 700">Real-time squawk</h3>
-<p style="margin: 8px 0 0; color: rgba(255,255,255,0.68); font-size: 15px">Live news updates in audio and text.</p>
-</div>
-<div style="padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1)">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F06A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
-<h3 style="margin: 18px 0 0; font-size: 20px; font-weight: 700">Economic calendar</h3>
-<p style="margin: 8px 0 0; color: rgba(255,255,255,0.68); font-size: 15px">Scheduled economic reports, all in one place.</p>
-</div>
-<div style="padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1)">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F06A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h3l3-7 4 14 3-9 2 2h5"></path></svg>
-<h3 style="margin: 18px 0 0; font-size: 20px; font-weight: 700">Tickstrike widget</h3>
-<p style="margin: 8px 0 0; color: rgba(255,255,255,0.68); font-size: 15px">The Tickstrike audio widget, built in.</p>
-</div>
-</div>
-</div>
+<section class="fx-band">
+  <div class="fx-band-header">
+    <div class="fx-band-eyebrow">Built for active traders</div>
+    <h2 class="fx-band-title">Hear the news <span>as it breaks.</span></h2>
+  </div>
+  <div class="fx-band-grid">
+    <div class="fx-card">
+      <div class="fx-card-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M6 16V9M10 16V5M14 16v-6M18 16V7"></path></svg></div>
+      <h3 class="fx-card-title">MOC imbalances</h3>
+      <p class="fx-card-text">Market-on-Close imbalance data posted every trading day.</p>
+    </div>
+    <div class="fx-card">
+      <div class="fx-card-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"></path></svg></div>
+      <h3 class="fx-card-title">Real-time squawk</h3>
+      <p class="fx-card-text">Live news updates in audio and text.</p>
+    </div>
+    <div class="fx-card">
+      <div class="fx-card-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></div>
+      <h3 class="fx-card-title">Economic calendar</h3>
+      <p class="fx-card-text">Scheduled economic reports, all in one place.</p>
+    </div>
+    <div class="fx-card">
+      <div class="fx-card-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h3l3-7 4 14 3-9 2 2h5"></path></svg></div>
+      <h3 class="fx-card-title">Tickstrike widget</h3>
+      <p class="fx-card-text">The Tickstrike audio widget, built in.</p>
+    </div>
+  </div>
 </section>
 
 <!-- CTA -->
@@ -250,21 +325,57 @@ body { overflow-x: hidden; }
 </div>
 </section>
 
-<!-- FOOTER -->
-<footer style="background: #0A2440; color: #FFFFFF">
-<div style="max-width: 1240px; margin: 0 auto; padding: 48px 24px 56px">
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1)">
-<img src="/financialjuice-page-package/financialjuice/images/navigationtrading-logo.png" alt="NavigationTrading" style="display: block; height: 40px; width: auto">
-<nav style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px">
-<a href="https://navigationtrading.com/legal-disclaimers/" style="color: rgba(255,255,255,0.8)">Privacy Policy</a>
-<a href="https://navigationtrading.com/legal-disclaimers/" style="color: rgba(255,255,255,0.8)">Terms of Use</a>
-</nav>
 </div>
-<p style="margin: 24px 0 0; color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6">NavigationTrading may receive compensation if you sign up for FinancialJuice through links on this page.</p>
-<p style="margin: 12px 0 0; color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.6">The risk of loss in trading securities, options, stocks, futures and forex can be substantial and is not suitable for all investors. Past results are not indicative of future returns, and the methods presented are not guaranteed to be profitable. Options involve risk and can result in rapid and substantial losses. Please read <a href="https://www.theocc.com/company-information/documents-and-archives/options-disclosure-document" style="color: #F7A07A">Characteristics and Risks of Standardized Options</a> before trading options.</p>
-<p style="margin: 12px 0 0; color: rgba(255,255,255,0.6); font-size: 13px">© Navigation Financial, LLC. All rights reserved.</p>
-</div>
+<!-- ── FOOTER (site-wide, copied from the FLUX page) ── -->
+<footer class="nt-footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><img src="/logo.png" alt="NavigationTrading"></div>
+      <div class="footer-tagline">Institutional Grade Trading Education</div>
+    </div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Contact</div>
+        <a href="mailto:support@navigationtrading.com" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">support@navigationtrading.com</a>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Follow</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <a href="https://www.facebook.com/navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /></svg>
+          </a>
+          <a href="https://x.com/navtrading1?s=21" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+          </a>
+          <a href="https://www.instagram.com/navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+          </a>
+          <a href="https://www.youtube.com/@navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Legal</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Risk Disclosure</a>
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Privacy Policy</a>
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="/legal-disclaimers#privacy" target="_blank" rel="noreferrer" class="footer-link">Privacy Policy</a>
+        <a href="/legal-disclaimers#terms" target="_blank" rel="noreferrer" class="footer-link">Terms of Use</a>
+        <a href="/legal-disclaimers#refund" target="_blank" rel="noreferrer" class="footer-link">Refund Policy</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+    </div>
+    <div class="footer-copy">The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.</div>
+    <div class="footer-copy">NavigationTrading may receive compensation if you sign up for FinancialJuice through links on this page. Options can result in rapid and substantial losses; please read <a href="https://www.theocc.com/company-information/documents-and-archives/options-disclosure-document" target="_blank" rel="noopener">Characteristics and Risks of Standardized Options</a> before trading options.</div>
+  </div>
 </footer>
-
-</div>
 </body></html>

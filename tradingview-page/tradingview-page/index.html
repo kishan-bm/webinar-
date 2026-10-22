@@ -9,7 +9,7 @@
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
-html{background:#0A2440}body{margin:0;background:#F2F7FB}
+html{background:#0D2E4E}body{margin:0;background:#F2F7FB}
 .ntv{--navy:#0D2E4E;--navy-deep:#0A2440;--navy-lift:#17426E;--ink:#0A1826;--body:#3A4E62;--bg:#F2F7FB;--card:#E9F1F8;--line:#CBDCE9;--grid:#E4EDF5;--orange:#C8420A;--orange-hi:#F06A2A;--orange-soft:#F7A07A;
   background:var(--bg);color:var(--ink);font-family:Satoshi,"General Sans",ui-sans-serif,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .ntv *{box-sizing:border-box}
@@ -64,14 +64,6 @@ html{background:#0A2440}body{margin:0;background:#F2F7FB}
 .ntv-cta p{margin:16px auto 0;max-width:520px;color:rgba(255,255,255,.72);font-size:18px}
 .ntv-cta .btn{margin-top:32px;min-height:50px;padding:0 30px;font-size:16px}
 /* footer */
-.ntv-foot{background:var(--navy-deep);color:#fff}
-.ntv-foot .wrap{padding-top:48px;padding-bottom:56px}
-.ntv-foot-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
-.ntv-foot-top img{height:40px;width:auto;display:block}
-.ntv-foot nav{display:flex;flex-wrap:wrap;gap:24px;font-size:14px}
-.ntv-foot nav a{color:rgba(255,255,255,.8)}
-.ntv-foot p{margin-top:12px;color:rgba(255,255,255,.6);font-size:13px;line-height:1.6}
-.ntv-foot p a{color:var(--orange-soft)}
 @media (max-width:640px){.ntv .ntv-hero{padding-top:120px;padding-bottom:48px}.ntv .ntv-split{padding-top:72px;padding-bottom:72px}.ntv .ntv-steps{padding-top:72px;padding-bottom:72px}.ntv-cta{padding:52px 22px}}
 </style>
 
@@ -173,6 +165,86 @@ html{background:#0A2440}body{margin:0;background:#F2F7FB}
 body { overflow-x: hidden; }
 </style>
 <script src="/site-config.js" data-page="tradingview" defer></script>
+<style>
+/* ── SITE FOOTER (copied from the FLUX page, flux/src/components/landing/Footer.tsx) ── */
+footer.nt-footer { font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; line-height: 1.5; color: #fff; -webkit-font-smoothing: antialiased; box-sizing: border-box; }
+footer.nt-footer *, footer.nt-footer *::before, footer.nt-footer *::after { box-sizing: border-box; }
+footer.nt-footer { background: #0D2E4E; padding: 80px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+footer.nt-footer::before { content: ''; position: absolute; inset: 0; z-index: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') center/cover no-repeat; opacity: 0.05; pointer-events: none; }
+footer.nt-footer > .footer-top, footer.nt-footer > .footer-bottom { position: relative; z-index: 1; }
+footer.nt-footer .footer-top { padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+footer.nt-footer .footer-brand img { height: 40px; width: auto; transform: scale(5); transform-origin: left center; }
+footer.nt-footer .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 100px; }
+footer.nt-footer .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.24); color: rgba(255,255,255,0.6); transition: background 0.2s, color 0.2s; text-decoration: none; }
+footer.nt-footer .social-icon:hover { background: #c8420a; color: #fff; }
+footer.nt-footer .footer-link { color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+footer.nt-footer .footer-link:hover { color: rgba(255,255,255,0.9); }
+footer.nt-footer .footer-bottom { display: flex; flex-direction: column; align-items: flex-start; padding-top: 40px; gap: 16px; }
+footer.nt-footer .footer-copy { font-size: 11.5px; color: rgba(255,255,255,0.25); line-height: 1.7; }
+footer.nt-footer .footer-copy a { color: rgba(255,255,255,0.45); }
+@media (max-width: 768px) {
+  footer.nt-footer { padding: 60px 20px 32px; }
+  footer.nt-footer .footer-top { flex-direction: column; gap: 36px; }
+  footer.nt-footer .footer-brand img { transform: scale(3) !important; transform-origin: left center; margin-bottom: 30px; }
+  footer.nt-footer .footer-tagline { margin-top: 0; }
+}
+</style>
+<style>
+/* ── HERO (same design as the FLUX page hero, flux/src/components/landing/Hero.tsx) ── */
+/* Satoshi under a private name so only the hero uses it, not the rest of the page */
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/TTX2Z3BF3P6Y5BQT3IV2VNOK6FL22KUT/7QYRJOI3JIMYHGY6CH7SOIFRQLZOLNJ6/KFIAZD4RUMEZIYV6FQ3T3GP5PDBDB6JY.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/P2LQKHE6KA6ZP4AAGN72KDWMHH6ZH3TA/ZC32TK2P7FPS5GFTL46EU6KQJA24ZYDB/7AHDUZ4A7LFLVFUIFSARGIWCRQJHISQP.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/LAFFD4SDUCDVQEXFPDC7C53EQ4ZELWQI/PXCT3G6LO6ICM5I3NTYENYPWJAECAWDD/GHM6WVH6MILNYOOCXHXB5GTSGNTMGXZR.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+.fx-hero { position: relative; overflow: hidden; padding: 128px 0 96px; background: #0D2E4E; color: #fff; font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; font-feature-settings: "ss01", "cv11"; }
+.fx-hero *, .fx-hero *::before, .fx-hero *::after { box-sizing: border-box; }
+.fx-hero .fx-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; pointer-events: none; }
+.fx-hero .fx-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(13,46,78,0.88) 0%, rgba(13,46,78,0.72) 50%, rgba(13,46,78,0.88) 100%); }
+.fx-hero .fx-glow-orange { position: absolute; pointer-events: none; width: 700px; height: 700px; top: -200px; right: -100px; border-radius: 50%; background: radial-gradient(circle, rgba(200,66,10,0.18) 0%, transparent 65%); }
+.fx-hero .fx-glow-blue { position: absolute; pointer-events: none; width: 500px; height: 500px; bottom: -100px; left: -50px; border-radius: 50%; background: radial-gradient(circle, rgba(30,100,200,0.22) 0%, transparent 65%); }
+.fx-hero .fx-inner { position: relative; max-width: 1152px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.fx-hero .fx-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.1); padding: 6px 16px; font-size: 12px; line-height: 16px; font-weight: 500; color: rgba(255,255,255,0.8); box-shadow: 0 1px 2px rgba(0,0,0,0.05); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); text-decoration: none; }
+.fx-hero .fx-pill-dot { display: flex; width: 6px; height: 6px; border-radius: 999px; background: oklch(0.5 0.19 40); }
+.fx-hero .fx-title { margin: 32px auto 0; max-width: 1024px; font-family: inherit; font-size: 48px; line-height: 1.02; font-weight: 700; letter-spacing: -0.03em; font-feature-settings: "ss01"; color: #fff; text-wrap: balance; }
+.fx-hero .fx-accent { color: #e04d10; }
+.fx-hero .fx-lead { margin: 24px auto 0; max-width: 672px; font-family: inherit; font-size: 16px; line-height: 1.625; color: rgba(255,255,255,0.65); }
+.fx-hero .fx-ctas { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.fx-hero .fx-btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 14px 24px; font-family: inherit; font-size: 14px; line-height: 20px; font-weight: 500; color: #fff; text-decoration: none; transition: background 0.2s, box-shadow 0.2s; }
+.fx-hero .fx-btn svg { transition: transform 0.2s; }
+.fx-hero .fx-btn:hover svg { transform: translateX(2px); }
+.fx-hero .fx-btn-primary { background: oklch(0.5 0.19 40); box-shadow: 0 0 0 1px oklch(0.85 0.092 235 / 0.4), 0 20px 60px -20px oklch(0.42 0.138 235 / 0.35); }
+.fx-hero .fx-btn-primary:hover { background: oklch(0.38 0.17 35); }
+.fx-hero .fx-btn-ghost { border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.fx-hero .fx-btn-ghost:hover { background: rgba(255,255,255,0.2); }
+.fx-hero .fx-note { margin: 14px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-size: 13px; color: rgba(255,255,255,0.6); }
+.fx-hero .fx-media { position: relative; margin: 80px auto 0; max-width: 1152px; }
+.fx-hero .fx-media-label { margin-bottom: 16px; font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #F7A07A; }
+.fx-hero .fx-frame { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); background: #0B1726; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+.fx-hero .fx-frame img { display: block; width: 100%; height: auto; }
+@keyframes fx-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.fx-hero .fx-rise { animation: fx-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (min-width: 768px) { .fx-hero .fx-title { font-size: 72px; } .fx-hero .fx-lead { font-size: 18px; } }
+@media (min-width: 1024px) { .fx-hero .fx-title { font-size: 88px; } }
+@media (prefers-reduced-motion: reduce) { .fx-hero .fx-rise { animation: none; } }
+</style>
+<style>
+/* ── FEATURE BAND (same design as the FLUX "What Members Say" section, flux/src/components/landing/Testimonials.tsx) ── */
+@font-face { font-family: 'FluxSatoshi'; src: url('https://cdn.fontshare.com/wf/NHPGVFYUXYXE33DZ75OIT4JFGHITX5PE/PSUTMASCDJTVPERDYJZPN23BVUFUCQIF/J64QX5IPOHK56I2KYUNBQ5M2XWZEYKYX.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+.fx-band { padding: 100px 0; background: #0D2E4E; position: relative; overflow: hidden; color: #fff; font-family: 'FluxSatoshi', 'General Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.fx-band *, .fx-band *::before, .fx-band *::after { box-sizing: border-box; }
+.fx-band::before { content: ''; position: absolute; inset: 0; background: url('/WhatsApp Image 2026-03-10 at 5.35.08 PM (1).jpeg') top center / cover no-repeat; opacity: 0.8; z-index: 1; pointer-events: none; }
+.fx-band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,32,64,.96) 0%, rgba(13,32,64,.82) 55%, rgba(13,32,64,.92) 100%); z-index: 2; pointer-events: none; }
+.fx-band .fx-band-header { position: relative; z-index: 10; text-align: center; margin-bottom: 40px; padding: 0 24px; }
+.fx-band .fx-band-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(200,66,10,0.15); border: 1px solid rgba(200,66,10,0.32); border-radius: 50px; color: #e87040; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.fx-band .fx-band-title { font-family: inherit; font-size: clamp(32px, 4vw, 48px); color: #fff; letter-spacing: -1.5px; margin: 0 auto; font-weight: 800; line-height: 1.1; }
+.fx-band .fx-band-title span { background: linear-gradient(135deg, #fff 0%, #c8420a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.fx-band .fx-band-grid { position: relative; z-index: 10; max-width: 1180px; margin: 20px auto 0; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+.fx-band .fx-card { background: rgba(0,0,0,0.4); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px; display: flex; flex-direction: column; text-align: left; transition: all 0.3s ease; }
+.fx-band .fx-card:hover { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.25); transform: translateY(-5px); }
+.fx-band .fx-card-mark { display: flex; align-items: center; min-height: 32px; margin-bottom: 20px; color: #c8420a; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.fx-band .fx-card-mark svg { width: 28px; height: 28px; stroke: #c8420a; }
+.fx-band .fx-card-title { margin: 0; font-family: inherit; font-size: 18px; font-weight: 700; color: #fff; line-height: 1.3; }
+.fx-band .fx-card-text { margin: 10px 0 0; font-family: inherit; font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.8); }
+</style>
 </head>
 <body>
 <!-- ── NAVBAR (site-wide, copied from pricing.html) ── -->
@@ -210,16 +282,25 @@ body { overflow-x: hidden; }
 </nav>
 <script>(function(){var nav=document.getElementById('navbar');function onScroll(){nav.classList.toggle('scrolled',window.scrollY>60);}window.addEventListener('scroll',onScroll,{passive:true});onScroll();})();</script>
 <div class="ntv">
-  <section class="dark"><div class="wrap ntv-hero">
-    <a class="ntv-pill" href="#ntv-features"><i></i>Our charting platform of choice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <h1>Chart the market <span class="hl">like we do.</span></h1>
-    <p class="lead">TradingView gives you professional charting on web, desktop and mobile, plus direct access to the custom NavigationTrading indicators we use in our own trading.</p>
-    <div class="ntv-ctas">
-      <a class="btn btn-orange" href="https://www.tradingview.com/?aff_id=23851" target="_blank" rel="noopener">Get TradingView <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-glass" href="#ntv-features">See the features</a>
+<section class="fx-hero">
+  <img class="fx-bg" src="/WhatsApp Image 2026-03-10 at 5.35.08 PM.jpeg" alt="">
+  <div class="fx-overlay"></div>
+  <div class="fx-glow-orange"></div>
+  <div class="fx-glow-blue"></div>
+  <div class="fx-inner">
+    <a class="fx-pill fx-rise" href="#ntv-features"><span class="fx-pill-dot"></span>Our charting platform of choice <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <h1 class="fx-title fx-rise" style="animation-delay:80ms">Chart the market <span class="fx-accent">like we do.</span></h1>
+    <p class="fx-lead fx-rise" style="animation-delay:160ms">TradingView gives you professional charting on web, desktop and mobile, plus direct access to the custom NavigationTrading indicators we use in our own trading.</p>
+    <div class="fx-ctas fx-rise" style="animation-delay:240ms">
+      <a class="fx-btn fx-btn-primary" href="https://www.tradingview.com/?aff_id=23851" target="_blank" rel="noopener">Get TradingView <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="fx-btn fx-btn-ghost" href="#ntv-features">See the features</a>
     </div>
-    <div class="ntv-app"><div class="ntv-video"><iframe src="https://player.vimeo.com/video/801001895?h=84bedd9162&background=1&autoplay=1&mute=1&loop=1&title=0&byline=0&portrait=0" title="TradingView with NavigationTrading indicators" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  </div></section>
+    <div class="fx-media fx-rise" style="animation-delay:420ms">
+      <div class="fx-frame"><div class="ntv-video"><iframe src="https://player.vimeo.com/video/801001895?h=84bedd9162&background=1&autoplay=1&mute=1&loop=1&title=0&byline=0&portrait=0" title="TradingView with NavigationTrading indicators" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
+    </div>
+  </div>
+</section>
+
 
   <section id="ntv-features" class="gridbg" style="border-top:1px solid #CBDCE9"><div class="narrow ntv-split">
     <div class="txt">
@@ -239,15 +320,29 @@ body { overflow-x: hidden; }
       <img src="/tradingview-page/tradingview-page/images/tradingview-strategy-tester.png" alt="TradingView strategy tester showing MACD strategy trades and performance stats on a chart" loading="lazy"></div>
   </div></section>
 
-  <section class="dark" style="background:radial-gradient(ellipse 70% 80% at 50% 100%,#17426E 0%,#0D2E4E 60%,#0A2440 100%)"><div class="narrow ntv-steps">
-    <div class="eyebrow">Getting started</div>
-    <h2>Up and running in three steps.</h2>
-    <div class="ntv-steps-grid">
-      <div class="ntv-step"><b>01</b><h3>Open your account</h3><p>Sign up for TradingView through our link on this page.</p></div>
-      <div class="ntv-step"><b>02</b><h3>Add our indicators</h3><p>Import the NavigationTrading indicators to your charts.</p></div>
-      <div class="ntv-step"><b>03</b><h3>Set your alerts</h3><p>Get notified on any device when your levels hit.</p></div>
+<section class="fx-band">
+  <div class="fx-band-header">
+    <div class="fx-band-eyebrow">Getting started</div>
+    <h2 class="fx-band-title">Up and running <span>in three steps.</span></h2>
+  </div>
+  <div class="fx-band-grid">
+    <div class="fx-card">
+      <div class="fx-card-mark">01</div>
+      <h3 class="fx-card-title">Open your account</h3>
+      <p class="fx-card-text">Sign up for TradingView through our link on this page.</p>
     </div>
-  </div></section>
+    <div class="fx-card">
+      <div class="fx-card-mark">02</div>
+      <h3 class="fx-card-title">Add our indicators</h3>
+      <p class="fx-card-text">Import the NavigationTrading indicators to your charts.</p>
+    </div>
+    <div class="fx-card">
+      <div class="fx-card-mark">03</div>
+      <h3 class="fx-card-title">Set your alerts</h3>
+      <p class="fx-card-text">Get notified on any device when your levels hit.</p>
+    </div>
+  </div>
+</section>
 
   <section class="gridbg"><div class="narrow ntv-split rev">
     <div class="media">
@@ -274,15 +369,58 @@ body { overflow-x: hidden; }
     <a class="btn btn-orange" href="https://www.tradingview.com/?aff_id=23851" target="_blank" rel="noopener">Get TradingView <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div></section>
 
-  <footer class="ntv-foot"><div class="wrap">
-    <div class="ntv-foot-top">
-      <img src="/tradingview-page/tradingview-page/images/navigationtrading-logo-white.png" alt="NavigationTrading">
-      <nav><a href="https://navigationtrading.com/legal-disclaimers/">Privacy Policy</a><a href="https://navigationtrading.com/legal-disclaimers/">Terms of Use</a></nav>
-    </div>
-    <p style="margin-top:24px">NavigationTrading may receive compensation if you sign up for TradingView through links on this page.</p>
-    <p>Trading securities, options, stocks, futures and forex involves substantial risk and is not suitable for all investors. Past results are not indicative of future returns, and the methods presented are not guaranteed to be profitable. Options can result in rapid and substantial losses. Please read <a href="https://www.theocc.com/company-information/documents-and-archives/options-disclosure-document" target="_blank" rel="noopener">Characteristics and Risks of Standardized Options</a> before trading options.</p>
-    <p>© Navigation Financial, LLC. All rights reserved.</p>
-  </div></footer>
 </div>
+<!-- ── FOOTER (site-wide, copied from the FLUX page) ── -->
+<footer class="nt-footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><img src="/logo.png" alt="NavigationTrading"></div>
+      <div class="footer-tagline">Institutional Grade Trading Education</div>
+    </div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Contact</div>
+        <a href="mailto:support@navigationtrading.com" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">support@navigationtrading.com</a>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Follow</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <a href="https://www.facebook.com/navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /></svg>
+          </a>
+          <a href="https://x.com/navtrading1?s=21" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+          </a>
+          <a href="https://www.instagram.com/navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+          </a>
+          <a href="https://www.youtube.com/@navigationtrading" target="_blank" rel="noreferrer" class="social-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a1828"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Legal</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Risk Disclosure</a>
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Privacy Policy</a>
+          <a href="/legal-disclaimers" target="_blank" rel="noreferrer" class="footer-link">Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="/legal-disclaimers#privacy" target="_blank" rel="noreferrer" class="footer-link">Privacy Policy</a>
+        <a href="/legal-disclaimers#terms" target="_blank" rel="noreferrer" class="footer-link">Terms of Use</a>
+        <a href="/legal-disclaimers#refund" target="_blank" rel="noreferrer" class="footer-link">Refund Policy</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Navigation Financial, LLC</div>
+    </div>
+    <div class="footer-copy">The risk of loss in trading securities, options, stocks, futures and forex can be substantial. Securities involve risk and are not suitable for all investors. Consider all relevant risk factors, including their personal financial situation, before trading. Past results of any individual or trading system published by Navigation Financial, LLC are not indicative of future returns. It should not be assumed that the methods, techniques, or indicators presented in these products and services will be profitable or that they will not result in losses.</div>
+    <div class="footer-copy">NavigationTrading may receive compensation if you sign up for TradingView through links on this page. Options can result in rapid and substantial losses; please read <a href="https://www.theocc.com/company-information/documents-and-archives/options-disclosure-document" target="_blank" rel="noopener">Characteristics and Risks of Standardized Options</a> before trading options.</div>
+  </div>
+</footer>
 </body>
 </html>
