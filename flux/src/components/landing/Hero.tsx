@@ -36,7 +36,7 @@ export function Hero() {
         </a>
 
         <h1
-          className="animate-rise mx-auto mt-8 max-w-5xl font-display text-5xl leading-[1.02] text-white text-balance md:text-7xl lg:text-[88px]"
+          className="animate-rise mx-auto mt-8 max-w-5xl font-display text-[40px] leading-[1.02] text-white text-balance md:text-[56px] lg:text-[64px]"
           style={{ animationDelay: "80ms" }}
         >
           Trade the market with{" "}
