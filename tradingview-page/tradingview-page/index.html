@@ -37,7 +37,7 @@ body{margin:0;background:#F2F7FB}
 .ntv-video{position:relative;aspect-ratio:640/347;background:#0B1726}
 .ntv-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 /* split sections */
-.ntv-split{display:flex;flex-wrap:wrap;align-items:center;gap:56px;padding-top:112px;padding-bottom:112px}
+.ntv .ntv-split{display:flex;flex-wrap:wrap;align-items:center;gap:56px;padding-top:112px;padding-bottom:112px}
 .ntv-split.rev{flex-wrap:wrap-reverse}
 .ntv-split>.txt{flex:1 1 400px;min-width:0}
 .ntv-split>.media{flex:1 1 440px;min-width:0;padding:26px;border-radius:24px;background:var(--card);border:1px solid #D6E4EF;box-shadow:inset 0 2px 0 #9FD3EE}
@@ -49,7 +49,7 @@ body{margin:0;background:#F2F7FB}
 .ntv-list span{flex:0 0 30px;height:30px;border-radius:50%;border:1px solid #F1CDBB;background:#FFF4EE;display:flex;align-items:center;justify-content:center;color:var(--orange)}
 .ntv-split .ctas{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
 /* steps */
-.ntv-steps{padding-top:104px;padding-bottom:104px;text-align:center}
+.ntv .ntv-steps{padding-top:104px;padding-bottom:104px;text-align:center}
 .ntv-steps .eyebrow{color:var(--orange-soft)}
 .ntv-steps h2{margin-top:14px;font-size:clamp(36px,4.4vw,60px);line-height:1.05;font-weight:700;letter-spacing:-.03em}
 .ntv-steps-grid{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;text-align:left}
@@ -72,7 +72,7 @@ body{margin:0;background:#F2F7FB}
 .ntv-foot nav a{color:rgba(255,255,255,.8)}
 .ntv-foot p{margin-top:12px;color:rgba(255,255,255,.6);font-size:13px;line-height:1.6}
 .ntv-foot p a{color:var(--orange-soft)}
-@media (max-width:640px){.ntv .ntv-hero{padding-top:120px;padding-bottom:48px}.ntv-split{padding-top:72px;padding-bottom:72px}.ntv-steps{padding-top:72px;padding-bottom:72px}.ntv-cta{padding:52px 22px}}
+@media (max-width:640px){.ntv .ntv-hero{padding-top:120px;padding-bottom:48px}.ntv .ntv-split{padding-top:72px;padding-bottom:72px}.ntv .ntv-steps{padding-top:72px;padding-bottom:72px}.ntv-cta{padding:52px 22px}}
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
