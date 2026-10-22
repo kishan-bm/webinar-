@@ -46,8 +46,8 @@ export default function PublicLayout({
           <li><a href="/contact">Contact Us</a></li>
         </ul>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }} className="nav-auth-group">
-            <a href="https://whop.com/orders/products/" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 600 }}>Login</a>
-            <a href="https://whop.com/navigationtrading/" className="nav-cta">Join Now</a>
+            <a href="https://member.navigationtrading.com/" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 600 }}>Login</a>
+            <a href="/pricing" className="nav-cta">Join Now</a>
         </div>
         <div
           className={`nav-backdrop${navOpen ? ' active' : ''}`}

@@ -228,7 +228,7 @@ export default function RedirectsPage() {
                 <input
                   type="text"
                   className="form-input"
-                  placeholder="e.g. https://whop.com/navigationtrading/ntpro/"
+                  placeholder="e.g. https://member.navigationtrading.com/join/pro"
                   value={targetUrl}
                   onChange={(e) => setTargetUrl(e.target.value)}
                 />
