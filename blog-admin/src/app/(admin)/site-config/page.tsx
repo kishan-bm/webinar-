@@ -578,6 +578,39 @@ const PAGES_CONFIG: PageConfig[] = [
     ]
   },
   {
+    key: 'tradingview',
+    title: 'TradingView (Partner)',
+    path: '/tradingview',
+    deployedUrl: 'https://www.navigationtrading.com/tradingview',
+    description: 'TradingView affiliate page. The "Get TradingView" buttons are hardcoded affiliate links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'financialjuice',
+    title: 'FinancialJuice (Partner)',
+    path: '/juice',
+    deployedUrl: 'https://www.navigationtrading.com/juice',
+    description: 'FinancialJuice referral page. The "Get FinancialJuice" buttons are hardcoded referral links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'ota',
+    title: "Option Trader's Assistant (Partner)",
+    path: '/ota',
+    deployedUrl: 'https://www.navigationtrading.com/ota',
+    description: 'Option Trader\'s Assistant referral page. The "Start Free Trial" buttons are hardcoded referral links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
     key: 'trade-options-institutional-edge',
     title: 'Trade Options With Institutional Edge',
     path: '/trade-options-institutional-edge',

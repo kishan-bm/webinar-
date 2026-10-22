@@ -9,7 +9,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-15|tos-thankyou-10-15|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-15|tos-thankyou-10-15|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads|tradingview|juice|ota)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -174,6 +174,14 @@
     {
       "source": "/trade-options-institutional-edge",
       "destination": "/trade-options-institutional-edge"
+    },
+    {
+      "source": "/tradingview",
+      "destination": "/tradingview-page/tradingview-page/index"
+    },
+    {
+      "source": "/juice",
+      "destination": "/financialjuice-page-package/financialjuice/preview"
     },
     {
       "source": "/dtt-6/16",
