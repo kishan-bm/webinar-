@@ -9,7 +9,7 @@
       ]
     },
     {
-      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-15|tos-thankyou-10-15|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads|tradingview|juice|ota|mexem)",
+      "source": "/(home|pricing|podcast|contact|brokers|performance|coaching|flux|day-trading-membership|day-trading-offer|day-trading-replay|day-trading-replay-v2|day-trading|free-membership|paid-membership|transformer-option-spreads|transformer-option-spreads-8-20|tos-thank-you-8-20|transformer-option-spreads-10-15|tos-thankyou-10-15|tos-replay|tos-replay-v2|tos-replay-noshow|indexV3|indexV4|options-basics|iron-condors|calendar-spreads|butterfly-spreads|vertical-spreads|tradingview|juice|ota|mexem|optionstrat|tat|tradezella|connect)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
@@ -186,6 +186,18 @@
     {
       "source": "/mexem",
       "destination": "/mexem-page"
+    },
+    {
+      "source": "/optionstrat",
+      "destination": "/optionstrat-page/index"
+    },
+    {
+      "source": "/tat",
+      "destination": "/tat-page/index"
+    },
+    {
+      "source": "/tradezella",
+      "destination": "/tradezella/preview"
     },
     {
       "source": "/dtt-6/16",

@@ -622,6 +622,50 @@ const PAGES_CONFIG: PageConfig[] = [
     ]
   },
   {
+    key: 'optionstrat',
+    title: 'OptionStrat (Partner)',
+    path: '/optionstrat',
+    deployedUrl: 'https://www.navigationtrading.com/optionstrat',
+    description: 'OptionStrat affiliate page (20% off). The "Claim 20% off" buttons are hardcoded affiliate links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'tat',
+    title: 'Trade Automation Toolbox (Partner)',
+    path: '/tat',
+    deployedUrl: 'https://www.navigationtrading.com/tat',
+    description: 'Trade Automation Toolbox referral page (30-day free trial). The "Start your free trial" buttons are hardcoded referral links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'tradezella',
+    title: 'TradeZella (Partner)',
+    path: '/tradezella',
+    deployedUrl: 'https://www.navigationtrading.com/tradezella',
+    description: 'TradeZella affiliate page (20% off with code 20off). The "Claim 20% off" buttons are hardcoded affiliate links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
+    key: 'connect',
+    title: 'Connect (Social Channels)',
+    path: '/connect',
+    deployedUrl: 'https://www.navigationtrading.com/connect',
+    description: 'Social channels page (Discord, YouTube, X, Instagram, Facebook). The channel links are hardcoded.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
     key: 'trade-options-institutional-edge',
     title: 'Trade Options With Institutional Edge',
     path: '/trade-options-institutional-edge',
