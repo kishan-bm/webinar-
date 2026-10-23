@@ -611,6 +611,17 @@ const PAGES_CONFIG: PageConfig[] = [
     ]
   },
   {
+    key: 'mexem',
+    title: 'MEXEM (Partner)',
+    path: '/mexem',
+    deployedUrl: 'https://www.navigationtrading.com/mexem',
+    description: 'MEXEM broker referral page. The "Open a MEXEM account" / "Learn more" buttons are hardcoded referral links.',
+    fields: [
+      { key: 'loginLink', label: 'Navbar Login URL', type: 'url', placeholder: 'https://member.navigationtrading.com', description: 'URL for the Navbar Login button (desktop and mobile)', group: 'URLs & Links' },
+      { key: 'navCtaLink', label: 'Navbar Join Now URL', type: 'url', placeholder: '/pricing', description: 'URL for the Navbar Join Now button', group: 'URLs & Links' },
+    ]
+  },
+  {
     key: 'trade-options-institutional-edge',
     title: 'Trade Options With Institutional Edge',
     path: '/trade-options-institutional-edge',
