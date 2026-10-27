@@ -87,8 +87,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@navtrading1" },
       { name: "twitter:title", content: "Flux — Navigation Trading" },
       { name: "twitter:description", content: "FLUX gives you a real-time edge on market direction and timing, so you can trade with confidence instead of guesswork." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b068244b-d8e1-468c-9ed8-f26031381ceb/id-preview-2640dcac--c81e1e10-f8a6-499c-b031-8993132f6cdf.lovable.app-1785241208877.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b068244b-d8e1-468c-9ed8-f26031381ceb/id-preview-2640dcac--c81e1e10-f8a6-499c-b031-8993132f6cdf.lovable.app-1785241208877.png" },
+      { property: "og:url", content: "https://navigationtrading.com/flux" },
+      // Share image is hosted on the main site (repo root flux-share.jpg), 1200x630
+      { property: "og:image", content: "https://navigationtrading.com/flux-share.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:image", content: "https://navigationtrading.com/flux-share.jpg" },
     ],
     links: [
       { rel: "preconnect", href: "https://api.fontshare.com" },
@@ -101,7 +105,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      // Same NavigationTrading icons as the main site (served from its repo root)
+      { rel: "icon", href: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { rel: "icon", href: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
   shellComponent: RootShell,

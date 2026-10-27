@@ -103,7 +103,7 @@ export function Navbar() {
           <li><a href="/contact">Contact Us</a></li>
         </ul>
         <div className="nav-auth-group">
-          <a href="/pricing" className="nav-cta">Get Trade Alerts</a>
+          <a href="/pricing" className="nav-cta">Get FLUX</a>
         </div>
         <div
           className={`nav-backdrop${open ? " active" : ""}`}
