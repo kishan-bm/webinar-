@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCheckoutLink } from "@/hooks/useCheckoutLink";
 
 const NAV_CSS = `
   .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; transition: background 0.4s, box-shadow 0.4s, padding 0.3s; }
@@ -67,6 +68,7 @@ const NAV_CSS = `
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const checkoutUrl = useCheckoutLink();
 
   return (
     <>
@@ -103,7 +105,7 @@ export function Navbar() {
           <li><a href="/contact">Contact Us</a></li>
         </ul>
         <div className="nav-auth-group">
-          <a href="/pricing" className="nav-cta">Get FLUX</a>
+          <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="nav-cta">Get FLUX</a>
         </div>
         <div
           className={`nav-backdrop${open ? " active" : ""}`}
