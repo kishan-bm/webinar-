@@ -116,14 +116,16 @@ export function FluxValueComparison() {
     <section className="fxc" id="flux-value" aria-labelledby="fxc-title">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div className="fxc-wrap">
-        <p className="fxc-eyebrow">The Pro Membership Value</p>
-        <h2 className="fxc-title" id="fxc-title">
-          Over <span>${headlineMonthly} a month</span> in trading tools. One login.
-        </h2>
-        <p className="fxc-lede">
-          Most traders piece together a stack of subscriptions to get what Flux puts on one screen. Here&apos;s what
-          each Flux tool would cost you on its own, and it all comes with your Pro membership.
-        </p>
+        <div className="fxc-intro">
+          <p className="fxc-eyebrow">The Pro Membership Value</p>
+          <h2 className="fxc-title" id="fxc-title">
+            Over <span>${headlineMonthly} a month</span> in trading tools.<br className="fxc-br" /> One login.
+          </h2>
+          <p className="fxc-lede">
+            Most traders piece together a stack of subscriptions to get what Flux puts on one screen. Here&apos;s what
+            each Flux tool would cost you on its own, and it all comes with your Pro membership.
+          </p>
+        </div>
 
         <div className="fxc-table" role="table" aria-label="Flux compared with standalone tools">
           <div className="fxc-row fxc-head" role="row">
@@ -205,46 +207,51 @@ const CSS = `
 .fxc *{box-sizing:border-box}
 .fxc-wrap{max-width:1120px;margin:0 auto}
 .fxc-eyebrow{font:600 13px/1 "General Sans",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin:0}
-.fxc-title{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.05;margin:16px 0 0;text-wrap:balance}
+.fxc-title{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(2rem,3.6vw,2.75rem);line-height:1.1;margin:16px 0 0;text-wrap:balance}
 .fxc-title span{color:var(--orange)}
 .fxc-lede{font-size:18px;line-height:1.55;color:var(--muted);max-width:640px;margin:20px 0 0}
+@media (min-width:861px){
+  .fxc-intro{margin:0 auto;text-align:center}
+  .fxc-lede{max-width:880px;margin-left:auto;margin-right:auto}
+}
 
-.fxc-table{margin-top:48px;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 50px -30px rgba(13,46,78,.35)}
+.fxc-table{max-width:1040px;margin:40px auto 0;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 50px -30px rgba(13,46,78,.35)}
 .fxc-row{display:grid;grid-template-columns:1.25fr 1.35fr 1.35fr .7fr;border-top:1px solid var(--line)}
 .fxc-row:first-child{border-top:0}
-.fxc-cell{padding:22px 24px}
-.fxc-head .fxc-cell{font:600 12px/1.2 "General Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:18px;padding-bottom:18px;background:#f8fafc}
+.fxc-cell{padding:16px 20px}
+.fxc-head .fxc-cell{font:600 12px/1.2 "General Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:14px;padding-bottom:14px;background:#f8fafc}
 .fxc-head .fxc-flux{background:var(--navy);color:#fff}
 .fxc-head .fxc-price{text-align:right}
 
-.fxc-feature h3{font-family:"Satoshi",sans-serif;font-weight:700;font-size:18px;margin:0;line-height:1.25}
+.fxc-feature h3{font-family:"Satoshi",sans-serif;font-weight:700;font-size:16px;margin:0;line-height:1.25}
 .fxc-flux{background:rgba(13,46,78,.04);border-left:3px solid var(--navy)}
-.fxc-check{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--navy);font-size:15px}
+.fxc-check{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--navy);font-size:14px}
 .fxc-check svg{flex:none}
-.fxc-flux p,.fxc-comp p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
-.fxc-comp strong{font-weight:600;font-size:15px}
-.fxc-alt{font-size:13px!important}
-.fxc-price{text-align:right;font-family:"Satoshi",sans-serif;font-weight:700;font-size:20px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fxc-flux p,.fxc-comp p{margin:4px 0 0;font-size:13px;line-height:1.5;color:var(--muted)}
+.fxc-comp strong{font-weight:600;font-size:14px}
+.fxc-alt{font-size:12px!important}
+.fxc-price{text-align:right;font-family:"Satoshi",sans-serif;font-weight:700;font-size:18px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fxc-price small{display:block;font:500 12px/1.3 "General Sans",sans-serif;color:var(--muted)}
 .fxc-excl .fxc-comp strong{color:var(--orange)}
 .fxc-badge{display:inline-block;background:var(--orange);color:#fff;font:600 11px/1 "General Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:6px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
-.fxc-na{color:var(--muted);font-weight:500;font-size:15px}
+.fxc-na{color:var(--muted);font-weight:500;font-size:14px}
 
-.fxc-total{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;padding:32px}
+.fxc-total{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;padding:26px 28px}
 .fxc-total-label{font:600 13px/1 "General Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .fxc-total-compare{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 28px;margin-top:12px}
-.fxc-strike{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(1.8rem,3.6vw,2.6rem);text-decoration:line-through;text-decoration-color:var(--orange-lt);text-decoration-thickness:3px;color:rgba(255,255,255,.85)}
+.fxc-strike{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.2rem);text-decoration:line-through;text-decoration-color:var(--orange-lt);text-decoration-thickness:3px;color:rgba(255,255,255,.85)}
 .fxc-strike small{font-size:.5em;font-weight:500}
-.fxc-incl{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(1.8rem,3.6vw,2.6rem);color:#fff}
+.fxc-incl{font-family:"Satoshi",sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff}
 .fxc-incl em{font-style:normal;color:var(--orange-lt)}
 .fxc-sub{margin:10px 0 0;color:rgba(255,255,255,.75);font-size:15px}
-.fxc-cta{display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font:600 16px/1 "General Sans",sans-serif;padding:18px 28px;border-radius:999px;white-space:nowrap;transition:background .2s}
+.fxc-cta{display:inline-block;background:var(--orange);color:#fff;text-decoration:none;font:600 15px/1 "General Sans",sans-serif;padding:16px 24px;border-radius:999px;white-space:nowrap;transition:background .2s}
 .fxc-cta:hover{background:#e04d10}
 .fxc-cta:focus-visible{outline:3px solid var(--orange-lt);outline-offset:3px}
 
-.fxc-notes{margin:20px 4px 0;font-size:12px;line-height:1.6;color:var(--muted)}
+.fxc-notes{max-width:1032px;margin:20px auto 0;font-size:12px;line-height:1.6;color:var(--muted)}
 
 @media (max-width:860px){
+  .fxc-br{display:none}
   .fxc{padding:64px 16px}
   .fxc-head{display:none}
   .fxc-row{grid-template-columns:1fr auto;grid-template-areas:"feat price" "flux flux" "comp comp";padding:20px;gap:12px 16px}
