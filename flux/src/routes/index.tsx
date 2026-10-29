@@ -3,6 +3,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { IntegrationFlow } from "@/components/landing/IntegrationFlow";
+import { FluxValueComparison } from "@/components/landing/FluxValueComparison";
 import { Stats } from "@/components/landing/Stats";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
@@ -21,6 +22,7 @@ function Index() {
         <ProductShowcase />
         <Stats />
         <IntegrationFlow />
+        <FluxValueComparison />
         <Testimonials />
         <Faq />
       </main>
